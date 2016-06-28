@@ -4,10 +4,27 @@
 <head>
     <meta charset="utf-8"/>
     <title>TypeScript HTML App</title>
-    <script src="C:\Users\Administrateur\Documents\blockly\appengine\storage.js"></script>
-    <script src="C:\Users\Administrateur\Documents\blockly\blockly_compressed.js"></script>
-    <script src="C:\Users\Administrateur\Documents\blockly\blocks_compressed.js"></script>
-    <script src="C:\Users\Administrateur\Documents\blockly\msg\js\en.js"></script>
+    <link rel="stylesheet" href="app.css" type="text/css"/>
+
+    <script src="app.js"></script>
+    <script src="Blockly/blockly_uncompressed.js"></script>
+    <script src="Blockly/blocks_compressed.js"></script>
+
+    <!-- Storage and parsing -->
+    <script src="Storage/storage.js"></script>
+    <script src="Storage/parsingXML.js"></script>
+    <script src="Toolbox/category.js"></script>
+
+    <!-- Overriden version of the core -->    
+    <script src="Blockly/core_override/procedures.js"></script>
+   
+    <!-- Custom blocks -->
+    <script src="Blockly/blocks/custom.js"></script>
+    <script src="Blockly/blocks/BlockTemperature.js"></script>
+
+    <!-- Error messages -->
+    <script src="Blockly/msg/js/fr.js"></script>
+
 </head>
 <body>
 <h1>Blockly tests</h1>
@@ -16,19 +33,21 @@
     <p>
         Tests sur blockly. Sauvegarde test.
     </p>
-    <div >
-        <span>LOCAL </span>
-        <span><button onclick="save()"> Save </button></span>
-        <span><button onclick="reload()"> Reload </button></span>
-        <span><button onclick="addCategory()"> Save Category </button></span>
-        <span><button onclick="EditCategoryName()"> Edit Category </button></span>
-        <span><button onclick="parse()"> parse </button></span>
+    <div class="edition-window decode-window">
+        <div>
+            <span> LOCAL </span>
+            <span><button onclick="save(workspace)"> Save </button></span>
+            <span><button onclick="reload(workspace)"> Reload </button></span>
+            <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
+            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+            <span>______</span>
+            <span><button onclick="addCategory()"> Save Category </button></span>
+            <span><button onclick="EditCategoryName()"> Edit Category </button></span>
+        </div>
+        <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
 </div>
 <div>
-    <span>
-        <div id="blocklyDiv" style="height: 600px; width: 1000px;"></div>
-    </span>
     <span>
         <pre id="saveContent"></pre>
     </span>
@@ -70,140 +89,10 @@
     <div id="NewCategory"></div>
 
 </xml>
-
 <script>
     var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox') });
-
-    BlocklyStorage.backupOnUnload();
-
-    function save() {
-        var elem = document.getElementById('saveContent');
-        elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
-        BlocklyStorage.backupBlocks_(workspace);
-
-
-        var firstBlock = workspace.getAllBlocks()[0];
-        var domBlock = Blockly.Xml.blockToDom(firstBlock);
-        var category = domBlock.getElementsByClassName("blocklyHtmlInput").getAttribute("style");
-        alert(category);
-    }
-
-    function reload() {
-        BlocklyStorage.restoreBlocks(workspace);
-    }
-
-    function addCategory() {
-        var firstBlock = workspace.getAllBlocks()[0];
-        var domBlock = Blockly.Xml.blockToDom(firstBlock);
-        var names = domBlock.getElementsByTagName("field");
-        var catName = names[2].innerHTML; // tagname : category 
-
-        var existingCategories = document.getElementsByTagName("category");
-
-        var i;
-        for (i = 0; i < existingCategories.length; i++) {
-            if (existingCategories[i].getAttribute("name") == catName) {
-                if (catName == "Variables" || catName == "Functions")
-                {
-                    alert("La modification des catégories 'Variables' et 'Functions' est interdite. \nVeuillez modifier le nom de la catégorie.");
-                    break;
-                } else
-                {
-                    var newblock = document.createElement("block");
-                    var typeAtt = document.createAttribute("type");
-                    typeAtt.value = domBlock.getAttribute("type");
-                    newblock.setAttributeNode(typeAtt);
-                    existingCategories[i].appendChild(newblock);
-                    workspace.updateToolbox(document.getElementById("toolbox"));
-                    break;
-                }  
-            }
-        }
-
-        if (i == existingCategories.length) {
-
-            var newCategory = document.createElement("category");
-            var nameAtt = document.createAttribute("name");
-            nameAtt.value = catName;
-            newCategory.setAttributeNode(nameAtt);
-            var colourAtt = document.createAttribute("colour");
-            colourAtt.value = 220;
-            newCategory.setAttributeNode(colourAtt);
-
-            var newblock1 = document.createElement("block");
-            var typeAtt1 = document.createAttribute("type");
-            typeAtt1.value = domBlock.getAttribute("type");
-            newblock1.setAttributeNode(typeAtt1);
-            newCategory.appendChild(newblock1);
-
-            document.getElementById("toolbox").appendChild(newCategory);
-            workspace.updateToolbox(document.getElementById("toolbox"));
-
-        }
-
-    }
-
-    function parse() {
-        var firstBlock = workspace.getAllBlocks()[0];
-        var domBlock = Blockly.Xml.blockToDom(firstBlock);
-        var tags = domBlock.getElementsByTagName("*");
-        
-        var JSCode = "Blockly.Blocks['" + domBlock.getAttribute("type") + "'] = {\n" + " init: function() {";
-
-        for (var i = 0; i < tags.length; i++) {
-            switch(tags[i].tagName) {
-                case "FIELD":
-                    JSCode += "this.appendDummyInput\n";
-                    JSCode += ".appendField(" + tags[i].getAttribute("name") + ")";
-                    JSCode += ".appendField(new Blockly.FieldTextInput(" + tags[i].getAttribute("name") + ")," + tags[i].innerHTML;
-                    break;
-                case "STATEMENT":
-                    break;
-                case "BLOCK":
-                    break;
-
-            }
-        }
-        alert(JSCode);
-        /*var JSCode = "Blockly.Blocks['" + domBlock.getAttribute("type") + "'] = {\n" +
-            appendln("init: function() {", 1);
-        JSCode += appendln("this.appendDummyInput", 2) +
-            appendln(".setAlign(Blockly.ALIGN_CENTRE)", 4) +
-            appendln(".appendField('" + "');", 4);
-
-        JSCode += appendln("}", 1) + appendln("};");*/
-
-        
-
-
-    }
-
-
-    /*function EditCategoryName() {
-        var w = window.open('', '', 'width=400,height=400,resizeable,scrollbars');
-        w.document.write("modifier la catégorie");
-        var form = w.document.createElement("form");
-
-        form.innerHTML = "nom de la catégorie :";
-        var category1 = w.document.createElement("input");
-        category1.type = "text";
-        category1.name = "category1";
-        form.appendChild(category1);
-
-        form.innerHTML = "nouveau nom :";
-        var category2 = w.document.createElement("input");
-        category2.type = "text";
-        category2.name = "category1";
-        form.appendChild(category2);
-
-        w.document.getElementsByTagName("body").appendChild(form);
-
-    }*/
-
+    { toolbox: document.getElementById('toolbox') });  
 </script>
-
-<script src="C:\Users\Administrateur\Documents\blockly_tests\BlockTemperature.js"></script>
 
 </body>
 </html>

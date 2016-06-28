@@ -4,6 +4,11 @@ function save(workspace_) {
     elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
 
     BlocklyStorage.backupBlocks_(workspace_);
+
+    var firstBlock = workspace.getAllBlocks()[0];
+    var domBlock = Blockly.Xml.blockToDom(firstBlock);
+    var category = domBlock.getElementsByClassName("blocklyHtmlInput").getAttribute("style");
+    console.log(category);
 };
 
 // Reload datas to a workspace
@@ -21,3 +26,10 @@ function hardReload(workspace_) {
     var xml = Blockly.Xml.textToDom(text);
     Blockly.Xml.domToWorkspace(xml, workspace_);
 };
+
+function createFunction(workspace) {
+    var workspace_ = Blockly.inject('blocklyDiv2',
+    { toolbox: document.getElementById('toolbox') });
+
+    workspace.addWorkspace(workspace_);
+}
