@@ -33,18 +33,12 @@
     <p>
         Tests sur blockly. Sauvegarde test.
     </p>
-    <div class="edition-window decode-window">
-        <div>
-            <span> LOCAL </span>
-            <span><button onclick="save(workspace)"> Save </button></span>
-            <span><button onclick="reload(workspace)"> Reload </button></span>
-            <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
-            <span>______</span>
-            <span><button onclick="addCategory()"> Save Category </button></span>
-            <span><button onclick="EditCategoryName()"> Edit Category </button></span>
-        </div>
-        <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
+    <div >
+        <span>LOCAL </span>
+        <span><button onclick="save(), parse()"> Save </button></span>
+        <span><button onclick="reload()"> Reload </button></span>
+        <span><button onclick="addCategory()"> Save Category </button></span>
+        <span><button onclick="EditCategoryName()"> Edit Category </button></span>
     </div>
 </div>
 <div>
@@ -91,7 +85,119 @@
 </xml>
 <script>
     var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox') });  
+    { toolbox: document.getElementById('toolbox') });
+
+    BlocklyStorage.backupOnUnload();
+
+    function save() {
+        var elem = document.getElementById('saveContent');
+        elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
+        BlocklyStorage.backupBlocks_(workspace);
+
+
+        var firstBlock = workspace.getAllBlocks()[0];
+        var domBlock = Blockly.Xml.blockToDom(firstBlock);
+        var category = domBlock.getElementsByClassName("blocklyHtmlInput").getAttribute("style");
+        alert(category);
+    }
+
+    function reload() {
+        BlocklyStorage.restoreBlocks(workspace);
+    }
+
+    function addCategory() {
+        var firstBlock = workspace.getAllBlocks()[0];
+        var domBlock = Blockly.Xml.blockToDom(firstBlock);
+        var names = domBlock.getElementsByTagName("field");
+        var catName = names[2].innerHTML; // tagname : category 
+
+        var existingCategories = document.getElementsByTagName("category");
+
+        var i;
+        for (i = 0; i < existingCategories.length; i++) {
+            if (existingCategories[i].getAttribute("name") == catName) {
+                if (catName == "Variables" || catName == "Functions")
+                {
+                    alert("La modification des catégories 'Variables' et 'Functions' est interdite. \nVeuillez modifier le nom de la catégorie.");
+                    break;
+                } else
+                {
+                    var newblock = document.createElement("block");
+                    var typeAtt = document.createAttribute("type");
+                    typeAtt.value = domBlock.getAttribute("type");
+                    newblock.setAttributeNode(typeAtt);
+                    existingCategories[i].appendChild(newblock);
+                    workspace.updateToolbox(document.getElementById("toolbox"));
+                    break;
+                }  
+            }
+        }
+
+        if (i == existingCategories.length) {
+
+            var newCategory = document.createElement("category");
+            var nameAtt = document.createAttribute("name");
+            nameAtt.value = catName;
+            newCategory.setAttributeNode(nameAtt);
+            var colourAtt = document.createAttribute("colour");
+            colourAtt.value = 220;
+            newCategory.setAttributeNode(colourAtt);
+
+            var newblock1 = document.createElement("block");
+            var typeAtt1 = document.createAttribute("type");
+            typeAtt1.value = domBlock.getAttribute("type");
+            newblock1.setAttributeNode(typeAtt1);
+            newCategory.appendChild(newblock1);
+
+            document.getElementById("toolbox").appendChild(newCategory);
+            workspace.updateToolbox(document.getElementById("toolbox"));
+
+        }
+
+    }
+
+    function parse() {
+        var firstBlock = workspace.getAllBlocks()[0];
+        var domBlock = Blockly.Xml.blockToDom(firstBlock);
+        var tags = domBlock.getElementsByTagName("*");
+        
+        for (var i = 0; i < tags.length; i++) {
+            switch(tags[i].tagName) {
+                case "field":
+                    break;
+                case "statement":
+                    break;
+                case "block":
+                    break;
+
+            }
+        }
+
+
+    }
+
+
+    /*function EditCategoryName() {
+        var w = window.open('', '', 'width=400,height=400,resizeable,scrollbars');
+        w.document.write("modifier la catégorie");
+        var form = w.document.createElement("form");
+
+        form.innerHTML = "nom de la catégorie :";
+        var category1 = w.document.createElement("input");
+        category1.type = "text";
+        category1.name = "category1";
+        form.appendChild(category1);
+
+        form.innerHTML = "nouveau nom :";
+        var category2 = w.document.createElement("input");
+        category2.type = "text";
+        category2.name = "category1";
+        form.appendChild(category2);
+
+        w.document.getElementsByTagName("body").appendChild(form);
+
+    }*/
+
 </script>
 
 </body>
