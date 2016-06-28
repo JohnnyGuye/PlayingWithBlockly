@@ -18,10 +18,11 @@
     </p>
     <div >
         <span>LOCAL </span>
-        <span><button onclick="save(), parse()"> Save </button></span>
+        <span><button onclick="save()"> Save </button></span>
         <span><button onclick="reload()"> Reload </button></span>
         <span><button onclick="addCategory()"> Save Category </button></span>
         <span><button onclick="EditCategoryName()"> Edit Category </button></span>
+        <span><button onclick="parse()"> parse </button></span>
     </div>
 </div>
 <div>
@@ -148,17 +149,32 @@
         var domBlock = Blockly.Xml.blockToDom(firstBlock);
         var tags = domBlock.getElementsByTagName("*");
         
+        var JSCode = "Blockly.Blocks['" + domBlock.getAttribute("type") + "'] = {\n" + " init: function() {";
+
         for (var i = 0; i < tags.length; i++) {
             switch(tags[i].tagName) {
-                case "field":
+                case "FIELD":
+                    JSCode += "this.appendDummyInput\n";
+                    JSCode += ".appendField(" + tags[i].getAttribute("name") + ")";
+                    JSCode += ".appendField(new Blockly.FieldTextInput(" + tags[i].getAttribute("name") + ")," + tags[i].innerHTML;
                     break;
-                case "statement":
+                case "STATEMENT":
                     break;
-                case "block":
+                case "BLOCK":
                     break;
 
             }
         }
+        alert(JSCode);
+        /*var JSCode = "Blockly.Blocks['" + domBlock.getAttribute("type") + "'] = {\n" +
+            appendln("init: function() {", 1);
+        JSCode += appendln("this.appendDummyInput", 2) +
+            appendln(".setAlign(Blockly.ALIGN_CENTRE)", 4) +
+            appendln(".appendField('" + "');", 4);
+
+        JSCode += appendln("}", 1) + appendln("};");*/
+
+        
 
 
     }
