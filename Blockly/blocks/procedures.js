@@ -44,10 +44,33 @@ Blockly.Blocks['procedures_defnoreturn'] = {
         Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE,
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
+
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE)
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
+      //code ajouté : début 
+    this.appendDummyInput()
+      .appendField("Version")
+      .appendField(new Blockly.FieldTextInput("version"), "version");
+
+    this.appendDummyInput()
+          .appendField("Category")
+          .appendField(new Blockly.FieldTextInput("category"), "category");
+      /*deprecated
+      function dynamicOptions() {
+        var options = [];
+        var now = Date.now();
+        for (var i = 0; i < 7; i++) {
+            options.push([String(new Date(now)).substring(0, 3), 'DAY' + i]);
+            now += 24 * 60 * 60 * 1000;
+        }
+        return options;
+    }*/   
+      this.appendDummyInput()
+      .appendField("Tags")
+      .appendField(new Blockly.FieldTextInput("tags"), "tags");
+      //code ajouté : fin 
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     if (Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT) {
       this.setCommentText(Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT);
@@ -59,6 +82,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     this.setStatements_(true);
     this.statementConnection_ = null;
   },
+
   /**
    * Initialization of the block has completed, clean up anything that may be
    * inconsistent as a result of the XML loading.
@@ -68,6 +92,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     var name = Blockly.Procedures.findLegalName(
         this.getFieldValue('NAME'), this);
     this.setFieldValue(name, 'NAME');
+
   },
   /**
    * Add or remove the statement block from this function definition.
@@ -133,7 +158,8 @@ Blockly.Blocks['procedures_defnoreturn'] = {
   mutationToDom: function(opt_paramIds) {
     var container = document.createElement('mutation');
     if (opt_paramIds) {
-      container.setAttribute('name', this.getFieldValue('NAME'));
+        container.setAttribute('name', this.getFieldValue('NAME'));
+        container.setAttribute('category', this.getFieldValue('Category'));
     }
     for (var i = 0; i < this.arguments_.length; i++) {
       var parameter = document.createElement('arg');
@@ -263,7 +289,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * @this Blockly.Block
    */
   getProcedureDef: function() {
-    return [this.getFieldValue('NAME'), this.arguments_, false];
+      return [this.getFieldValue('NAME'), this.arguments_, false];
   },
   /**
    * Return all variables referenced by this block.
