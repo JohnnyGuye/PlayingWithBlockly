@@ -21,3 +21,10 @@ function hardReload(workspace_) {
     var xml = Blockly.Xml.textToDom(text);
     Blockly.Xml.domToWorkspace(xml, workspace_);
 };
+
+function createFunction(workspace) {
+    var workspace_ = Blockly.inject('blocklyDiv2',
+    { toolbox: document.getElementById('toolbox') });
+
+    workspace.addWorkspace(workspace_);
+}

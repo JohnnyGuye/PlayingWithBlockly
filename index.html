@@ -10,8 +10,9 @@
     <script src="Blockly/blockly_uncompressed.js"></script>
     <script src="Blockly/blocks_compressed.js"></script>
 
-    <!-- Storage -->
+    <!-- Storage and parsing -->
     <script src="storage.js"></script>
+    <script src="parsingXML.js"></script>
 
     <!-- Overriden version of the core -->    
     <script src="Blockly/core_override/procedures.js"></script>
@@ -30,19 +31,18 @@
     <p>
         Tests sur blockly. Sauvegarde test.
     </p>
-    <div >
-        <span>LOCAL </span>
-        <span><button onclick="save(workspace)"> Save </button></span>
-        <span><button onclick="reload(workspace)"> Reload </button></span>
-        <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-        <span><button onclick="tryParse(workspace)"> TryParse </button></span>
+    <div class="edition-window decode-window">
+        <div>
+            <span> LOCAL </span>
+            <span><button onclick="save(workspace)"> Save </button></span>
+            <span><button onclick="reload(workspace)"> Reload </button></span>
+            <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
+            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+        </div>
+        <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
 </div>
 <div>
-    <span>
-        <span><div id="blocklyDiv" style="height: 400px; width: 1000px;"></div></span>
-        <span><div id="blocklyDiv2" style="height: 400px; width: 1000px;"></div></span>
-    </span>
     <span>
         <pre id="saveContent"></pre>
     </span>
@@ -365,60 +365,6 @@
     // Create the workspaces
     var workspace = Blockly.inject('blocklyDiv',
     { toolbox: document.getElementById('toolbox') });
-
-    var workspace2 = Blockly.inject('blocklyDiv2',
-    { toolbox: document.getElementById('toolbox') });
-
-    workspace.addWorkspace(workspace2);
-
-    // ------------------------------------------------------------------------------------------------
-
-    // Append some tex with tabulation
-    function append(text, tab) {
-        var t = "  ";
-        for (var i = 0; i < tab; i++) {
-            text = t + text;
-        }
-        return text;
-    }
-
-    function appendln(text, tab) {
-        return append(text, tab) + "\n";
-    }
-
-    // Try to parse XML into a custom block
-    function tryParse(workspace_) {
-        var firstBlock = workspace_.getAllBlocks()[0];
-        var domBlock = Blockly.Xml.blockToDom(firstBlock);
-        var names = domBlock.getElementsByTagName("*");
-
-        var name = names[3].tagName;
-
-        for (var i = 0; i < names.length; i++) {
-            var item = names[i];
-            switch (item.tagName) {
-            case "FIELD":
-                name = item.content;
-                break;
-            default:
-                break;
-            }
-        }
-        ////var text = Blockly.Xml.domToPrettyText(domBlock);
-        ////alert(text);
-
-        var JSCode = "Blockly.Blocks['" +
-            name +
-            appendln("'] = {") +
-            appendln("init: function() {", 1);
-        JSCode += appendln("this.appendDummyInput", 2) +
-            appendln(".setAlign(Blockly.ALIGN_CENTRE)", 4) +
-            appendln(".appendField('" + "');", 4);
-
-        JSCode += appendln("}", 1) + appendln("};");
-
-        alert(JSCode);
-    }
 
 </script>
 </body>
