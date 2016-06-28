@@ -4,24 +4,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css"/>
-
-    <script src="app.js"></script>
-    <script src="Blockly/blockly_uncompressed.js"></script>
-    <script src="Blockly/blocks_compressed.js"></script>
-
-    <!-- Storage -->
-    <script src="storage.js"></script>
-
-    <!-- Overriden version of the core -->    
-    <script src="Blockly/core_override/procedures.js"></script>
-   
-    <!-- Custom blocks -->
-    <script src="Blockly/blocks/custom.js"></script>
-
-    <!-- Error messages -->
-    <script src="Blockly/msg/js/fr.js"></script>
-
+    <script src="C:\Users\Administrateur\Documents\blockly\appengine\storage.js"></script>
+    <script src="C:\Users\Administrateur\Documents\blockly\blockly_compressed.js"></script>
+    <script src="C:\Users\Administrateur\Documents\blockly\blocks_compressed.js"></script>
+    <script src="C:\Users\Administrateur\Documents\blockly\msg\js\en.js"></script>
 </head>
 <body>
 <h1>Blockly tests</h1>
@@ -32,394 +18,176 @@
     </p>
     <div >
         <span>LOCAL </span>
-        <span><button onclick="save(workspace)"> Save </button></span>
-        <span><button onclick="reload(workspace)"> Reload </button></span>
-        <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-        <span><button onclick="tryParse(workspace)"> TryParse </button></span>
+        <span><button onclick="save(), parse()"> Save </button></span>
+        <span><button onclick="reload()"> Reload </button></span>
+        <span><button onclick="addCategory()"> Save Category </button></span>
+        <span><button onclick="EditCategoryName()"> Edit Category </button></span>
     </div>
 </div>
 <div>
     <span>
-        <span><div id="blocklyDiv" style="height: 400px; width: 1000px;"></div></span>
-        <span><div id="blocklyDiv2" style="height: 400px; width: 1000px;"></div></span>
+        <div id="blocklyDiv" style="height: 600px; width: 1000px;"></div>
     </span>
     <span>
         <pre id="saveContent"></pre>
     </span>
 </div>
 <xml id="toolbox" style="display: none">
-<category name="Decodeur" colour="220">
-    <block type="decode_weft"></block>
-    <block type="configurationblock"></block>
-    <block type="simple_block"></block>
-</category>
-<category name="Algorihtmie" colour="250">
-<category name="Logic" id="catLogic" colour="210">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean"></block>
-    <block type="logic_null"></block>
-    <block type="logic_ternary"></block>
-</category>
-<category name="Loops" id="catLoops" colour="120">
-    <block type="controls_repeat_ext">
-        <value name="TIMES">
-            <shadow type="math_number">
-                <field name="NUM">10</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="controls_whileUntil"></block>
-    <block type="controls_for">
-        <value name="FROM">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-        <value name="TO">
-            <shadow type="math_number">
-                <field name="NUM">10</field>
-            </shadow>
-        </value>
-        <value name="BY">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="controls_forEach"></block>
-    <block type="controls_flow_statements"></block>
-</category>
-<category name="Math" id="catMath" colour="230">
-    <block type="math_number"></block>
-    <block type="math_arithmetic">
-        <value name="A">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-        <value name="B">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_single">
-        <value name="NUM">
-            <shadow type="math_number">
-                <field name="NUM">9</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_trig">
-        <value name="NUM">
-            <shadow type="math_number">
-                <field name="NUM">45</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_constant"></block>
-    <block type="math_number_property">
-        <value name="NUMBER_TO_CHECK">
-            <shadow type="math_number">
-                <field name="NUM">0</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_change">
-        <value name="DELTA">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_round">
-        <value name="NUM">
-            <shadow type="math_number">
-                <field name="NUM">3.1</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_on_list"></block>
-    <block type="math_modulo">
-        <value name="DIVIDEND">
-            <shadow type="math_number">
-                <field name="NUM">64</field>
-            </shadow>
-        </value>
-        <value name="DIVISOR">
-            <shadow type="math_number">
-                <field name="NUM">10</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_constrain">
-        <value name="VALUE">
-            <shadow type="math_number">
-                <field name="NUM">50</field>
-            </shadow>
-        </value>
-        <value name="LOW">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-        <value name="HIGH">
-            <shadow type="math_number">
-                <field name="NUM">100</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_random_int">
-        <value name="FROM">
-            <shadow type="math_number">
-                <field name="NUM">1</field>
-            </shadow>
-        </value>
-        <value name="TO">
-            <shadow type="math_number">
-                <field name="NUM">100</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="math_random_float"></block>
-</category>
-<category name="Text" id="catText" colour="160">
-    <block type="text"></block>
-    <block type="text_join"></block>
-    <block type="text_append">
-        <value name="TEXT">
-            <shadow type="text"></shadow>
-        </value>
-    </block>
-    <block type="text_length">
-        <value name="VALUE">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_isEmpty">
-        <value name="VALUE">
-            <shadow type="text">
-                <field name="TEXT"></field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_indexOf">
-        <value name="VALUE">
-            <block type="variables_get">
-                <field name="VAR">text</field>
-            </block>
-        </value>
-        <value name="FIND">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_charAt">
-        <value name="VALUE">
-            <block type="variables_get">
-                <field name="VAR">text</field>
-            </block>
-        </value>
-    </block>
-    <block type="text_getSubstring">
-        <value name="STRING">
-            <block type="variables_get">
-                <field name="VAR">text</field>
-            </block>
-        </value>
-    </block>
-    <block type="text_changeCase">
-        <value name="TEXT">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_trim">
-        <value name="TEXT">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_print">
-        <value name="TEXT">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="text_prompt_ext">
-        <value name="TEXT">
-            <shadow type="text">
-                <field name="TEXT">abc</field>
-            </shadow>
-        </value>
-    </block>
-</category>
-<category name="Lists" id="catLists" colour="260">
-    <block type="lists_create_with">
-        <mutation items="0"></mutation>
-    </block>
-    <block type="lists_create_with"></block>
-    <block type="lists_repeat">
-        <value name="NUM">
-            <shadow type="math_number">
-                <field name="NUM">5</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="lists_length"></block>
-    <block type="lists_isEmpty"></block>
-    <block type="lists_indexOf">
-        <value name="VALUE">
-            <block type="variables_get">
-                <field name="VAR">list</field>
-            </block>
-        </value>
-    </block>
-    <block type="lists_getIndex">
-        <value name="VALUE">
-            <block type="variables_get">
-                <field name="VAR">list</field>
-            </block>
-        </value>
-    </block>
-    <block type="lists_setIndex">
-        <value name="LIST">
-            <block type="variables_get">
-                <field name="VAR">list</field>
-            </block>
-        </value>
-    </block>
-    <block type="lists_getSublist">
-        <value name="LIST">
-            <block type="variables_get">
-                <field name="VAR">list</field>
-            </block>
-        </value>
-    </block>
-    <block type="lists_split">
-        <value name="DELIM">
-            <shadow type="text">
-                <field name="TEXT">,</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="lists_sort"></block>
-</category>
-<category name="Colour" id="catColour" colour="20">
-    <block type="colour_picker"></block>
-    <block type="colour_random"></block>
-    <block type="colour_rgb">
-        <value name="RED">
-            <shadow type="math_number">
-                <field name="NUM">100</field>
-            </shadow>
-        </value>
-        <value name="GREEN">
-            <shadow type="math_number">
-                <field name="NUM">50</field>
-            </shadow>
-        </value>
-        <value name="BLUE">
-            <shadow type="math_number">
-                <field name="NUM">0</field>
-            </shadow>
-        </value>
-    </block>
-    <block type="colour_blend">
-        <value name="COLOUR1">
-            <shadow type="colour_picker">
-                <field name="COLOUR">#ff0000</field>
-            </shadow>
-        </value>
-        <value name="COLOUR2">
-            <shadow type="colour_picker">
-                <field name="COLOUR">#3333ff</field>
-            </shadow>
-        </value>
-        <value name="RATIO">
-            <shadow type="math_number">
-                <field name="NUM">0.5</field>
-            </shadow>
-        </value>
-    </block>
-</category>
-<sep></sep>
-<category name="Variables" id="catVariables" colour="330" custom="VARIABLE"></category>
-<category name="Functions" id="catFunctions" colour="290" custom="PROCEDURE"></category>
-</category>
+    <category name="Blocks standards" colour="240">
+
+        <block type="container_block"></block>
+
+
+        <sep gap="8"></sep>
+        <category name="Opérations de contrôle">
+            <block type="controls_if"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
+        </category>
+
+        <category name="Opérations logiques">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+
+        <category name="Blocks numériques">
+            <block type="math_number"></block>
+        </category>
+
+    </category>
+
+    <category name="Functions" custom="PROCEDURE" colour="50"></category>
+    <category name="Variables" custom="VARIABLE" colour="50"></category>
+
+    <category name="Blocks métier" colour="20">
+        <block type="temperature"></block>
+        <block type="function"></block>
+        <block type="function_with_tags"></block>
+    </category>
+
+    <div id="NewCategory"></div>
+
 </xml>
 
 <script>
-
-    goog.provide('MyBlockly.Workspace');
-
-    // Create the workspaces
     var workspace = Blockly.inject('blocklyDiv',
     { toolbox: document.getElementById('toolbox') });
 
-    var workspace2 = Blockly.inject('blocklyDiv2',
-    { toolbox: document.getElementById('toolbox') });
+    BlocklyStorage.backupOnUnload();
 
-    workspace.addWorkspace(workspace2);
+    function save() {
+        var elem = document.getElementById('saveContent');
+        elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
+        BlocklyStorage.backupBlocks_(workspace);
 
-    // ------------------------------------------------------------------------------------------------
 
-    // Append some tex with tabulation
-    function append(text, tab) {
-        var t = "  ";
-        for (var i = 0; i < tab; i++) {
-            text = t + text;
-        }
-        return text;
-    }
-
-    function appendln(text, tab) {
-        return append(text, tab) + "\n";
-    }
-
-    // Try to parse XML into a custom block
-    function tryParse(workspace_) {
-        var firstBlock = workspace_.getAllBlocks()[0];
+        var firstBlock = workspace.getAllBlocks()[0];
         var domBlock = Blockly.Xml.blockToDom(firstBlock);
-        var names = domBlock.getElementsByTagName("*");
+        var category = domBlock.getElementsByClassName("blocklyHtmlInput").getAttribute("style");
+        alert(category);
+    }
 
-        var name = names[3].tagName;
+    function reload() {
+        BlocklyStorage.restoreBlocks(workspace);
+    }
 
-        for (var i = 0; i < names.length; i++) {
-            var item = names[i];
-            switch (item.tagName) {
-            case "FIELD":
-                name = item.content;
-                break;
-            default:
-                break;
+    function addCategory() {
+        var firstBlock = workspace.getAllBlocks()[0];
+        var domBlock = Blockly.Xml.blockToDom(firstBlock);
+        var names = domBlock.getElementsByTagName("field");
+        var catName = names[2].innerHTML; // tagname : category 
+
+        var existingCategories = document.getElementsByTagName("category");
+
+        var i;
+        for (i = 0; i < existingCategories.length; i++) {
+            if (existingCategories[i].getAttribute("name") == catName) {
+                if (catName == "Variables" || catName == "Functions")
+                {
+                    alert("La modification des catégories 'Variables' et 'Functions' est interdite. \nVeuillez modifier le nom de la catégorie.");
+                    break;
+                } else
+                {
+                    var newblock = document.createElement("block");
+                    var typeAtt = document.createAttribute("type");
+                    typeAtt.value = domBlock.getAttribute("type");
+                    newblock.setAttributeNode(typeAtt);
+                    existingCategories[i].appendChild(newblock);
+                    workspace.updateToolbox(document.getElementById("toolbox"));
+                    break;
+                }  
             }
         }
-        ////var text = Blockly.Xml.domToPrettyText(domBlock);
-        ////alert(text);
 
-        var JSCode = "Blockly.Blocks['" +
-            name +
-            appendln("'] = {") +
-            appendln("init: function() {", 1);
-        JSCode += appendln("this.appendDummyInput", 2) +
-            appendln(".setAlign(Blockly.ALIGN_CENTRE)", 4) +
-            appendln(".appendField('" + "');", 4);
+        if (i == existingCategories.length) {
 
-        JSCode += appendln("}", 1) + appendln("};");
+            var newCategory = document.createElement("category");
+            var nameAtt = document.createAttribute("name");
+            nameAtt.value = catName;
+            newCategory.setAttributeNode(nameAtt);
+            var colourAtt = document.createAttribute("colour");
+            colourAtt.value = 220;
+            newCategory.setAttributeNode(colourAtt);
 
-        alert(JSCode);
+            var newblock1 = document.createElement("block");
+            var typeAtt1 = document.createAttribute("type");
+            typeAtt1.value = domBlock.getAttribute("type");
+            newblock1.setAttributeNode(typeAtt1);
+            newCategory.appendChild(newblock1);
+
+            document.getElementById("toolbox").appendChild(newCategory);
+            workspace.updateToolbox(document.getElementById("toolbox"));
+
+        }
+
     }
 
+    function parse() {
+        var firstBlock = workspace.getAllBlocks()[0];
+        var domBlock = Blockly.Xml.blockToDom(firstBlock);
+        var tags = domBlock.getElementsByTagName("*");
+        
+        for (var i = 0; i < tags.length; i++) {
+            switch(tags[i].tagName) {
+                case "field":
+                    break;
+                case "statement":
+                    break;
+                case "block":
+                    break;
+
+            }
+        }
+
+
+    }
+
+
+    /*function EditCategoryName() {
+        var w = window.open('', '', 'width=400,height=400,resizeable,scrollbars');
+        w.document.write("modifier la catégorie");
+        var form = w.document.createElement("form");
+
+        form.innerHTML = "nom de la catégorie :";
+        var category1 = w.document.createElement("input");
+        category1.type = "text";
+        category1.name = "category1";
+        form.appendChild(category1);
+
+        form.innerHTML = "nouveau nom :";
+        var category2 = w.document.createElement("input");
+        category2.type = "text";
+        category2.name = "category1";
+        form.appendChild(category2);
+
+        w.document.getElementsByTagName("body").appendChild(form);
+
+    }*/
+
 </script>
+
+<script src="C:\Users\Administrateur\Documents\blockly_tests\BlockTemperature.js"></script>
+
 </body>
 </html>
