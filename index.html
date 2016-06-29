@@ -10,14 +10,9 @@
     <script src="Blockly/blockly_uncompressed.js"></script>
     <script src="Blockly/blocks_compressed.js"></script>
 
-    <!-- Storage and parsing -->
-    <script src="Storage/storage.js"></script>
-    <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
-
-    <!-- Overriden version of the core -->    
+    <!-- Overriden version of the core -->
     <script src="Blockly/core_override/procedures.js"></script>
-   
+
     <!-- Custom blocks -->
     <script src="Blockly/blocks/custom.js"></script>
     <script src="Blockly/blocks/BlockTemperature.js"></script>
@@ -26,26 +21,29 @@
     <script src="Blockly/msg/js/fr.js"></script>
 
 </head>
+
+<!--------------------------------------------------------------------------------------------->
 <body>
 <h1>Blockly tests</h1>
 
-<div>
+<div id="wrapper" class="container">
     <p>
         Tests sur blockly. Sauvegarde test.
     </p>
-    <div class="edition-window decode-window">
+    <div class="edition-window" id="decode_window">
         <div>
             <span> LOCAL </span>
-            <span><button onclick="save(workspace)"> Save </button></span>
+            <span><button onclick="save(workspace, document)"> Save </button></span>
             <span><button onclick="reload(workspace)"> Reload </button></span>
             <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+            <span><button onclick="createFunction(workspace, document)" title="Créer une fonction"> Nouvelle fonction </button></span>
             <span>______</span>
             <span><button onclick="addCategory()"> Save Category </button></span>
             <span><button onclick="EditCategoryName()"> Edit Category </button></span>
         </div>
         <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
+    <div id="funcWindowLoc"></div>
 </div>
 <div>
     <span>
@@ -89,9 +87,37 @@
     <div id="NewCategory"></div>
 
 </xml>
+
+<!-- Storage and parsing -->
+<script src="Blockly/appengine/storage.js"></script>
+<script src="Storage/storage.js"></script>
+<script src="Storage/parsingXML.js"></script>
+<script src="Toolbox/category.js"></script>
+
 <script>
     var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox') });  
+    { toolbox: document.getElementById('toolbox') });
+
+    /** 
+     * Create a new workspace for editing a function.
+     * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
+     */
+    function createFunction(workspace) {
+
+        var funcWindow = document.createElement("div");
+        funcWindow
+            .innerHTML =
+            '<div class="edition-window"><div><span> LOCAL </span><span><button onclick="save(workspace, document)"> Save </button></span><span><button onclick="reload(workspace)"> Reload </button></span><span><button onclick="hardReload(workspace)"> Hard-reload </button></span><span><button onclick="createFunction(workspace, document)" title="Créer une fonction"> Nouvelle fonction </button></span><span>______</span><span><button onclick="addCategory()"> Save Category </button></span><span><button onclick="EditCategoryName()"> Edit Category </button></span></div><div id="blocklyFunction" style="height: 400px; width: 1000px;"></div></div>';
+
+        var decWindow = document.getElementById("funcWindowLoc");
+        document.getElementById("wrapper").insertBefore(funcWindow, decWindow);
+
+        var workspace_ = Blockly.inject('blocklyFunction',
+        { toolbox: document.getElementById('toolbox') });
+
+        workspace.addWorkspace(workspace_);
+
+    }
 </script>
 
 </body>
