@@ -34,6 +34,7 @@ span {
 }
 
 .item-workspace {
+    transition: 1s;
     display: inline-block;
     font-family: 'Segoe UI', sans-serif;
     font-style: normal;
@@ -48,6 +49,7 @@ span {
 }
 
 .item-workspace:hover {
+    transition: 0.1s;
     background-color: #d0d0d0;
     border-bottom: solid red 3px;
 }
