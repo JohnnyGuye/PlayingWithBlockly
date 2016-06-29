@@ -71,7 +71,7 @@ Blockly.CSharp.procedures_defreturn = function() {
             var parPos = code.substring(endPos + 6).indexOf('(');
             var computePos = code.substring(0, endPos).indexOf('.Compute(');
             if (parPos === -1 || computePos !== -1) {
-                code = code.slice(0, endPos) + code.slice(endPos + 6);
+                code = code.slice(0, endPos) + code.slice(endPos + 6);//TO DO modifier pour ça supprime tous les .End() après .Compute et pas juste le dernier
             }
         }
     }
