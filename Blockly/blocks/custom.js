@@ -177,7 +177,7 @@ Blockly.Blocks['execute'] = {
     }
 };
 
-Blockly.Blocks['switch'] = {
+/*Blockly.Blocks['switch'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("switch");
@@ -209,6 +209,38 @@ Blockly.Blocks['switch'] = {
         this.setColour(120);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#dsnuad');
+    }
+};*/
+
+Blockly.Blocks['switch'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("switch");
+        this.appendDummyInput()
+            .appendField("variable :")
+            .appendField(new Blockly.FieldVariable("item"), "NAME");
+        this.appendStatementInput("NAME")
+            .setCheck(null);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#z53icu');
+    }
+};
+
+Blockly.Blocks['case'] = {
+    init: function () {
+        this.appendStatementInput("NAME")
+            .setCheck(null)
+            .appendField("case : ")
+            .appendField(new Blockly.FieldTextInput("default"), "NAME")
+            .appendField("then :");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(9);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#x7kjuy');
     }
 };
 
