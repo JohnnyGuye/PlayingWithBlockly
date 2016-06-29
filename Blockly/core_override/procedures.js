@@ -80,12 +80,10 @@ Blockly.Procedures.allProcedures = function(workspace) {
   var proceduresNoReturn = [];    
   // If we are working on a single worspace
   if(workspace instanceof Blockly.Workspace) {  
-    console.log("Working on a single area, doing much");
     fillProcedure(workspace, proceduresReturn, proceduresNoReturn);    
   }
   // If we are working on a area of workspaces
   else {
-    console.log("Working on areas, doing nothin'");
     for(var i = 0; i < workspace; i++) {
       fillProcedure(workspace[i], proceduresReturn, proceduresNoReturn);
     }    
@@ -94,3 +92,67 @@ Blockly.Procedures.allProcedures = function(workspace) {
   proceduresReturn.sort(Blockly.Procedures.procTupleComparator_);
   return [proceduresNoReturn, proceduresReturn];
 };
+
+
+function checkCategories(workspace, categories, procedures) {
+    var blocks = workspace.getAllBlocks();
+    // For each block in this workspace
+    for (var i = 0; i < blocks.length; i++) {
+        var procedureDef = blocks[i].getProcedureDef;
+        if (procedureDef) {
+            var category = blocks[i].getField("category");
+            if (category) {
+                var categoryName = category.getText();
+
+                // We manage to know if the category already exists
+                var discovered = false;
+                var j;
+                for (j = 0; j < categories.length; j++) {
+                    if (categoryName === categories[j]) {
+                        discovered = true;
+                        break;
+                    }
+                }
+                
+                // If not discovered we create the category and fill it with the block
+                if (!discovered) {
+                    var procedureTab = new Array();
+                    procedureTab.push(blocks[i]);
+
+                    categories.push(categoryName);                   
+                    procedures.push(procedureTab);
+                } else {
+                    procedures[j].push(blocks[i]);
+                }
+            }
+        }
+    }
+
+    // Do that again for children
+    var children = workspace.getLinkedWorkspace();
+    for (var i = 0; i < children.length; i++) {
+        checkCategories(workspace, categories)
+    }
+}
+
+/**
+ * Find all user-created procedure definitions in a workspace and its category
+ * @param {!Blockly.Workspace} root Root workspace.
+ * @return {!Array.<!Array.<!Array>>} Pair of arrays, the
+ *     first contains procedures without return variables, the second with.
+ *     Each procedure is defined by a three-element list of name, parameter
+ *     list, and return value boolean.
+ */
+Blockly.Procedures.allCategories = function(workspace) {
+    var categories = new Array();
+    var procedures = new Array();
+    if (workspace instanceof Blockly.Workspace) {
+        checkCategories(workspace, categories, procedures);
+    }
+    else {
+        for (var i = 0; i < workspace; i++) {
+            checkCategories(workspace[i], categories, procedures);
+        }
+    }
+    return [categories, procedures];
+}
