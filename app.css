@@ -5,3 +5,7 @@
 span {
     font-style: italic;
 }
+
+#content1 {
+    white-space: pre;
+}
