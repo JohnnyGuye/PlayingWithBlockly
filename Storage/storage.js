@@ -1,6 +1,8 @@
-﻿// Saves a workspace 
-function save(workspace_, document) {
-    var elem = document.getElementById('saveContent');
+﻿
+
+// Saves a workspace 
+function save(workspace_, document_) {
+    var elem = document_.getElementById('saveContent');
     elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
 
     BlocklyStorage.backupBlocks_(workspace_);

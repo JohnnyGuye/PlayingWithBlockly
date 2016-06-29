@@ -81,7 +81,7 @@ goog.addDependency("../../../" + dir + "/core/utils.js", ['Blockly.utils'], ['go
 goog.addDependency("../../../" + dir + "/core/variables.js", ['Blockly.Variables'], ['Blockly.Blocks', 'Blockly.Workspace', 'goog.string']);
 goog.addDependency("../../../" + dir + "/core/warning.js", ['Blockly.Warning'], ['Blockly.Bubble', 'Blockly.Icon']);
 goog.addDependency("../../../" + dir + "/core/widgetdiv.js", ['Blockly.WidgetDiv'], ['Blockly.Css', 'goog.dom', 'goog.style']);
-goog.addDependency("../../../" + dir + "/core/workspace.js", ['Blockly.Workspace'], ['goog.math']);
+goog.addDependency("../../../" + dir + "/core_override/workspace.js", ['Blockly.Workspace'], ['goog.math']);
 goog.addDependency("../../../" + dir + "/core/workspace_svg.js", ['Blockly.WorkspaceSvg'], ['Blockly.ConnectionDB', 'Blockly.Options', 'Blockly.ScrollbarPair', 'Blockly.Trashcan', 'Blockly.Workspace', 'Blockly.Xml', 'Blockly.ZoomControls', 'goog.dom', 'goog.math.Coordinate', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/xml.js", ['Blockly.Xml'], ['goog.asserts', 'goog.dom']);
 goog.addDependency("../../../" + dir + "/core/zoom_controls.js", ['Blockly.ZoomControls'], ['goog.dom']);
