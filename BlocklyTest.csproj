@@ -49,6 +49,7 @@
     <Content Include="Blockly\appengine\storage.py" />
     <Content Include="Blockly\blockly_compressed.js" />
     <Content Include="Blockly\blockly_uncompressed.js" />
+    <Content Include="Blockly\blocks\BlockTemperature.js" />
     <Content Include="Blockly\blocks\colour.js" />
     <Content Include="Blockly\blocks\custom.js" />
     <Content Include="Blockly\blocks\lists.js" />
@@ -107,6 +108,9 @@
     <Content Include="Blockly\core\workspace_svg.js" />
     <Content Include="Blockly\core\xml.js" />
     <Content Include="Blockly\core\zoom_controls.js" />
+    <Content Include="Blockly\core_override\blocks.js" />
+    <Content Include="Blockly\core_override\procedures.js" />
+    <Content Include="Blockly\core_override\workspace.js" />
     <Content Include="Blockly\dart_compressed.js" />
     <Content Include="Blockly\demos\accessible\icon.png" />
     <Content Include="Blockly\demos\accessible\index.html" />
@@ -398,6 +402,9 @@
     <Content Include="Blockly\tests\multi_playground.html" />
     <Content Include="Blockly\tests\playground.html" />
     <Content Include="index.html" />
+    <Content Include="Storage\parsingXML.js" />
+    <Content Include="Storage\storage.js" />
+    <Content Include="Toolbox\category.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
