@@ -31,16 +31,26 @@
         Tests sur blockly. Sauvegarde test.
     </p>
     <div class="edition-window decode-window">
-        <div>
-            <span> LOCAL </span>
-            <span><button onclick="save(workspace, document)"> Save </button></span>
-            <span><button onclick="reload(workspace)"> Reload </button></span>
-            <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
-            <span>______</span>
-            <span><button onclick="addCategory()"> Save Category </button></span>
-            <span><button onclick="parse()"> parse </button></span>
-            <span><button onclick="EditCategoryName()"> Edit Category </button></span>
+
+        <div class="toolbar-workspace">
+            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+            <div class="toolbar-items">
+                <div class="toolbar-group">
+                    <span><button class="item-workspace" onclick="save(workspace, document)"> Save </button></span>
+                    <span><button class="item-workspace" onclick="reload(workspace)"> Reload </button></span>
+                    <span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>
+                    <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+                </div>
+                <div class="toolbar-group">
+                    <span><button class="item-workspace" onclick="addCategory()"> Save Category </button></span>
+                    <span>
+                        <button class="item-workspace" onclick="parse()">
+                            parse
+                        </button>
+                    </span>
+                    <span><button class="item-workspace" onclick="EditCategoryName()"> Edit Category </button></span>
+                </div>
+             </div>
         </div>
         <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>

@@ -1,7 +1,61 @@
 ﻿body {
     font-family: 'Segoe UI', sans-serif;
+
 }
 
 span {
     font-style: italic;
+}
+
+/*-------------------- Toolbar ----------------------- */
+.toolbar-workspace {
+    margin: 0px;
+    padding: 10px;
+    color: white;
+    background-color: #200000;
+    width: 980px;
+    height: auto;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.title-toolbar-workspace {
+    margin: 0px;
+    height: 30px;
+    width: auto;
+    text-align: center;
+}
+
+.toolbar-group {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    height: auto;
+    background-color: #ececec;   
+}
+
+.item-workspace {
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    background-color: #ececec;
+    border-radius: 1px;
+    height: 30px;
+    margin: 0px;
+    position: relative;
+    border: 0;
+    border-bottom: solid grey 3px;
+}
+
+.item-workspace:hover {
+    background-color: #d0d0d0;
+    border-bottom: solid red 3px;
+}
+
+.item-workspace:active {
+    background-color: antiquewhite;
+}
+
+.item-workspace:selection {
+    border-bottom-color: #454545;
 }
