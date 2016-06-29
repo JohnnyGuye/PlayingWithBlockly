@@ -76,3 +76,25 @@ Blockly.Blocks['simple_block'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };
+
+Blockly.Blocks['decodebytes'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("DecodeBytes");
+        this.appendDummyInput()
+            .appendField("name :")
+            .appendField(new Blockly.FieldTextInput("default"), "name");
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("start byte position : ");
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("end byte position : ");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(210);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#e3vsv5');
+    }
+};
