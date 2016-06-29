@@ -13,6 +13,7 @@
                 alert("La modification des catégories 'Variables' et 'Functions' est interdite. \nVeuillez modifier le nom de la catégorie.");
                 break;
             } else {
+                alert(existingCategories[i].getAttribute("name"));
                 var newblock = document.createElement("block");
                 var typeAtt = document.createAttribute("type");
                 typeAtt.value = domBlock.getAttribute("type");
@@ -38,32 +39,16 @@
         var typeAtt1 = document.createAttribute("type");
         typeAtt1.value = domBlock.getAttribute("type");
         newblock1.setAttributeNode(typeAtt1);
+
+        var idAtt1 = document.createAttribute("id");
+        idAtt1.value = domBlock.getAttribute("id");
+        newblock1.setAttributeNode(idAtt1);
         newCategory.appendChild(newblock1);
 
         document.getElementById("toolbox").appendChild(newCategory);
         workspace.updateToolbox(document.getElementById("toolbox"));
 
     }
-
-}
-
-function parse() {
-    var firstBlock = workspace.getAllBlocks()[0];
-    var domBlock = Blockly.Xml.blockToDom(firstBlock);
-    var tags = domBlock.getElementsByTagName("*");
-
-    for (var i = 0; i < tags.length; i++) {
-        switch (tags[i].tagName) {
-        case "field":
-            break;
-        case "statement":
-            break;
-        case "block":
-            break;
-
-        }
-    }
-
 
 }
 

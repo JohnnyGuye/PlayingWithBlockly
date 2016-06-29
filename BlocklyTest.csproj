@@ -398,6 +398,9 @@
     <Content Include="Blockly\tests\multi_playground.html" />
     <Content Include="Blockly\tests\playground.html" />
     <Content Include="index.html" />
+    <Content Include="Storage\parsingXML.js" />
+    <Content Include="Storage\storage.js" />
+    <Content Include="Toolbox\category.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -151,7 +151,7 @@ Blockly.Procedures.rename = function(text) {
 
 /**
  * Construct the blocks required by the flyout for the procedure category.
- * @param {!Blockly.Workspace} workspace The workspace containing procedures.
+ * @param {!Blockly.Workspace} workspace The workspace contianing procedures.
  * @return {!Array.<!Element>} Array of XML block elements.
  */
 Blockly.Procedures.flyoutCategory = function(workspace) {

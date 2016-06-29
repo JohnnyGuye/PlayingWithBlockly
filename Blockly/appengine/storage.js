@@ -61,7 +61,6 @@ BlocklyStorage.restoreBlocks = function(opt_workspace) {
     var workspace = opt_workspace || Blockly.getMainWorkspace();
     var xml = Blockly.Xml.textToDom(window.localStorage[url]);
     Blockly.Xml.domToWorkspace(xml, workspace);
-    alert(window.localStorage[url]);
   }
 };
 

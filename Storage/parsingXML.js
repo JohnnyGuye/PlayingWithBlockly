@@ -44,3 +44,32 @@ function tryParse(workspace_) {
 
     alert(JSCode);
 }
+
+
+function parse() {
+    var firstBlock = workspace.getAllBlocks()[0];
+    var domBlock = Blockly.Xml.blockToDom(firstBlock);
+    var tags = domBlock.getElementsByTagName("*");
+
+    var JSCode = "Blockly.Blocks['" + domBlock.getAttribute("type") + "'] = {\n" + appendln("init: function() {", 1);
+
+    for (var i = 0; i < tags.length; i++) {
+        switch (tags[i].tagName) {
+            case "FIELD":
+                JSCode += appendln('this.appendDummyInput()', 2);
+                JSCode += appendln('.appendField(' + '"' + tags[i].getAttribute("name") + '"' + ")", 3);
+                JSCode += appendln("appendField(new Blockly.FieldTextInput(" + '"' + tags[i].innerHTML + '"' + "), " + '"' + tags[i].innerHTML + '"' + ");", 3);
+                break;
+            case "STATEMENT":
+                JSCode += appendln('this.appendStatementInput("NAME")', 2);
+                JSCode += appendln('.setCheck(null);', 3);
+                break;
+            case "BLOCK":
+                break;
+
+        }
+    }
+
+    alert(JSCode);
+
+}
