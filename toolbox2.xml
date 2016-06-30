@@ -1,7 +1,4 @@
-﻿<!--?xml version="1.0" encoding="utf-8"?-->
-
-
-<xml id="toolbox" style="display: none">
+﻿<xml id="toolbox" style="display: none">
   <category name="Algorihtmie" colour="250">
     <category name="Logic" id="catLogic" colour="210">
       <block type="controls_if"></block>
@@ -325,7 +322,11 @@
 
   </category>
 
-  <category name="Functions" custom="PROCEDURE" colour="50"></category>
-  <category name="Variables" custom="VARIABLE" colour="50"></category>
+  <category name="Functions" custom="PROCEDURE" colour="10"></category>
+  <category name="Variables" custom="VARIABLE" colour="20"></category>
+
+  <category name="Mes fonctions" id="NewCategory" colour="0">
+    <!-- It's gonna be filled the same maneer as function and variables -->
+  </category>
 
 </xml>

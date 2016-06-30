@@ -94,7 +94,12 @@ save(activWorkspace, document)">
 </div>
 
 <script>
-    /**
+    var workspace;
+    var activWorkspace;
+    var nameActivWorkspace;
+    var nbWorkspaces = 0;
+
+    /*
      * Sends an Http request to get the content of the xml file containing the detailed toolbox
      * Adds the xml tag and its content to the current html file
      * Injects the content in blockly's toolbox
@@ -107,15 +112,11 @@ save(activWorkspace, document)">
             .success(function (response) {
                 document.getElementById("body").innerHTML += response;
 
-                var workspace = Blockly.inject('blocklyDiv',
+                workspace = Blockly.inject('blocklyDiv',
                 { toolbox: document.getElementById('toolbox') });
 
             });
     });
-       
-    var activWorkspace;
-    var nameActivWorkspace;
-    var nbWorkspaces = 0;
 
     /** 
      * Create a new workspace for editing a function.
