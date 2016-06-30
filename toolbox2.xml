@@ -328,10 +328,4 @@
   <category name="Functions" custom="PROCEDURE" colour="50"></category>
   <category name="Variables" custom="VARIABLE" colour="50"></category>
 
-  <category name="Blocks métier" colour="20">
-    <block type="temperature"></block>
-    <block type="function"></block>
-    <block type="function_with_tags"></block>
-  </category>
-
 </xml>
