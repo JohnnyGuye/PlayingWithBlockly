@@ -61,33 +61,13 @@
     </ul>
 </div>
 
-    <div id="toolboxHolder"></div>
-<script>
-    var app = angular.module('httpApp', []);
-    app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml",
-            {
-                /*transformResponse: function (cnv) {
-                    var x2js = new X2JS();
-                    var aftCnv = x2js.xml_str2json(cnv);
-                    return aftCnv;
-                }*/
-           })
-        .success(function (response) {
-            alert(response);
-            //var xmlNode = 
-                document.getElementById(("body")).innerHTML += response ;
-                //console.log(response.xml);
-            });
-    });
-    </script>
-
-
+<pre id="toolboxHolder" lang="xml"></pre>
+    
 <script>
     var workspace = Blockly.inject('blocklyDiv',
     { toolbox: document.getElementById('toolbox') });
 
-    /** 
+    /**
      * Create a new workspace for editing a function.
      * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
      */
@@ -106,10 +86,32 @@
 
 </script>
 
+
     <!-- Storage and parsing -->
     <script src="Storage/storage.js"></script>
     <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
+<script src="Toolbox/category.js"></script>
+
+<script>
+    var app = angular.module('httpApp', []);
+    app.controller('httpController', function ($scope, $http) {
+        $http.get("toolbox2.xml",
+            {
+                /*transformResponse: function (cnv) {
+                    var x2js = new X2JS();
+                    var aftCnv = x2js.xml_str2json(cnv);
+                    return aftCnv;
+                }*/
+           })
+        .success(function (response) {
+            var xmlNode = document.createTextNode(response);
+            var toolboxHolder = document.getElementById("toolboxHolder");
+            var parent = toolboxHolder.parentNode;
+            parent.insertBefore(xmlNode, toolboxHolder);
+            //document.getElementById("toolboxHolder").innerHTML = xmlNode.textContent;
+            });
+    });
+    </script>
 
 </body>
 </html>
