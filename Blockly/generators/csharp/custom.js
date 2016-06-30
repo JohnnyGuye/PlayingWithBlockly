@@ -49,7 +49,7 @@ Blockly.CSharp['decodeboolean'] = function (block) {
 Blockly.CSharp['switch'] = function (block) {
     var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('VARIABLE'), Blockly.Variables.NAME_TYPE);
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
-    var code = '.Switch(decodingContextData => decodingContextData.' + varName + ')\n' + statement + '.EndSwitch()';
+    var code = '.Switch(decodingContextData => decodingContextData.' + varName + ')\n' + statement + '.EndSwitch()\n';
     return code;
 };
 

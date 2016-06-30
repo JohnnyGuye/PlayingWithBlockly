@@ -69,7 +69,7 @@ Blockly.CSharp.init = function (workspace) {
 }
 
 Blockly.CSharp.getDefinitions = function (workspace, type) {
-    var defvars = [];
+    /*var defvars = [];
     var variables = Blockly.Variables.allVariables(workspace, type);
     for (var x = 0; x < variables.length; x++) {
         var name = Blockly.CSharp.variableDB_.getName(variables[x],
@@ -80,7 +80,8 @@ Blockly.CSharp.getDefinitions = function (workspace, type) {
         }
         defvars[x] = prefix + name + ";";
     }
-    return defvars;
+    return defvars;*/
+    return '';
 };
 
 /* Prepend the generated code with the variable definitions. */
