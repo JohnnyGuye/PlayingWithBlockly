@@ -1,7 +1,92 @@
 ﻿body {
     font-family: 'Segoe UI', sans-serif;
+
 }
 
 span {
     font-style: italic;
+}
+
+/*-------------------- Toolbar ----------------------- */
+.toolbar-workspace {
+    margin: 0px;
+    padding: 10px;
+    color: white;
+    background-color: #200000;
+    width: 980px;
+    height: auto;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.title-toolbar-workspace {
+    margin: 0px;
+    height: 30px;
+    width: auto;
+    text-align: center;
+}
+
+.toolbar-group {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    height: auto;
+    background-color: #ececec;   
+}
+
+.item-workspace {
+    transition: 1s;
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    background-color: #ececec;
+    border-radius: 1px;
+    height: 30px;
+    margin: 0px;
+    position: relative;
+    border: 0;
+    border-bottom: solid grey 3px;
+}
+
+.item-workspace:hover {
+    transition: 0.1s;
+    background-color: #d0d0d0;
+    border-bottom: solid red 3px;
+}
+
+.item-workspace:active {
+    background-color: antiquewhite;
+}
+
+.item-workspace:selection {
+    border-bottom-color: #454545;
+}
+
+.toolbar-onglet {
+    margin-top: 2px;
+    border-top: solid #604040 1px;
+    padding-top: 5px;
+    height: 20px;
+}
+
+.onglet {
+    transition: 0.2s;
+    margin: 0px;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    display: inline-block;
+    height: 20px;
+    padding: 3px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #603c3c;
+    border: solid #503030;
+}
+
+.onglet:hover {
+    box-shadow: 0px 0px 5px grey;
+}
+
+.onglet:checked {
+    background-color: #A08080;
+    color: #200000;
 }

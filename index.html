@@ -6,7 +6,7 @@
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="app.css" type="text/css"/>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
@@ -37,19 +37,57 @@
         Tests sur blockly. Sauvegarde test.
     </p>
     <div class="edition-window decode-window">
-        <div>
-            <span> LOCAL </span>
-            <span><button onclick="save(workspace, document)"> Save </button></span>
-            <span><button onclick="reload(workspace)"> Reload </button></span>
-            <span><button onclick="hardReload(workspace)"> Hard-reload </button></span>
-            <span><button onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
-            <span>______</span>
-            <span><button onclick="addCategory()"> Save Category </button></span>
-            <span><button onclick="parse()"> parse </button></span>
-            <span><button onclick="EditCategoryName()"> Edit Category </button></span>
+        <div class="toolbar-workspace">
+            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+            <div class="toolbar-items">
+                <div class="toolbar-group">
+                    <span><button class="item-workspace" onclick="save(workspace, document)"> Save </button></span>
+                    <span><button class="item-workspace" onclick="reload(workspace)"> Reload </button></span>
+                    <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
+                    <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+                </div>
+                <div class="toolbar-group">
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                    <!--<span>
+                        <button class="item-workspace" onclick="parse()">
+                            Parse
+                        </button>
+                    </span>
+                    <span><button class="item-workspace" onclick="EditCategoryName()"> Edit Category </button></span>-->
+                </div>
+            </div>
         </div>
         <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
+
+    <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+        <!-- Toolbar concepteur -->
+        <div class="toolbar-workspace">
+            <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
+            <div class="toolbar-items">
+                <div class="toolbar-group">
+                    <span>
+                        <button class="item-workspace" onclick="
+save(activWorkspace, document)">
+                            Sauvegarder
+                        </button>
+                    </span>
+                    <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
+                </div>
+                <div class="toolbar-group">
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                </div>
+            </div>
+            <div class="toolbar-onglet" id="toolbar-onglet-func">
+                <!-- There will be the onglets -->
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <span>
+        <pre id="saveContent"></pre>
+    </span>
 </div>
 
 <div ng-app="httpApp" ng-controller="httpController">
@@ -76,21 +114,57 @@
     });
    
     /**
+    var activWorkspace;
+    var nameActivWorkspace;
+    var nbWorkspaces = 0;
+
+    /** 
      * Create a new workspace for editing a function.
      * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
      */
     function createFunction(workspace) {
-        var funcWindow = document.createElement("div");
-        funcWindow
-            .innerHTML =
-            '<div class="edition-window"><div><span> LOCAL </span><span><button onclick="save(workspace, document)"> Save </button></span><span><button onclick="reload(workspace)"> Reload </button></span><span><button onclick="hardReload(workspace)"> Hard-reload </button></span><span><button onclick="createFunction(workspace, document)" title="Créer une fonction"> Nouvelle fonction </button></span><span>______</span><span><button onclick="addCategory()"> Save Category </button></span><span><button onclick="EditCategoryName()"> Edit Category </button></span></div><div id="blocklyFunction" style="height: 400px; width: 1000px;"></div></div>';
-        var decWindow = document.getElementById("funcWindowLoc");
-        document.getElementById("wrapper").insertBefore(funcWindow, decWindow);
-        var workspace_ = Blockly.inject('blocklyFunction',
-        { toolbox: document.getElementById('toolbox') });
 
-        workspace.addWorkspace(workspace_);
+        var funcWindow = document.getElementById("functionWrapper");
+        if (funcWindow.style.display === "none") {
+            funcWindow.style.display = "block";
+        }
+
+        // Hide the previous workspace
+        if (nbWorkspaces > 0) {
+            var shownWorkspace = document.getElementById(nameActivWorkspace);
+            shownWorkspace.style.display = "none";
+        }
+
+        // Create 
+        var newDiv = document.createElement('div');
+        newDiv.setAttribute("id", "blocklyDiv" + nbWorkspaces);
+        funcWindow.appendChild(newDiv);
+
+        try {
+            // Create the workspace
+            var newWorkspace = Blockly.inject('blocklyDiv' + nbWorkspaces,
+            { toolbox: document.getElementById('toolbox') });
+            workspace.addWorkspace(newWorkspace);
+        } catch(exception){
+            console.log("definately smthg is wrong");
+        }
+
+        // Create the onglet
+        var newOnglet = document.createElement('button');
+        newOnglet.setAttribute("class", "onglet");
+        newOnglet.setAttribute("name", "Nouveau");
+        newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
+        newOnglet.setAttribute("checked", true);
+        newOnglet.textContent ="Nouveau !";
+        document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
+        
+        // Change the new active workspace
+        activWorkspace = newWorkspace;
+        nameActivWorkspace = "blocklyDiv" + nbWorkspaces;
+
+        nbWorkspaces++;
     }
+
 
 </script>
 
