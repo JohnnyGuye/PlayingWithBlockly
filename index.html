@@ -57,13 +57,15 @@
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="save(workspace, document)"> Save </button></span>
-                    <span><button class="item-workspace" onclick="reload(workspace)"> Reload </button></span>
+                    <span><button class="item-workspace" onclick="save(workspace, document)"> Sauvegarder</button></span>
+                    <span><button class="item-workspace" onclick="reload(workspace)"> Recharger </button></span>
                     <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
                     <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="
+RefreshCategories(workspace)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="test()"> Générer </button></span>
                     <!--<span>
                         <button class="item-workspace" onclick="parse()">
                             Parse
@@ -91,7 +93,8 @@ save(activWorkspace, document)">
                     <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                    
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>                  
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -100,351 +103,16 @@ save(activWorkspace, document)">
         </div>
     </div>
 </div>
+
 <div>
     <span>
         <pre id="saveContent"></pre>
     </span>
 </div>
 
-    <button id="convert" onclick="test()">Convert</button>
+<pre id="content1"></pre>
 
-<xml id="toolbox" style="display: none">
-    <category name="Algorihtmie" colour="250">
-        <category name="Logic" id="catLogic" colour="210">
-            <block type="controls_if"></block>
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_negate"></block>
-            <block type="logic_boolean"></block>
-            <block type="logic_null"></block>
-            <block type="logic_ternary"></block>
-        </category>
-        <category name="Loops" id="catLoops" colour="120">
-            <block type="controls_repeat_ext">
-                <value name="TIMES">
-                    <shadow type="math_number">
-                        <field name="NUM">10</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="controls_whileUntil"></block>
-            <block type="controls_for">
-                <value name="FROM">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-                <value name="TO">
-                    <shadow type="math_number">
-                        <field name="NUM">10</field>
-                    </shadow>
-                </value>
-                <value name="BY">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="controls_forEach"></block>
-            <block type="controls_flow_statements"></block>
-        </category>
-        <category name="Math" id="catMath" colour="230">
-            <block type="math_number"></block>
-            <block type="math_arithmetic">
-                <value name="A">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-                <value name="B">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_single">
-                <value name="NUM">
-                    <shadow type="math_number">
-                        <field name="NUM">9</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_trig">
-                <value name="NUM">
-                    <shadow type="math_number">
-                        <field name="NUM">45</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_constant"></block>
-            <block type="math_number_property">
-                <value name="NUMBER_TO_CHECK">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_change">
-                <value name="DELTA">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_round">
-                <value name="NUM">
-                    <shadow type="math_number">
-                        <field name="NUM">3.1</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_on_list"></block>
-            <block type="math_modulo">
-                <value name="DIVIDEND">
-                    <shadow type="math_number">
-                        <field name="NUM">64</field>
-                    </shadow>
-                </value>
-                <value name="DIVISOR">
-                    <shadow type="math_number">
-                        <field name="NUM">10</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_constrain">
-                <value name="VALUE">
-                    <shadow type="math_number">
-                        <field name="NUM">50</field>
-                    </shadow>
-                </value>
-                <value name="LOW">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-                <value name="HIGH">
-                    <shadow type="math_number">
-                        <field name="NUM">100</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_random_int">
-                <value name="FROM">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-                <value name="TO">
-                    <shadow type="math_number">
-                        <field name="NUM">100</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="math_random_float"></block>
-        </category>
-        <category name="Text" id="catText" colour="160">
-            <block type="text"></block>
-            <block type="text_join"></block>
-            <block type="text_append">
-                <value name="TEXT">
-                    <shadow type="text"></shadow>
-                </value>
-            </block>
-            <block type="text_length">
-                <value name="VALUE">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_isEmpty">
-                <value name="VALUE">
-                    <shadow type="text">
-                        <field name="TEXT"></field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_indexOf">
-                <value name="VALUE">
-                    <block type="variables_get">
-                        <field name="VAR">text</field>
-                    </block>
-                </value>
-                <value name="FIND">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_charAt">
-                <value name="VALUE">
-                    <block type="variables_get">
-                        <field name="VAR">text</field>
-                    </block>
-                </value>
-            </block>
-            <block type="text_getSubstring">
-                <value name="STRING">
-                    <block type="variables_get">
-                        <field name="VAR">text</field>
-                    </block>
-                </value>
-            </block>
-            <block type="text_changeCase">
-                <value name="TEXT">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_trim">
-                <value name="TEXT">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_print">
-                <value name="TEXT">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="text_prompt_ext">
-                <value name="TEXT">
-                    <shadow type="text">
-                        <field name="TEXT">abc</field>
-                    </shadow>
-                </value>
-            </block>
-        </category>
-        <category name="Lists" id="catLists" colour="260">
-            <block type="lists_create_with">
-                <mutation items="0"></mutation>
-            </block>
-            <block type="lists_create_with"></block>
-            <block type="lists_repeat">
-                <value name="NUM">
-                    <shadow type="math_number">
-                        <field name="NUM">5</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="lists_length"></block>
-            <block type="lists_isEmpty"></block>
-            <block type="lists_indexOf">
-                <value name="VALUE">
-                    <block type="variables_get">
-                        <field name="VAR">list</field>
-                    </block>
-                </value>
-            </block>
-            <block type="lists_getIndex">
-                <value name="VALUE">
-                    <block type="variables_get">
-                        <field name="VAR">list</field>
-                    </block>
-                </value>
-            </block>
-            <block type="lists_setIndex">
-                <value name="LIST">
-                    <block type="variables_get">
-                        <field name="VAR">list</field>
-                    </block>
-                </value>
-            </block>
-            <block type="lists_getSublist">
-                <value name="LIST">
-                    <block type="variables_get">
-                        <field name="VAR">list</field>
-                    </block>
-                </value>
-            </block>
-            <block type="lists_split">
-                <value name="DELIM">
-                    <shadow type="text">
-                        <field name="TEXT">,</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="lists_sort"></block>
-        </category>
-        <category name="Colour" id="catColour" colour="20">
-            <block type="colour_picker"></block>
-            <block type="colour_random"></block>
-            <block type="colour_rgb">
-                <value name="RED">
-                    <shadow type="math_number">
-                        <field name="NUM">100</field>
-                    </shadow>
-                </value>
-                <value name="GREEN">
-                    <shadow type="math_number">
-                        <field name="NUM">50</field>
-                    </shadow>
-                </value>
-                <value name="BLUE">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="colour_blend">
-                <value name="COLOUR1">
-                    <shadow type="colour_picker">
-                        <field name="COLOUR">#ff0000</field>
-                    </shadow>
-                </value>
-                <value name="COLOUR2">
-                    <shadow type="colour_picker">
-                        <field name="COLOUR">#3333ff</field>
-                    </shadow>
-                </value>
-                <value name="RATIO">
-                    <shadow type="math_number">
-                        <field name="NUM">0.5</field>
-                    </shadow>
-                </value>
-            </block>
-        </category>
-    </category>
-        <category name="Core" colour="240">
-   
-
-            <sep gap="8"></sep>
-            <category name="Logic">
-                <block type="controls_if"></block>
-                <block type="switch"></block>
-                <block type="case"></block>
-                <block type="default"></block>
-            </category>
-
-            <category name="Decode">
-                <block type="decodebytes"></block>
-                <block type="decodeunsignedinteger"></block>
-                <block type="decodesignedinteger"></block>
-            </category>
-
-            <category name="Math">
-                <block type="compute"></block>
-                <block type="execute"></block>
-            </category>
-
-        </category>
-
-<category name="Generic">
-    <block type="decodeboolean"></block>
-    <!--<block type="procedures_defnoreturn"></block>-->
-</category>
-
-    <category name="Functions" custom="PROCEDURE" colour="50"></category>
-    <category name="Variables" custom="VARIABLE" colour="50"></category>
-
-
-<div id="NewCategory"></div>
-<div ng-app="httpApp" ng-controller="httpController">
-</div>
+<div ng-app="httpApp" ng-controller="httpController"></div>
 
 <script>
     var workspace;
@@ -459,31 +127,26 @@ save(activWorkspace, document)">
      */
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml",
-            {
-            })
-            .success(function (response) {
+        $http.get("toolbox2.xml", {})
+            .success(function(response) {
                 document.getElementById("body").innerHTML += response;
 
-<script>
-    var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox'),
-    zoom:
-     {
-         controls: true,
-         wheel: true,
-         startScale: 1.0,
-         maxScale: 3,
-         minScale: 0.2,
-         scaleSpeed: 1.2
-     },
-    trashcan: true
-    });
                 workspace = Blockly.inject('blocklyDiv',
-                { toolbox: document.getElementById('toolbox') });
-
+                {
+                    toolbox: document.getElementById('toolbox'),
+                    zoom:
+                    {
+                        controls: true,
+                        wheel: true,
+                        startScale: 1.0,
+                        maxScale: 3,
+                        minScale: 0.2,
+                        scaleSpeed: 1.2
+                    },
+                    trashcan: true
+                });
             });
-    });
+        });
 
     /** 
      * Create a new workspace for editing a function.
@@ -538,10 +201,7 @@ save(activWorkspace, document)">
         div.innerHTML = code;
         //alert(code);
     }
-
 </script>
-
-    <div id="content1"></div>
 
 <!-- Storage and parsing -->
     <script src="Storage/storage.js"></script>
