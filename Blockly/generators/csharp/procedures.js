@@ -65,13 +65,13 @@ Blockly.CSharp.procedures_defreturn = function() {
         }
         
 
-        //remove if needed the unecessary .End(), which means if the .End is at the end of the procedure def or if there is .compute before the .end
+        //remove if needed the unecessary .End(), which means if the .End is at the end of the procedure definition
         var endPos = code.lastIndexOf('.End()');
         if (endPos !== -1) {
             var parPos = code.substring(endPos + 6).indexOf('(');
-            var computePos = code.substring(0, endPos).indexOf('.Compute(');
-            if (parPos === -1 || computePos !== -1) {
-                code = code.slice(0, endPos) + code.slice(endPos + 6);//TO DO modifier pour ça supprime tous les .End() après .Compute et pas juste le dernier
+            //var computePos = code.substring(0, endPos).indexOf('.Compute(');
+            if (parPos === -1) {
+                code = code.slice(0, endPos) + code.slice(endPos + 6);
             }
         }
     }

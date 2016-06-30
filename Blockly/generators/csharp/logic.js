@@ -8,12 +8,12 @@ Blockly.CSharp.controls_if = function() {
   var argument = Blockly.CSharp.valueToCode(this, 'IF' + n,
       Blockly.CSharp.ORDER_NONE) || 'false';
   var branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
-  var code = '.If(' + argument + ') \n' + branch ;//previously if
+  var code = '.If( decodingContextData => decodingContextData.' + argument + ') \n' + branch;//previously if
   for (n = 1; n <= this.elseifCount_; n++) {
     argument = Blockly.CSharp.valueToCode(this, 'IF' + n,
         Blockly.CSharp.ORDER_NONE) || 'false';
     branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
-    code += ' ElseIf(' + argument + ') \n' + branch + '\n';
+    code += ' ElseIf(decodingContextData => decodingContextData.' + argument + ') \n' + branch + '\n';
   }
   if (this.elseCount_) {
     branch = Blockly.CSharp.statementToCode(this, 'ELSE');

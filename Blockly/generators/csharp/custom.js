@@ -45,3 +45,24 @@ Blockly.CSharp['decodeboolean'] = function (block) {
     var code = '.DecodeBoolean("' + varName + '", ' + position + 'M).End()\n';
     return code;
 };
+
+Blockly.CSharp['switch'] = function (block) {
+    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('VARIABLE'), Blockly.Variables.NAME_TYPE);
+    var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
+    var code = '.Switch(decodingContextData => decodingContextData.' + varName + ')\n' + statement + '.EndSwitch()';
+    return code;
+};
+
+Blockly.CSharp['case'] = function (block) {
+    var value = block.getFieldValue('value');
+    var statement = Blockly.CSharp.statementToCode(block, 'statement');
+    var code = '.Case('+value+')\n'+statement;
+    return code;
+};
+
+Blockly.CSharp['default'] = function (block) {
+    var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
+    var code = '.Default()\n'+statement;
+    return code;
+};
+

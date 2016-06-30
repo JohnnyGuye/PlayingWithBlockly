@@ -78,7 +78,7 @@ Blockly.Blocks['simple_block'] = {
     }
 };
 
-//Generic : 
+//Core : 
 
 Blockly.Blocks['decodebytes'] = {
     init: function () {
@@ -218,8 +218,8 @@ Blockly.Blocks['switch'] = {
             .appendField("switch");
         this.appendDummyInput()
             .appendField("variable :")
-            .appendField(new Blockly.FieldVariable("item"), "NAME");
-        this.appendStatementInput("NAME")
+            .appendField(new Blockly.FieldVariable("item"), "VARIABLE");
+        this.appendStatementInput("STATEMENT")
             .setCheck(null);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -231,10 +231,10 @@ Blockly.Blocks['switch'] = {
 
 Blockly.Blocks['case'] = {
     init: function () {
-        this.appendStatementInput("NAME")
+        this.appendStatementInput("statement")
             .setCheck(null)
             .appendField("case : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME")
+            .appendField(new Blockly.FieldTextInput("default"), "value")
             .appendField("then :");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -244,7 +244,21 @@ Blockly.Blocks['case'] = {
     }
 };
 
-//Core : 
+Blockly.Blocks['default'] = {
+    init: function () {
+        this.appendStatementInput("STATEMENT")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("default");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(65);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
+
+//Generic : 
 
 Blockly.Blocks['decodeboolean'] = {
     init: function () {
