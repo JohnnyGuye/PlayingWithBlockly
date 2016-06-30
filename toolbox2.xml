@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<!--?xml version="1.0" encoding="utf-8"?-->
 
-<?access-control allow="*"?>
 
 <xml id="toolbox" style="display: none">
   <category name="Algorihtmie" colour="250">
@@ -334,7 +333,5 @@
     <block type="function"></block>
     <block type="function_with_tags"></block>
   </category>
-
-  <div id="NewCategory"></div>
 
 </xml>
