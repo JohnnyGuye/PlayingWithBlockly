@@ -1,112 +1,4 @@
-﻿<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
-    <script src="app.js"></script>
-    <script src="Blockly/appengine/storage.js"></script>
-    <script src="Blockly/blockly_uncompressed.js"></script>
-    <script src="Blockly/blocks_compressed.js"></script>
-
-    <!-- To show xml with angular -->
-    <!--<script src="Scripts/jquery-3.0.0.min.js"></script>-->
-    <script src="Scripts/angular.min.js"></script>
-
-    <!-- Overriden version of the core -->
-    <script src="Blockly/core_override/procedures.js"></script>
-
-    <!-- Custom blocks -->
-    <script src="Blockly/blocks/custom.js"></script>
-    <script src="Blockly/blocks/BlockTemperature.js"></script>
-
-    <!-- Error messages -->
-    <script src="Blockly/msg/js/fr.js"></script>
-
-    <!--Csharp generator-->
-    <script src="Blockly/generators/csharp.js"></script>
-    <script src="Blockly/generators/csharp/variables.js"></script>
-    <script src="Blockly/generators/csharp/lists.js"></script>
-    <script src="Blockly/generators/csharp/colour.js"></script>
-    <script src="Blockly/generators/csharp/logic.js"></script>
-    <script src="Blockly/generators/csharp/math.js"></script>
-    <script src="Blockly/generators/csharp/loops.js"></script>
-    <script src="Blockly/generators/csharp/procedures.js"></script>
-    <script src="Blockly/generators/csharp/text.js"></script>
-    <script src="Blockly/generators/csharp/inferboilerplate.js"></script>
-    <script src="Blockly/generators/csharp/inferbool_variables.js"></script>
-    <script src="Blockly/generators/csharp/inferdistributions.js"></script>
-    <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
-    <script src="Blockly/generators/csharp/custom.js"></script>
-
-</head>
-
-<body id="body">
-<h1>Blockly tests</h1>
-
-<div id="wrapper">
-    <p>
-        Tests sur blockly. Sauvegarde test.
-    </p>
-    <div class="edition-window decode-window">
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
-            <div class="toolbar-items">
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="save(workspace, document)"> Save </button></span>
-                    <span><button class="item-workspace" onclick="reload(workspace)"> Reload </button></span>
-                    <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
-                    <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
-                </div>
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
-                    <!--<span>
-                        <button class="item-workspace" onclick="parse()">
-                            Parse
-                        </button>
-                    </span>
-                    <span><button class="item-workspace" onclick="EditCategoryName()"> Edit Category </button></span>-->
-                </div>
-            </div>
-        </div>
-        <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
-    </div>
-
-    <div id="functionWrapper" class="edition-window function-window" style="display: none;">
-        <!-- Toolbar concepteur -->
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
-            <div class="toolbar-items">
-                <div class="toolbar-group">
-                    <span>
-                        <button class="item-workspace" onclick="
-save(activWorkspace, document)">
-                            Sauvegarder
-                        </button>
-                    </span>
-                    <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
-                </div>
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
-                </div>
-            </div>
-            <div class="toolbar-onglet" id="toolbar-onglet-func">
-                <!-- There will be the onglets -->
-            </div>
-        </div>
-    </div>
-</div>
-<div>
-    <span>
-        <pre id="saveContent"></pre>
-    </span>
-</div>
-
-    <button id="convert" onclick="test()">Convert</button>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <xml id="toolbox" style="display: none">
     <category name="Algorihtmie" colour="250">
@@ -409,144 +301,38 @@ save(activWorkspace, document)">
             </block>
         </category>
     </category>
-        <category name="Core" colour="240">
-   
+        <category name="Blocks standards" colour="240">
+
+            <block type="container_block"></block>
 
             <sep gap="8"></sep>
-            <category name="Logic">
+            <category name="Opérations de contrôle">
                 <block type="controls_if"></block>
-                <block type="switch"></block>
-                <block type="case"></block>
-                <block type="default"></block>
+                <block type="controls_whileUntil"></block>
+                <block type="controls_for"></block>
             </category>
 
-            <category name="Decode">
-                <block type="decodebytes"></block>
-                <block type="decodeunsignedinteger"></block>
-                <block type="decodesignedinteger"></block>
+            <category name="Opérations logiques">
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_boolean"></block>
             </category>
 
-            <category name="Math">
-                <block type="compute"></block>
-                <block type="execute"></block>
+            <category name="Blocks numériques">
+                <block type="math_number"></block>
             </category>
 
         </category>
 
-<category name="Generic">
-    <block type="decodeboolean"></block>
-    <!--<block type="procedures_defnoreturn"></block>-->
-</category>
+        <category name="Functions" custom="PROCEDURE" colour="50"></category>
+        <category name="Variables" custom="VARIABLE" colour="50"></category>
 
-    <category name="Functions" custom="PROCEDURE" colour="50"></category>
-    <category name="Variables" custom="VARIABLE" colour="50"></category>
+        <category name="Blocks métier" colour="20">
+            <block type="temperature"></block>
+            <block type="function"></block>
+            <block type="function_with_tags"></block>
+        </category>
+     
+        <div id="NewCategory"></div>
 
-
-<div id="NewCategory"></div>
-<div ng-app="httpApp" ng-controller="httpController">
-</div>
-
-<script>
-    var workspace;
-    var activWorkspace;
-    var nameActivWorkspace;
-    var nbWorkspaces = 0;
-
-    /*
-     * Sends an Http request to get the content of the xml file containing the detailed toolbox
-     * Adds the xml tag and its content to the current html file
-     * Injects the content in blockly's toolbox
-     */
-    var app = angular.module('httpApp', []);
-    app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml",
-            {
-            })
-            .success(function (response) {
-                document.getElementById("body").innerHTML += response;
-
-<script>
-    var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox'),
-    zoom:
-     {
-         controls: true,
-         wheel: true,
-         startScale: 1.0,
-         maxScale: 3,
-         minScale: 0.2,
-         scaleSpeed: 1.2
-     },
-    trashcan: true
-    });
-                workspace = Blockly.inject('blocklyDiv',
-                { toolbox: document.getElementById('toolbox') });
-
-            });
-    });
-
-    /** 
-     * Create a new workspace for editing a function.
-     * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
-     */
-    function createFunction(workspace) {
-
-        var funcWindow = document.getElementById("functionWrapper");
-        if (funcWindow.style.display === "none") {
-            funcWindow.style.display = "block";
-        }
-
-        // Hide the previous workspace
-        if (nbWorkspaces > 0) {
-            var shownWorkspace = document.getElementById(nameActivWorkspace);
-            shownWorkspace.style.display = "none";
-        }
-
-        // Create 
-        var newDiv = document.createElement('div');
-        newDiv.setAttribute("id", "blocklyDiv" + nbWorkspaces);
-        funcWindow.appendChild(newDiv);
-
-        try {
-            // Create the workspace
-            var newWorkspace = Blockly.inject('blocklyDiv' + nbWorkspaces,
-            { toolbox: document.getElementById('toolbox') });
-            workspace.addWorkspace(newWorkspace);
-        } catch(exception){
-            console.log("definately smthg is wrong");
-        }
-
-        // Create the onglet
-        var newOnglet = document.createElement('button');
-        newOnglet.setAttribute("class", "onglet");
-        newOnglet.setAttribute("name", "Nouveau");
-        newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
-        newOnglet.setAttribute("checked", true);
-        newOnglet.textContent ="Nouveau !";
-        document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
-        
-        // Change the new active workspace
-        activWorkspace = newWorkspace;
-        nameActivWorkspace = "blocklyDiv" + nbWorkspaces;
-
-        nbWorkspaces++;
-    }
-
-    function test() {
-        var code = Blockly.CSharp.workspaceToCode(workspace);
-        var div = document.getElementById('content1');
-        div.innerHTML = code;
-        //alert(code);
-    }
-
-</script>
-
-    <div id="content1"></div>
-
-<!-- Storage and parsing -->
-    <script src="Storage/storage.js"></script>
-    <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
-
-</body>
-</html>
+</xml>
