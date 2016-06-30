@@ -6,10 +6,17 @@
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="app.css" type="text/css"/>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
     <script src="Blockly/blockly_uncompressed.js"></script>
     <script src="Blockly/blocks_compressed.js"></script>
+
+    <!-- To show xml with angular -->
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="xml2json/xml2json.js"></script>
 
     <!-- Overriden version of the core -->
     <script src="Blockly/core_override/procedures.js"></script>
@@ -23,7 +30,7 @@
 
 </head>
 
-<body>
+<body id="body">
 <h1>Blockly tests</h1>
 
 <div id="wrapper">
@@ -45,12 +52,35 @@
         <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
 </div>
-<div>
-    <span>
-        <pre id="saveContent"></pre>
-    </span>
+
+<div ng-app="httpApp" ng-controller="httpController">
+    <ul>
+        <li ng-repeat="det in details">
+            <a href="{{det.loc }}">{{det.loc }}</a>
+        </li>
+    </ul>
 </div>
-<pre lang="xml">{{"<xml id='toolbox' style='display: none'><category name='Algorihtmie' colour='250'><category name='Logic' id='catLogic' colour='210'><block type='controls_if'></block><block type='logic_compare'></block><block type='logic_operation'></block><block type='logic_negate'></block><block type='logic_boolean'></block><block type='logic_null'></block><block type='logic_ternary'></block></category><category name='Lists' id='catLists' colour='260'><block type='lists_create_with'><mutation items='0'></mutation></block><block type='lists_create_with'></block><block type='lists_repeat'><value name='NUM'><shadow type='math_number'><field name='NUM'>5</field></shadow></value></block> <block type='lists_length'></block><block type='lists_isEmpty'></block><block type='lists_setIndex'><value name='LIST'><block type='variables_get'><field name='VAR'>list</field></block></value></block></category><category name='Colour' id='catColour' colour='20'><block type='colour_picker'></block><block type='colour_random'></block><block type='colour_rgb'><value name='RED'><shadow type='math_number'><field name='NUM'>100</field></shadow></value><value name='GREEN'>shadow type='math_number'><field name='NUM'>50</field></shadow></value><value name='BLUE'><shadow type='math_number'><field name='NUM'>0</field></shadow></value></block><block type='colour_blend'><value name='COLOUR1'><shadow type='colour_picker'><field name='COLOUR'>#ff0000</field></shadow></value><value name='COLOUR2'><shadow type='colour_picker'><field name='COLOUR'>#3333ff</field></shadow></value><value name='RATIO'><shadow type='math_number'><field name='NUM'>0.5</field></shadow></value></block></category></category><category name='Blocks standards' colour='240'><block type='container_block'></block><sep gap='8'></sep><category name='Opérations de contrôle'><block type='controls_if'></block><block type='controls_whileUntil'></block><block type='controls_for'></block></category><category name='Opérations logiques'><block type='logic_compare'></block><block type='logic_operation'></block><block type='logic_boolean'></block></category><category name='Blocks numériques'><block type='math_number'></block></category></category><category name='Functions' custom='PROCEDURE' colour='50'></category><category name='Variables' custom='VARIABLE' colour='50'></category><category name='Blocks métier' colour='20'><block type='temperature'></block><block type='function'></block><block type='function_with_tags'></block></category></xml>"}}</pre>
+
+    <div id="toolboxHolder"></div>
+<script>
+    var app = angular.module('httpApp', []);
+    app.controller('httpController', function ($scope, $http) {
+        $http.get("toolbox2.xml",
+            {
+                /*transformResponse: function (cnv) {
+                    var x2js = new X2JS();
+                    var aftCnv = x2js.xml_str2json(cnv);
+                    return aftCnv;
+                }*/
+           })
+        .success(function (response) {
+            alert(response);
+            //var xmlNode = 
+                document.getElementById(("body")).innerHTML += response ;
+                //console.log(response.xml);
+            });
+    });
+    </script>
 
 
 <script>

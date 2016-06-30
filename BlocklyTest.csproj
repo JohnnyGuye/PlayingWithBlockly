@@ -404,8 +404,14 @@
     <Content Include="index.html" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
+    <Content Include="toolbox2.xml" />
     <Content Include="Toolbox\category.js" />
     <Content Include="web.config" />
+    <Content Include="xml2json\check_issues.html" />
+    <Content Include="xml2json\demo.html" />
+    <Content Include="xml2json\samples.html" />
+    <Content Include="xml2json\xml2json.js" />
+    <Content Include="xml2json\xml2json.min.js" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
@@ -532,6 +538,10 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+    <Content Include="xml2json\.project" />
+    <Content Include="xml2json\bower.json" />
+    <Content Include="xml2json\package.json" />
+    <Content Include="xml2json\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
