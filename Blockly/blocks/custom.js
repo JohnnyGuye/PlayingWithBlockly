@@ -85,7 +85,7 @@ Blockly.Blocks['decodebytes'] = {
         this.appendDummyInput()
             .appendField("DecodeBytes");
         this.appendDummyInput()
-            .appendField("name :")
+            .appendField("nom :")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("start")
             .setCheck(null)
@@ -105,9 +105,9 @@ Blockly.Blocks['decodebytes'] = {
 Blockly.Blocks['decodeunsignedinteger'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode unsigned integer");
+            .appendField("Decoder unsigned integer");
         this.appendDummyInput()
-            .appendField("name : ")
+            .appendField("nom : ")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
@@ -126,9 +126,9 @@ Blockly.Blocks['decodeunsignedinteger'] = {
 Blockly.Blocks['decodesignedinteger'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode signed integer");
+            .appendField("Decoder signed integer");
         this.appendDummyInput()
-            .appendField("name : ")
+            .appendField("nom : ")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
@@ -147,13 +147,13 @@ Blockly.Blocks['decodesignedinteger'] = {
 Blockly.Blocks['compute'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Compute : ");
+            .appendField("Calculer : ");
         this.appendDummyInput()
-            .appendField("name : ")
+            .appendField("Resultat : ")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("function")
             .setCheck(null)
-            .appendField("function :");
+            .appendField("Expression :");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -215,7 +215,7 @@ Blockly.Blocks['execute'] = {
 Blockly.Blocks['switch'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("switch");
+            .appendField("aiguillage");
         this.appendDummyInput()
             .appendField("variable :")
             .appendField(new Blockly.FieldVariable("item"), "VARIABLE");
@@ -233,9 +233,9 @@ Blockly.Blocks['case'] = {
     init: function () {
         this.appendStatementInput("statement")
             .setCheck(null)
-            .appendField("case : ")
+            .appendField("cas : ")
             .appendField(new Blockly.FieldTextInput("default"), "value")
-            .appendField("then :");
+            .appendField("faire");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(9);
@@ -249,7 +249,7 @@ Blockly.Blocks['default'] = {
         this.appendStatementInput("STATEMENT")
             .setCheck(null)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField("default");
+            .appendField("par defaut faire");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(65);
@@ -263,9 +263,9 @@ Blockly.Blocks['default'] = {
 Blockly.Blocks['decodeboolean'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode boolean :");
+            .appendField("Decoder booleen :");
         this.appendDummyInput()
-            .appendField("name :")
+            .appendField("nom :")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("POSITION")
             .setCheck(null)

@@ -370,55 +370,57 @@
             </block>
         </category>
     </category>
-        <category name="Blocks standards" colour="240">
-
-            <block type="decodebytes"></block>
-            <block type="decodeunsignedinteger"></block>
-            <block type="decodesignedinteger"></block>
-            <block type="compute"></block>
-            <block type="execute"></block>
-            <block type="decodeboolean"></block>
-            <block type="switch"></block>
-            <block type="case"></block>
-            <block type="default"></block>
-            <block type="container_block"></block>
+        <category name="Core" colour="240">
+   
 
             <sep gap="8"></sep>
-            <category name="Opérations de contrôle">
+            <category name="Logic">
                 <block type="controls_if"></block>
-                <block type="controls_whileUntil"></block>
-                <block type="controls_for"></block>
+                <block type="switch"></block>
+                <block type="case"></block>
+                <block type="default"></block>
             </category>
 
-            <category name="Opérations logiques">
-                <block type="logic_compare"></block>
-                <block type="logic_operation"></block>
-                <block type="logic_boolean"></block>
+            <category name="Decode">
+                <block type="decodebytes"></block>
+                <block type="decodeunsignedinteger"></block>
+                <block type="decodesignedinteger"></block>
             </category>
 
-            <category name="Blocks numériques">
-                <block type="math_number"></block>
+            <category name="Math">
+                <block type="compute"></block>
+                <block type="execute"></block>
             </category>
 
         </category>
 
-        <category name="Functions" custom="PROCEDURE" colour="50"></category>
-        <category name="Variables" custom="VARIABLE" colour="50"></category>
+<category name="Generic">
+    <block type="decodeboolean"></block>
+    <!--<block type="procedures_defnoreturn"></block>-->
+</category>
 
-        <category name="Blocks métier" colour="20">
-            <block type="temperature"></block>
-            <block type="procedures_defnoreturn"></block>
-            <block type="switch"></block>
-            <block type="case"></block>
-        </category>
-     
-        <div id="NewCategory"></div>
+    <category name="Functions" custom="PROCEDURE" colour="50"></category>
+    <category name="Variables" custom="VARIABLE" colour="50"></category>
+
+
+<div id="NewCategory"></div>
 
 </xml>
 
 <script>
     var workspace = Blockly.inject('blocklyDiv',
-    { toolbox: document.getElementById('toolbox') });
+    { toolbox: document.getElementById('toolbox'),
+    zoom:
+     {
+         controls: true,
+         wheel: true,
+         startScale: 1.0,
+         maxScale: 3,
+         minScale: 0.2,
+         scaleSpeed: 1.2
+     },
+    trashcan: true
+    });
 
     /** 
      * Create a new workspace for editing a function.
