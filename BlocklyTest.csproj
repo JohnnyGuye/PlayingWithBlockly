@@ -405,6 +405,7 @@
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
+    <Content Include="Toolbox\toolbar.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

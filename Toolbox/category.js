@@ -56,10 +56,22 @@ function addCategory() {
 /**
  * Refresh the list of categories in the toolbox using the definition of defined functions.
  * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
- * @returns {} Nothing
  */
 function RefreshCategories(workspace) {
     var categories = Blockly.Procedures.allCategories(workspace);
+
+    // Categories container
+    var CATEGORY_NAME = "Mes fonctions";
+    var myFunctions = document.createElement("category");
+    myFunctions.setAttribute("name", CATEGORY_NAME);
+    myFunctions.setAttribute("colour", 0);
+
+    // Rebase the categories to a empty tree
+    var divFunc = document.getElementById("NewCategory");
+    while (divFunc.hasChildNodes() === true) {
+        var child = divFunc.childNodes[0];
+        divFunc.removeChild(child);
+    }
 
     // For each category
     for (var i = 0; i < categories[0].length; i++) {
@@ -86,9 +98,11 @@ function RefreshCategories(workspace) {
             newCategory.appendChild(newProcedure);
         }
 
-        document.getElementById("toolbox").appendChild(newCategory);
-        workspace.updateToolbox(document.getElementById("toolbox"));
+        // Fill the tree
+        divFunc.appendChild(newCategory);
     }
+
+    workspace.updateToolbox(document.getElementById("toolbox"));
 }
 
 

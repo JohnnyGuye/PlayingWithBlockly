@@ -98,9 +98,9 @@ function checkCategories(workspace, categories, procedures) {
     var blocks = workspace.getAllBlocks();
     // For each block in this workspace
     for (var i = 0; i < blocks.length; i++) {
-        var procedureDef = blocks[i].getProcedureDef;
-        if (procedureDef) {
-            var category = blocks[i].getField("category");
+        var block = blocks[i];
+        if (block.getProcedureDef) {
+            var category = block.getField("category");            
             if (category) {
                 var categoryName = category.getText();
 
@@ -117,12 +117,12 @@ function checkCategories(workspace, categories, procedures) {
                 // If not discovered we create the category and fill it with the block
                 if (!discovered) {
                     var procedureTab = new Array();
-                    procedureTab.push(blocks[i]);
+                    procedureTab.push(block);
 
                     categories.push(categoryName);                   
                     procedures.push(procedureTab);
                 } else {
-                    procedures[j].push(blocks[i]);
+                    procedures[j].push(block);
                 }
             }
         }
@@ -131,7 +131,7 @@ function checkCategories(workspace, categories, procedures) {
     // Do that again for children
     var children = workspace.getLinkedWorkspace();
     for (var i = 0; i < children.length; i++) {
-        checkCategories(workspace, categories)
+        checkCategories(children[i], categories, procedures);
     }
 }
 

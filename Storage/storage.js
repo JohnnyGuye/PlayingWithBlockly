@@ -1,4 +1,7 @@
-﻿
+﻿/**
+ * @fileoverview A file in which are all the utility fonction for saving.
+ * @author johnnyq@hotmail.fr (Johnny Guye)
+ */
 
 // Saves a workspace 
 function save(workspace_, document_) {
