@@ -15,7 +15,6 @@ Blockly.CSharp.variables_set = function() {
       Blockly.CSharp.ORDER_ASSIGNMENT) || 'null';
   var varName = Blockly.CSharp.variableDB_.getName(
       this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-    //return  varName + ' = ' + argument0 + ';\n';
-  var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + argument0;
+    return  varName + ' = ' + argument0 + ';\n';
     return code;
 };

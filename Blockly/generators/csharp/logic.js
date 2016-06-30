@@ -13,7 +13,7 @@ Blockly.CSharp.controls_if = function() {
     argument = Blockly.CSharp.valueToCode(this, 'IF' + n,
         Blockly.CSharp.ORDER_NONE) || 'false';
     branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
-    code += ' ElseIf(decodingContextData => decodingContextData.' + argument + ') \n' + branch + '\n';
+    code += '.ElseIf(decodingContextData => decodingContextData.' + argument + ') \n' + branch + '\n';
   }
   if (this.elseCount_) {
     branch = Blockly.CSharp.statementToCode(this, 'ELSE');

@@ -86,7 +86,7 @@ Blockly.Blocks['decodebytes'] = {
             .appendField("DecodeBytes");
         this.appendDummyInput()
             .appendField("name :")
-            .appendField(new Blockly.FieldTextInput("default"), "name");
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("start")
             .setCheck(null)
             .appendField("start byte position : ");
@@ -108,7 +108,7 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("Decode unsigned integer");
         this.appendDummyInput()
             .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
             .appendField("least significant bit position");
@@ -129,7 +129,7 @@ Blockly.Blocks['decodesignedinteger'] = {
             .appendField("Decode signed integer");
         this.appendDummyInput()
             .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
             .appendField("least significant bit position :");
@@ -150,7 +150,7 @@ Blockly.Blocks['compute'] = {
             .appendField("Compute : ");
         this.appendDummyInput()
             .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("function")
             .setCheck(null)
             .appendField("function :");
@@ -266,7 +266,7 @@ Blockly.Blocks['decodeboolean'] = {
             .appendField("Decode boolean :");
         this.appendDummyInput()
             .appendField("name :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("POSITION")
             .setCheck(null)
             .appendField("position :");
