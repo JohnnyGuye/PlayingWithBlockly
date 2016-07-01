@@ -14,7 +14,7 @@
 
   <category name="Blocks génériques" colour="250">
     <block type="decodeboolean"></block>
-    <block type="decoder_une_trame"></block>
+    <block type="decodeframe"></block>
   </category>
 
   <category name="Mes fonctions" id="NewCategory" colour="0">

@@ -269,7 +269,7 @@ Blockly.Blocks['decodeboolean'] = {
         this.appendDummyInput()
             .appendField("Decode boolean :");
         this.appendDummyInput()
-            .appendField("name :")
+            .appendField("nom :")
             .appendField(new Blockly.FieldTextInput("default"), "NAME");
         this.appendDummyInput()
             .appendField("position :");
@@ -289,10 +289,13 @@ Blockly.Blocks['decodeboolean'] = {
 
 //block general : 
 
-Blockly.Blocks['decoder_une_trame'] = {
+Blockly.Blocks['decodeframe'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Decoder la trame :");
+        this.appendDummyInput()
+            .appendField("nom :")
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
         this.appendDummyInput()
             .appendField("trame : ")
             .appendField(new Blockly.FieldTextInput("0"), "hexaValue");
