@@ -145,6 +145,15 @@ save(activWorkspace, document)">
                     },
                     trashcan: true
                 });
+                { toolbox: document.getElementById('toolboxGeneric') });
+
+            });
+        $http.get("tooloboxCreateNewFunction.xml",
+            {
+            })
+            .success(function (response2) {
+                document.getElementById("body").innerHTML += response2;
+
             });
         });
 
@@ -173,7 +182,7 @@ save(activWorkspace, document)">
         try {
             // Create the workspace
             var newWorkspace = Blockly.inject('blocklyDiv' + nbWorkspaces,
-            { toolbox: document.getElementById('toolbox') });
+            { toolbox: document.getElementById('toolboxFunction') });
             workspace.addWorkspace(newWorkspace);
         } catch(exception){
             console.log("definately smthg is wrong");
