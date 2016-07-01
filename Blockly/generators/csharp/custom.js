@@ -18,8 +18,8 @@ Blockly.CSharp['decodebytes'] = function (block) {
     return code;
 };*/
 
-Blockly.JavaScript['decodeunsignedinteger'] = function (block) {
-    var varName = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+Blockly.CSharp['decodeunsignedinteger'] = function (block) {
+    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
     var msbyte = block.getFieldValue('MSBYTE');
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
