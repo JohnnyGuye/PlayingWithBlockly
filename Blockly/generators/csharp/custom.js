@@ -4,8 +4,8 @@ Blockly.CSharp.custom = {};
 
 Blockly.CSharp['decodebytes'] = function (block) {
     var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var startPos = Blockly.CSharp.valueToCode(block, 'start', Blockly.CSharp.ORDER_ATOMIC);
-    var endPos = Blockly.CSharp.valueToCode(block, 'end', Blockly.CSharp.ORDER_ATOMIC);
+    var startPos = block.getFieldValue('start');
+    var endPos = block.getFieldValue('end');
     var code = '.DecodeBytes("' + varName + '", ' + startPos + 'M, ' + endPos + 'M).End()\n';
     return code;
 };
@@ -24,15 +24,17 @@ Blockly.CSharp['decodeunsignedinteger'] = function (block) {
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
     var lsbit = block.getFieldValue('LSBIT');
-    var code = '.DecodeBytes("' + varName + '", ' + lsbyte +'.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
+    var code = '.DecodeUnsignedInteger("' + varName + '", ' + lsbyte +'.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
     return code;
 };
 
 Blockly.CSharp['decodesignedinteger'] = function (block) {
     var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var leastsignificantbit = Blockly.CSharp.valueToCode(block, 'leastSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
-    var mostsignificantbit = Blockly.CSharp.valueToCode(block, 'mostSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
-    var code = '.DecodeSignedInteger("' + varName + '", ' + leastsignificantbit + 'M, ' + mostsignificantbit + 'M).End()\n';
+    var msbyte = block.getFieldValue('MSBYTE');
+    var lsbyte = block.getFieldValue('LSBYTE');
+    var msbit = block.getFieldValue('MSBIT');
+    var lsbit = block.getFieldValue('LSBIT');
+    var code = '.DecodeSignedInteger("' + varName + '", ' + lsbyte + '.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
     return code;
 };
 
@@ -51,8 +53,9 @@ Blockly.CSharp['execute'] = function (block) {
 
 Blockly.CSharp['decodeboolean'] = function (block) {
     var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var position = Blockly.CSharp.valueToCode(block, 'POSITION', Blockly.CSharp.ORDER_ATOMIC);
-    var code = '.DecodeBoolean("' + varName + '", ' + position + 'M).End()\n';
+    var bytepos = block.getFieldValue('BYTEPOS');
+    var bitpos = block.getFieldValue('BITPOS');
+    var code = '.DecodeBoolean("' + varName + '", ' + bytepos + '.' + bitpos + 'M).End()\n';
     return code;
 };
 
@@ -65,7 +68,7 @@ Blockly.CSharp['switch'] = function (block) {
 
 Blockly.CSharp['case'] = function (block) {
     var value = block.getFieldValue('value');
-    var statement = Blockly.CSharp.statementToCode(block, 'statement');
+    var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
     var code = '.Case('+value+')\n'+statement;
     return code;
 };

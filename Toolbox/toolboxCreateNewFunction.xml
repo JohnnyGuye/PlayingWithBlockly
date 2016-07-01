@@ -1,5 +1,5 @@
-﻿<xml id="toolboxFunction" style="display: none">
-  
+﻿﻿<xml id="toolboxFunction" style="display: none">
+
   <category name="Algorihtmie" colour="20">
     <category name="Logic" id="catLogic" colour="210">
       <block type="controls_if"></block>
@@ -10,7 +10,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    
+
     <category name="Boucles" id="catLoops" colour="120">
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -40,7 +40,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    
+
     <category name="Math" id="catMath" colour="230">
       <block type="math_number"></block>
       <block type="math_arithmetic">
@@ -135,7 +135,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    
+
     <category name="Texte" id="catText" colour="160">
       <block type="text"></block>
       <block type="text_join"></block>
@@ -213,7 +213,7 @@
         </value>
       </block>
     </category>
-    
+
     <category name="Listes" id="catLists" colour="260">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
@@ -265,7 +265,7 @@
       </block>
       <block type="lists_sort"></block>
     </category>
-    
+
     <category name="Couleurs" id="catColour" colour="20">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
@@ -308,7 +308,7 @@
 
 
   <sep gap="8"></sep>
-    
+
   <category name="Opérations" colour="40">
 
     <block type="container_block"></block>
@@ -329,13 +329,13 @@
   <category name="Blocks numériques" colour="60">
     <block type="math_number"></block>
   </category>
-  
+
   <category name="Configuration" id="config-category" colour="180">
     <!-- It's gonna be filled with config variables -->
   </category>
 
   <sep gap="8"></sep>
-  
+
   <category name="Fonctions" custom="PROCEDURE" colour="80"></category>
   <category name="Variables" custom="VARIABLE" colour="100"></category>
 
