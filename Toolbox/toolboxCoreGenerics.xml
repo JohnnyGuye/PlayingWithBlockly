@@ -365,4 +365,16 @@
   <category name="Fonctions" custom="PROCEDURE" colour="80"></category>
   <category name="Variables" custom="VARIABLE" colour="100"></category>
 
+  <category name="Briques de base" colour="250">
+    <block type="decodebytes"></block>
+    <block type="decodeunsignedinteger"></block>
+    <block type="decodesignedinteger"></block>
+    <block type="compute"></block>
+    <block type="execute"></block>
+    <block type="switch"></block>
+    <block type="case"></block>
+    <block type="controls_if"></block>
+  </category>
+
+
 </xml>
