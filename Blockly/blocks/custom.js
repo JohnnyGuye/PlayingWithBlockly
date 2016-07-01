@@ -207,41 +207,6 @@ Blockly.Blocks['execute'] = {
     }
 };
 
-/*Blockly.Blocks['switch'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField("switch");
-        this.appendDummyInput()
-            .appendField("variable :")
-            .appendField(new Blockly.FieldVariable("item"), "NAME");
-        this.appendValueInput("NAME")
-            .setCheck(null)
-            .appendField("case :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME")
-            .appendField("then :");
-        this.appendValueInput("NAME")
-            .setCheck(null)
-            .appendField("case :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME")
-            .appendField("then :");
-        this.appendValueInput("NAME")
-            .setCheck(null)
-            .appendField("case :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME")
-            .appendField("then :");
-        this.appendValueInput("NAME")
-            .setCheck(null)
-            .appendField("case :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME")
-            .appendField("then :");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(210);
-        this.setTooltip('');
-        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#dsnuad');
-    }
-};*/
-
 Blockly.Blocks['switch'] = {
     init: function () {
         this.appendDummyInput()
