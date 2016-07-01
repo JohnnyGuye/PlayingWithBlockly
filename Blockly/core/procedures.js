@@ -163,7 +163,7 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     block.setAttribute('gap', 16);
     xmlList.push(block);
   }
-  if (Blockly.Blocks['procedures_defreturn']) {
+  /*if (Blockly.Blocks['procedures_defreturn']) {
     // <block type="procedures_defreturn" gap="16"></block>
     var block = goog.dom.createDom('block');
     block.setAttribute('type', 'procedures_defreturn');
@@ -176,7 +176,7 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     block.setAttribute('type', 'procedures_ifreturn');
     block.setAttribute('gap', 16);
     xmlList.push(block);
-  }
+  }*/
   if (xmlList.length) {
     // Add slightly larger gap between system blocks and user calls.
     xmlList[xmlList.length - 1].setAttribute('gap', 24);

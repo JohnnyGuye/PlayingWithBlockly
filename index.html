@@ -27,6 +27,22 @@
     <!-- Error messages -->
     <script src="Blockly/msg/js/fr.js"></script>
 
+    <!--Csharp generator-->
+    <script src="Blockly/generators/csharp.js"></script>
+    <script src="Blockly/generators/csharp/variables.js"></script>
+    <script src="Blockly/generators/csharp/lists.js"></script>
+    <script src="Blockly/generators/csharp/colour.js"></script>
+    <script src="Blockly/generators/csharp/logic.js"></script>
+    <script src="Blockly/generators/csharp/math.js"></script>
+    <script src="Blockly/generators/csharp/loops.js"></script>
+    <script src="Blockly/generators/csharp/procedures.js"></script>
+    <script src="Blockly/generators/csharp/text.js"></script>
+    <script src="Blockly/generators/csharp/inferboilerplate.js"></script>
+    <script src="Blockly/generators/csharp/inferbool_variables.js"></script>
+    <script src="Blockly/generators/csharp/inferdistributions.js"></script>
+    <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
+    <script src="Blockly/generators/csharp/custom.js"></script>
+
 </head>
 
 <body id="body">
@@ -41,13 +57,15 @@
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="save(workspace, document)"> Sauvegarder </button></span>
+                    <span><button class="item-workspace" onclick="save(workspace, document)"> Sauvegarder</button></span>
                     <span><button class="item-workspace" onclick="reload(workspace)"> Recharger </button></span>
                     <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
                     <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="
+RefreshCategories(workspace)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="test()"> Générer </button></span>
                     <!--<span>
                         <button class="item-workspace" onclick="parse()">
                             Parse
@@ -75,7 +93,8 @@ save(activWorkspace, document)">
                     <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>
+                    
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>                  
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -84,14 +103,16 @@ save(activWorkspace, document)">
         </div>
     </div>
 </div>
+
 <div>
     <span>
         <pre id="saveContent"></pre>
     </span>
 </div>
 
-<div ng-app="httpApp" ng-controller="httpController">
-</div>
+<pre id="content1"></pre>
+
+<div ng-app="httpApp" ng-controller="httpController"></div>
 
 <script>
     var workspace;
@@ -106,17 +127,26 @@ save(activWorkspace, document)">
      */
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml",
-            {
-            })
-            .success(function (response) {
+        $http.get("toolbox2.xml", {})
+            .success(function(response) {
                 document.getElementById("body").innerHTML += response;
 
                 workspace = Blockly.inject('blocklyDiv',
-                { toolbox: document.getElementById('toolbox') });
-
+                {
+                    toolbox: document.getElementById('toolbox'),
+                    zoom:
+                    {
+                        controls: true,
+                        wheel: true,
+                        startScale: 1.0,
+                        maxScale: 3,
+                        minScale: 0.2,
+                        scaleSpeed: 1.2
+                    },
+                    trashcan: true
+                });
             });
-    });
+        });
 
     /** 
      * Create a new workspace for editing a function.
@@ -165,13 +195,18 @@ save(activWorkspace, document)">
         nbWorkspaces++;
     }
 
-
+    function test() {
+        var code = Blockly.CSharp.workspaceToCode(workspace);
+        var div = document.getElementById('content1');
+        div.innerHTML = code;
+        //alert(code);
+    }
 </script>
 
-    <!-- Storage and parsing -->
-<script src="Storage/storage.js"></script>
-<script src="Storage/parsingXML.js"></script>
-<script src="Toolbox/category.js"></script>
+<!-- Storage and parsing -->
+    <script src="Storage/storage.js"></script>
+    <script src="Storage/parsingXML.js"></script>
+    <script src="Toolbox/category.js"></script>
 
 </body>
 </html>

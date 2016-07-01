@@ -324,6 +324,12 @@
 
   <category name="Functions" custom="PROCEDURE" colour="10"></category>
   <category name="Variables" custom="VARIABLE" colour="20"></category>
+  
+  <category name="Generic">
+    <block type="decodeboolean"></block>
+    <!--<block type="procedures_defnoreturn"></block>-->
+  </category>
+
 
   <category name="Mes fonctions" id="NewCategory" colour="0">
     <!-- It's gonna be filled the same maneer as function and variables -->

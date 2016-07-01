@@ -78,19 +78,19 @@ Blockly.Blocks['simple_block'] = {
     }
 };
 
-//Generic : 
+//Core : 
 
 Blockly.Blocks['decodebytes'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("DecodeBytes");
         this.appendDummyInput()
-            .appendField("name :")
-            .appendField(new Blockly.FieldTextInput("default"), "name");
-        this.appendValueInput("NAME")
+            .appendField("nom :")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
+        this.appendValueInput("start")
             .setCheck(null)
             .appendField("start byte position : ");
-        this.appendValueInput("NAME")
+        this.appendValueInput("end")
             .setCheck(null)
             .appendField("end byte position : ");
         this.setInputsInline(false);
@@ -105,16 +105,18 @@ Blockly.Blocks['decodebytes'] = {
 Blockly.Blocks['decodeunsignedinteger'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode unsigned integer");
+            .appendField("Decoder unsigned integer");
         this.appendDummyInput()
-            .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField("nom : ")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
             .appendField("least significant bit position");
         this.appendValueInput("mostSignificantBit")
             .setCheck(null)
             .appendField("most significant bit position");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#4d9g5v');
@@ -124,16 +126,18 @@ Blockly.Blocks['decodeunsignedinteger'] = {
 Blockly.Blocks['decodesignedinteger'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode signed integer");
+            .appendField("Decoder signed integer");
         this.appendDummyInput()
-            .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField("nom : ")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("leastSignificantBit")
             .setCheck(null)
             .appendField("least significant bit position :");
         this.appendValueInput("mostSignificantBit")
             .setCheck(null)
             .appendField("most significant bit position :");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(160);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#yc64so');
@@ -143,13 +147,15 @@ Blockly.Blocks['decodesignedinteger'] = {
 Blockly.Blocks['compute'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Compute : ");
+            .appendField("Calculer : ");
         this.appendDummyInput()
-            .appendField("name : ")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField("Resultat : ")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendValueInput("function")
             .setCheck(null)
-            .appendField("function :");
+            .appendField("Expression :");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(330);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#skwmiv');
@@ -160,16 +166,18 @@ Blockly.Blocks['execute'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Execute ");
-        this.appendValueInput("NAME")
+        this.appendValueInput("action")
             .setCheck(null)
             .appendField("Action : ");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
         this.setColour(120);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#iuhihs');
     }
 };
 
-Blockly.Blocks['switch'] = {
+/*Blockly.Blocks['switch'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("switch");
@@ -202,18 +210,64 @@ Blockly.Blocks['switch'] = {
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#dsnuad');
     }
+};*/
+
+Blockly.Blocks['switch'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("aiguillage");
+        this.appendDummyInput()
+            .appendField("variable :")
+            .appendField(new Blockly.FieldVariable("item"), "VARIABLE");
+        this.appendStatementInput("STATEMENT")
+            .setCheck(null);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#z53icu');
+    }
 };
 
-//Core : 
+Blockly.Blocks['case'] = {
+    init: function () {
+        this.appendStatementInput("statement")
+            .setCheck(null)
+            .appendField("cas : ")
+            .appendField(new Blockly.FieldTextInput("default"), "value")
+            .appendField("faire");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(9);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#x7kjuy');
+    }
+};
+
+Blockly.Blocks['default'] = {
+    init: function () {
+        this.appendStatementInput("STATEMENT")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("par defaut faire");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(65);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
+
+//Generic : 
 
 Blockly.Blocks['decodeboolean'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode boolean :");
+            .appendField("Decoder booleen :");
         this.appendDummyInput()
-            .appendField("name :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
-        this.appendValueInput("NAME")
+            .appendField("nom :")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
+        this.appendValueInput("POSITION")
             .setCheck(null)
             .appendField("position :");
         this.setPreviousStatement(true, null);
@@ -223,5 +277,3 @@ Blockly.Blocks['decodeboolean'] = {
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#re2b4h');
     }
 };
-
-// Connit 
