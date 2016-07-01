@@ -78,7 +78,7 @@ Blockly.Blocks['simple_block'] = {
     }
 };
 
-//Generic : 
+//Core : 
 
 Blockly.Blocks['decodebytes'] = {
     init: function () {
@@ -134,7 +134,7 @@ Blockly.Blocks['decodesignedinteger'] = {
         this.appendValueInput("mostSignificantBit")
             .setCheck(null)
             .appendField("most significant bit position :");
-        this.setColour(160);
+        this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#yc64so');
     }
@@ -150,7 +150,7 @@ Blockly.Blocks['compute'] = {
         this.appendValueInput("function")
             .setCheck(null)
             .appendField("function :");
-        this.setColour(330);
+        this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#skwmiv');
     }
@@ -163,7 +163,7 @@ Blockly.Blocks['execute'] = {
         this.appendValueInput("NAME")
             .setCheck(null)
             .appendField("Action : ");
-        this.setColour(120);
+        this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#iuhihs');
     }
@@ -198,13 +198,15 @@ Blockly.Blocks['switch'] = {
             .appendField("then :");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(120);
+        this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#dsnuad');
     }
 };
 
-//Core : 
+// + if custom 
+
+//Generics : 
 
 Blockly.Blocks['decodeboolean'] = {
     init: function () {

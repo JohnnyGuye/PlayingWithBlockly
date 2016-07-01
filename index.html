@@ -106,14 +106,21 @@ save(activWorkspace, document)">
      */
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml",
+        $http.get("toolboxCoreGenerics.xml",
             {
             })
             .success(function (response) {
                 document.getElementById("body").innerHTML += response;
 
                 workspace = Blockly.inject('blocklyDiv',
-                { toolbox: document.getElementById('toolbox') });
+                { toolbox: document.getElementById('toolboxGeneric') });
+
+            });
+        $http.get("tooloboxCreateNewFunction.xml",
+            {
+            })
+            .success(function (response2) {
+                document.getElementById("body").innerHTML += response2;
 
             });
     });
@@ -143,7 +150,7 @@ save(activWorkspace, document)">
         try {
             // Create the workspace
             var newWorkspace = Blockly.inject('blocklyDiv' + nbWorkspaces,
-            { toolbox: document.getElementById('toolbox') });
+            { toolbox: document.getElementById('toolboxFunction') });
             workspace.addWorkspace(newWorkspace);
         } catch(exception){
             console.log("definately smthg is wrong");
