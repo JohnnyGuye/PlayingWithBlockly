@@ -330,9 +330,10 @@
     <!--<block type="procedures_defnoreturn"></block>-->
   </category>
 
-
   <category name="Mes fonctions" id="NewCategory" colour="0">
     <!-- It's gonna be filled the same maneer as function and variables -->
   </category>
-
+  <category name="Configuration" id="config-category" colour="180">
+    <!-- It's gonna be filled with config variables -->
+  </category>
 </xml>
