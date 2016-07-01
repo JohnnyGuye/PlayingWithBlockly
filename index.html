@@ -117,7 +117,7 @@ save(activWorkspace, document)">
 <script>
     var workspace;
     var activWorkspace;
-    var valueActivWorkspace;
+    var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
 
     var BASE_BLOCKLY_DIV = "blocklyDiv";
@@ -129,7 +129,7 @@ save(activWorkspace, document)">
      */
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
-        $http.get("toolboxCoreGenerics.xml", {})
+        $http.get("Toolbox/toolboxCoreGenerics.xml", {})
             .success(function(response) {
                 document.getElementById("body").innerHTML += response;
 
@@ -150,7 +150,7 @@ save(activWorkspace, document)">
                 
 
             });
-        $http.get("tooloboxCreateNewFunction.xml",
+        $http.get("Toolbox/toolboxCreateNewFunction.xml",
             {
             })
             .success(function (response2) {
@@ -177,7 +177,7 @@ save(activWorkspace, document)">
         // Create anchor
         var newDiv = document.createElement('div');
         newDiv.setAttribute("id", BASE_BLOCKLY_DIV + nbWorkspaces);
-        newDiv.setAttribute("class", 'blocklyDiv');
+        newDiv.setAttribute("class", BASE_BLOCKLY_DIV);
         funcWindow.appendChild(newDiv);
 
         // Create the workspace
