@@ -2,7 +2,7 @@
  * Refresh the list of categories in the toolbox using the definition of defined functions.
  * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
  */
-function RefreshCategories(workspace) {
+function RefreshCategories(workspace, toolboxId) {
     var categories = Blockly.Procedures.allCategories(workspace);
 
     // Categories container
@@ -47,5 +47,5 @@ function RefreshCategories(workspace) {
         divFunc.appendChild(newCategory);
     }
 
-    workspace.updateToolbox(document.getElementById("toolbox"));
+    workspace.updateToolbox(document.getElementById(toolboxId));
 }
