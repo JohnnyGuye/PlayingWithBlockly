@@ -331,8 +331,17 @@
   </category>
   
 
+<<<<<<< HEAD:toolbox2.xml
+  <category name="Mes fonctions" id="NewCategory" colour="0">
+    <!-- It's gonna be filled the same maneer as function and variables -->
+  </category>
+  <category name="Configuration" id="config-category" colour="180">
+    <!-- It's gonna be filled with config variables -->
+  </category>
+=======
 
   <category name="Fonctions" custom="PROCEDURE" colour="80"></category>
   <category name="Variables" custom="VARIABLE" colour="100"></category>
 
+>>>>>>> 1514b3b57e089ad318ae2244a80dc9f12106cac7:tooloboxCreateNewFunction.xml
 </xml>

@@ -75,7 +75,7 @@ RefreshCategories(workspace)"> Refresh </button></span>
                 </div>
             </div>
         </div>
-        <div id="blocklyDiv" style="height: 400px; width: 1000px;"></div>
+        <div id="blocklyDiv" class="blocklyDiv" style="height: 400px; width: 1000px;"></div>
     </div>
 
     <div id="functionWrapper" class="edition-window function-window" style="display: none;">
@@ -117,8 +117,10 @@ save(activWorkspace, document)">
 <script>
     var workspace;
     var activWorkspace;
-    var nameActivWorkspace;
+    var valueActivWorkspace;
     var nbWorkspaces = 0;
+
+    var BASE_BLOCKLY_DIV = "blocklyDiv";
 
     /*
      * Sends an Http request to get the content of the xml file containing the detailed toolbox
@@ -131,7 +133,7 @@ save(activWorkspace, document)">
             .success(function(response) {
                 document.getElementById("body").innerHTML += response;
 
-                workspace = Blockly.inject('blocklyDiv',
+                workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                 {
                     toolbox: document.getElementById('toolboxGeneric'),
                     zoom:
@@ -162,7 +164,6 @@ save(activWorkspace, document)">
      * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
      */
     function createFunction(workspace) {
-
         var funcWindow = document.getElementById("functionWrapper");
         if (funcWindow.style.display === "none") {
             funcWindow.style.display = "block";
@@ -170,38 +171,40 @@ save(activWorkspace, document)">
 
         // Hide the previous workspace
         if (nbWorkspaces > 0) {
-            var shownWorkspace = document.getElementById(nameActivWorkspace);
-            shownWorkspace.style.display = "none";
+            document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
         }
 
-        // Create 
+        // Create anchor
         var newDiv = document.createElement('div');
-        newDiv.setAttribute("id", "blocklyDiv" + nbWorkspaces);
+        newDiv.setAttribute("id", BASE_BLOCKLY_DIV + nbWorkspaces);
+        newDiv.setAttribute("class", 'blocklyDiv');
         funcWindow.appendChild(newDiv);
 
-        try {
-            // Create the workspace
-            var newWorkspace = Blockly.inject('blocklyDiv' + nbWorkspaces,
-            { toolbox: document.getElementById('toolboxFunction') });
-            workspace.addWorkspace(newWorkspace);
-        } catch(exception){
-            console.log("definately smthg is wrong");
-        }
+        // Create the workspace
+        var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
+        { toolbox: document.getElementById('toolboxFunction') });
+        workspace.attachChildWorkspace(newWorkspace);
+        activWorkspace = newWorkspace;               
+        valueActivWorkspace = nbWorkspaces;
 
         // Create the onglet
         var newOnglet = document.createElement('button');
         newOnglet.setAttribute("class", "onglet");
         newOnglet.setAttribute("name", "Nouveau");
         newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
+        newOnglet.setAttribute("value", nbWorkspaces);
         newOnglet.setAttribute("checked", true);
-        newOnglet.textContent ="Nouveau !";
+        newOnglet.setAttribute("onclick", "changeActiveWorkspace(" + nbWorkspaces + ")");
+        newOnglet.textContent = "Nouveau !";
         document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
-        
-        // Change the new active workspace
-        activWorkspace = newWorkspace;
-        nameActivWorkspace = "blocklyDiv" + nbWorkspaces;
 
         nbWorkspaces++;
+    }
+
+    function changeActiveWorkspace(newValueActivWorkspace) {
+        document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
+        document.getElementById(BASE_BLOCKLY_DIV + newValueActivWorkspace).style.display = "block";
+        valueActivWorkspace = newValueActivWorkspace;
     }
 
     function test() {
