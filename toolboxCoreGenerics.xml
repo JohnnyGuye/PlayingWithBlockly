@@ -8,6 +8,7 @@
     <block type="compute"></block>
     <block type="execute"></block>
     <block type="switch"></block>
+    <block type="case"></block>
     <block type="controls_if"></block>
   </category>
   
