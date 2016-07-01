@@ -274,3 +274,21 @@ Blockly.Blocks['decodeboolean'] = {
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#re2b4h');
     }
 };
+
+//block general : 
+
+Blockly.Blocks['decoder_une_trame'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Decoder la trame :");
+        this.appendDummyInput()
+            .appendField("trame : ")
+            .appendField(new Blockly.FieldTextInput("0"), "hexaValue");
+        this.appendStatementInput("blocks")
+            .setCheck(null)
+            .appendField("decodage :");
+        this.setColour(330);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
