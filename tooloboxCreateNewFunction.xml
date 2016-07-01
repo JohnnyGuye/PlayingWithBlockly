@@ -1,5 +1,6 @@
-﻿<xml id="toolbox" style="display: none">
-  <category name="Algorihtmie" colour="250">
+﻿<xml id="toolboxFunction" style="display: none">
+  
+  <category name="Algorihtmie" colour="20">
     <category name="Logic" id="catLogic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -9,7 +10,8 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="Loops" id="catLoops" colour="120">
+    
+    <category name="Boucles" id="catLoops" colour="120">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -38,6 +40,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
+    
     <category name="Math" id="catMath" colour="230">
       <block type="math_number"></block>
       <block type="math_arithmetic">
@@ -132,7 +135,8 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="Text" id="catText" colour="160">
+    
+    <category name="Texte" id="catText" colour="160">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -209,7 +213,8 @@
         </value>
       </block>
     </category>
-    <category name="Lists" id="catLists" colour="260">
+    
+    <category name="Listes" id="catLists" colour="260">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -260,7 +265,8 @@
       </block>
       <block type="lists_sort"></block>
     </category>
-    <category name="Colour" id="catColour" colour="20">
+    
+    <category name="Couleurs" id="catColour" colour="20">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -299,10 +305,13 @@
       </block>
     </category>
   </category>
-  <category name="Blocks standards" colour="240">
+
+
+  <sep gap="8"></sep>
+    
+  <category name="Opérations" colour="40">
 
     <block type="container_block"></block>
-
     <sep gap="8"></sep>
     <category name="Opérations de contrôle">
       <block type="controls_if"></block>
@@ -315,25 +324,24 @@
       <block type="logic_operation"></block>
       <block type="logic_boolean"></block>
     </category>
-
-    <category name="Blocks numériques">
-      <block type="math_number"></block>
-    </category>
-
   </category>
 
-  <category name="Functions" custom="PROCEDURE" colour="10"></category>
-  <category name="Variables" custom="VARIABLE" colour="20"></category>
+  <category name="Blocks numériques" colour="60">
+    <block type="math_number"></block>
+  </category>
   
-  <category name="Generic">
-    <block type="decodeboolean"></block>
-    <!--<block type="procedures_defnoreturn"></block>-->
-  </category>
 
+<<<<<<< HEAD:toolbox2.xml
   <category name="Mes fonctions" id="NewCategory" colour="0">
     <!-- It's gonna be filled the same maneer as function and variables -->
   </category>
   <category name="Configuration" id="config-category" colour="180">
     <!-- It's gonna be filled with config variables -->
   </category>
+=======
+
+  <category name="Fonctions" custom="PROCEDURE" colour="80"></category>
+  <category name="Variables" custom="VARIABLE" colour="100"></category>
+
+>>>>>>> 1514b3b57e089ad318ae2244a80dc9f12106cac7:tooloboxCreateNewFunction.xml
 </xml>

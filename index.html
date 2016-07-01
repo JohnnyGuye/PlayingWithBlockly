@@ -129,13 +129,13 @@ save(activWorkspace, document)">
      */
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
-        $http.get("toolbox2.xml", {})
+        $http.get("toolboxCoreGenerics.xml", {})
             .success(function(response) {
                 document.getElementById("body").innerHTML += response;
 
                 workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                 {
-                    toolbox: document.getElementById('toolbox'),
+                    toolbox: document.getElementById('toolboxGeneric'),
                     zoom:
                     {
                         controls: true,
@@ -147,6 +147,15 @@ save(activWorkspace, document)">
                     },
                     trashcan: true
                 });
+                
+
+            });
+        $http.get("tooloboxCreateNewFunction.xml",
+            {
+            })
+            .success(function (response2) {
+                document.getElementById("body").innerHTML += response2;
+
             });
         });
 
@@ -173,7 +182,7 @@ save(activWorkspace, document)">
 
         // Create the workspace
         var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
-        { toolbox: document.getElementById('toolbox') });
+        { toolbox: document.getElementById('toolboxFunction') });
         workspace.attachChildWorkspace(newWorkspace);
         activWorkspace = newWorkspace;               
         valueActivWorkspace = nbWorkspaces;
