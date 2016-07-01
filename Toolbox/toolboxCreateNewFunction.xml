@@ -330,13 +330,12 @@
     <block type="math_number"></block>
   </category>
   
-  <category name="Mes fonctions" id="NewCategory" colour="0">
-    <!-- It's gonna be filled the same maneer as function and variables -->
-  </category>
   <category name="Configuration" id="config-category" colour="180">
     <!-- It's gonna be filled with config variables -->
   </category>
 
+  <sep gap="8"></sep>
+  
   <category name="Fonctions" custom="PROCEDURE" colour="80"></category>
   <category name="Variables" custom="VARIABLE" colour="100"></category>
 

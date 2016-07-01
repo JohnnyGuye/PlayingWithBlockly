@@ -22,7 +22,6 @@
 
     <!-- Custom blocks -->
     <script src="Blockly/blocks/custom.js"></script>
-    <script src="Blockly/blocks/BlockTemperature.js"></script>
 
     <!-- Error messages -->
     <script src="Blockly/msg/js/fr.js"></script>
@@ -64,14 +63,8 @@
                 </div>
                 <div class="toolbar-group">
                     <span><button class="item-workspace" onclick="
-RefreshCategories(workspace)"> Refresh </button></span>
+RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
                     <span><button class="item-workspace" onclick="test()"> Générer </button></span>
-                    <!--<span>
-                        <button class="item-workspace" onclick="parse()">
-                            Parse
-                        </button>
-                    </span>
-                    <span><button class="item-workspace" onclick="EditCategoryName()"> Edit Category </button></span>-->
                 </div>
             </div>
         </div>
@@ -94,7 +87,7 @@ save(activWorkspace, document)">
                 </div>
                 <div class="toolbar-group">
                     
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace)"> Refresh </button></span>                  
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace,  princToolboxId)"> Refresh </button></span>                  
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -120,6 +113,7 @@ save(activWorkspace, document)">
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
 
+    var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
     /*
@@ -135,7 +129,7 @@ save(activWorkspace, document)">
 
                 workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                 {
-                    toolbox: document.getElementById('toolboxGeneric'),
+                    toolbox: document.getElementById(princToolboxId),
                     zoom:
                     {
                         controls: true,
@@ -150,13 +144,14 @@ save(activWorkspace, document)">
                 
 
             });
-        $http.get("Toolbox/toolboxCreateNewFunction.xml",
-            {
-            })
-            .success(function (response2) {
-                document.getElementById("body").innerHTML += response2;
 
-            });
+        ////$http.get("Toolbox/toolboxCreateNewFunction.xml",
+        ////    {
+        ////    })
+        ////    .success(function (response) {
+        ////       // document.getElementById("body").innerHTML += response;
+
+        ////    });
         });
 
     /** 
