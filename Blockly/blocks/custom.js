@@ -102,7 +102,7 @@ Blockly.Blocks['decodebytes'] = {
     }
 };
 
-Blockly.Blocks['decodeunsignedinteger'] = {
+/*Blockly.Blocks['decodeunsignedinteger'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Decoder unsigned integer");
@@ -120,6 +120,36 @@ Blockly.Blocks['decodeunsignedinteger'] = {
         this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#4d9g5v');
+    }
+};*/
+
+Blockly.Blocks['decodeunsignedinteger'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Decoder Unsigned Integer");
+        this.appendDummyInput()
+            .appendField("nom :")
+            .appendField(new Blockly.FieldVariable("default"), "NAME");
+        this.appendDummyInput()
+            .appendField("position :");
+        this.appendDummyInput()
+            .appendField("        poids fort")
+            .appendField("poids faible");
+        this.appendDummyInput()
+            .appendField("octet    ")
+            .appendField(new Blockly.FieldTextInput("0"), "MSBYTE")
+            .appendField("           ")
+            .appendField(new Blockly.FieldTextInput("0"), "LSBYTE");
+        this.appendDummyInput()
+            .appendField("bit        ")
+            .appendField(new Blockly.FieldTextInput("0"), "MSBIT")
+            .appendField("           ")
+            .appendField(new Blockly.FieldTextInput("0"), "LSBIT");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#9nq9w3');
     }
 };
 

@@ -10,11 +10,21 @@ Blockly.CSharp['decodebytes'] = function (block) {
     return code;
 };
 
-Blockly.CSharp['decodeunsignedinteger'] = function (block) {
+/*Blockly.CSharp['decodeunsignedinteger'] = function (block) {
     var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
     var leastsignificantbit = Blockly.CSharp.valueToCode(block, 'leastSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
     var mostsignificantbit = Blockly.CSharp.valueToCode(block, 'mostSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
     var code = '.DecodeUnsignedInteger("' + varName + '", ' + leastsignificantbit + 'M, ' + mostsignificantbit + 'M).End()\n';
+    return code;
+};*/
+
+Blockly.JavaScript['decodeunsignedinteger'] = function (block) {
+    var varName = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    var msbyte = block.getFieldValue('MSBYTE');
+    var lsbyte = block.getFieldValue('LSBYTE');
+    var msbit = block.getFieldValue('MSBIT');
+    var lsbit = block.getFieldValue('LSBIT');
+    var code = '.DecodeBytes("' + varName + '", ' + lsbyte +'.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
     return code;
 };
 
