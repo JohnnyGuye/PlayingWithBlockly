@@ -1,0 +1,24 @@
+﻿
+<xml id="toolboxGeneric" style="display: none">
+
+  <category name="Briques de base" colour="250">
+    <block type="decodebytes"></block>
+    <block type="decodeunsignedinteger"></block>
+    <block type="decodesignedinteger"></block>
+    <block type="compute"></block>
+    <block type="execute"></block>
+    <block type="switch"></block>
+    <block type="case"></block>
+    <block type="controls_if"></block>
+  </category>
+  
+  
+  <category name="Blocks génériques" colour="250">
+    <block type="decodeboolean"></block>
+  </category>
+
+  <category name="Mes fonctions" id="NewCategory" colour="0">
+    <!-- It's gonna be filled the same maneer as function and variables -->
+  </category>
+
+</xml>

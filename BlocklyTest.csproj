@@ -2852,7 +2852,7 @@
     <Content Include="obj\Debug\BlocklyTest.pdb" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
-    <Content Include="toolbox2.xml" />
+    <Content Include="tooloboxCreateNewFunction.xml" />
     <Content Include="Toolbox\category.js" />
     <Content Include="Toolbox\toolbar.html" />
     <Content Include="web.config" />
@@ -2861,6 +2861,7 @@
     <Content Include="xml2json\samples.html" />
     <Content Include="xml2json\xml2json.js" />
     <Content Include="xml2json\xml2json.min.js" />
+    <Content Include="toolboxCoreGenerics.xml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />

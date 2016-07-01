@@ -236,7 +236,7 @@ Blockly.Blocks['execute'] = {
             .appendField("then :");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(120);
+        this.setColour(210);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#dsnuad');
     }
@@ -288,7 +288,9 @@ Blockly.Blocks['default'] = {
     }
 };
 
-//Generic : 
+// + if custom 
+
+//Generics : 
 
 Blockly.Blocks['decodeboolean'] = {
     init: function () {
