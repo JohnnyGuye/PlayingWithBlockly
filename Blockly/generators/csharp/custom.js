@@ -52,7 +52,7 @@ Blockly.CSharp['execute'] = function (block) {
 };
 
 Blockly.CSharp['decodeboolean'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    var varName = block.getFieldValue('NAME');
     var bytepos = block.getFieldValue('BYTEPOS');
     var bitpos = block.getFieldValue('BITPOS');
     var code = '.DecodeBoolean("' + varName + '", ' + bytepos + '.' + bitpos + 'M).End()\n';
@@ -78,4 +78,39 @@ Blockly.CSharp['default'] = function (block) {
     var code = '.Default()\n'+statement;
     return code;
 };
+
+Blockly.CSharp['decodeframe'] = function (block) {
+    var frameName = block.getFieldValue('NAME');
+    var statement = Blockly.CSharp.statementToCode(block, 'blocks');
+    var code = 'public static TDecodableBlock ' + frameName + '<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep)' +
+            '\n\twhere TDecodableBlock : IDecodableStep<TDecodableBlock>' +
+            '\n{' +
+            '\n\tContract.Requires<ArgumentNullException>(previousDecodableStep != null);' +
+            '\n' +
+            '\n\treturn' +
+            '\n\t\tpreviousDecodableStep' +
+            //TO DO : à modifier pour que ça s'adapte à toutes les longueurs de trames et pas juste celles de 12
+            '\n\t\t.If(decodingContextData => decodingContextData.DecodedValues.FrameLength != 12)'+
+            '\n\t\t\t.RaiseErrorIncorrectFrameLength()'+
+            '\n\t\t.EndIf()'+
+            '\n' + Blockly.CSharp.prefixLines(statement, "\t") + '}';
+
+    //add an semicolon at the end, if needed
+    if (code.lastIndexOf(';') !== code.length - 3) {
+        code = code.slice(0, -2) + ';' + code.slice(-2);
+    }
+
+
+    //remove if needed the unecessary .End(), which means if the .End is at the end of the procedure definition
+    var endPos = code.lastIndexOf('.End()');
+    if (endPos !== -1) {
+        var parPos = code.substring(endPos + 6).indexOf('(');
+        //var computePos = code.substring(0, endPos).indexOf('.Compute(');
+        if (parPos === -1) {
+            code = code.slice(0, endPos) + code.slice(endPos + 6);
+        }
+    }
+    return code;
+};
+
 

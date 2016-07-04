@@ -10,8 +10,9 @@
 
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
-    <script src="Blockly/blockly_uncompressed.js"></script>
+    <script src="Blockly/blockly_uncompressed.js"></script>    
     <script src="Blockly/blocks_compressed.js"></script>
+    
 
     <!-- To show xml with angular -->
     <!--<script src="Scripts/jquery-3.0.0.min.js"></script>-->
@@ -68,7 +69,7 @@
                 </div>
                 <div class="toolbar-group">
                     <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                    <span><button class="item-workspace" onclick="test()"> Générer </button></span>
+                    <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
                 </div>
             </div>
         </div>
@@ -87,7 +88,9 @@
                 <div class="toolbar-group">
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>                  
+
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>  
+                    <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>                
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -201,8 +204,15 @@
         valueActivWorkspace = newValueActivWorkspace;
     }
 
-    function test() {
-        var code = Blockly.CSharp.workspaceToCode(workspace);
+    function generateFrameCode() {
+        var code = Blockly.CSharp.workspaceToCode(workspace, "FRAME");
+        var div = document.getElementById('content1');
+        div.innerHTML = code;
+        //alert(code);
+    }
+
+    function generateFunctionCode() {
+        var code = Blockly.CSharp.workspaceToCode(activWorkspace, "FUNC");
         var div = document.getElementById('content1');
         div.innerHTML = code;
         //alert(code);
