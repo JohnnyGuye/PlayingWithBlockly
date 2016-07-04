@@ -18,7 +18,7 @@ function RefreshCategories(workspace, toolboxId) {
     myFunctions.setAttribute("name", CATEGORY_NAME);
     myFunctions.setAttribute("colour", 0);
 
-    // Rebase the categories to a empty tree
+    // Rebase the categories to an empty tree
     var divFunc = document.getElementById("NewCategory");
     while (divFunc.hasChildNodes() === true) {
         var child = divFunc.childNodes[0];
@@ -62,32 +62,49 @@ function RefreshCategories(workspace, toolboxId) {
  * @param {} toolboxId 
  * @returns {} 
  */
-function TagSearch(workspace) {
-
-    //var categories = Blockly.Procedures.allCategories(workspace);
-    //var procedures = categories[1];
+function TagSearch(workspace, toolboxId) {
 
     var procedures = workspace.getAllDescendantBlocks();
-    console.log(procedures);
 
-    //var search = document.getElementById("search-bar").value;
     var searchWords = parseTags();
 
-    //for each searching word 
-    for (var j = 0; j < searchWords.length; j++) {
-        
-        // For each block is all workspaces
-        for (var i = 0; i < procedures.length; i++) {
-            var tags = procedures[i].getField("tags").text_;
-            if (searchWords[j] == tags) {
-                console.log(procedures[i].getFieldValue("NAME"));
-                console.log(procedures[i].getFieldValue("category"));
+    // Categories container
+    var tagWords = document.getElementById("search-bar").value;
+    var tagCategory = document.createElement("category");
+    tagCategory.setAttribute("name", tagWords);
+    tagCategory.setAttribute("colour", 0);
+
+
+    // For each block is all workspaces
+    for (var i = 0; i < procedures.length; i++) {
+
+        var tags = procedures[i].getField("tags").text_;
+
+        //for each searched word 
+        for (var j = 0; j < searchWords.length; j++) {
+            if (searchWords[j] === tags) {
+                //console.log(procedures[i].getFieldValue("NAME"));
+                var newProcedure = document.createElement("block");
+                if (procedures[i].getProcedureDef()[2]) {
+                    newProcedure.setAttribute("type", "procedures_callreturn");
+                } else {
+                    newProcedure.setAttribute("type", "procedures_callnoreturn");
+                }
+
+                var mutator = document.createElement("mutation");
+                mutator.setAttribute("name", procedures[i].getProcedureDef()[0]);
+
+                newProcedure.appendChild(mutator);
+                tagCategory.appendChild(newProcedure);
             }
         }
     }
 
+    document.getElementById(toolboxId).appendChild(tagCategory);
 
+    workspace.updateToolbox(document.getElementById(toolboxId));
 }
+
 
 function parseTags() {
     var search = document.getElementById("search-bar").value;
