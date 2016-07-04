@@ -70,16 +70,28 @@ function TagSearch(workspace) {
     var procedures = workspace.getAllDescendantBlocks();
     console.log(procedures);
 
-    var search = document.getElementById("search-bar").value;
-    alert(search);
+    //var search = document.getElementById("search-bar").value;
+    var searchWords = parseTags();
 
-    // For each block is all workspaces
-    for (var i = 0; i < procedures.length; i++) {
-        var tags = procedures[i].getField("tags").text_;
-        if (search == tags) {
-            console.log(procedures[i].getFieldValue("NAME"));
+    //for each searching word 
+    for (var j = 0; j < searchWords.length; j++) {
+        
+        // For each block is all workspaces
+        for (var i = 0; i < procedures.length; i++) {
+            var tags = procedures[i].getField("tags").text_;
+            if (searchWords[j] == tags) {
+                console.log(procedures[i].getFieldValue("NAME"));
+                console.log(procedures[i].getFieldValue("category"));
+            }
         }
     }
 
+
+}
+
+function parseTags() {
+    var search = document.getElementById("search-bar").value;
+    var tagSplit = search.split(",");
+    return tagSplit;
 }
 
