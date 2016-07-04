@@ -59,7 +59,7 @@
 
                 <div id="searchbar">
                     <form action="" class="formulaire">
-                        <input class="champ" type="text" value="..." />
+                        <input class="champ" id="search-bar" type="text" value="..." />
                         <button class="item-workspace" onclick="TagSearch(workspace)"> Rechercher </button>
                     </form>
                 </div>
@@ -152,7 +152,7 @@
     });
 
     hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
-    console.log(Blockly.getMainWorkspace() === hiddenWorkspace);
+    //console.log(Blockly.getMainWorkspace() === hiddenWorkspace);
 
     //------------------------------------------------------------------ Tools
     /** 
