@@ -14,15 +14,24 @@ SquidStorage.SecondaryStorage = "secWS";
  * @param {Blockly.Workspace} The workspace you want to save.
  */
 SquidStorage.SaveWorkspace = function (workspace) {
+    // Gets the current URL, not including the hash.
+    var baseUrl = window.location.href.split('#')[0] + "#";
+
 	var workspaceSec;
 	var children = workspace.getLinkedWorkspace();
-	for(var i = 0; i < children.length; i++) {
-		workspaceSec = children[i] || workspaceSec;
-	}
+	console.log("Sauvegarde");
+    if (children.length > 0) {
+        workspaceSec = children[0];
+        for (var i = 1; i < children.length; i++) {
+            workspaceSec = children[i] || workspaceSec;
+        }
 
-	// Gets the current URL, not including the hash.
-	var baseUrl = window.location.href.split('#')[0]+"#";
-	backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
+        backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
+        console.log(children.length);
+    } else {
+        console.log("No secondary workspace.");
+    }
+
     backupBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
 };
 
@@ -37,9 +46,11 @@ function backupBlocks (workspace, url) {
 SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace) {
 	var baseUrl = window.location.href.split('#')[0] + "#";
 	restoreBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
+
+	console.log("Rechargement");
+
 	if(secondaryWorkspace != null) {
 		restoreBlocks(secondaryWorkspace, baseUrl + SquidStorage.SecondaryStorage);
-	    workspace.attachChildWorkspace(secondaryWorkspace);
 	} else {
 		restoreBlocks(workspace, baseUrl + SquidStorage.SecondaryStorage);
 	}

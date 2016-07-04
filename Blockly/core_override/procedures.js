@@ -75,7 +75,7 @@ function fillProcedure(workspace, proceduresReturn, proceduresNoReturn) {
  *     Each procedure is defined by a three-element list of name, parameter
  *     list, and return value boolean.
  */
-Blockly.Procedures.allProcedures = function(workspace) {
+Blockly.Procedures.allProcedures = function (root) {
   var proceduresReturn = [];
   var proceduresNoReturn = [];    
   // If we are working on a single worspace

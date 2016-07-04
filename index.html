@@ -56,13 +56,13 @@
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace)"> Sauvegarder</button></span>
-                    <span><button class="item-workspace" onclick="SquidStorage.ReloadWorkspace(workspace, hiddenWorkspace); RefreshCategories(workspace, princToolboxId);"> Recharger </button></span>
+                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace); Refresh();"> Sauvegarder</button></span>
+                    <span><button class="item-workspace" onclick="SquidStorage.ReloadWorkspace(workspace, hiddenWorkspace); Refresh()"> Recharger </button></span>
                     <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
-                    <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+                    <span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
                     <span><button class="item-workspace" onclick="test()"> Générer </button></span>
                 </div>
             </div>
@@ -139,11 +139,10 @@
                     },
                     trashcan: true
                 });
+                hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
+                workspace.attachChildWorkspace(hiddenWorkspace);
             });
     });
-
-    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
-    console.log(Blockly.getMainWorkspace() === hiddenWorkspace);
 
     //------------------------------------------------------------------ Tools
     /** 
@@ -199,6 +198,10 @@
         var div = document.getElementById('content1');
         div.innerHTML = code;
         //alert(code);
+    }
+
+    function Refresh() {
+        RefreshCategories(workspace, princToolboxId);
     }
 </script>
 
