@@ -14,15 +14,16 @@ SquidStorage.BaseUrl = function() {
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
  * but they are all saved at the same place, which, you will restore only two workspaces,
  * even if you had more secondary workspaces. (No function is lost during operation)
- * @param {Blockly.Workspace} The workspace you want to save.
+ * @param {Blockly.Workspace} The workspace you want to save.t
+ * @param {string} location The location of the save.
  */
-SquidStorage.SaveWorkspace = function (workspace) {
+SquidStorage.SaveWorkspace = function (workspace, location) {
     // Gets the current URL, not including the hash.
     var baseUrl = SquidStorage.BaseUrl();
 
     SquidStorage.SaveFunction(workspace);
 
-    backupBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
+    backupBlocks(workspace, baseUrl + location);
 };
 
 SquidStorage.SaveFunction = function(workspace) {
@@ -50,13 +51,15 @@ function backupBlocks (workspace, url) {
 };
 
 // Reload datas to a workspace
-SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace) {
+SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
     var baseUrl = window.location.href.split('#')[0] + "#";
-    if (workspace != null) {
-        restoreBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
+    if (workspace != null && location != null) {
+        workspace.clear();
+        restoreBlocks(workspace, baseUrl + location);
     }
 
-	if(secondaryWorkspace != null) {
+    if (secondaryWorkspace != null) {
+        secondaryWorkspace.clear();
 		restoreBlocks(secondaryWorkspace, baseUrl + SquidStorage.SecondaryStorage);
 	}
 };

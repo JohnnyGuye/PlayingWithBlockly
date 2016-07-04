@@ -56,12 +56,10 @@
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-
-                    <span><button class="item-workspace" onclick="SquidStorage.ReloadWorkspace(workspace, null); Refresh()"> Recharger </button></span>
-                    <!--<span><button class="item-workspace" onclick="SquidStorage.ReloadWorkspace(null, hiddenWorkspace); Refresh()"> Recharger les fonctions </button></span>-->
-
+                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();"> Sauvegarder </button></span>
+                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
                 </div>
-                <div class="toolbar-group">
+                <div class="toolbar-group">                   
                     <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
                     <a href="#functionWrapper"><span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span></a>
                     <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
@@ -109,6 +107,7 @@
 <div ng-app="httpApp" ng-controller="httpController"></div>
 
 <script>
+    var workspaceName = "FirstWorkspace";
     var workspace;
     var hiddenWorkspace;
     var activWorkspace;
@@ -204,6 +203,14 @@
 
     function Refresh() {
         RefreshCategories(workspace, princToolboxId);
+    }
+
+    function Reload() {
+        if (window
+            .confirm("Êtes vous sûr de vouloir recharger une trame ?\nTout changement non sauvegardé sera perdu.")) {
+            SquidStorage.ReloadWorkspace(workspace, null, workspaceName);
+            Refresh();
+        }       
     }
 
     function clearFunc(workspace) {
