@@ -2,20 +2,58 @@
  * @fileoverview A file in which are all the utility fonction for saving.
  * @author johnnyq@hotmail.fr (Johnny Guye)
  */
+var SquidStorage = {};
 
-// Saves a workspace 
-function save(workspace_, document_) {
-    var elem = document_.getElementById('saveContent');
-    elem.textContent = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace));
+SquidStorage.PrincipalStorage = "princWS";
+SquidStorage.SecondaryStorage = "secWS";
 
-    BlocklyStorage.backupBlocks_(workspace_);
+/**
+ * Saves a workspace in local storage. The secondary workspace are fully saved too, 
+ * but they are all saved at the same place, which, you will restore only two workspaces,
+ * even if you had more secondary workspaces. (No function is lost during operation)
+ * @param {Blockly.Workspace} The workspace you want to save.
+ */
+SquidStorage.SaveWorkspace = function (workspace) {
+	var workspaceSec;
+	var children = workspace.getLinkedWorkspace();
+	for(var i = 0; i < children.length; i++) {
+		workspaceSec = children[i] || workspaceSec;
+	}
+
+	// Gets the current URL, not including the hash.
+	var baseUrl = window.location.href.split('#')[0]+"#";
+	backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
+    backupBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
+};
+
+function backupBlocks (workspace, url) {
+  if ('localStorage' in window) {
+    var xml = Blockly.Xml.workspaceToDom(workspace);    
+    window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
+  }
 };
 
 // Reload datas to a workspace
-function reload(workspace_) {
-    BlocklyStorage.restoreBlocks(workspace_);
+SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace) {
+	var baseUrl = window.location.href.split('#')[0] + "#";
+	restoreBlocks(workspace, baseUrl + SquidStorage.PrincipalStorage);
+	if(secondaryWorkspace != null) {
+		restoreBlocks(secondaryWorkspace, baseUrl + SquidStorage.SecondaryStorage);
+	    workspace.attachChildWorkspace(secondaryWorkspace);
+	} else {
+		restoreBlocks(workspace, baseUrl + SquidStorage.SecondaryStorage);
+	}
 };
 
+function restoreBlocks (opt_workspace, url) {
+	if('localStorage' in window && window.localStorage[url]) {
+		var workspace = opt_workspace;
+		var xml = Blockly.Xml.textToDom(window.localStorage[url]);
+		Blockly.Xml.domToWorkspace(xml, workspace);
+	}
+};
+
+//----------------------------------- Deprecated
 // Reload hard coded datas to a workspace
 function hardReload(workspace_) {
     var text =

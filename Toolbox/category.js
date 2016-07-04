@@ -3,7 +3,14 @@
  * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
  */
 function RefreshCategories(workspace, toolboxId) {
+    /* Categories tree :
+     * [0][i] -> Category name
+     * [1][i] -> list of procedure in this category
+     * [1][i][j] -> procedure definition
+     */
     var categories = Blockly.Procedures.allCategories(workspace);
+    var categoriesNames = categories[0];
+    var categoriesProcedures = categories[1];
 
     // Categories container
     var CATEGORY_NAME = "Mes fonctions";
@@ -22,13 +29,13 @@ function RefreshCategories(workspace, toolboxId) {
     for (var i = 0; i < categories[0].length; i++) {
 
         var newCategory = document.createElement("category");       
-        newCategory.setAttribute("name", categories[0][i]);
+        newCategory.setAttribute("name", categoriesNames[i]);
         newCategory.setAttribute("colour", Math.floor(Math.random() * 360));
         
         // For each procedure in this category
-        for (var j = 0; j < categories[1][i].length; j++) {
-            var block = categories[1][i][j];
-            
+        for (var j = 0; j < categoriesProcedures[i].length; j++) {
+            var block = categoriesProcedures[i][j];
+            console.log(block);
             var newProcedure = document.createElement("block");
             if (block.getProcedureDef()[2]) {
                 newProcedure.setAttribute("type", "procedures_callreturn");

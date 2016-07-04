@@ -56,21 +56,24 @@
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="save(workspace, document)"> Sauvegarder</button></span>
-                    <span><button class="item-workspace" onclick="reload(workspace)"> Recharger </button></span>
+                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace)"> Sauvegarder</button></span>
+                    <span><button class="item-workspace" onclick="SquidStorage.ReloadWorkspace(workspace, hiddenWorkspace); RefreshCategories(workspace, princToolboxId);"> Recharger </button></span>
                     <!--<span><button class="item-workspace" onclick="hardReload(workspace)"> Hard-reload </button></span>-->
                     <span><button class="item-workspace" onclick="createFunction(workspace)" tilte="Créer une fonction"> Nouvelle fonction </button></span>
                 </div>
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="
-RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
                     <span><button class="item-workspace" onclick="test()"> Générer </button></span>
                 </div>
             </div>
         </div>
-        <div id="blocklyDiv" class="blocklyDiv" style="height: 400px; width: 1000px;"></div>
+        <div id="blocklyDiv" class="blocklyDiv"></div>
     </div>
 
+    <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
+    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
+
+    <!-- There are the workspaces you use when you work on function -->
     <div id="functionWrapper" class="edition-window function-window" style="display: none;">
         <!-- Toolbar concepteur -->
         <div class="toolbar-workspace">
@@ -85,8 +88,7 @@ RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
                     <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
                 </div>
                 <div class="toolbar-group">
-                    
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace,  princToolboxId)"> Refresh </button></span>                  
+                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>                  
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -108,6 +110,7 @@ RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
 
 <script>
     var workspace;
+    var hiddenWorkspace;
     var activWorkspace;
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
@@ -115,11 +118,7 @@ RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
     var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
-    /*
-     * Sends an Http request to get the content of the xml file containing the detailed toolbox
-     * Adds the xml tag and its content to the current html file
-     * Injects the content in blockly's toolbox
-     */
+    // Create a the main workspace
     var app = angular.module('httpApp', []);
     app.controller('httpController', function ($scope, $http) {
         $http.get("Toolbox/toolboxCoreGenerics.xml", {})
@@ -140,19 +139,13 @@ RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
                     },
                     trashcan: true
                 });
-                
-
             });
+    });
 
-        ////$http.get("Toolbox/toolboxCreateNewFunction.xml",
-        ////    {
-        ////    })
-        ////    .success(function (response) {
-        ////       // document.getElementById("body").innerHTML += response;
+    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
+    console.log(Blockly.getMainWorkspace() === hiddenWorkspace);
 
-        ////    });
-        });
-
+    //------------------------------------------------------------------ Tools
     /** 
      * Create a new workspace for editing a function.
      * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
