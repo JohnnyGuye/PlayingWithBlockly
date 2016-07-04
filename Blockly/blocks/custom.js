@@ -85,7 +85,7 @@ Blockly.Blocks['decodebytes'] = {
         this.appendDummyInput()
             .appendField("Decoder octets");
         this.appendDummyInput()
-            .appendField("name :")
+            .appendField("nom :")
             .appendField(new Blockly.FieldVariable("default"), "NAME");
         this.appendDummyInput()
             .appendField("octet de debut :")
@@ -267,7 +267,7 @@ Blockly.Blocks['default'] = {
 Blockly.Blocks['decodeboolean'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decode boolean :");
+            .appendField("Decoder booleen :");
         this.appendDummyInput()
             .appendField("nom :")
             .appendField(new Blockly.FieldTextInput("default"), "NAME");
