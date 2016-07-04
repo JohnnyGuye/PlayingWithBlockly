@@ -55,7 +55,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
       .appendField(new Blockly.FieldTextInput("version"), "version");
 
     this.appendDummyInput()
-          .appendField("Category")
+          .appendField("Categorie")
           .appendField(new Blockly.FieldTextInput("category"), "category");
       /*deprecated
       function dynamicOptions() {

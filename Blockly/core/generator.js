@@ -80,9 +80,10 @@ Blockly.Generator.prototype.COMMENT_WRAP = 60;
 /**
  * Generate code for all blocks in the workspace to the specified language.
  * @param {Blockly.Workspace} workspace Workspace to generate code from.
+ * @param {string} "FRAME" if frame editor workspace, "FUNC" if function editor
  * @return {string} Generated code.
  */
-Blockly.Generator.prototype.workspaceToCode = function(workspace) {
+Blockly.Generator.prototype.workspaceToCode = function(workspace, workspaceType) {
   if (!workspace) {
     // Backwards compatibility from before there could be multiple workspaces.
     console.warn('No workspace specified in workspaceToCode call.  Guessing.');
@@ -91,7 +92,25 @@ Blockly.Generator.prototype.workspaceToCode = function(workspace) {
   var code = [];
   this.init(workspace);
   var blocks = workspace.getTopBlocks(true);
-  for (var x = 0, block; block = blocks[x]; x++) {
+  if (workspaceType === 'FRAME') {
+        for (var x = 0, block; block = blocks[x]; x++) {
+            if (block.type !== 'decodeframe') {
+                alert('Les blocs de plus haut niveau doivent etre du type decoder la trame');
+                return null;
+            }
+        }
+  }
+  if (workspaceType === 'FUNC') {
+      for (var x = 0, block; block = blocks[x]; x++) {
+          if (block.type !== 'procedures_defnoreturn') {
+              alert('Les blocs de plus haut niveau doivent etre du type Fonction');
+              return null;
+          }
+      }
+  }
+
+    for (var x = 0, block; block = blocks[x]; x++) {
+        //alert(block.type);
     var line = this.blockToCode(block);
     if (goog.isArray(line)) {
       // Value blocks return tuples of code and operator order.
