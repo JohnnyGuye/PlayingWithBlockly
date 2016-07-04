@@ -49,3 +49,31 @@ function RefreshCategories(workspace, toolboxId) {
 
     workspace.updateToolbox(document.getElementById(toolboxId));
 }
+
+/**
+ * Searching with tags
+ * @param {} workspace 
+ * @param {} toolboxId 
+ * @returns {} 
+ */
+function TagSearch(workspace) {
+
+    var categories = Blockly.Procedures.allCategories(workspace);
+    alert(categories.text);
+    // For each category
+    for (var i = 0; i < categories[0].length; i++) {
+
+        // For each procedure in this category
+        for (var j = 0; j < categories[1][i].length; j++) {
+            //get the block
+            var block = categories[1][i][j];
+            //get the tags
+            var fields = categories[1][i][j].getElementsByTagName("field");
+            var tags = fields[3].content;
+            alert(tags);
+
+
+        }
+    }
+
+}
