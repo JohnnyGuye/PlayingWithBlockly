@@ -18,7 +18,7 @@ function RefreshCategories(workspace, toolboxId) {
     myFunctions.setAttribute("name", CATEGORY_NAME);
     myFunctions.setAttribute("colour", 0);
 
-    // Rebase the categories to a empty tree
+    // Rebase the categories to an empty tree
     var divFunc = document.getElementById("NewCategory");
     while (divFunc.hasChildNodes() === true) {
         var child = divFunc.childNodes[0];
@@ -55,3 +55,57 @@ function RefreshCategories(workspace, toolboxId) {
 
     workspace.updateToolbox(document.getElementById(toolboxId));
 }
+
+/**
+ * Searching with tags
+ * @param {} workspace 
+ * @param {} toolboxId 
+ * @returns {} 
+ */
+function TagSearch(workspace, toolboxId) {
+    //get all procedures defined in all existing workspaces
+    var procedures = workspace.getAllDescendantBlocks();
+ 
+    var searchWords = parseTags();
+
+    // Get the results container tag and remove all the blocks it contains since the last research
+    var tagCategory = document.getElementById("SearchCategory");
+    while (tagCategory.firstChild) {
+        tagCategory.removeChild(tagCategory.firstChild);
+    }
+
+    // For each block is all workspaces
+    for (var i = 0; i < procedures.length; i++) {
+
+        var tags = procedures[i].getField("tags").text_;
+
+        //for each searched word 
+        for (var j = 0; j < searchWords.length; j++) {
+            if (searchWords[j] === tags) {
+                //console.log(procedures[i].getFieldValue("NAME"));
+                var newProcedure = document.createElement("block");
+                if (procedures[i].getProcedureDef()[2]) {
+                    newProcedure.setAttribute("type", "procedures_callreturn");
+                } else {
+                    newProcedure.setAttribute("type", "procedures_callnoreturn");
+                }
+
+                var mutator = document.createElement("mutation");
+                mutator.setAttribute("name", procedures[i].getProcedureDef()[0]);
+
+                newProcedure.appendChild(mutator);
+                tagCategory.appendChild(newProcedure);
+            }
+        }
+    }
+
+    workspace.updateToolbox(document.getElementById(toolboxId));
+}
+
+
+function parseTags() {
+    var search = document.getElementById("search-bar").value;
+    var tagSplit = search.split(",");
+    return tagSplit;
+}
+

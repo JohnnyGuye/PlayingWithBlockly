@@ -56,6 +56,15 @@
         <div class="toolbar-workspace">
             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
             <div class="toolbar-items">
+                <!-- Adding the search bar for tags -->
+
+                <div id="searchbar">
+                    <form action="" class="formulaire">
+                        <input class="champ" id="search-bar" type="text" value="..." />
+                        <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
+                    </form>
+                </div>
+
                 <div class="toolbar-group">
                     <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();"> Sauvegarder </button></span>
                     <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>

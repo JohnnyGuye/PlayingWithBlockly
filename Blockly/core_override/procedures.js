@@ -113,6 +113,7 @@ function checkCategories(workspace, categories, procedures) {
                         break;
                     }
                 }
+
                 
                 // If not discovered we create the category and fill it with the block
                 if (!discovered) {
@@ -125,6 +126,7 @@ function checkCategories(workspace, categories, procedures) {
                     procedures[j].push(block);
                 }
             }
+
         }
     }
 
