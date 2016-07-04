@@ -63,17 +63,16 @@ function RefreshCategories(workspace, toolboxId) {
  * @returns {} 
  */
 function TagSearch(workspace, toolboxId) {
-
+    //get all procedures defined in all existing workspaces
     var procedures = workspace.getAllDescendantBlocks();
-
+ 
     var searchWords = parseTags();
 
-    // Categories container
-    var tagWords = document.getElementById("search-bar").value;
-    var tagCategory = document.createElement("category");
-    tagCategory.setAttribute("name", tagWords);
-    tagCategory.setAttribute("colour", 0);
-
+    // Get the results container tag and remove all the blocks it contains since the last research
+    var tagCategory = document.getElementById("SearchCategory");
+    while (tagCategory.firstChild) {
+        tagCategory.removeChild(tagCategory.firstChild);
+    }
 
     // For each block is all workspaces
     for (var i = 0; i < procedures.length; i++) {
@@ -99,8 +98,6 @@ function TagSearch(workspace, toolboxId) {
             }
         }
     }
-
-    document.getElementById(toolboxId).appendChild(tagCategory);
 
     workspace.updateToolbox(document.getElementById(toolboxId));
 }
