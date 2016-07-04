@@ -178,6 +178,22 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
 };
 
 /**
+ * Find all variables scoped in this workspace.
+ * @return {!Array.!Array<Blockly.Block>} Array of arrays of blocks. Each cell is a higher degree of scope.
+ */
+Blockly.Workspace.prototype.getAllAscendantBlocks = function() {
+    var that = this;
+    var ascendantBlocks = new Array();
+
+    do {        
+        ascendantBlocks.push(that.getTopBlocks(false));
+        that = that.getParentWorkspace();
+    } while(that != null);
+
+    return ascendantBlocks;
+};
+
+/**
  * Dispose of all blocks in workspace.
  */
 Blockly.Workspace.prototype.clear = function() {
@@ -361,6 +377,14 @@ Blockly.Workspace.prototype.getLinkedWorkspace = function() {
 Blockly.Workspace.prototype.getParentWorkspace = function() {
     return this.parentWorkspace_;
 };
+
+/** 
+ * Verify is this workspace has a parent workspace.
+ * @return true if it has parents.
+ */
+Blockly.Workspace.prototype.hasParentWorkspace = function() {
+    return this.parentWorkspace_ != null;
+}
 //------------------------------------------------------------
 
 /**
