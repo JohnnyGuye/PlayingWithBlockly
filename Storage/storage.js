@@ -4,11 +4,14 @@
  */
 var SquidStorage = {};
 
-SquidStorage.PrincipalStorage = "princWS";
-SquidStorage.SecondaryStorage = "secWS";
-SquidStorage.BaseUrl = function() {
+SquidStorage.BaseUrl = function () {
     return window.location.href.split('#')[0] + "#";
 }
+
+SquidStorage.PrincipalStorage = "princWS";
+SquidStorage.SecondaryStorage = "secWS";
+SquidStorage.SaveLocations = SquidStorage.BaseUrl() + "saveDictionary";
+
 
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 

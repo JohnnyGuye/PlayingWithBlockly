@@ -53,16 +53,17 @@
     </p>
     <div class="edition-window decode-window">
         <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+            <div class="title-toolbar-workspace"><span>Editeur de décodeur - </span><span id="workspaceName">Nouveau</span></div>
             <div class="toolbar-items">
                 <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();"> Sauvegarder </button></span>
-                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
+                    <button class="item-workspace" onclick="Save();"> Sauvegarder </button>
+                    <button class="item-workspace" onclick="Reload();"> Recharger </button>
+                    <div id="filesDiv"></div>
                 </div>
                 <div class="toolbar-group">                   
-                    <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
-                    <a href="#functionWrapper"><span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span></a>
-                    <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
+                    <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button>
+                    <a href="#functionWrapper"><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></a>
+                    <button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button>
 
                 </div>
                 <div class="toolbar-group">
@@ -107,6 +108,12 @@
 <div ng-app="httpApp" ng-controller="httpController"></div>
 
 <script>
+    var workspaceNames = new Array();
+    // DEBUG
+    workspaceNames.push('John');
+    workspaceNames.push("jack");
+    workspaceNames.push("fioez");
+    workspaceNames.push("hiohhoifea");
     var workspaceName = "FirstWorkspace";
     var workspace;
     var hiddenWorkspace;
@@ -205,12 +212,54 @@
         RefreshCategories(workspace, princToolboxId);
     }
 
-    function Reload() {
+    function Save() {
+        var possible = true;
+        var workspaceStr = "";
+        for (var i = 0; i < workspaceNames.length; i++) {
+            workspaceStr += workspaceNames[i] + "\n";
+            if (workspaceNames[i] == workspaceName) {
+                possible = false;
+                break;
+            }
+        }
+        if (possible) {
+            workspaceNames.push(workspaceName);
+            workspaceStr += workspaceName + "\n";
+        } else {
+            console.warn("Save refresh");
+        }
+
+        var url = SquidStorage.SaveLocations;
+        window.localStorage.setItem(url, workspaceStr);
+        console.log(workspaceStr);
+
+        SquidStorage.SaveWorkspace(workspace, workspaceName);
+        var elem = document.getElementById("workspaceName");
+        elem.innerHTML = workspaceName;
+
+        Refresh();
+    }
+
+    function reload_(name) {
         if (window
             .confirm("Êtes vous sûr de vouloir recharger une trame ?\nTout changement non sauvegardé sera perdu.")) {
+            workspaceName = name;
             SquidStorage.ReloadWorkspace(workspace, null, workspaceName);
+            var elem = document.getElementById("workspaceName");
+            elem.innerHTML = workspaceName;
             Refresh();
-        }       
+        }
+    }
+
+    function Reload() {
+        ////var filesDiv = document.getElementById("filesDiv");
+        ////for (var i = 0; i < workspaceNames.length; i++) {
+        ////    var element = document.createElement("button");
+        ////    element.setAttribute("onclick", "reload_(" + workspaceNames[i] + ")");
+        ////    element.innerHTML = workspaceNames[i];
+        ////    filesDiv.appendChild(element);
+        ////}    
+        reload_(workspaceName);
     }
 
     function clearFunc(workspace) {

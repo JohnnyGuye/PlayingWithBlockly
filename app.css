@@ -13,6 +13,41 @@ span {
     width: 1000px;
 }
 
+#filesDiv {
+    position: relative;
+    z-index: 999;
+}
+
+#filesDiv button {
+    transition: 1s;
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    background-color: #ececec;
+    border-radius: 1px;
+    height: 30px;
+    margin: 0px;
+    position: relative;
+    border: 0;
+    border-left: solid grey 3px ;
+}
+
+#filesDiv button:hover {
+    transition: 0.1s;
+    background-color: #d0d0d0;
+    border-left: solid red 3px;
+}
+
+#filesDiv button:active {
+    background-color: antiquewhite;
+}
+
+#filesDiv button:selection {
+    border-bottom-color: #454545;
+}
+
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
     margin: 0px;
