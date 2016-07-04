@@ -128,7 +128,8 @@ blocklyApp.FieldComponent = ng.core
         return;
       }
       if (this.field instanceof Blockly.FieldVariable) {
-        blocklyApp.debug && console.log();
+        blocklyApp.debug && 
+();
         Blockly.FieldVariable.dropdownChange.call(this.field, text);
       } else {
         this.field.setValue(text);

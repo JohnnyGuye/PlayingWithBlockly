@@ -35,7 +35,6 @@ function RefreshCategories(workspace, toolboxId) {
         // For each procedure in this category
         for (var j = 0; j < categoriesProcedures[i].length; j++) {
             var block = categoriesProcedures[i][j];
-            console.log(block);
             var newProcedure = document.createElement("block");
             if (block.getProcedureDef()[2]) {
                 newProcedure.setAttribute("type", "procedures_callreturn");
