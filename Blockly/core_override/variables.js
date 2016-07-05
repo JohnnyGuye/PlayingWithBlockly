@@ -46,9 +46,9 @@ Blockly.Variables.allVariables = function(root) {
   if (root.getDescendants) {
     // Root is Block.
     blocks = root.getDescendants();
-  } else if (root.getAllBlocks) {
+  } else if (root.getAllAscendantBlocks) {
     // Root is Workspace.
-    blocks = root.getAllBlocks();
+    blocks = root.getAllAscendantBlocks();
   } else {
     throw 'Not Block or Workspace: ' + root;
   }
@@ -80,7 +80,7 @@ Blockly.Variables.allVariables = function(root) {
  */
 Blockly.Variables.renameVariable = function(oldName, newName, workspace) {
   Blockly.Events.setGroup(true);
-  var blocks = workspace.getAllBlocks();
+  var blocks = workspace.getAllAscendantBlocks();
   // Iterate through every block.
   for (var i = 0; i < blocks.length; i++) {
     blocks[i].renameVar(oldName, newName);

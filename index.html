@@ -10,9 +10,9 @@
 
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
-    <script src="Blockly/blockly_uncompressed.js"></script>    
-    <script src="Blockly/blocks_compressed.js"></script>  
-    
+    <script src="Blockly/blockly_uncompressed.js"></script>
+    <script src="Blockly/blocks_compressed.js"></script>
+
 
     <!-- To show xml with angular -->
     <!--<script src="Scripts/jquery-3.0.0.min.js"></script>-->
@@ -46,75 +46,103 @@
 </head>
 
 <body id="body">
+    <aside class="side-bar" style="display: inline-block; text-align: center;">
+        <div>
+            <h1>Configuration</h1>
+            <table>
+                <tr>
+                    <td><label id="variable1" name="Ma variable">Ma variable </label></td>
+                    <td><input type="number" id="variable1Input" name="Ma variable"/></td>
+                    <td><button class="item-workspace"> x </button></td>
+                </tr>
+                <tr>
+                    <td><label id="variable2" name="Ma variable2">Mon autre variable </label></td>
+                    <td><input type="number" id="variable1Input" name="Ma variable3"/></td>
+                    <td><button class="item-workspace"> x </button></td>
+                </tr>
+                <tr>
+                    <td><label id="variable3" name="Ma variable3">Ma troisième variable </label></td>
+                    <td><input type="number" id="variable1Input" name="Ma variable3"/></td>
+                    <td><button class="item-workspace"> x </button></td>
+                </tr>
+            </table>
+            <button class="item-workspace" style="margin: auto;"> Ajouter config </button>
+        </div>
+    </aside>
 <h1>Blockly tests</h1>
 
-<div id="wrapper">
-    <p>
-        Tests sur blockly. Sauvegarde test.
-    </p>
-    <div class="edition-window decode-window">
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"><span>Editeur de décodeur - </span><span id="workspaceName">Nouveau</span></div>
-            <div class="toolbar-items">
-                <!-- Adding the search bar for tags -->
+<div>
+    <div id="wrapper" style="display: inline-block;">
+        <p>
+            Tests sur blockly. Sauvegarde test.
+        </p>
+        <div class="edition-window decode-window">
+            <div class="toolbar-workspace">
+                <div class="title-toolbar-workspace">
+                    <span>Editeur de décodeur - </span><span id="workspaceName">Nouveau</span></div>
+                <div class="toolbar-items">
+                    <!-- Adding the search bar for tags -->
 
-                <div id="searchbar">
-                    <form action="" class="formulaire">
-                        <input class="champ" id="search-bar" type="text" value="..." />
-                        <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
-                    </form>
-                </div>
+                    <div id="searchbar">
+                        <form action="" class="formulaire">
+                            <input class="champ" id="search-bar" type="text" value="..."/>
+                            <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
+                        </form>
+                    </div>
 
-                <div class="toolbar-group">
-                    <button class="item-workspace" onclick="Save();"> Sauvegarder </button>
-                    <button class="item-workspace" onclick="Reload();"> Recharger </button>
-                    <div id="filesDiv"></div>
-                </div>
-                <div class="toolbar-group">                   
-                    <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button>
-                    <a href="#functionWrapper"><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></a>
-                    <button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button>
+                    <div class="toolbar-group">
+                        <button class="item-workspace" onclick="Save();"> Sauvegarder </button>
+                        <button class="item-workspace" onclick="Reload();"> Recharger </button>
+                        <div id="filesDiv"></div>
+                    </div>
+                    <div class="toolbar-group">
+                        <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button>
+                        <a href="#functionWrapper">
+                            <button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button>
+                        </a>
+                        <button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button>
 
+                    </div>
+                    <div class="toolbar-group">
+                        <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
+                        <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
+                    </div>
                 </div>
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                    <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
+            </div>
+            <div id="blocklyDiv" class="blocklyDiv"></div>
+        </div>
+
+        <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
+        <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
+
+        <!-- There are the workspaces you use when you work on function -->
+        <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+            <!-- Toolbar concepteur -->
+            <div class="toolbar-workspace">
+                <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
+                <div class="toolbar-items">
+                    <div class="toolbar-group">
+                        <span>
+                                <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();">
+                                    Sauvegarder
+                                </button>
+                            </span>
+                        <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
+                    </div>
+                    <div class="toolbar-group">
+
+                        <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                        <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
+                    </div>
+                </div>
+                <div class="toolbar-onglet" id="toolbar-onglet-func">
+                    <!-- There will be the onglets -->
                 </div>
             </div>
         </div>
-        <div id="blocklyDiv" class="blocklyDiv"></div>
     </div>
 
-    <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
-
-    <!-- There are the workspaces you use when you work on function -->
-    <div id="functionWrapper" class="edition-window function-window" style="display: none;">
-        <!-- Toolbar concepteur -->
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
-            <div class="toolbar-items">
-                <div class="toolbar-group">
-                    <span>
-                        <button class="item-workspace" onclick="save(activWorkspace, document)">
-                            Sauvegarder
-                        </button>
-                    </span>
-                    <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
-                </div>
-                <div class="toolbar-group">
-
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>  
-                    <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>                
-                </div>
-            </div>
-            <div class="toolbar-onglet" id="toolbar-onglet-func">
-                <!-- There will be the onglets -->
-            </div>
-        </div>
-    </div>
 </div>
-
 <div>
     <span>
         <pre id="saveContent"></pre>
@@ -133,42 +161,50 @@
     workspaceNames.push("fioez");
     workspaceNames.push("hiohhoifea");
     var workspaceName = "FirstWorkspace";
+
+    /* Workspaces */
     var workspace;
+    var configWorkspace;
     var hiddenWorkspace;
     var activWorkspace;
+
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
 
+    /* Element IDs */
     var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
     // Create a the main workspace
     var app = angular.module('httpApp', []);
-    app.controller('httpController', function ($scope, $http) {
-        $http.get("Toolbox/toolboxCoreGenerics.xml", {})
-            .success(function(response) {
-                document.getElementById("body").innerHTML += response;
+    app.controller('httpController',
+        function($scope, $http) {
+            $http.get("Toolbox/toolboxCoreGenerics.xml", {})
+                .success(function(response) {
+                    document.getElementById("body").innerHTML += response;
 
-                workspace = Blockly.inject(BASE_BLOCKLY_DIV,
-                {
-                    toolbox: document.getElementById(princToolboxId),
-                    zoom:
+                    workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                     {
-                        controls: true,
-                        wheel: true,
-                        startScale: 1.0,
-                        maxScale: 3,
-                        minScale: 0.2,
-                        scaleSpeed: 1.2
-                    },
-                    trashcan: true
+                        toolbox: document.getElementById(princToolboxId),
+                        zoom:
+                        {
+                            controls: true,
+                            wheel: true,
+                            startScale: 1.0,
+                            maxScale: 3,
+                            minScale: 0.2,
+                            scaleSpeed: 1.2
+                        },
+                        trashcan: true
+                    });
+                    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
+                    configWorkspace = new Blockly.Workspace();
+                    configWorkspace.attachChildWorkspace(workspace);
+                    workspace.attachChildWorkspace(hiddenWorkspace);
+                    SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
+                    Refresh();
                 });
-                hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
-                workspace.attachChildWorkspace(hiddenWorkspace);
-                SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
-                Refresh();
-            });
-    });
+        });
 
     //------------------------------------------------------------------ Tools
     /** 
@@ -196,7 +232,7 @@
         var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
         { toolbox: document.getElementById('toolboxFunction') });
         workspace.attachChildWorkspace(newWorkspace);
-        activWorkspace = newWorkspace;               
+        activWorkspace = newWorkspace;
         valueActivWorkspace = nbWorkspaces;
 
         // Create the onglet
@@ -305,9 +341,9 @@
 </script>
 
 <!-- Storage and parsing -->
-    <script src="Storage/storage.js"></script>
-    <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
+<script src="Storage/storage.js"></script>
+<script src="Storage/parsingXML.js"></script>
+<script src="Toolbox/category.js"></script>
 
 </body>
 </html>

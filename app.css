@@ -47,6 +47,23 @@ span {
 #filesDiv button:selection {
     border-bottom-color: #454545;
 }
+/* ------------------- Sidebar ----------------------- */
+.side-bar {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 300px;
+    padding: 20px;
+    background: #604040;
+    color: antiquewhite;
+    box-shadow: 0px 0px 20px black inset;
+
+}
+
+.side-bar h1 {
+    text-align: center;
+}
 
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
