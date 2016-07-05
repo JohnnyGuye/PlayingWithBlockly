@@ -177,6 +177,25 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
     return blocks;
 };
 
+function childrenWorkspaceBlocks(workspace, blocks) {
+    var children = workspace.getLinkedWorkspace();
+    for (var j = 0; j < children.length; j++) {
+        var childrenblocks = children[j].getAllBlocks();
+        for (var h = 0; h < childrenblocks.length; h++) {
+            blocks.push(childrenblocks[h]);
+        }      
+        childrenWorkspaceBlocks(children[j], blocks);
+    }
+}
+
+Blockly.Workspace.prototype.getAllDescendantBlocks = function () {
+    var blocks = this.getTopBlocks(false);
+    for (var i = 0; i < blocks.length; i++) {
+        blocks.push.apply(blocks, blocks[i].getChildren());
+    }
+    childrenWorkspaceBlocks(this, blocks);
+    return blocks;
+}
 /**
  * Find all variables scoped in this workspace.
  * @return {!Array.!Array<Blockly.Block>} Array of arrays of blocks. Each cell is a higher degree of scope.

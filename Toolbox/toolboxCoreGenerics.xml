@@ -22,6 +22,10 @@
     <!-- It's gonna be filled the same maneer as function and variables -->
   </category>
 
+  <category name="Recherche" id="SearchCategory" colour="0">
+    <!-- It's gonna be filled the same maneer as function and variables -->
+  </category>
+
 </xml>
 
 <xml id="toolboxFunction" style="display: none">
