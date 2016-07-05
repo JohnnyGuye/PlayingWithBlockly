@@ -100,10 +100,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <h3 align="center"> Créateur de décodeur </h3>
-
-            <div id="wrapper">
+            <div id="wrapper" class="col-md-9">
+                <h3 align="center"> Créateur de décodeur </h3>
                 <p align="justify">
                     Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br/>
                     Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
@@ -142,11 +140,12 @@
 
                     <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
                     <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
-
+   
                     <!-- There are the workspaces you use when you work on function -->
                     <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+                        <h3 align="center"> Editeur de fonctions </h3>
                         <!-- Toolbar concepteur -->
-                        <div class="toolbar-workspace">
+                        <div class="toolbar-workspace" id="functionToolbar">
                             <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
                             <div class="toolbar-items">
                                 <div class="toolbar-group">
@@ -170,11 +169,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <h3>Contexte de décodage</h3>
-        </div>
+
     </div>
-</div>
 
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
@@ -242,7 +238,7 @@
         if (funcWindow.style.display === "none") {
             funcWindow.style.display = "block";
         }
-
+        
         // Hide the previous workspace
         if (nbWorkspaces > 0) {
             document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
