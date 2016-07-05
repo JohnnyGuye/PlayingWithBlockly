@@ -9,7 +9,7 @@ span {
 
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 400px;
+    height: 500px;
     width: 800px;
 }
 
@@ -95,4 +95,9 @@ span {
 .onglet:checked {
     background-color: #A08080;
     color: #200000;
+}
+
+.jumbotron {
+    color: inherit;
+    background-color: gainsboro;
 }
