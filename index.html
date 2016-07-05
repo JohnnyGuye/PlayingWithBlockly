@@ -53,15 +53,54 @@
 
 <body id="body">
 
-<div class="jumbotron text-center">
-    <h1 class="title">Blockly tests</h1>
-</div>
+    <aside class="side-bar" style="display: inline-block; text-align: center;">
+        <div>
+            <h1>Configuration</h1>
+            <table>
+                <tr>
+                    <td>
+                        <label id="variable1" name="Ma variable">Ma variable </label>
+                    </td>
+                    <td>
+                        <input type="number" id="variable1Input" name="Ma variable" />
+                    </td>
+                    <td>
+                        <button class="item-workspace"> x </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="variable2" name="Ma variable2">Mon autre variable </label>
+                    </td>
+                    <td>
+                        <input type="number" id="variable1Input" name="Ma variable3" />
+                    </td>
+                    <td>
+                        <button class="item-workspace"> x </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="variable3" name="Ma variable3">Ma troisième variable </label>
+                    </td>
+                    <td>
+                        <input type="number" id="variable1Input" name="Ma variable3" />
+                    </td>
+                    <td>
+                        <button class="item-workspace"> x </button>
+                    </td>
+                </tr>
+            </table>
+            <button class="item-workspace" style="margin: auto;"> Ajouter config </button>
+        </div>
+    </aside>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
 
-                <div id="wrapper" class="col-md-9">
+            <div class="col-md-11">
+
+                <div id="wrapper">
                     <h3 align="center"> Créateur de décodeur </h3>
                     <p align="justify">
                         Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br/>
@@ -104,90 +143,50 @@ createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fon
                                 </div>
                             </div>
                         </div>
-                    <div id="blocklyDiv" class="blocklyDiv"></div>
+                        <div id="blocklyDiv" class="blocklyDiv"></div>
                     </div>
-                        <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-                        <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
-                    <!--div class="row"-->
-                        <!-- There are the workspaces you use when you work on function -->
-                        <div id="functionWrapper" class="edition-window function-window" style="display: none;">
-                            <h3 align="center"> Editeur de fonctions </h3>
-                            <!-- Toolbar concepteur -->
-                            <div class="toolbar-workspace" id="functionToolbar">
-                                <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
-                                <div class="toolbar-items">
-                                    <div class="toolbar-group">
-                                        <span>
-                                            <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();">
-                                                Sauvegarder
-                                            </button>
-                                        </span>
-                                        <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
-                                    </div>
-                                    <div class="toolbar-group">
-                                        <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
-                                        <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
-                                    </div>
-                                </div>
-                                <div class="toolbar-onglet" id="toolbar-onglet-func">
-                                    <!-- There will be the onglets -->
-                                </div>
-                            </div>
-                        </div>
-                    <!--/div-->
+                    <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
+                    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
                 </div>
+
+                <!-- fermeture column9-->
+                </div>
+                <!-- refmeture row 1 -->
             </div>
 
-            <div class="col-md-3">
-
-                <aside class="side-bar" style="display: inline-block; text-align: center;">
-                    <div>
-                        <h1>Configuration</h1>
-                        <table>
-                            <tr>
-                                <td>
-                                    <label id="variable1" name="Ma variable">Ma variable </label>
-                                </td>
-                                <td>
-                                    <input type="number" id="variable1Input" name="Ma variable" />
-                                </td>
-                                <td>
-                                    <button class="item-workspace"> x </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label id="variable2" name="Ma variable2">Mon autre variable </label>
-                                </td>
-                                <td>
-                                    <input type="number" id="variable1Input" name="Ma variable3" />
-                                </td>
-                                <td>
-                                    <button class="item-workspace"> x </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label id="variable3" name="Ma variable3">Ma troisième variable </label>
-                                </td>
-                                <td>
-                                    <input type="number" id="variable1Input" name="Ma variable3" />
-                                </td>
-                                <td>
-                                    <button class="item-workspace"> x </button>
-                                </td>
-                            </tr>
-                        </table>
-                        <button class="item-workspace" style="margin: auto;"> Ajouter config </button>
+        <div class="row">
+            <div class="col-md-11">
+                <!-- There are the workspaces you use when you work on function -->
+                <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+                    <h3 align="center"> Editeur de fonctions </h3>
+                    <!-- Toolbar concepteur -->
+                    <div class="toolbar-workspace" id="functionToolbar">
+                        <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
+                        <div class="toolbar-items">
+                            <div class="toolbar-group">
+                                <span>
+                                    <button class="item-workspace" onclick="SquidStorage
+    .SaveFunction(workspace); Refresh();">
+                                        Sauvegarder
+                                    </button>
+                                </span>
+                                <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
+                            </div>
+                            <div class="toolbar-group">
+                                <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                                <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
+                            </div>
+                        </div>
+                        <div class="toolbar-onglet" id="toolbar-onglet-func">
+                            <!-- There will be the onglets -->
+                        </div>
                     </div>
-                </aside>
+                </div>
 
             </div>
 
         </div>
-
-    </div>
-        
+        </div>
 
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
