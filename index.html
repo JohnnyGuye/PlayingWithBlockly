@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8"/>
     <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css"/>
+
+    <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="bootstrap-3.3.6/dist/js/npm.js"></script>
+    <script src="bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="app.css" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
@@ -46,10 +52,18 @@
 </head>
 
 <body id="body">
-<h1>Blockly tests</h1>
 
-<div id="wrapper">
-    <p>
+<div class="jumbotron text-center">
+    <h1 class="title">Blockly tests</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h3 align="center"> Workspace principale</h3>
+
+            <div id="wrapper">
+    <p align="center">
         Tests sur blockly. Sauvegarde test.
     </p>
     <div class="edition-window decode-window">
@@ -113,14 +127,14 @@
         </div>
     </div>
 </div>
-
-<div>
-    <span>
-        <pre id="saveContent"></pre>
-    </span>
+</div>
+        <div class="col-md-3">
+            <h3>Contexte de décodage</h3> 
+        </div>
+    </div>
 </div>
 
-<pre id="content1"></pre>
+
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
 

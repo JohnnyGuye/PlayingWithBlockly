@@ -9,8 +9,8 @@ span {
 
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 400px;
-    width: 1000px;
+    height: 500px;
+    width: 800px;
 }
 
 /*-------------------- Toolbar ----------------------- */
@@ -19,7 +19,7 @@ span {
     padding: 10px;
     color: white;
     background-color: #200000;
-    width: 980px;
+    width: 800px;
     height: auto;
     border-radius: 5px 5px 0px 0px;
 }
@@ -95,4 +95,9 @@ span {
 .onglet:checked {
     background-color: #A08080;
     color: #200000;
+}
+
+.jumbotron {
+    color: inherit;
+    background-color: gainsboro;
 }
