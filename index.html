@@ -55,42 +55,11 @@
 <aside class="side-bar" style="display: inline-block; text-align: center;">
     <div>
         <h1>Configuration</h1>
-        <table>
-            <tr>
-                <td>
-                    <label id="variable1" name="Ma variable">Ma variable </label>
-                </td>
-                <td>
-                    <input type="number" id="variable1Input" name="Ma variable"/>
-                </td>
-                <td>
-                    <button class="item-workspace"> x </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="variable2" name="Ma variable2">Mon autre variable </label>
-                </td>
-                <td>
-                    <input type="number" id="variable1Input" name="Ma variable3"/>
-                </td>
-                <td>
-                    <button class="item-workspace"> x </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="variable3" name="Ma variable3">Ma troisième variable </label>
-                </td>
-                <td>
-                    <input type="number" id="variable1Input" name="Ma variable3"/>
-                </td>
-                <td>
-                    <button class="item-workspace"> x </button>
-                </td>
-            </tr>
+        <button class="item-workspace" style="margin: auto;" onclick="createVariable()"> Ajouter config </button>
+        <div id="blocklyDivVariables" style="display: none;"></div>
+        <table id="config-table">
         </table>
-        <button class="item-workspace" style="margin: auto;"> Ajouter config </button>
+        
     </div>
 </aside>
 
@@ -192,6 +161,7 @@
 
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
+    var variablesCount = 0;
 
     /* Element IDs */
     var princToolboxId = "toolboxGeneric";
@@ -220,14 +190,59 @@
                         trashcan: true
                     });
                     hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
-                    configWorkspace = new Blockly.Workspace();
+                    configWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Variables");
                     configWorkspace.attachChildWorkspace(workspace);
                     workspace.attachChildWorkspace(hiddenWorkspace);
                     SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
                     Refresh();
                 });
         });
+    // ------------------------------------------------------------- Configuration
+    function createVariable() {
+        var name = "Variable n°" + variablesCount;
+        var table = document.getElementById("config-table");
+        var variable = workspace.newBlock("variables_get", "var" + variablesCount);
+        
+        var label = document.createElement("label");
+        label.setAttribute("id", "variable" + variablesCount + "_label");
+        label.setAttribute("name", name);
+        label.innerHTML = name;
 
+        var input = document.createElement("input");
+        input.setAttribute("type", "number");
+        input.setAttribute("id", "variable" + variablesCount + "_input");
+        input.setAttribute("name", name);
+
+        var button = document.createElement("button");
+        button.setAttribute("class", "delete-button");
+        button.setAttribute("onclick", "deleteVariable(" + variablesCount + ")");
+        button.innerHTML = " x ";
+
+
+        var row = document.createElement("tr");
+        row.setAttribute("id", "variable" + variablesCount + "_row");
+        var cell = document.createElement("td");
+        cell.appendChild(label);
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.appendChild(input);
+        row.appendChild(cell);
+        
+        cell = document.createElement("td");
+        cell.appendChild(button);
+        row.appendChild(document.createElement("td").appendChild(button));
+
+        table.appendChild(row);
+
+        //variable.rename("John");
+        variablesCount++;
+    }
+
+    function deleteVariable(variableId) {
+        var elem = $("variable" + variableId + "_label");
+        $('#variable' + variableId + "_row").remove();
+    }
     //------------------------------------------------------------------ Tools
     /** 
      * Create a new workspace for editing a function.
