@@ -10,7 +10,7 @@ span {
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
     height: 500px;
-    width: 800px;
+    width: 100%; /*1000*/
 }
 
 #filesDiv {
@@ -49,10 +49,11 @@ span {
 }
 /* ------------------- Sidebar ----------------------- */
 .side-bar {
-    position: absolute;
+    position: fixed;
     right: 0px;
-    top: 0px;
+    top: 0;
     height: 100%;
+    z-index: 999;
     width: 300px;
     padding: 20px;
     background: #604040;
@@ -87,13 +88,28 @@ span {
     background-color: #d0d0d0;
 }
 
-/*-------------------- Toolbar ----------------------- */
-.toolbar-workspace {
+.edition-window {
     margin: 0px;
     padding: 10px;
     color: white;
     background-color: #200000;
-    width: 820px;
+    width: 90%; /*1020px*/
+    height: auto;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.searchbar {
+    color: black;
+}
+
+/*-------------------- Toolbar ----------------------- */
+.toolbar-workspace {
+    margin: 0px;
+    padding: 10px;
+    padding-right: 0px;
+    color: white;
+    background-color: #200000;
+    width: 90%; /*1000*/
     height: auto;
     border-radius: 5px 5px 5px 5px;
 }
@@ -172,4 +188,5 @@ span {
     background-color: #A08080;
     color: #200000;
 }
+
 

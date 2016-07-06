@@ -53,6 +53,7 @@
 </head>
 
 <body id="body">
+
 <aside class="side-bar" style="display: inline-block; text-align: center;">
     <div>
         <h1>Configuration</h1>
@@ -64,83 +65,101 @@
     </div>
 </aside>
 
-<div class="jumbotron text-center">
-    <h1 class="title">Blockly tests</h1>
-</div>
+    <div class="container">
+        <div class="row">
 
-<div class="container">
-    <div class="row">
-            <div id="wrapper" class="col-md-9">
-                <h3 align="center"> Créateur de décodeur </h3>
-                <p align="justify">
-                    Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br/>
-                    Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
-                </p>
-                <div class="edition-window decode-window">
-                    <div class="toolbar-workspace">
-                        <div class="title-toolbar-workspace"> Editeur de décodeur </div>
-                        <div class="toolbar-items">
+            <div class="col-md-11">
+
+                <div id="wrapper">
+                    <h3 align="center"> Créateur de décodeur </h3> 
+                    <p align="justify">
+                        Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br/>
+                        Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
+                    </p>
+
+                    <div class="edition-window decode-window">
+                        <div class="toolbar-workspace">
+                            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+
+                            <div class="toolbar-items">
+
+                                <div class="toolbar-group">
+                                    <span>
+                                        <button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();">
+                                            Sauvegarder
+                                        </button>
+                                    </span>
+                                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
+                                </div>
+                                <div class="toolbar-group">
+                                    <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
+                                    <a href="#functionWrapper">
+                                        <span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+                                    </a>
+                                    <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
+
+                                </div>
+                                <div class="toolbar-group">
+                                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
+                                    <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
+                                </div>
+                            </div>
+
                             <!-- Adding the search bar for tags -->
 
-                            <div id="searchbar">
+                            <div id="searchbar" class="searchbar">
                                 <form action="" class="formulaire">
-                                    <input class="champ" id="search-bar" type="text" value="..."/>
-                                    <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
+                                    <input id="search-bar" type="text" value="" />
+                                    <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')" />
                                 </form>
                             </div>
 
-                            <div class="toolbar-group">
-                                <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();"> Sauvegarder </button></span>
-                                <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
-                            </div>
-                            <div class="toolbar-group">
-                                <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
-                                <a href="#functionWrapper">
-                                    <span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span></a>
-                                <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
 
-                            </div>
-                            <div class="toolbar-group">
-                                <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                                <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
-                            </div>
                         </div>
                         <div id="blocklyDiv" class="blocklyDiv"></div>
                     </div>
-
                     <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
                     <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
-   
-                    <!-- There are the workspaces you use when you work on function -->
-                    <div id="functionWrapper" class="edition-window function-window" style="display: none;">
-                        <h3 align="center"> Editeur de fonctions </h3>
-                        <!-- Toolbar concepteur -->
-                        <div class="toolbar-workspace" id="functionToolbar">
-                            <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
-                            <div class="toolbar-items">
-                                <div class="toolbar-group">
-                                    <span>
-                                <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();">
-                                    Sauvegarder
-                                </button>
-                            </span>
-                                    <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
-                                </div>
-                                <div class="toolbar-group">
-                                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
-                                    <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
-                                </div>
+                </div>
+
+                <!-- fermeture column9-->
+                </div>
+                <!-- refmeture row 1 -->
+            </div>
+
+        <div class="row">
+            <div class="col-md-11">
+                <!-- There are the workspaces you use when you work on function -->
+                <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+                    <h3 align="center"> Editeur de fonctions </h3>
+                    <!-- Toolbar concepteur -->
+                    <div class="toolbar-workspace" id="functionToolbar">
+                        <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
+                        <div class="toolbar-items">
+                            <div class="toolbar-group">
+                                <span>
+                                    <button class="item-workspace" onclick="SquidStorage
+    .SaveFunction(workspace); Refresh();">
+                                        Sauvegarder
+                                    </button>
+                                </span>
+                                <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
                             </div>
-                            <div class="toolbar-onglet" id="toolbar-onglet-func">
-                                <!-- There will be the onglets -->
+                            <div class="toolbar-group">
+                                <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                                <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
                             </div>
+                        </div>
+                        <div class="toolbar-onglet" id="toolbar-onglet-func">
+                            <!-- There will be the onglets -->
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </div>
+            </div>
+
+        </div>
+        </div>
 
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
