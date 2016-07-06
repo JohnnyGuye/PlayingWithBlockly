@@ -1,35 +1,9 @@
-/**
- * @license
- * Visual Blocks Editor
- *
- * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-/**
- * @fileoverview Utility functions for handling variables.
- * @author fraser@google.com (Neil Fraser)
- */
 'use strict';
-
-goog.provide('Blockly.Variables');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Workspace');
 goog.require('goog.string');
-
 
 /**
  * Category to separate variable names from procedures and generated functions.
@@ -41,7 +15,7 @@ Blockly.Variables.NAME_TYPE = 'VARIABLE';
  * @param {!Blockly.Block|!Blockly.Workspace} root Root block or workspace.
  * @return {!Array.<string>} Array of variable names.
  */
-Blockly.Variables.allVariables = function(root) {
+Blockly.Variables.allVariables = function(root, scoping) {
   var blocks;
   if (root.getDescendants) {
     // Root is Block.
@@ -53,18 +27,20 @@ Blockly.Variables.allVariables = function(root) {
     throw 'Not Block or Workspace: ' + root;
   }
   var variableHash = Object.create(null);
-  // Iterate through every block and add each variable to the hash.
-  for (var x = 0; x < blocks.length; x++) {
-    var blockVariables = blocks[x].getVars();
-    for (var y = 0; y < blockVariables.length; y++) {
-      var varName = blockVariables[y];
-      // Variable name may be null if the block is only half-built.
-      if (varName) {
-        variableHash[varName.toLowerCase()] = varName;
-      }
+    for (var i = 0; i < blocks.length; i++) {
+        // Iterate through every block and add each variable to the hash.
+        for (var x = 0; x < blocks[i].length; x++) {
+            var blockVariables = blocks[i][x].getVars();
+            for (var y = 0; y < blockVariables.length; y++) {
+                var varName = blockVariables[y];
+                // Variable name may be null if the block is only half-built.
+                if (varName) {
+                    variableHash[varName.toLowerCase()] = varName;
+                }
+            }
+        }
     }
-  }
-  // Flatten the hash into a list.
+    // Flatten the hash into a list.
   var variableList = [];
   for (var name in variableHash) {
     variableList.push(variableHash[name]);

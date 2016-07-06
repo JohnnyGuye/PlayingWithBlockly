@@ -13,17 +13,21 @@
   </category>
 
 
-  <category name="Blocks génériques" colour="250">
+  <category name="Blocks génériques" colour="270">
     <block type="decodeboolean"></block>
     <block type="decodeframe"></block>
   </category>
-
-  <category name="Mes fonctions" id="NewCategory" colour="0">
+  
+  <category name="Configuration" id="ConfigCategory" colour="0">
+    <!-- It's gonna be filled by the configuration variables -->
+  </category>
+  <category name="Variables" custom="VARIABLE" colour="100"></category>
+  <category name="Mes fonctions" id="NewCategory" colour="180">
     <!-- It's gonna be filled the same maneer as function and variables -->
   </category>
 
-  <category name="Recherche" id="SearchCategory" colour="0">
-    <!-- It's gonna be filled the same maneer as function and variables -->
+  <category name="Recherche" id="SearchCategory" colour="200">
+    <!-- It's gonna be filled by the functions in the good tag -->
   </category>
 
 </xml>
@@ -31,8 +35,6 @@
 <xml id="toolboxFunction" style="display: none">
 
   <sep gap="8"></sep>
-
-
 
   <category name="Configuration" id="config-category" colour="180">
     <!-- It's gonna be filled with config variables -->

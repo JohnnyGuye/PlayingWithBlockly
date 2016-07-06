@@ -82,7 +82,7 @@ Blockly.Workspace = function(opt_options) {
      * @type {!Object}
      * @private
      */
-    this.parentWorkspace_ = Object.create(null);
+    this.parentWorkspace_ = null;
 };
 
 /**
@@ -204,10 +204,10 @@ Blockly.Workspace.prototype.getAllAscendantBlocks = function() {
     var that = this;
     var ascendantBlocks = new Array();
 
-    do {        
+    while (that !== null && that !== undefined) {
         ascendantBlocks.push(that.getTopBlocks(false));
         that = that.getParentWorkspace();
-    } while(that != null);
+    }
 
     return ascendantBlocks;
 };

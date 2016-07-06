@@ -111,6 +111,7 @@
     <Content Include="Blockly\core\zoom_controls.js" />
     <Content Include="Blockly\core_override\blocks.js" />
     <Content Include="Blockly\core_override\procedures.js" />
+    <Content Include="Blockly\core_override\variables.js" />
     <Content Include="Blockly\core_override\workspace.js" />
     <Content Include="Blockly\dart_compressed.js" />
     <Content Include="Blockly\demos\accessible\icon.png" />
@@ -3095,6 +3096,10 @@
     <Content Include="obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\BlocklyTest.dll" />
     <Content Include="obj\Debug\BlocklyTest.pdb" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
@@ -3381,6 +3386,7 @@
     <Content Include="bootstrap-3.3.6\test-infra\S3Cachefile.json" />
     <Content Include="bootstrap-3.3.6\test-infra\uncached-npm-install.sh" />
     <Content Include="bootstrap-3.3.6\_config.yml" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

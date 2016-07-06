@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>TypeScript HTML App</title>
+    <title>Decodeur - 1.0</title>
 
     <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,6 +26,7 @@
 
     <!-- Overriden version of the core -->
     <script src="Blockly/core_override/procedures.js"></script>
+    <script src="Blockly/core_override/variables.js"></script>
 
     <!-- Custom blocks -->
     <script src="Blockly/blocks/custom.js"></script>
@@ -201,6 +202,7 @@
     function createVariable() {
         var name = "Variable n°" + variablesCount;
         var table = document.getElementById("config-table");
+
         var variable = workspace.newBlock("variables_get", "var" + variablesCount);
         
         var label = document.createElement("label");
@@ -235,8 +237,8 @@
 
         table.appendChild(row);
 
-        //variable.rename("John");
         variablesCount++;
+        RefreshVariables(workspace, princToolboxId);
     }
 
     function deleteVariable(variableId) {
