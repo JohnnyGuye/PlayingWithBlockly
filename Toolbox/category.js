@@ -99,7 +99,7 @@ function TagSearch(workspace, toolboxId) {
             }
         }
     }
-    // if no element has the tags requested : 
+    // if no element has the tags requested :
     if (count === 0) {
         alert("Aucun élément ne correspond à votre recherche.");
     }
