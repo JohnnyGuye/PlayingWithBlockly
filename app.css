@@ -76,6 +76,10 @@ span {
     border-radius: 5px 5px 5px 5px;
 }
 
+.searchbar {
+    color: black;
+}
+
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
     margin: 0px;

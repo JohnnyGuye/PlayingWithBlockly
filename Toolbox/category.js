@@ -67,6 +67,7 @@ function TagSearch(workspace, toolboxId) {
     var procedures = workspace.getAllDescendantBlocks();
  
     var searchWords = parseTags();
+    var count = 0;
 
     // Get the results container tag and remove all the blocks it contains since the last research
     var tagCategory = document.getElementById("SearchCategory");
@@ -82,7 +83,7 @@ function TagSearch(workspace, toolboxId) {
         //for each searched word 
         for (var j = 0; j < searchWords.length; j++) {
             if (searchWords[j] === tags) {
-                //console.log(procedures[i].getFieldValue("NAME"));
+                count++;
                 var newProcedure = document.createElement("block");
                 if (procedures[i].getProcedureDef()[2]) {
                     newProcedure.setAttribute("type", "procedures_callreturn");
@@ -98,7 +99,10 @@ function TagSearch(workspace, toolboxId) {
             }
         }
     }
-
+    // if no element has the tags requested : 
+    if (count === 0) {
+        alert("Aucun élément ne correspond à votre recherche.");
+    }
     workspace.updateToolbox(document.getElementById(toolboxId));
 }
 
