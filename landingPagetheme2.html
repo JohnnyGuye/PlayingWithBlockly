@@ -1,67 +1,60 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>LeDecodeur-Page d'accueil</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="startbootstrap-stylish-portfolio-1.0.5/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="startbootstrap-stylish-portfolio-1.0.5/css/stylish-portfolio.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="startbootstrap-stylish-portfolio-1.0.5/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-
 <body>
-
     <!-- Header -->
-<header id="top" class="header">
+    <header id="top" class="header">
 
-    <!-- images for the slideshow >
+        <!-- images for the slideshow >
 
-    <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/bg.jpg">
-    <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/callout.jpg">
-    <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-1.jpg">
-    <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-2.jpg"-->
+        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/bg.jpg">
+        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/callout.jpg">
+        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-1.jpg">
+        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-2.jpg"-->
 
-    <div class="text-vertical-center">
-        <h1>Décodeur de trames</h1>
-        <h3>m2ocity</h3>
-        <br>
-        <a href="index.html" class="btn btn-dark btn-lg">Commencer</a>
-    </div>
-</header>
-
+        <div class="text-vertical-center">
+            <h1>Décodeur de trames</h1>
+            <h3>m2ocity</h3>
+            <br>
+            <a href="index.html" class="btn btn-dark btn-lg">Commencer</a>
+        </div>
+    </header>
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>m2ocity</strong>
+                    <h4>
+                        <strong>m2ocity</strong>
                     </h4>
-                    <p>66 Quai Charles de Gaule
-                        <br>69006 Lyon</p>
+                    <p>
+                        66 Quai Charles de Gaule
+                        <br>69006 Lyon
+                    </p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li>
+                            <i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
                         </li>
                     </ul>
                     <br>
@@ -72,20 +65,17 @@
         </div>
         <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     </footer>
-
     <!-- jQuery -->
     <script src="startbootstrap-stylish-portfolio-1.0.5/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="startbootstrap-stylish-portfolio-1.0.5/js/bootstrap.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script>
 
-     //automatic slidshow of background images : 
+     //automatic slidshow of background images :
 
-        //Array of images which you want to show: 
-        var images = new Array('startbootstrap-stylish-portfolio-1.0.5/img/theme1-im0.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme1-im2.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme1-im3.jpg');
+        //Array of images which you want to show:
+        var images = new Array('startbootstrap-stylish-portfolio-1.0.5/img/theme2-im1.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im7.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im3.jpeg');
         var nextimage = 0;
 
         doSlideshow();
@@ -97,14 +87,14 @@
             .css(    '-webkit-background-size', 'cover')
             .css('-moz-background-size', 'cover')
             .css('background-size', 'cover')
-            .css('-o-background-size', 'cover')          
+            .css('-o-background-size', 'cover')
             .fadeIn(500, function () {
-                setTimeout(doSlideshow, 2000);
+                setTimeout(doSlideshow, 1000);
             });
         }
 
 
-    // Slowly scrolling to the selected menu item on the page 
+    // Slowly scrolling to the selected menu item on the page
     $(function() {
         $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
@@ -145,7 +135,6 @@
         }
     });
     </script>
-
 </body>
-
 </html>
+
