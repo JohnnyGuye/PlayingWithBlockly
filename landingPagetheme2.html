@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <title>LeDecodeur-Page d'accueil</title>
     <!-- Bootstrap Core CSS -->
     <link href="startbootstrap-stylish-portfolio-1.0.5/css/bootstrap.min.css" rel="stylesheet">
@@ -14,29 +12,19 @@
     <!-- Custom Fonts -->
     <link href="startbootstrap-stylish-portfolio-1.0.5/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 </head>
+
 <body>
+
+<div id="landingPageId" class="landingPage">
     <!-- Header -->
     <header id="top" class="header">
-
-        <!-- images for the slideshow >
-
-        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/bg.jpg">
-        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/callout.jpg">
-        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-1.jpg">
-        <img class="mySlides" src="startbootstrap-stylish-portfolio-1.0.5/img/portfolio-2.jpg"-->
-
         <div class="text-vertical-center">
             <h1>Décodeur de trames</h1>
             <h3>m2ocity</h3>
             <br>
-            <a href="index.html" class="btn btn-dark btn-lg">Commencer</a>
+            <a class="btn btn-dark btn-lg" href="index.html"> Commencer </a>
         </div>
     </header>
     <!-- Footer -->
@@ -59,82 +47,113 @@
                     </ul>
                     <br>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; <a href="http://www.m2ocity.com">www.m2ocity.com</a> </p>
+                    <p class="text-muted">
+                        Copyright &copy; <a href="http://www.m2ocity.com">www.m2ocity.com</a>
+                    </p>
                 </div>
             </div>
         </div>
         <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     </footer>
-    <!-- jQuery -->
-    <script src="startbootstrap-stylish-portfolio-1.0.5/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="startbootstrap-stylish-portfolio-1.0.5/js/bootstrap.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script>
+</div>
 
-     //automatic slidshow of background images :
+<!-- jQuery -->
+<script src="startbootstrap-stylish-portfolio-1.0.5/js/jquery.js"></script>
 
-        //Array of images which you want to show:
-        var images = new Array('startbootstrap-stylish-portfolio-1.0.5/img/theme2-im1.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im7.jpg', 'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im3.jpeg');
-        var nextimage = 0;
+<!-- Bootstrap Core JavaScript -->
+<script src="startbootstrap-stylish-portfolio-1.0.5/js/bootstrap.min.js"></script>
 
-        doSlideshow();
+<!-- Customizing page -->
+<script>  
 
-        function doSlideshow() {
-            if (nextimage >= images.length) { nextimage = 0; }
-            $('.header')
+    //automatic slidshow of background images :
+    var images = new Array(
+        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im9.jpg',
+        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im3.jpeg',
+        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im10.jpg');
+    var nextimage = 0;
+
+    doSlideshow();
+
+    function doSlideshow() {
+        if (nextimage >= images.length) {
+            nextimage = 0;
+        }
+        $('.header')
             .css('background', 'url("' + images[nextimage++] + '")' + ' no-repeat center center scroll')
-            .css(    '-webkit-background-size', 'cover')
+            .css('-webkit-background-size', 'cover')
             .css('-moz-background-size', 'cover')
             .css('background-size', 'cover')
             .css('-o-background-size', 'cover')
-            .fadeIn(500, function () {
-                setTimeout(doSlideshow, 1000);
-            });
-        }
+            .fadeIn(500,
+                function() {
+                    setTimeout(doSlideshow, 1300);
+                });
+    }
 
 
     // Slowly scrolling to the selected menu item on the page
     $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
+        $('a[href*=#]:not([href=#])')
+            .click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') ||
+                    location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body')
+                            .animate({
+                                    scrollTop: target.offset().top
+                                },
+                                1000);
+                        return false;
+                    }
                 }
-            }
-        });
+            });
     });
     //#to-top button appears after scrolling
     var fixed = false;
-    $(document).scroll(function() {
-        if ($(this).scrollTop() > 250) {
-            if (!fixed) {
-                fixed = true;
-                // $('#to-top').css({position:'fixed', display:'block'});
-                $('#to-top').show("slow", function() {
-                    $('#to-top').css({
-                        position: 'fixed',
-                        display: 'block'
-                    });
-                });
+    $(document)
+        .scroll(function() {
+            if ($(this).scrollTop() > 250) {
+                if (!fixed) {
+                    fixed = true;
+                    // $('#to-top').css({position:'fixed', display:'block'});
+                    $('#to-top')
+                        .show("slow",
+                            function() {
+                                $('#to-top')
+                                    .css({
+                                        position: 'fixed',
+                                        display: 'block'
+                                    });
+                            });
+                }
+            } else {
+                if (fixed) {
+                    fixed = false;
+                    $('#to-top')
+                        .hide("slow",
+                            function() {
+                                $('#to-top')
+                                    .css({
+                                        display: 'none'
+                                    });
+                            });
+                }
             }
-        } else {
-            if (fixed) {
-                fixed = false;
-                $('#to-top').hide("slow", function() {
-                    $('#to-top').css({
-                        display: 'none'
-                    });
-                });
-            }
-        }
-    });
-    </script>
+        });
+
+    //loading page in the background : 
+    function displayIndex() {
+        var landingPage = document.getElementById("landingPageId");
+        $(landingPage).fadeOut('slow');
+        document.getElementById("DisplayIndex").style.display = "inline";
+        //$(indexPage).fadeIn();
+
+        //console.log("ok!!!!");
+    }
+</script>
 </body>
 </html>
 

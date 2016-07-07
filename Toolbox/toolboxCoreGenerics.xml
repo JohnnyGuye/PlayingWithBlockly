@@ -35,7 +35,7 @@
 
 
   <category name="Configuration" id="config-category" colour="180">
-    <!-- It's gonna be filled with config variables -->
+    <!-- It's gonna be filled with config variables >
   </category>
 
   <sep gap="8"></sep>
