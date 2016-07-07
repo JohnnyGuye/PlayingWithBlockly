@@ -45,7 +45,14 @@ SquidStorage.SaveFunction = function(workspace) {
 
 function backupBlocks (workspace, url) {
   if ('localStorage' in window) {
-    var xml = Blockly.Xml.workspaceToDom(workspace);    
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      //FOR TESTS add by felix
+      var txt = Blockly.Xml.domToPrettyText(xml);
+      //alert(txt);
+      var div = document.getElementById('xml1');
+      div.innerHTML = txt;
+      //END FOR TESTS
+     
     window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
   }
 };
