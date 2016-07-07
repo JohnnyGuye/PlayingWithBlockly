@@ -41,18 +41,24 @@ function RefreshCategories(workspace, toolboxId) {
         
         // For each procedure in this category
         for (var j = 0; j < categoriesProcedures[i].length; j++) {
-            var block = categoriesProcedures[i][j];
-            var newProcedure = document.createElement("block");
-            if (block.getProcedureDef()[2]) {
-                newProcedure.setAttribute("type", "procedures_callreturn");
-            } else {
-                newProcedure.setAttribute("type", "procedures_callnoreturn");
-            }
-            
-            var mutator = document.createElement("mutation");
-            mutator.setAttribute("name", block.getProcedureDef()[0]);
+            var block = categoriesProcedures[i][j];            
+            var def = block.getProcedureDef();
+            var name = def[0];
+            var args = def[1];
+            var type = def[2];
 
-            newProcedure.appendChild(mutator);
+            var newProcedure = document.createElement("block");
+            newProcedure.setAttribute("type", (type ? "procedures_callreturn": "procedures_callnoreturn"));
+            newProcedure.setAttribute("gap", 16);
+            var mutation = document.createElement("mutation");
+            mutation.setAttribute("name", name);
+            for (var k = 0; k < args.length; k++) {
+                var arg = document.createElement("arg");
+                arg.setAttribute("name", args[k]);
+                mutation.appendChild(arg);
+            }
+
+            newProcedure.appendChild(mutation);
             newCategory.appendChild(newProcedure);
         }
 

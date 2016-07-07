@@ -270,8 +270,12 @@
         RefreshVariables(workspace, princToolboxId);
     }
 
+    function modifyVariableName() {
+        
+    }
+
     function deleteVariable(variableId) {
-        var elem = $("variable" + variableId + "_label");
+        var elem = document.getElementById("variable" + variableId + "_label");
         var name = elem.getAttribute("name");
         var variables = Blockly.Variables.allVariables(configWorkspace);
         for (var i = 0; i < variables.length; i++) {
