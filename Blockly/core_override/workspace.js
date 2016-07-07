@@ -205,7 +205,10 @@ Blockly.Workspace.prototype.getAllAscendantBlocks = function() {
     var ascendantBlocks = new Array();
 
     while (that !== null && that !== undefined) {
-        ascendantBlocks.push(that.getTopBlocks(false));
+        var blocks = that.getAllBlocks();
+        for (var i = 0; i < blocks.length; i++) {
+            ascendantBlocks.push(blocks[i]);
+        }
         that = that.getParentWorkspace();
     }
 

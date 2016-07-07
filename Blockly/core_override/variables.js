@@ -27,16 +27,14 @@ Blockly.Variables.allVariables = function(root, scoping) {
     throw 'Not Block or Workspace: ' + root;
   }
   var variableHash = Object.create(null);
-    for (var i = 0; i < blocks.length; i++) {
-        // Iterate through every block and add each variable to the hash.
-        for (var x = 0; x < blocks[i].length; x++) {
-            var blockVariables = blocks[i][x].getVars();
-            for (var y = 0; y < blockVariables.length; y++) {
-                var varName = blockVariables[y];
-                // Variable name may be null if the block is only half-built.
-                if (varName) {
-                    variableHash[varName.toLowerCase()] = varName;
-                }
+    // Iterate through every block and add each variable to the hash.
+    for (var x = 0; x < blocks.length; x++) {
+        var blockVariables = blocks[x].getVars();
+        for (var y = 0; y < blockVariables.length; y++) {
+            var varName = blockVariables[y];
+            // Variable name may be null if the block is only half-built.
+            if (varName) {
+                variableHash[varName.toLowerCase()] = varName;
             }
         }
     }

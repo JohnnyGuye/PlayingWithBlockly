@@ -47,6 +47,77 @@ span {
 #filesDiv button:selection {
     border-bottom-color: #454545;
 }
+
+/* ---------------- Generated code ------------------- */
+.top-layer {
+    position: fixed;
+    z-index: 999;
+}
+
+.generated-code {
+    text-align: center;
+    transition: width 0.4s, opacity 0.4s;
+    position: fixed;
+    top: 0;
+    left: 2%;
+    width: 0%;
+    opacity: 0;
+    height: 100%;
+    background-color: antiquewhite;
+    color: #604040;
+    box-shadow: 0px 0px 20px 10px #200000 inset;
+    z-index: 999;
+}
+
+.generated-code pre {
+    text-align: left;
+    position: relative;
+    width: 95%;
+    margin: 20px;
+    border: 0;
+    box-shadow: 0 0 1px 1px brown;
+        
+}
+
+.code-hide {
+    position: fixed;
+    z-index: 999;
+    background-color: violet;
+    top: 0;
+    left: 0;
+    width: 2%;
+    height: 100%;
+    
+}
+
+.code-hide button {
+    border: 0px;
+    height: 100%;
+    width: 100%;
+    font-size: 2em;
+    color: antiquewhite;
+    background-color: #200000;
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+
+.rotate {
+
+/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
 /* ------------------- Sidebar ----------------------- */
 .side-bar {
     position: fixed;
@@ -54,7 +125,8 @@ span {
     top: 0;
     height: 100%;
     z-index: 999;
-    width: 300px;
+    width: 20%;
+    min-width: 300px;
     padding: 20px;
     background: #604040;
     color: antiquewhite;
@@ -104,6 +176,7 @@ span {
 
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
+    z-index: 0;
     margin: 0px;
     padding: 10px;
     padding-right: 0px;

@@ -54,16 +54,26 @@
 
 <body id="body">
 
-<aside class="side-bar" style="display: inline-block; text-align: center;">
-    <div>
-        <h1>Configuration</h1>
-        <button class="item-workspace" style="margin: auto;" onclick="createVariable()"> Ajouter config </button>
-        <div id="blocklyDivVariables" style="display: none;"></div>
-        <table id="config-table">
-        </table>
+<div class="top-layer">
+    <aside class="code-hide">
+        <button id="code-hide" onclick="hideGenerated()"><div class="rotate"> Générer </div></button>
         
-    </div>
-</aside>
+    </aside>
+    <aside class="generated-code" id="generated-code">
+            <h1> Code généré </h1>
+            <pre id="content1"></pre>            
+    </aside>
+
+    <aside class="side-bar" style="display: inline-block; text-align: center;">
+        <div>
+            <h1>Configuration</h1>
+            <button class="item-workspace" style="margin: auto;" onclick="createVariable()"> Ajouter config </button>
+            <div id="blocklyDivVariables" style="display: none;"></div>
+            <table id="config-table"></table>
+        </div>
+    </aside>
+
+</div>
 
     <div class="container">
         <div class="row">
@@ -101,7 +111,6 @@
                                 </div>
                                 <div class="toolbar-group">
                                     <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                                    <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
                                 </div>
                             </div>
 
@@ -147,7 +156,6 @@
                             </div>
                             <div class="toolbar-group">
                                 <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
-                                <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>
                             </div>
                         </div>
                         <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -222,8 +230,10 @@
         var name = "Variable n°" + variablesCount;
         var table = document.getElementById("config-table");
 
-        var variable = workspace.newBlock("variables_get", "var" + variablesCount);
-        
+        var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
+        Blockly.Variables.renameVariable("élément", name, configWorkspace);
+        console.log(Blockly.Variables.flyoutCategory(workspace));
+
         var label = document.createElement("label");
         label.setAttribute("id", "variable" + variablesCount + "_label");
         label.setAttribute("name", name);
@@ -262,7 +272,28 @@
 
     function deleteVariable(variableId) {
         var elem = $("variable" + variableId + "_label");
+        var name = elem.getAttribute("name");
+        var variables = Blockly.Variables.allVariables(configWorkspace);
+        for (var i = 0; i < variables.length; i++) {
+            if (variables[i]) {
+                console.log(variables[i]);
+            }
+        }
         $('#variable' + variableId + "_row").remove();
+    }
+
+    function hideGenerated() {
+        var gc = document.getElementById("generated-code");
+        var b = document.getElementById("code-hide");
+        var w = gc.style.width;
+        if (gc.style.width !== '80%') {
+            generateFrameCode();
+            gc.style.width = '80%';
+            gc.style.opacity = 1;
+        } else {
+            gc.style.width = '0%';
+            gc.style.opacity = 0;
+        }
     }
     //------------------------------------------------------------------ Tools
     /** 

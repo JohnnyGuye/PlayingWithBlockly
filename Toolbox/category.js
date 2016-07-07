@@ -3,6 +3,7 @@
  */
 function RefreshVariables(workspace, toolboxId) {
     var variables = Blockly.Variables.allVariables(workspace);
+    console.log(variables.length + " ");
 }
 /**
  * Refresh the list of categories in the toolbox using the definition of defined functions.
