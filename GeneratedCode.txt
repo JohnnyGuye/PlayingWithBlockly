@@ -1,0 +1,2 @@
+.DecodeBoolean("default", 0.0M).End()
+.DecodeBytes("default2", 0M, 0M).End()

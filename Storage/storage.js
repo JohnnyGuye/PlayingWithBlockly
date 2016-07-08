@@ -55,8 +55,8 @@ function backupBlocks (workspace, url) {
       //alert(txt);
       //var div = document.getElementById('xml1');
       //div.innerHTML = prettyTxt;
-      var code = Blockly.CSharp.workspaceToCode(workspace);
-      postCode(code, xmlTxt);
+      //var code = Blockly.CSharp.workspaceToCode(workspace);
+      //postCode(code, xmlTxt);
       //END FOR TESTS
      
       window.localStorage.setItem(url, xmlTxt);

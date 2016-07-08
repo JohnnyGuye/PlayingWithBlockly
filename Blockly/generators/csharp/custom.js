@@ -2,51 +2,75 @@
 
 Blockly.CSharp.custom = {};
 
+Blockly.CSharp.addMIfNeeded = function (param) {
+    if (!isNaN(param)) {
+            param = param + 'M';
+    }
+    return param;
+
+}
+
+Blockly.CSharp.prepareBytesAndBits = function(args) {
+    if (isNaN(args[0])) {
+        if (isNaN(args[1])) {
+            return args[0] + ' + ' + args[1] + ' / 10M';
+        } else {
+            return args[0] + ' + 0.' + args[1] + 'M';
+        }
+    } else {
+        if (isNaN(args[1])) {
+            return args[0] + 'M + ' + args[1] + ' / 10M';
+        } else {
+            return args[0] + '.' + args[1] + 'M';
+        }
+    }
+}
+
 Blockly.CSharp['decodebytes'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    var varName = block.getFieldValue('NAME');
     var startPos = block.getFieldValue('start');
     var endPos = block.getFieldValue('end');
-    var code = '.DecodeBytes("' + varName + '", ' + startPos + 'M, ' + endPos + 'M).End()\n';
+    startPos = Blockly.CSharp.addMIfNeeded(startPos);
+    endPos = Blockly.CSharp.addMIfNeeded(endPos);
+    //var code = '.DecodeBytes("' + varName + '", ' + startPos + 'M, ' + endPos + 'M).End()\n';
+    var code = '.DecodeBytes("' + varName + '", ' + startPos + ', ' + endPos + ').End()\n';
     return code;
 };
 
-/*Blockly.CSharp['decodeunsignedinteger'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var leastsignificantbit = Blockly.CSharp.valueToCode(block, 'leastSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
-    var mostsignificantbit = Blockly.CSharp.valueToCode(block, 'mostSignificantBit', Blockly.CSharp.ORDER_ATOMIC);
-    var code = '.DecodeUnsignedInteger("' + varName + '", ' + leastsignificantbit + 'M, ' + mostsignificantbit + 'M).End()\n';
-    return code;
-};*/
 
 Blockly.CSharp['decodeunsignedinteger'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    var varName = block.getFieldValue('NAME');
     var msbyte = block.getFieldValue('MSBYTE');
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
     var lsbit = block.getFieldValue('LSBIT');
-    var code = '.DecodeUnsignedInteger("' + varName + '", ' + lsbyte +'.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
+    var ms = Blockly.CSharp.prepareBytesAndBits([ msbyte, msbit ]);
+    var ls = Blockly.CSharp.prepareBytesAndBits([ lsbyte, lsbit ]);
+    var code = '.DecodeUnsignedInteger("' + varName + '", ' + ls + ', ' + ms + ').End()\n';
     return code;
 };
 
 Blockly.CSharp['decodesignedinteger'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
+    var varName = block.getFieldValue('NAME');
     var msbyte = block.getFieldValue('MSBYTE');
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
     var lsbit = block.getFieldValue('LSBIT');
-    var code = '.DecodeSignedInteger("' + varName + '", ' + lsbyte + '.' + lsbit + 'M, ' + msbyte + '.' + msbit + 'M).End()\n';
+    var ms = Blockly.CSharp.prepareBytesAndBits([msbyte, msbit]);
+    var ls = Blockly.CSharp.prepareBytesAndBits([lsbyte, lsbit]);
+    var code = '.DecodeSignedInteger("' + varName + '", ' + ls + ', ' + ms + ').End()\n';
     return code;
 };
 
 Blockly.CSharp['compute'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('NAME'), Blockly.Variables.NAME_TYPE);
-    var expression = Blockly.CSharp.valueToCode(block, 'function', Blockly.CSharp.ORDER_ATOMIC);
+    var varName = block.getFieldValue('NAME');
+    var expression = block.getFieldValue('FUNCTION');
     var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + expression + ')\n';
     return code;
 };
 
 Blockly.CSharp['execute'] = function (block) {
-    var action = Blockly.CSharp.valueToCode(block, 'action', Blockly.CSharp.ORDER_ATOMIC);
+    var action = block.getFieldValue('ACTION');
     var code = '.Execute(' + action + ').End()\n';
     return code;
 };
@@ -55,7 +79,8 @@ Blockly.CSharp['decodeboolean'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var bytepos = block.getFieldValue('BYTEPOS');
     var bitpos = block.getFieldValue('BITPOS');
-    var code = '.DecodeBoolean("' + varName + '", ' + bytepos + '.' + bitpos + 'M).End()\n';
+    var pos = Blockly.CSharp.prepareBytesAndBits([bytepos, bitpos]);
+    var code = '.DecodeBoolean("' + varName + '", ' + pos + ').End()\n';
     return code;
 };
 

@@ -37,7 +37,6 @@
         {
             //throw new System.ArgumentException("Parameter cannot be null");
             File.WriteAllText(@"d:\Stage\stage\PlayingWithBlockly\BlocksInXml.txt", xml);
-
             return xml;
         }
 
