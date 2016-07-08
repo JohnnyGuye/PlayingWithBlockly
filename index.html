@@ -33,6 +33,7 @@
 
     <!-- Error messages -->
     <script src="Blockly/msg/js/fr.js"></script>
+    <script src="Dev/dev-mode.js"></script>
 
     <!--Csharp generator-->
     <script src="Blockly/generators/csharp.js"></script>
@@ -50,9 +51,11 @@
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
     <script src="Blockly/generators/csharp/custom.js"></script>
 
+    <script src="postCode.js"></script>
+
 </head>
 
-<body id="body">
+<body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
 
 <div class="top-layer">
     <aside class="code-hide">
@@ -93,7 +96,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-11">
+            <div class="col-md-12">
 
                 <div id="wrapper">
                     <h3 align="center"> Créateur de décodeur </h3> 
@@ -108,55 +111,48 @@
 
                             <div class="toolbar-items">
 
-                                <div class="toolbar-group">
-                                    <span>
-                                        <button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();">
-                                            Sauvegarder
-                                        </button>
-                                    </span>
-                                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
-                                </div>
+                                <!--<div class="toolbar-group">
+                                    <button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();">
+                                        Sauvegarder
+                                    </button>
+                                    <button class="item-workspace" onclick="Reload();"> Recharger </button>
+                                </div>-->
                                 <div class="toolbar-group">
                                     <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
-                                    <a href="#functionWrapper">
-                                        <span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span>
-                                    </a>
+                                    <!--<a href="#functionWrapper">
+                                        <button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button>
+                                    </a>-->
                                     <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
 
                                 </div>
                                 <div class="toolbar-group">
-                                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
+                                    <button class="item-workspace" onclick="Refresh();"> Refresh </button>
+                                </div>
+                                <!-- Adding the search bar for tags -->
+                                <div class="toolbar-group">
+                                    <input id="search-bar" type="text" value=""/>
+                                    <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
                                 </div>
                             </div>
-
-                            <!-- Adding the search bar for tags -->
-
-                            <div id="searchbar" class="searchbar">
-                                <form action="" class="formulaire">
-                                    <input id="search-bar" type="text" value="" />
-                                    <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')" />
-                                </form>
-                            </div>
-
-
                         </div>
+
                         <div id="blocklyDiv" class="blocklyDiv"></div>
                     </div>
                     <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-                    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
+                    <div id="blocklyDivHidden" class="blocklyDiv dev-block"></div>
                 </div>
 
                 <!-- fermeture column9-->
                 </div>
-                <!-- refmeture row 1 -->
+                <!-- fermeture row 1 -->
             </div>
 
-        <div class="row">
-            <div class="col-md-11">
-                <!-- There are the workspaces you use when you work on function -->
+        <!--<div class="row">
+            <div class="col-md-12">
+                < There are the workspaces you use when you work on function >
                 <div id="functionWrapper" class="edition-window function-window" style="display: none;">
                     <h3 align="center"> Editeur de fonctions </h3>
-                    <!-- Toolbar concepteur -->
+                    <!-- Toolbar concepteur >
                     <div class="toolbar-workspace" id="functionToolbar">
                         <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
                         <div class="toolbar-items">
@@ -174,14 +170,14 @@
                             </div>
                         </div>
                         <div class="toolbar-onglet" id="toolbar-onglet-func">
-                            <!-- There will be the onglets -->
+                            <!-- There will be the onglets>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-        </div>
+        </div>-->
         </div>
 
 
@@ -189,11 +185,6 @@
 
 <script>
     var workspaceNames = new Array();
-    // DEBUG
-    workspaceNames.push('John');
-    workspaceNames.push("jack");
-    workspaceNames.push("fioez");
-    workspaceNames.push("hiohhoifea");
     var workspaceName = "FirstWorkspace";
 
     /* Workspaces */
@@ -232,7 +223,20 @@
                         },
                         trashcan: true
                     });
-                    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
+                    activWorkspace = workspace;
+                    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden",
+                    {
+                        trashcan: true,
+                        zoom:
+                        {
+                            controls: true,
+                            wheel: true,
+                            startScale: 1.0,
+                            maxScale: 5.0,
+                            minScale: 0.1,
+                            scaleSpeed: 1.3
+                        }
+                    });
                     configWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Variables");
                     configWorkspace.attachChildWorkspace(workspace);
                     workspace.attachChildWorkspace(hiddenWorkspace);
@@ -240,19 +244,24 @@
                     Refresh();
                 });
         });
+
+    
     // ------------------------------------------------------------- Configuration
     function createVariable() {
-        var name = "Variable n°" + variablesCount;
+        var name = "Variable_" + variablesCount;
         var table = document.getElementById("config-table");
 
         var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
         Blockly.Variables.renameVariable("élément", name, configWorkspace);
         console.log(Blockly.Variables.flyoutCategory(workspace));
 
-        var label = document.createElement("label");
+        var label = document.createElement("input");
+        label.setAttribute("type", "text");
+        label.setAttribute("class", "variable-name");
         label.setAttribute("id", "variable" + variablesCount + "_label");
-        label.setAttribute("name", name);
-        label.innerHTML = name;
+        label.setAttribute("name", name + "l");
+        label.setAttribute("value", name);
+        label.setAttribute("onclick", "modifyVariableName(" + variablesCount + ")");
 
         var input = document.createElement("input");
         input.setAttribute("type", "number");
@@ -285,8 +294,33 @@
         RefreshVariables(workspace, princToolboxId);
     }
 
+    /* Not working */
+    function modifyVariableName(variableId) {
+        var label = document.getElementById("variable" + variableId + "_label");
+        var oldName = label.getAttribute("value");
+        console.log(label);
+        var previousName = oldName;
+        var newName;
+        function valid() {
+            
+            newName = document.getElementById("variable" + variableId + "_label").getAttribute("value");
+            console.log(previousName + "|" + newName);
+            
+            if (newName != previousName) {
+                setTimeout(valid, 500);
+                console.log("retry");
+            } else {
+                Blockly.Variables.renameVariable(oldName, newName, configWorkspace);
+                console.log("Name validation");
+            }
+            previousName = newName;
+        }
+
+        setTimeout(valid, 1500);
+    }
+
     function deleteVariable(variableId) {
-        var elem = $("variable" + variableId + "_label");
+        var elem = document.getElementById("variable" + variableId + "_label");
         var name = elem.getAttribute("name");
         var variables = Blockly.Variables.allVariables(configWorkspace);
         for (var i = 0; i < variables.length; i++) {
@@ -302,7 +336,7 @@
         var b = document.getElementById("code-hide");
         var w = gc.style.width;
         if (gc.style.width !== '80%') {
-            generateFrameCode();
+            generateCode();
             gc.style.width = '80%';
             gc.style.opacity = 1;
         } else {
@@ -359,17 +393,11 @@
         valueActivWorkspace = newValueActivWorkspace;
     }
 
-    function generateFrameCode() {
-        var code = Blockly.CSharp.workspaceToCode(workspace, "FRAME");
+    function generateCode() {
+        var code = Blockly.CSharp.workspaceToCode(activWorkspace);
         var div = document.getElementById('content1');
         div.innerHTML = code;
-        //alert(code);
-    }
-
-    function generateFunctionCode() {
-        var code = Blockly.CSharp.workspaceToCode(activWorkspace, "FUNC");
-        var div = document.getElementById('content1');
-        div.innerHTML = code;
+        //postCode(code, "sfsfs");
         //alert(code);
     }
 
@@ -435,6 +463,8 @@
             Refresh();
         }
     }
+
+    
 </script>
 
 <!-- Storage and parsing -->

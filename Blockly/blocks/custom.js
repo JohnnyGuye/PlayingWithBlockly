@@ -86,7 +86,7 @@ Blockly.Blocks['decodebytes'] = {
             .appendField("Decoder octets");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldVariable("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
         this.appendDummyInput()
             .appendField("octet de debut :")
             .appendField(new Blockly.FieldTextInput("0"), "start");
@@ -129,7 +129,7 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("Decoder entier non signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldVariable("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -159,7 +159,7 @@ Blockly.Blocks['decodesignedinteger'] = {
             .appendField("Decoder entier signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldVariable("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default"), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -189,10 +189,10 @@ Blockly.Blocks['compute'] = {
             .appendField("Calculer : ");
         this.appendDummyInput()
             .appendField("Resultat : ")
-            .appendField(new Blockly.FieldVariable("default"), "NAME");
-        this.appendValueInput("function")
-            .setCheck(null)
-            .appendField("Expression :");
+            .appendField(new Blockly.FieldTextInput("nom"), "NAME");
+        this.appendDummyInput()
+            .appendField("Expression : ")
+            .appendField(new Blockly.FieldTextInput("expression"), "FUNCTION");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -205,12 +205,12 @@ Blockly.Blocks['execute'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Executer ");
-        this.appendValueInput("action")
-            .setCheck(null)
-            .appendField("Action : ");
+        this.appendDummyInput()
+            .appendField("Action :")
+            .appendField(new Blockly.FieldTextInput("expression"), "ACTION");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(120);
+        this.setColour(330);
         this.setTooltip('');
         this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#iuhihs');
     }

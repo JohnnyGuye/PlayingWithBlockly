@@ -32,15 +32,19 @@ SquidStorage.SaveWorkspace = function (workspace, location) {
 SquidStorage.SaveFunction = function(workspace) {
     var baseUrl = SquidStorage.BaseUrl();
     var workspaceSec = new Blockly.Workspace();
-
+    var blocks;
     // We create a new workspace in which we place all the blocks from the hidden workspace
     // And then we add the new functions
     var children = workspace.getLinkedWorkspace();
     for (var i = 0; i < children.length; i++) {
-        var blocks = children[i].getTopBlocks();
+        blocks = children[i].getTopBlocks();
         for (var j = 0; j < blocks.length; j++) {
             workspaceSec.addTopBlock(blocks[j]);
         }
+    }
+    blocks = workspace.getTopBlocks();
+    for (var j = 0; j < blocks.length; j++) {
+        workspaceSec.addTopBlock(blocks[j]);
     }
 
     backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
@@ -48,8 +52,18 @@ SquidStorage.SaveFunction = function(workspace) {
 
 function backupBlocks (workspace, url) {
   if ('localStorage' in window) {
-    var xml = Blockly.Xml.workspaceToDom(workspace);    
-    window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      //FOR TESTS add by felix
+      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
+      var xmlTxt = Blockly.Xml.domToText(xml);
+      //alert(txt);
+      //var div = document.getElementById('xml1');
+      //div.innerHTML = prettyTxt;
+      //var code = Blockly.CSharp.workspaceToCode(workspace);
+      //postCode(code, xmlTxt);
+      //END FOR TESTS
+     
+      window.localStorage.setItem(url, xmlTxt);
   }
 };
 
