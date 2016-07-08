@@ -82,7 +82,7 @@ Blockly.Workspace = function(opt_options) {
      * @type {!Object}
      * @private
      */
-    this.parentWorkspace_ = Object.create(null);
+    this.parentWorkspace_ = null;
 };
 
 /**
@@ -177,6 +177,25 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
     return blocks;
 };
 
+function childrenWorkspaceBlocks(workspace, blocks) {
+    var children = workspace.getLinkedWorkspace();
+    for (var j = 0; j < children.length; j++) {
+        var childrenblocks = children[j].getAllBlocks();
+        for (var h = 0; h < childrenblocks.length; h++) {
+            blocks.push(childrenblocks[h]);
+        }      
+        childrenWorkspaceBlocks(children[j], blocks);
+    }
+}
+
+Blockly.Workspace.prototype.getAllDescendantBlocks = function () {
+    var blocks = this.getTopBlocks(false);
+    for (var i = 0; i < blocks.length; i++) {
+        blocks.push.apply(blocks, blocks[i].getChildren());
+    }
+    childrenWorkspaceBlocks(this, blocks);
+    return blocks;
+}
 /**
  * Find all variables scoped in this workspace.
  * @return {!Array.!Array<Blockly.Block>} Array of arrays of blocks. Each cell is a higher degree of scope.
@@ -185,10 +204,13 @@ Blockly.Workspace.prototype.getAllAscendantBlocks = function() {
     var that = this;
     var ascendantBlocks = new Array();
 
-    do {        
-        ascendantBlocks.push(that.getTopBlocks(false));
+    while (that !== null && that !== undefined) {
+        var blocks = that.getAllBlocks();
+        for (var i = 0; i < blocks.length; i++) {
+            ascendantBlocks.push(blocks[i]);
+        }
         that = that.getParentWorkspace();
-    } while(that != null);
+    }
 
     return ascendantBlocks;
 };

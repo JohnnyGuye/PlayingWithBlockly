@@ -3,16 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>TypeScript HTML App</title>
+    <title>Decodeur - 1.0</title>
+
+    <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="bootstrap-3.3.6/dist/js/npm.js"></script>
+    <script src="bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="app.css" type="text/css"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
-    <script src="Blockly/blockly_uncompressed.js"></script>    
+    <script src="Blockly/blockly_uncompressed.js"></script>
     <script src="Blockly/blocks_compressed.js"></script>
-    
+
 
     <!-- To show xml with angular -->
     <!--<script src="Scripts/jquery-3.0.0.min.js"></script>-->
@@ -20,6 +26,7 @@
 
     <!-- Overriden version of the core -->
     <script src="Blockly/core_override/procedures.js"></script>
+    <script src="Blockly/core_override/variables.js"></script>
 
     <!-- Custom blocks -->
     <script src="Blockly/blocks/custom.js"></script>
@@ -48,109 +55,248 @@
 </head>
 
 <body id="body">
-<h1>Blockly tests</h1>
 
-<div id="wrapper">
-    <p>
-        Tests sur blockly. Sauvegarde test.
-    </p>
-    <div class="edition-window decode-window">
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
-            <div class="toolbar-items">
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();"> Sauvegarder </button></span>
-                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
-                </div>
-                <div class="toolbar-group">                   
-                    <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
-                    <a href="#functionWrapper"><span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span></a>
-                    <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
+<div class="top-layer">
+    <aside class="code-hide">
+        <button id="code-hide" onclick="hideGenerated()"><div class="rotate"> Générer </div></button>
+        
+    </aside>
+    <aside class="generated-code" id="generated-code">
+            <h1> Code généré </h1>
+            <pre id="content1"></pre>            
+    </aside>
 
-                </div>
-                <div class="toolbar-group">
-                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                    <span><button class="item-workspace" onclick="generateCode()"> Générer </button></span>
-                </div>
-            </div>
+    <aside class="side-bar" style="display: inline-block; text-align: center;">
+        <div>
+            <h1>Configuration</h1>
+            <button class="item-workspace" style="margin: auto;" onclick="createVariable()"> Ajouter config </button>
+            <div id="blocklyDivVariables" style="display: none;"></div>
+            <table id="config-table"></table>
         </div>
-        <div id="blocklyDiv" class="blocklyDiv"></div>
-    </div>
+    </aside>
 
-    <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
-
-    <!-- There are the workspaces you use when you work on function -->
-    <div id="functionWrapper" class="edition-window function-window" style="display: none;">
-        <!-- Toolbar concepteur -->
-        <div class="toolbar-workspace">
-            <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
-            <div class="toolbar-items">
-                <div class="toolbar-group">
-                </div>
-                <div class="toolbar-group">
-
-                    <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>  
-                    <span><button class="item-workspace" onclick="generateCode()"> Générer </button></span>                
-                </div>
-            </div>
-            <div class="toolbar-onglet" id="toolbar-onglet-func">
-                <!-- There will be the onglets -->
-            </div>
-        </div>
-    </div>
 </div>
 
-<div>
-    <span>
-        <pre id="saveContent"></pre>
-    </span>
-</div>
+    <div class="container">
+        <div class="row">
 
-<pre id="content1"></pre>
-<textarea id="xml1"></textarea>
+            <div class="col-md-11">
+
+                <div id="wrapper">
+                    <h3 align="center"> Créateur de décodeur </h3> 
+                    <p align="justify">
+                        Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br/>
+                        Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
+                    </p>
+
+                    <div class="edition-window decode-window">
+                        <div class="toolbar-workspace">
+                            <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+
+                            <div class="toolbar-items">
+
+                                <div class="toolbar-group">
+                                    <span>
+                                        <button class="item-workspace" onclick="SquidStorage.SaveWorkspace(workspace, workspaceName); Refresh();">
+                                            Sauvegarder
+                                        </button>
+                                    </span>
+                                    <span><button class="item-workspace" onclick="Reload();"> Recharger </button></span>
+                                </div>
+                                <div class="toolbar-group">
+                                    <span><button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();"> Sauvegarder les fonctions </button></span>
+                                    <a href="#functionWrapper">
+                                        <span><button class="item-workspace" onclick="createFunction(workspace); Refresh();" tilte="Créer une fonction"> Nouvelle fonction </button></span>
+                                    </a>
+                                    <span><button class="item-workspace" onclick="ClearFunction();" tilte="Efface les fonctions enregistrées"> Effacer les fonctions </button></span>
+
+                                </div>
+                                <div class="toolbar-group">
+                                    <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
+                                </div>
+                            </div>
+
+                            <!-- Adding the search bar for tags -->
+
+                            <div id="searchbar" class="searchbar">
+                                <form action="" class="formulaire">
+                                    <input id="search-bar" type="text" value="" />
+                                    <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')" />
+                                </form>
+                            </div>
+
+
+                        </div>
+                        <div id="blocklyDiv" class="blocklyDiv"></div>
+                    </div>
+                    <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
+                    <div id="blocklyDivHidden" class="blocklyDiv" style="display: none"></div>
+                </div>
+
+                <!-- fermeture column9-->
+                </div>
+                <!-- refmeture row 1 -->
+            </div>
+
+        <div class="row">
+            <div class="col-md-11">
+                <!-- There are the workspaces you use when you work on function -->
+                <div id="functionWrapper" class="edition-window function-window" style="display: none;">
+                    <h3 align="center"> Editeur de fonctions </h3>
+                    <!-- Toolbar concepteur -->
+                    <div class="toolbar-workspace" id="functionToolbar">
+                        <div class="title-toolbar-workspace"> Concepteur de fonctions </div>
+                        <div class="toolbar-items">
+                            <div class="toolbar-group">
+                                <span>
+                                    <button class="item-workspace" onclick="SquidStorage
+    .SaveFunction(workspace); Refresh();">
+                                        Sauvegarder
+                                    </button>
+                                </span>
+                                <span><button class="item-workspace" onclick="reload(activWorkspace)"> Recharger </button></span>
+                            </div>
+                            <div class="toolbar-group">
+                                <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>
+                            </div>
+                        </div>
+                        <div class="toolbar-onglet" id="toolbar-onglet-func">
+                            <!-- There will be the onglets -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
 
 <script>
+    var workspaceNames = new Array();
+    // DEBUG
+    workspaceNames.push('John');
+    workspaceNames.push("jack");
+    workspaceNames.push("fioez");
+    workspaceNames.push("hiohhoifea");
     var workspaceName = "FirstWorkspace";
+
+    /* Workspaces */
     var workspace;
+    var configWorkspace;
     var hiddenWorkspace;
     var activWorkspace;
+
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
+    var variablesCount = 0;
 
+    /* Element IDs */
     var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
     // Create a the main workspace
     var app = angular.module('httpApp', []);
-    app.controller('httpController', function ($scope, $http) {
-        $http.get("Toolbox/toolboxCoreGenerics.xml", {})
-            .success(function(response) {
-                document.getElementById("body").innerHTML += response;
+    app.controller('httpController',
+        function($scope, $http) {
+            $http.get("Toolbox/toolboxCoreGenerics.xml", {})
+                .success(function(response) {
+                    document.getElementById("body").innerHTML += response;
 
-                workspace = Blockly.inject(BASE_BLOCKLY_DIV,
-                {
-                    toolbox: document.getElementById(princToolboxId),
-                    zoom:
+                    workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                     {
-                        controls: true,
-                        wheel: true,
-                        startScale: 1.0,
-                        maxScale: 3,
-                        minScale: 0.2,
-                        scaleSpeed: 1.2
-                    },
-                    trashcan: true
+                        toolbox: document.getElementById(princToolboxId),
+                        zoom:
+                        {
+                            controls: true,
+                            wheel: true,
+                            startScale: 1.0,
+                            maxScale: 3,
+                            minScale: 0.2,
+                            scaleSpeed: 1.2
+                        },
+                        trashcan: true
+                    });
+                    hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
+                    configWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Variables");
+                    configWorkspace.attachChildWorkspace(workspace);
+                    workspace.attachChildWorkspace(hiddenWorkspace);
+                    SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
+                    Refresh();
                 });
-                hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden");
-                workspace.attachChildWorkspace(hiddenWorkspace);
-                SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
-                Refresh();
-            });
-    });
+        });
+    // ------------------------------------------------------------- Configuration
+    function createVariable() {
+        var name = "Variable n°" + variablesCount;
+        var table = document.getElementById("config-table");
 
+        var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
+        Blockly.Variables.renameVariable("élément", name, configWorkspace);
+        console.log(Blockly.Variables.flyoutCategory(workspace));
+
+        var label = document.createElement("label");
+        label.setAttribute("id", "variable" + variablesCount + "_label");
+        label.setAttribute("name", name);
+        label.innerHTML = name;
+
+        var input = document.createElement("input");
+        input.setAttribute("type", "number");
+        input.setAttribute("id", "variable" + variablesCount + "_input");
+        input.setAttribute("name", name);
+
+        var button = document.createElement("button");
+        button.setAttribute("class", "delete-button");
+        button.setAttribute("onclick", "deleteVariable(" + variablesCount + ")");
+        button.innerHTML = " x ";
+
+
+        var row = document.createElement("tr");
+        row.setAttribute("id", "variable" + variablesCount + "_row");
+        var cell = document.createElement("td");
+        cell.appendChild(label);
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.appendChild(input);
+        row.appendChild(cell);
+        
+        cell = document.createElement("td");
+        cell.appendChild(button);
+        row.appendChild(document.createElement("td").appendChild(button));
+
+        table.appendChild(row);
+
+        variablesCount++;
+        RefreshVariables(workspace, princToolboxId);
+    }
+
+    function deleteVariable(variableId) {
+        var elem = $("variable" + variableId + "_label");
+        var name = elem.getAttribute("name");
+        var variables = Blockly.Variables.allVariables(configWorkspace);
+        for (var i = 0; i < variables.length; i++) {
+            if (variables[i]) {
+                console.log(variables[i]);
+            }
+        }
+        $('#variable' + variableId + "_row").remove();
+    }
+
+    function hideGenerated() {
+        var gc = document.getElementById("generated-code");
+        var b = document.getElementById("code-hide");
+        var w = gc.style.width;
+        if (gc.style.width !== '80%') {
+            generateFrameCode();
+            gc.style.width = '80%';
+            gc.style.opacity = 1;
+        } else {
+            gc.style.width = '0%';
+            gc.style.opacity = 0;
+        }
+    }
     //------------------------------------------------------------------ Tools
     /** 
      * Create a new workspace for editing a function.
@@ -161,7 +307,7 @@
         if (funcWindow.style.display === "none") {
             funcWindow.style.display = "block";
         }
-
+        
         // Hide the previous workspace
         if (nbWorkspaces > 0) {
             document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
@@ -177,7 +323,7 @@
         var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
         { toolbox: document.getElementById('toolboxFunction') });
         workspace.attachChildWorkspace(newWorkspace);
-        activWorkspace = newWorkspace;               
+        activWorkspace = newWorkspace;
         valueActivWorkspace = nbWorkspaces;
 
         // Create the onglet
@@ -212,12 +358,47 @@
         RefreshCategories(workspace, princToolboxId);
     }
 
-    function Reload() {
+    function Save() {
+        var possible = true;
+        var workspaceStr = "";
+        for (var i = 0; i < workspaceNames.length; i++) {
+            workspaceStr += workspaceNames[i] + "\n";
+            if (workspaceNames[i] == workspaceName) {
+                possible = false;
+                break;
+            }
+        }
+        if (possible) {
+            workspaceNames.push(workspaceName);
+            workspaceStr += workspaceName + "\n";
+        } else {
+            console.warn("Save refresh");
+        }
+
+        var url = SquidStorage.SaveLocations;
+        window.localStorage.setItem(url, workspaceStr);
+        console.log(workspaceStr);
+
+        SquidStorage.SaveWorkspace(workspace, workspaceName);
+        var elem = document.getElementById("workspaceName");
+        elem.innerHTML = workspaceName;
+
+        Refresh();
+    }
+
+    function reload_(name) {
         if (window
             .confirm("Êtes vous sûr de vouloir recharger une trame ?\nTout changement non sauvegardé sera perdu.")) {
+            workspaceName = name;
             SquidStorage.ReloadWorkspace(workspace, null, workspaceName);
+            var elem = document.getElementById("workspaceName");
+            elem.innerHTML = workspaceName;
             Refresh();
-        }       
+        }
+    }
+
+    function Reload() {   
+        reload_(workspaceName);
     }
 
     function clearFunc(workspace) {
@@ -238,9 +419,9 @@
 </script>
 
 <!-- Storage and parsing -->
-    <script src="Storage/storage.js"></script>
-    <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
+<script src="Storage/storage.js"></script>
+<script src="Storage/parsingXML.js"></script>
+<script src="Toolbox/category.js"></script>
 
 </body>
 </html>

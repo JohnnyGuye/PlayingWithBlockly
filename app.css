@@ -9,19 +9,182 @@ span {
 
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 400px;
-    width: 1000px;
+    height: 500px;
+    width: 100%; /*1000*/
 }
 
-/*-------------------- Toolbar ----------------------- */
-.toolbar-workspace {
+#filesDiv {
+    position: relative;
+    z-index: 999;
+}
+
+#filesDiv button {
+    transition: 1s;
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    background-color: #ececec;
+    border-radius: 1px;
+    height: 30px;
+    margin: 0px;
+    position: relative;
+    border: 0;
+    border-left: solid grey 3px ;
+}
+
+#filesDiv button:hover {
+    transition: 0.1s;
+    background-color: #d0d0d0;
+    border-left: solid red 3px;
+}
+
+#filesDiv button:active {
+    background-color: antiquewhite;
+}
+
+#filesDiv button:selection {
+    border-bottom-color: #454545;
+}
+
+/* ---------------- Generated code ------------------- */
+.top-layer {
+    position: fixed;
+    z-index: 999;
+}
+
+.generated-code {
+    text-align: center;
+    transition: width 0.4s, opacity 0.4s;
+    position: fixed;
+    top: 0;
+    left: 2%;
+    width: 0%;
+    opacity: 0;
+    height: 100%;
+    background-color: antiquewhite;
+    color: #604040;
+    box-shadow: 0px 0px 20px 10px #200000 inset;
+    z-index: 999;
+}
+
+.generated-code pre {
+    text-align: left;
+    position: relative;
+    width: 95%;
+    margin: 20px;
+    border: 0;
+    box-shadow: 0 0 1px 1px brown;
+        
+}
+
+.code-hide {
+    position: fixed;
+    z-index: 999;
+    background-color: violet;
+    top: 0;
+    left: 0;
+    width: 2%;
+    height: 100%;
+    
+}
+
+.code-hide button {
+    border: 0px;
+    height: 100%;
+    width: 100%;
+    font-size: 2em;
+    color: antiquewhite;
+    background-color: #200000;
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+
+.rotate {
+
+/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+/* ------------------- Sidebar ----------------------- */
+.side-bar {
+    position: fixed;
+    right: 0px;
+    top: 0;
+    height: 100%;
+    z-index: 999;
+    width: 20%;
+    min-width: 300px;
+    padding: 20px;
+    background: #604040;
+    color: antiquewhite;
+    box-shadow: 0px 0px 20px black inset;
+
+}
+
+.side-bar h1 {
+    text-align: center;
+}
+
+.delete-button {
+    font-family: 'Segoe UI', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    transition: 0.2s;
+    border-radius: 2px;
+    height: 28px;
+    width: 20px;
+    box-shadow: 0px 0px 0px 0px antiquewhite inset;
+    color: black;
+    background-color: #ececec;
+    color: black;
+
+    margin: 2px;
+    border: 0;
+}
+
+.delete-button:hover {
+    box-shadow: 0px 0px 0px 1px red inset;
+    background-color: #d0d0d0;
+}
+
+.edition-window {
     margin: 0px;
     padding: 10px;
     color: white;
     background-color: #200000;
-    width: 980px;
+    width: 90%; /*1020px*/
     height: auto;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.searchbar {
+    color: black;
+}
+
+/*-------------------- Toolbar ----------------------- */
+.toolbar-workspace {
+    z-index: 0;
+    margin: 0px;
+    padding: 10px;
+    padding-right: 0px;
+    color: white;
+    background-color: #200000;
+    width: 90%; /*1000*/
+    height: auto;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .title-toolbar-workspace {
@@ -34,12 +197,14 @@ span {
 .toolbar-group {
     padding: 0px;
     margin: 0px;
+    margin-bottom: 3px;
     display: inline-block;
     height: auto;
     background-color: #ececec;   
 }
 
 .item-workspace {
+    color: black;
     transition: 1s;
     display: inline-block;
     font-family: 'Segoe UI', sans-serif;
@@ -96,3 +261,5 @@ span {
     background-color: #A08080;
     color: #200000;
 }
+
+
