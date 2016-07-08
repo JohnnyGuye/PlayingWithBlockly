@@ -43,6 +43,8 @@
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
     <script src="Blockly/generators/csharp/custom.js"></script>
 
+    <script src="postCode.js"></script>
+
 </head>
 
 <body id="body">
@@ -68,7 +70,7 @@
                 </div>
                 <div class="toolbar-group">
                     <span><button class="item-workspace" onclick="Refresh();"> Refresh </button></span>
-                    <span><button class="item-workspace" onclick="generateFrameCode()"> Générer </button></span>
+                    <span><button class="item-workspace" onclick="generateCode()"> Générer </button></span>
                 </div>
             </div>
         </div>
@@ -89,7 +91,7 @@
                 <div class="toolbar-group">
 
                     <span><button class="item-workspace" onclick="RefreshCategories(workspace, princToolboxId)"> Refresh </button></span>  
-                    <span><button class="item-workspace" onclick="generateFunctionCode()"> Générer </button></span>                
+                    <span><button class="item-workspace" onclick="generateCode()"> Générer </button></span>                
                 </div>
             </div>
             <div class="toolbar-onglet" id="toolbar-onglet-func">
@@ -106,6 +108,7 @@
 </div>
 
 <pre id="content1"></pre>
+<textarea id="xml1"></textarea>
 
 <div ng-app="httpApp" ng-controller="httpController"></div>
 
@@ -197,17 +200,11 @@
         valueActivWorkspace = newValueActivWorkspace;
     }
 
-    function generateFrameCode() {
-        var code = Blockly.CSharp.workspaceToCode(workspace, "FRAME");
+    function generateCode() {
+        var code = Blockly.CSharp.workspaceToCode(activWorkspace);
         var div = document.getElementById('content1');
         div.innerHTML = code;
-        //alert(code);
-    }
-
-    function generateFunctionCode() {
-        var code = Blockly.CSharp.workspaceToCode(activWorkspace, "FUNC");
-        var div = document.getElementById('content1');
-        div.innerHTML = code;
+        //postCode(code, "sfsfs");
         //alert(code);
     }
 
