@@ -42,9 +42,12 @@ Blockly.Blocks['controls_if'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
-    this.appendValueInput('IF0')
-        .setCheck('Boolean')
-        .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
+
+   this.appendValueInput('IF0')
+         .setCheck('Boolean')
+         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
+
+
     this.appendStatementInput('DO0')
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     this.setPreviousStatement(true);
@@ -206,9 +209,10 @@ Blockly.Blocks['controls_if'] = {
     }
     // Rebuild block.
     for (var i = 1; i <= this.elseifCount_; i++) {
-      this.appendValueInput('IF' + i)
-          .setCheck('Boolean')
-          .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
+
+        this.appendValueInput('IF' + i)
+            .setCheck('Boolean')
+            .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
       this.appendStatementInput('DO' + i)
           .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     }
