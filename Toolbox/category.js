@@ -32,6 +32,14 @@ function RefreshCategories(workspace, toolboxId) {
         divFunc.removeChild(child);
     }
 
+    if (Blockly.Blocks['procedures_defnoreturn']) {
+        // <block type="procedures_defnoreturn" gap="16"></block>
+        var block = goog.dom.createDom('block');
+        block.setAttribute('type', 'procedures_defnoreturn');
+        block.setAttribute('gap', 16);
+        divFunc.appendChild(block);
+    }
+
     // For each category
     for (var i = 0; i < categories[0].length; i++) {
 
@@ -41,7 +49,7 @@ function RefreshCategories(workspace, toolboxId) {
         
         // For each procedure in this category
         for (var j = 0; j < categoriesProcedures[i].length; j++) {
-            var block = categoriesProcedures[i][j];            
+            block = categoriesProcedures[i][j];            
             var def = block.getProcedureDef();
             var name = def[0];
             var args = def[1];
