@@ -646,6 +646,20 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
 
+  if (this.getProcedureDef()) {
+      // Option to test decoding block
+      var decodingOption = {
+          text: "tester le decodeur",
+          enabled: true,
+          callback: function() {
+              document.getElementById("nom-decodeur").value = block.getProcedureDef()[0];
+              document.getElementById("valeur-a-decoder").value = block.arguments_[0];
+              console.log(block);
+          }
+      }
+      menuOptions.push(decodingOption);
+  }
+
   if (this.isDeletable() && this.isMovable() && !block.isInFlyout) {
     // Option to duplicate this block.
     var duplicateOption = {

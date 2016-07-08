@@ -67,9 +67,24 @@
     <aside class="side-bar" style="display: inline-block; text-align: center;">
         <div>
             <h1>Configuration</h1>
-            <button class="item-workspace" style="margin: auto;" onclick="createVariable()"> Ajouter config </button>
+            <button class="item-workspace" style="margin: auto;" onclick="createVariable()">Ajouter config</button>
             <div id="blocklyDivVariables" style="display: none;"></div>
             <table id="config-table"></table>
+        </div>
+
+        <div>
+            <h1>Inventaire</h1>
+            <button class="item-workspace" style="margin: auto;" onclick="createVariable()">Ajouter config</button>
+            <div id="blocklyDivInventaire" style="display: none;"></div>
+            <table id="inventaire-table"></table>
+        </div>
+
+        <div id="decodingTest">
+            <h1>Tester le décodeur</h1>
+            <button class="item-workspace">Tester</button>
+            <input id="nom-decodeur" type="text" value="nom fonction"/>
+            <input id="valeur-a-decoder" type="text" value="chaine hexa"/>
+            <input id="resultat" type="text" class="textarea" value="resultat"/>
         </div>
     </aside>
 
