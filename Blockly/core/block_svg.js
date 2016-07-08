@@ -653,6 +653,10 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
           enabled: true,
           callback: function() {
               document.getElementById("nom-decodeur").value = block.getProcedureDef()[0];
+
+              //var code = Blockly.CSharp.blockToCode(block);
+              //console.log(code);
+              //document.getElementById("resultat").value = code;
           }
       }
       menuOptions.push(decodingOption);
