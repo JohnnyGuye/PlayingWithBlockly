@@ -18,22 +18,8 @@
       <block type="decodeframe"></block>
     </category>
 
-    <category name="Configuration" id="ConfigCategory" colour="0">
-      <!-- It's gonna be filled by the configuration variables -->
-    </category>
-    <category name="Variables" custom="VARIABLE" colour="100"></category>
-    <category name="Mes fonctions" id="NewCategory" colour="180">
-      <!-- It's gonna be filled the same maneer as function and variables -->
-    </category>
-
-    <category name="Recherche" id="SearchCategory" colour="200">
-      <!-- It's gonna be filled by the functions in the good tag -->
-    </category>
-
-  </div>
-
-  <div id="toolboxFunction" style="display: none">
-
+    <sep gap="8"></sep>
+    
     <category name="Algorihtmie" colour="20">
       <category name="Logic" id="catLogic" colour="210">
         <block type="controls_if"></block>
@@ -338,26 +324,45 @@
           </value>
         </block>
       </category>
+      <category name="Opérations" colour="40">
+        <block type="container_block"></block>
+        <sep gap="8"></sep>
+        <category name="Opérations de contrôle">
+          <block type="controls_if"></block>
+          <block type="controls_whileUntil"></block>
+          <block type="controls_for"></block>
+        </category>
+
+        <category name="Opérations logiques">
+          <block type="logic_compare"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_boolean"></block>
+        </category>
+      </category>
     </category>
 
     <sep gap="8"></sep>
 
-    <category name="Opérations" colour="40">
-
-      <block type="container_block"></block>
-      <sep gap="8"></sep>
-      <category name="Opérations de contrôle">
-        <block type="controls_if"></block>
-        <block type="controls_whileUntil"></block>
-        <block type="controls_for"></block>
-      </category>
-
-      <category name="Opérations logiques">
-        <block type="logic_compare"></block>
-        <block type="logic_operation"></block>
-        <block type="logic_boolean"></block>
-      </category>
+    <category name="Configuration" id="ConfigCategory" colour="0">
+      <!-- It's gonna be filled by the configuration variables -->
     </category>
+    <category name="Variables" custom="VARIABLE" colour="100"></category>
+
+    <sep gap="8"></sep>
+    
+    <category name="Mes fonctions" id="NewCategory" colour="180">
+      <!-- It's gonna be filled the same maneer as function and variables -->
+    </category>
+
+    <category name="Recherche" id="SearchCategory" colour="200">
+      <!-- It's gonna be filled by the functions in the good tag -->
+    </category>
+
+  </div>
+
+  <div id="toolboxFunction" style="display: none">
+
+    
 
     <category name="Blocks numériques" colour="60">
       <block type="math_number"></block>

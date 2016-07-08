@@ -3124,7 +3124,6 @@
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
     <Content Include="Toolbox\category.js" />
-    <Content Include="Toolbox\toolbar.html" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />

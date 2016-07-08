@@ -32,15 +32,19 @@ SquidStorage.SaveWorkspace = function (workspace, location) {
 SquidStorage.SaveFunction = function(workspace) {
     var baseUrl = SquidStorage.BaseUrl();
     var workspaceSec = new Blockly.Workspace();
-
+    var blocks;
     // We create a new workspace in which we place all the blocks from the hidden workspace
     // And then we add the new functions
     var children = workspace.getLinkedWorkspace();
     for (var i = 0; i < children.length; i++) {
-        var blocks = children[i].getTopBlocks();
+        blocks = children[i].getTopBlocks();
         for (var j = 0; j < blocks.length; j++) {
             workspaceSec.addTopBlock(blocks[j]);
         }
+    }
+    blocks = workspace.getTopBlocks();
+    for (var j = 0; j < blocks.length; j++) {
+        workspaceSec.addTopBlock(blocks[j]);
     }
 
     backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
