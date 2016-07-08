@@ -16,7 +16,7 @@ Blockly.generateCodeOnServerSide = function () {
     });
 }
 
-Blockly.postCode = function(code) {
+/*Blockly.postCode = function(code) {
 
     $.ajax({
         url: 'Handler1.ashx',
@@ -34,4 +34,4 @@ Blockly.postCode = function(code) {
     e.preventDefault();
 }
 
-generateCodeOnServerSide();
+generateCodeOnServerSide();*/

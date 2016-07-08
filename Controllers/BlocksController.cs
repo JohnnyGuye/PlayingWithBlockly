@@ -21,13 +21,24 @@
         // POST api/<controller>
 
         //public void Save([FromBody]string value)
-        [Route("api/blocks/save")]
+        [Route("api/blocks/savecode")]
         [HttpPost]   
-        public string Save([FromBody]string value)
+        public string SaveCode([FromBody]string code)
         {
             //throw new System.ArgumentException("Parameter cannot be null");
-            File.WriteAllText(@"d:\Stage\stage\PlayingWithBlockly\GeneratedCode.txt", value);
-            return value;
+            File.WriteAllText(@"d:\Stage\stage\PlayingWithBlockly\GeneratedCode.txt", code);
+            
+            return code;
+        }
+
+        [Route("api/blocks/savexml")]
+        [HttpPost]
+        public string SaveXml([FromBody]string xml)
+        {
+            //throw new System.ArgumentException("Parameter cannot be null");
+            File.WriteAllText(@"d:\Stage\stage\PlayingWithBlockly\BlocksInXml.txt", xml);
+
+            return xml;
         }
 
         // PUT api/<controller>/5

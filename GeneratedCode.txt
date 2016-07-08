@@ -9,6 +9,7 @@ public static TDecodableBlock default<TDecodableBlock>(this IDecodableStep<TDeco
 			.RaiseErrorIncorrectFrameLength()
 		.EndIf()
 		.DecodeBoolean("default", 0.0M).End()
+		.DecodeBoolean("default", 0.0M).End()
 		.DecodeBytes("default2", 0M, 0M).End()
 		.DecodeUnsignedInteger("default2", 0.0M, 0.0M).End()
 		.DecodeBytes("default2", 0M, 0M);

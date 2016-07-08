@@ -47,13 +47,16 @@ function backupBlocks (workspace, url) {
   if ('localStorage' in window) {
       var xml = Blockly.Xml.workspaceToDom(workspace);
       //FOR TESTS add by felix
-      var txt = Blockly.Xml.domToPrettyText(xml);
+      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
+      var xmlTxt = Blockly.Xml.domToText(xml);
       //alert(txt);
-      var div = document.getElementById('xml1');
-      div.innerHTML = txt;
+      //var div = document.getElementById('xml1');
+      //div.innerHTML = prettyTxt;
+      var code = Blockly.CSharp.workspaceToCode(workspace);
+      postCode(code, xmlTxt);
       //END FOR TESTS
      
-    window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
+      window.localStorage.setItem(url, xmlTxt);
   }
 };
 
