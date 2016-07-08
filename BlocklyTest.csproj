@@ -662,7 +662,7 @@
     <Content Include="bootstrap-3.3.6\package.js" />
     <Content Include="bootstrap-3.3.6\test-infra\requirements.txt" />
     <Content Include="bootstrap-3.3.6\test-infra\s3_cache.py" />
-    <Content Include="BlocksInXml.txt" />
+    <Content Include="ServerStorage\BlocksInXml.txt" />
     <Content Include="closure-library\.gitignore" />
     <Content Include="closure-library\alltests.js" />
     <Content Include="closure-library\all_tests.html" />
@@ -3093,7 +3093,7 @@
     <Content Include="closure-library\third_party\closure\goog\mochikit\async\deferred_test.html" />
     <Content Include="closure-library\third_party\closure\goog\osapi\osapi.js" />
     <Content Include="closure-library\third_party\closure\goog\svgpan\svgpan.js" />
-    <Content Include="GeneratedCode.txt" />
+    <Content Include="ServerStorage\GeneratedCode.txt" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="landingPagetheme2.html" />
@@ -3120,8 +3120,6 @@
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\jquery.js" />
     <Content Include="landingPage.html" />
     <Content Include="postCode.js" />
-    <Content Include="ServerSideGenerator\server_generator.js" />
-    <Content Include="ServerSideGenerator\workspace_storage.txt" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
@@ -3469,7 +3467,6 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="runScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
