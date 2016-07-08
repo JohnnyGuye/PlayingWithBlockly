@@ -120,6 +120,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 /* ------------------- Sidebar ----------------------- */
 .side-bar {
+    font-family: 'Segoe UI', sans-serif;
     position: fixed;
     right: 0px;
     top: 0;
@@ -132,6 +133,21 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     color: antiquewhite;
     box-shadow: 0px 0px 20px black inset;
 
+}
+.side-bar .variable-name {
+    
+}
+
+.side-bar input {
+    width: 80%;
+    font-style: normal;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+    color: #604040;
+    border: 0;
+    border-radius: 1px;
+    box-shadow: 0 0;
+    margin: 2px;    
 }
 
 .side-bar h1 {
