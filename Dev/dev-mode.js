@@ -6,7 +6,7 @@ SquidDev = {};
 
 /* The current state of the devmode
 */
-SquidDev.DEVMODE = false;
+SquidDev.DEVMODE = true;
 
 /**
  * The string for activating devmode

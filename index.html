@@ -70,23 +70,22 @@
     <aside class="side-bar" style="display: inline-block; text-align: center;">
         <div>
             <h1>Configuration</h1>
-            <button class="item-workspace" style="margin: auto;" onclick="createVariable()">Ajouter config</button>
+            <button class="item-workspace" onclick="createVariable()">Ajouter config</button>
             <div id="blocklyDivVariables" style="display: none;"></div>
             <table id="config-table"></table>
         </div>
 
         <div>
             <h1>Inventaire</h1>
-            <button class="item-workspace" style="margin: auto;" onclick="createVariable()">Ajouter config</button>
+            <button class="item-workspace" onclick="createInventaire()">Ajouter config</button>
             <div id="blocklyDivInventaire" style="display: none;"></div>
             <table id="inventaire-table"></table>
         </div>
 
         <div id="decodingTest">
             <h1>Tester le décodeur</h1>
-            <button class="item-workspace">Tester</button>
-            <input id="nom-decodeur" type="text" value="nom fonction"/>
-            <input id="valeur-a-decoder" type="text" value="chaine hexa"/>
+            <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
+            <input id="nom-decodeur" type="text" value="nom du décodeur"/>
             <input id="resultat" type="text" class="textarea" value="resultat"/>
         </div>
     </aside>
@@ -105,7 +104,7 @@
                         Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
                     </p>
 
-                    <div class="edition-window decode-window">
+                    <div class="edition-window decode-window row">
                         <div class="toolbar-workspace">
                             <div class="title-toolbar-workspace"> Editeur de décodeur </div>
 
@@ -139,8 +138,9 @@
                         <div id="blocklyDiv" class="blocklyDiv"></div>
                     </div>
                     <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-                    <div id="blocklyDivHidden" class="blocklyDiv dev-block"></div>
-                </div>
+                    <div class="edition-window decode-window row dev-block">
+                        <div id="blocklyDivHidden" class="blocklyDiv dev-block"></div>
+                    </div>
 
                 <!-- fermeture column9-->
                 </div>
@@ -294,6 +294,7 @@
         RefreshVariables(workspace, princToolboxId);
     }
 
+
     /* Not working */
     function modifyVariableName(variableId) {
         var label = document.getElementById("variable" + variableId + "_label");
@@ -330,6 +331,51 @@
         }
         $('#variable' + variableId + "_row").remove();
     }
+
+    function createInventaire() {
+        var name = "Inventaire_" + variablesCount;
+        var table = document.getElementById("inventaire-table");
+
+
+        var label = document.createElement("input");
+        label.setAttribute("type", "text");
+        label.setAttribute("class", "variable-name");
+        label.setAttribute("id", "inventaire" + variablesCount + "_label");
+        label.setAttribute("name", name + "l");
+        label.setAttribute("value", name);
+        label.setAttribute("onclick", "modifyVariableName(" + variablesCount + ")");
+
+        var input = document.createElement("input");
+        input.setAttribute("type", "number");
+        input.setAttribute("id", "inventaire" + variablesCount + "_input");
+        input.setAttribute("name", name);
+
+        var button = document.createElement("button");
+        button.setAttribute("class", "delete-button");
+        button.setAttribute("onclick", "deleteVariable(" + variablesCount + ")");
+        button.innerHTML = " x ";
+
+
+        var row = document.createElement("tr");
+        row.setAttribute("id", "variable" + variablesCount + "_row");
+        var cell = document.createElement("td");
+        cell.appendChild(label);
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.appendChild(input);
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.appendChild(button);
+        row.appendChild(document.createElement("td").appendChild(button));
+
+        table.appendChild(row);
+
+        variablesCount++;
+        RefreshVariables(workspace, princToolboxId);
+    }
+
 
     function hideGenerated() {
         var gc = document.getElementById("generated-code");
