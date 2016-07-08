@@ -10,6 +10,11 @@ Blockly.CSharp.addMIfNeeded = function (param) {
 
 }
 
+/**
+ * Enable cohabitation of written parameters and numeric values in bytes and bits text field by putting the right form in generated code
+ * @param {Array<>} args an array containing the byte pos in 1st and the bit pos in 2nd
+ * @returns {string} the correct generated code syntax
+ */
 Blockly.CSharp.prepareBytesAndBits = function(args) {
     if (isNaN(args[0])) {
         if (isNaN(args[1])) {
