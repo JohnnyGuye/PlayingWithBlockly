@@ -9,7 +9,7 @@ span {
 
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 500px;
+    height: 800px;
     width: 100%; /*1000*/
 }
 
@@ -77,7 +77,7 @@ span {
     transition: width 0.4s, opacity 0.4s;
     position: fixed;
     top: 0;
-    left: 2%;
+    left: 0;
     width: 0%;
     opacity: 0;
     height: 100%;
@@ -85,6 +85,11 @@ span {
     color: #604040;
     box-shadow: 0px 0px 20px 10px #200000 inset;
     z-index: 999;
+}
+
+.configuration {
+    position: relative;
+    width: 90%;
 }
 
 .generated-code pre {
@@ -97,25 +102,41 @@ span {
         
 }
 
-.code-hide {
-    position: fixed;
-    z-index: 999;
-    background-color: violet;
-    top: 0;
-    left: 0;
-    width: 2%;
+.full-height {
     height: 100%;
-    
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.code-hide {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+    width: 10%;
 }
 
 .code-hide button {
-    border: 0px;
+    transition: 0.2s;
+    margin: 0;
+    padding: 0;
     height: 100%;
+    border: 0px;
     width: 100%;
     font-size: 2em;
     color: antiquewhite;
     background-color: #200000;
-    box-shadow: 0px 0px 1px 1px black inset;
+    box-shadow: 0px 0px 5px 0px antiquewhite inset;
+}
+
+.code-hide button:hover {
+    background-color: #300000;
 }
 
 .rotate {
@@ -144,12 +165,10 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     top: 0;
     height: 100%;
     z-index: 999;
-    width: 20%;
     min-width: 300px;
-    padding: 20px;
     background: #604040;
     color: antiquewhite;
-    box-shadow: 0px 0px 20px black inset;
+    
 
 }
 .side-bar .variable-name {
@@ -216,11 +235,10 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .edition-window {
-    margin: 0px;
+    margin: 5px;
     padding: 10px;
     color: white;
     background-color: #200000;
-    width: 90%; /*1020px*/
     height: auto;
     border-radius: 5px 5px 5px 5px;
 }
