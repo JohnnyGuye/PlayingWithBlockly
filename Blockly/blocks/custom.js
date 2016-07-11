@@ -222,7 +222,7 @@ Blockly.Blocks['switch'] = {
             .appendField("Aiguillage");
         this.appendDummyInput()
             .appendField("variable :")
-            .appendField(new Blockly.FieldVariable("item"), "VARIABLE");
+            .appendField(new Blockly.FieldTextInput("item"), "VARIABLE");
         this.appendStatementInput("STATEMENT")
             .setCheck(null);
         this.setPreviousStatement(true, null);

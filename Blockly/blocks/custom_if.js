@@ -8,7 +8,7 @@
         this.setColour(Blockly.Blocks.logic.HUE);
 
 
-        this.appendDummyInput()
+        this.appendDummyInput("IF0")
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF)
             .appendField(new Blockly.FieldTextInput("expression"), "IF0");
         //TEST this.appendValueInput('IF0')
@@ -100,14 +100,14 @@
         // Count number of inputs.
         this.elseifCount_ = 0;
         this.elseCount_ = 0;
-        var valueConnections = [null];
+        var dummyConnections = [null];
         var statementConnections = [null];
         var elseStatementConnection = null;
         while (clauseBlock) {
             switch (clauseBlock.type) {
                 case 'custom_controls_if_elseif':
                     this.elseifCount_++;
-                    //valueConnections.push(clauseBlock.dummyConnection_);
+                    dummyConnections.push(clauseBlock.dummyConnection_);
                     statementConnections.push(clauseBlock.statementConnection_);
                     break;
                 case 'custom_controls_if_else':
@@ -123,7 +123,7 @@
         this.updateShape_();
         // Reconnect any child blocks.
         for (var i = 1; i <= this.elseifCount_; i++) {
-            Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
+            Blockly.Mutator.reconnect(dummyConnections[i], this, 'IF' + i);
             Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
         }
         Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE');
@@ -142,7 +142,7 @@
                     var inputIf = this.getInput('IF' + i);
                     var inputDo = this.getInput('DO' + i);
                     clauseBlock.dummyConnection_ =
-                        inputIf; //&& inputIf.connection.targetConnection;
+                        inputIf && inputIf.connection;//.targetConnection;
                     clauseBlock.statementConnection_ =
                         inputDo && inputDo.connection.targetConnection;
                     i++;
@@ -178,7 +178,7 @@
         // Rebuild block.
         for (var i = 1; i <= this.elseifCount_; i++) {
             //TEST
-            this.appendDummyInput()
+            this.appendDummyInput('IF' + i)
                 .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF)
                 .appendField(new Blockly.FieldTextInput("expression"), 'IF' + i);
             /*TEST this.appendValueInput('IF' + i)

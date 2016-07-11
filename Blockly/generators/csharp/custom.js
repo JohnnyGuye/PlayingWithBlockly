@@ -90,7 +90,7 @@ Blockly.CSharp['decodeboolean'] = function (block) {
 };
 
 Blockly.CSharp['switch'] = function (block) {
-    var varName = Blockly.CSharp.variableDB_.getName(block.getFieldValue('VARIABLE'), Blockly.Variables.NAME_TYPE);
+    var varName = block.getFieldValue('VARIABLE');
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
     var code = '.Switch(decodingContextData => decodingContextData.' + varName + ')\n' + statement + '.EndSwitch()\n';
     return code;
@@ -142,5 +142,25 @@ Blockly.CSharp['decodeframe'] = function (block) {
     }
     return code;
 };
+
+Blockly.CSharp["custom_controls_if"] = function (block) {
+    // If/elseif/else condition.
+    var n = 0;
+    var argument = block.getFieldValue('IF' +n) || 'false';
+    var branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
+    var code = '.If( decodingContextData => decodingContextData.' + argument + ') \n' + branch;//previously if
+    for (n = 1; n <= this.elseifCount_; n++) {
+        argument = block.getFieldValue('IF' + n) || 'false';
+        branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
+        code += '.ElseIf(decodingContextData => decodingContextData.' + argument + ') \n' + branch;
+    }
+    if (this.elseCount_) {
+        branch = Blockly.CSharp.statementToCode(this, 'ELSE');
+        code += '.Else() \n' + branch;
+    }
+    return code + '.EndIf()\n';//previously code + '\n'
+};
+
+
 
 
