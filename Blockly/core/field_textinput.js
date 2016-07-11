@@ -32,6 +32,9 @@ goog.require('goog.asserts');
 goog.require('goog.dom');
 goog.require('goog.userAgent');
 
+//TEST
+goog.require('goog.ui.ac');
+
 
 /**
  * Class for an editable text field.
@@ -43,9 +46,10 @@ goog.require('goog.userAgent');
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldTextInput = function(text, opt_validator) {
+Blockly.FieldTextInput = function (text, opt_validator, opt_autocompleteData) {
   Blockly.FieldTextInput.superClass_.constructor.call(this, text,
-      opt_validator);
+      opt_validator);  
+  this.setAutocompleteData(opt_autocompleteData); //TEST
 };
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
@@ -65,6 +69,22 @@ Blockly.FieldTextInput.prototype.CURSOR = 'text';
  */
 Blockly.FieldTextInput.prototype.spellcheck_ = true;
 
+
+//TEST
+/**
+ * Function to call to get autocomplete data
+ * @private
+*/
+Blockly.FieldTextInput.prototype.autocompleteData_ = null;
+
+/**
+  * Autocomplete UI Element
+  * @private
+  */
+Blockly.FieldTextInput.prototype.autocompleteUI_ = null;
+
+//END TEST 1
+
 /**
  * Close the input widget if this input is being deleted.
  */
@@ -72,6 +92,58 @@ Blockly.FieldTextInput.prototype.dispose = function() {
   Blockly.WidgetDiv.hideIfOwner(this);
   Blockly.FieldTextInput.superClass_.dispose.call(this);
 };
+
+//TEST 2
+/**
+ * Sets a new autocomplete data function.
+ * @param {Function} handler New autocomplete data, or null.
+ */
+Blockly.Field.prototype.setAutocompleteData = function (handler) {
+    this.autocompleteData_ = handler;
+};
+
+/**
+ * Callback called when autocomplete item is selected and input is
+ * updated, used to notify input that a value was set so it resizes
+ * if needed
+ * @private
+ */
+Blockly.Field.prototype.onAutoCompleteUpdate_ = function () {
+    //var target = this.autocompleteUI_.getTarget(),
+  //      text = target.value;
+   // this.setText(text);
+
+    // after one autocompletion the ui doesn't display anymore, that's
+    // why I remove it here so it's recreated
+   // this.autocompleteUI_.dismissOnDelay();
+    // this.autocompleteUI_ = null;
+    //this.resizeEditor_();
+    //Blockly.svgResize(this.sourceBlock_.workspace);
+};
+
+/**
+ * Inits autocomplete attached to target only if not already inited,
+ * and this.autocompleteData_ is set
+ * @private
+ */
+
+Blockly.Field.prototype.lazyAutocompleteInit_ = function (target) {
+    var values, ui, self = this;
+
+   // function onAutoCompleteUpdate() {
+        //self.onAutoCompleteUpdate_();
+    //}
+
+    if (this.autocompleteData_){//} && !this.autocompleteUI_) {
+        values = this.autocompleteData_();
+        ui = goog.ui.ac.createSimpleAutoComplete(values, target, false, true);
+        this.autocompleteUI_ = ui;
+        //this.autocompleteUI_.listen(goog.ui.ac.AutoComplete.EventType.UPDATE, onAutoCompleteUpdate);
+       // this.autocompleteUI_.listen(goog.ui.ac.AutoComplete.EventType.UPDATE, self.onAutoCompleteUpdate_());
+    }
+};
+
+//END TEST 2
 
 /**
  * Set the text in this field.
@@ -192,6 +264,7 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
     htmlInput.oldValue_ = text;
     this.setValue(text);
     this.validate_();
+    this.lazyAutocompleteInit_(e.target); //TEEEEEEEEEEEEEEEEEEEEEEEEEEEST
   } else if (goog.userAgent.WEBKIT) {
     // Cursor key.  Render the source block to show the caret moving.
     // Chrome only (version 26, OS X).
