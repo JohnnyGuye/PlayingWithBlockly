@@ -638,7 +638,8 @@ Blockly.BlockSvg.prototype.showHelp_ = function() {
  * @param {!Event} e Mouse event.
  * @private
  */
-Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
+Blockly.BlockSvg.prototype.showContextMenu_ = function (e) {
+
   if (this.workspace.options.readOnly || !this.contextMenu) {
     return;
   }
@@ -646,10 +647,21 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
   var block = this;
   var menuOptions = [];
 
-  if (this.getProcedureDef()) {
+    if (this.getProcedureCall) {
+        var goToDefOption = {
+            text: "Afficher la definition",
+            enabled: true,
+            callback: function() {
+                console.log(this.getProcedureCall());
+            }
+        }
+        menuOptions.push(goToDefOption);
+    }
+
+  if (this.getProcedureDef) {
       // Option to test decoding block
       var decodingOption = {
-          text: "tester le decodeur",
+          text: "Tester le decodeur",
           enabled: true,
           callback: function() {
               document.getElementById("nom-decodeur").value = block.getProcedureDef()[0];
