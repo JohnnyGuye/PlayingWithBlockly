@@ -283,6 +283,12 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background-color: #ececec;   
 }
 
+#search-bar {
+    margin-left: 4px;
+    margin-top: 4px;
+    height : 100%;
+}
+
 .item-workspace {
     color: black;
     transition: 1s;
@@ -293,7 +299,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background-color: #ececec;
     border-radius: 1px;
     height: 30px;
-    margin: 0px;
+    margin-top: 4px;
     position: relative;
     border: 0;
     border-bottom: solid grey 3px;
