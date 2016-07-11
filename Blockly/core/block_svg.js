@@ -643,7 +643,7 @@ var DecodeBlock = {
  * Show the context menu for this block.
  * @param {!Event} e Mouse event.
  * @private
- */
+ */ 
 Blockly.BlockSvg.prototype.showContextMenu_ = function (e) {
 
   if (this.workspace.options.readOnly || !this.contextMenu) {
