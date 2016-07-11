@@ -58,13 +58,12 @@
 <body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
 
 <div class="top-layer full-height">
-    <div class="row full-height">
-        <aside class="generated-code col-lg-9" id="generated-code">
-            <h1> Code généré </h1>
+        <div class="generated-code full-height" id="generated-code">
+            <h1 class="no-margin"> Code généré </h1>
             <pre id="content1"></pre>
-        </aside>
+        </div>
 
-        <aside class="side-bar no-padding full-height col-lg-3" style="display: inline-block; text-align: center;">
+        <aside class="side-bar full-height">
             <div class="row full-height">
                 <aside class="code-hide full-height col-lg-2">
                     <button id="code-hide" onclick="hideGenerated()">
@@ -81,7 +80,7 @@
 
                     <div>
                         <h1>Inventaire</h1>
-                        <button class="item-workspace" onclick="createInventaire()">Ajouter config</button>
+                        <button class="item-workspace" onclick="createInventaire()">Ajouter inventaire</button>
                         <div id="blocklyDivInventaire" style="display: none;"></div>
                         <table id="inventaire-table"></table>
                     </div>
@@ -97,18 +96,18 @@
         </aside>
     </div>
 
-</div>
-
 <div class="row">
-    <div class="col-lg-1"></div>
-    <div class="col-md-7">
+    <div class="col-lg-0"></div>
+    <div class="col-md-9">
 
         <div id="wrapper">
-            <h3 align="center"> Créateur de décodeur </h3>
-            <p align="justify">
-                Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br />
-                Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
-            </p>
+            <div>
+                <h3 align="center"> Créateur de décodeur </h3>
+                <p align="justify">
+                    Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br />
+                    Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
+                </p>
+            </div>
 
             <div class="edition-window decode-window">
                 <div class="toolbar-workspace">
@@ -124,7 +123,8 @@
                         </div>-->
                         <div class="toolbar-group">
                             <span>
-                                <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();">
+                                <button class="item-workspace" onclick="
+SquidStorage.SaveFunction(workspace); Refresh();">
                                     Sauvegarder les fonctions
                                 </button>
                             </span>
@@ -139,8 +139,8 @@
                         </div>
                         <!-- Adding the search bar for tags -->
                         <div class="toolbar-group">
-                            <input id="search-bar" type="text" value="" />
-                            <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')" />
+                            <input id="search-bar" type="text" value=""/>
+                            <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
                         </div>
                     </div>
                 </div>
@@ -204,6 +204,7 @@
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
     var variablesCount = 0;
+    var inventaireCount = 0;
 
     /* Element IDs */
     var princToolboxId = "toolboxGeneric";
@@ -341,21 +342,24 @@
     }
 
     function createInventaire() {
-        var name = "Inventaire_" + variablesCount;
+        var name = "Inventaire_" + inventaireCount;
         var table = document.getElementById("inventaire-table");
 
+        var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
+        Blockly.Variables.renameVariable("élément", name, configWorkspace);
+        console.log(Blockly.Variables.flyoutCategory(workspace));
 
         var label = document.createElement("input");
         label.setAttribute("type", "text");
         label.setAttribute("class", "variable-name");
-        label.setAttribute("id", "inventaire" + variablesCount + "_label");
+        label.setAttribute("id", "variable" + variablesCount + "_label");
         label.setAttribute("name", name + "l");
         label.setAttribute("value", name);
         label.setAttribute("onclick", "modifyVariableName(" + variablesCount + ")");
 
         var input = document.createElement("input");
         input.setAttribute("type", "number");
-        input.setAttribute("id", "inventaire" + variablesCount + "_input");
+        input.setAttribute("id", "variable" + variablesCount + "_input");
         input.setAttribute("name", name);
 
         var button = document.createElement("button");
@@ -380,6 +384,7 @@
 
         table.appendChild(row);
 
+        inventaireCount++; 
         variablesCount++;
         RefreshVariables(workspace, princToolboxId);
     }
@@ -389,9 +394,10 @@
         var gc = document.getElementById("generated-code");
         var b = document.getElementById("code-hide");
         var w = gc.style.width;
-        if (gc.style.width !== '75%') {
+        var fullSize = '75%';
+        if (gc.style.width !== fullSize) {
             generateCode();
-            gc.style.width = '75%';
+            gc.style.width = fullSize;
             gc.style.opacity = 1;
         } else {
             gc.style.width = '0%';

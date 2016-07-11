@@ -76,26 +76,30 @@ span {
     text-align: center;
     transition: width 0.4s, opacity 0.4s;
     position: fixed;
-    top: 0;
-    left: 0;
     width: 0%;
     opacity: 0;
-    height: 100%;
     background-color: antiquewhite;
     color: #604040;
-    box-shadow: 0px 0px 20px 10px #200000 inset;
+    box-shadow: 0 0 3px 1px #200000 inset;
     z-index: 999;
 }
+.generated-code h1 {
+    padding: 20px;    
+}
 
-.configuration {
+.top-layer button {
     position: relative;
-    width: 90%;
+    text-align: center;
+    width: auto;
+    margin: 0 0;
+    padding: 5px;
+    background-color: white;
+    color: black;
 }
 
 .generated-code pre {
     text-align: left;
     position: relative;
-    width: 95%;
     margin: 20px;
     border: 0;
     box-shadow: 0 0 1px 1px brown;
@@ -164,11 +168,12 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     right: 0px;
     top: 0;
     height: 100%;
+    width: 25%;
     z-index: 999;
     min-width: 300px;
     background: #604040;
     color: antiquewhite;
-    
+    text-align: center;
 
 }
 .side-bar .variable-name {
@@ -176,15 +181,16 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .side-bar input {
-    width: 80%;
+    width: 100%;
+    padding: 2px;
+    margin: 2px; 
     font-style: normal;
     font-weight: bold;
     font-family: 'Segoe UI', sans-serif;
     color: #604040;
     border: 0;
     border-radius: 1px;
-    box-shadow: 0 0;
-    margin: 2px;    
+    box-shadow: 0 0;      
 }
 
 .side-bar h1 {
