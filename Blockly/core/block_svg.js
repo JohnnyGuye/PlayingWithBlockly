@@ -633,6 +633,12 @@ Blockly.BlockSvg.prototype.showHelp_ = function() {
   }
 };
 
+var DecodeBlock = {
+    blockName : function(block) {
+        document.getElementById("nom-decodeur").value = block.getProcedureDef()[0];
+    }
+}
+
 /**
  * Show the context menu for this block.
  * @param {!Event} e Mouse event.
@@ -652,7 +658,6 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function (e) {
             text: "Afficher la definition",
             enabled: true,
             callback: function() {
-                console.log(this.getProcedureCall());
             }
         }
         menuOptions.push(goToDefOption);
@@ -664,11 +669,7 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function (e) {
           text: "Tester le decodeur",
           enabled: true,
           callback: function() {
-              document.getElementById("nom-decodeur").value = block.getProcedureDef()[0];
-
-              //var code = Blockly.CSharp.blockToCode(block);
-              //console.log(code);
-              //document.getElementById("resultat").value = code;
+              DecodeBlock.blockName(block);
           }
       }
       menuOptions.push(decodingOption);
