@@ -134,8 +134,7 @@
                         </div>-->
                         <div class="toolbar-group">
                             <span>
-                                <button class="item-workspace" onclick="
-SquidStorage.SaveFunction(workspace); Refresh();">
+                                <button class="item-workspace" onclick="Save()">
                                     Sauvegarder les fonctions
                                 </button>
                             </span>
@@ -477,30 +476,33 @@ SquidStorage.SaveFunction(workspace); Refresh();">
     }
 
     function Save() {
-        var possible = true;
-        var workspaceStr = "";
-        for (var i = 0; i < workspaceNames.length; i++) {
-            workspaceStr += workspaceNames[i] + "\n";
-            if (workspaceNames[i] == workspaceName) {
-                possible = false;
-                break;
-            }
-        }
-        if (possible) {
-            workspaceNames.push(workspaceName);
-            workspaceStr += workspaceName + "\n";
-        } else {
-            console.warn("Save refresh");
-        }
+        ////var possible = true;
+        ////var workspaceStr = "";
+        ////for (var i = 0; i < workspaceNames.length; i++) {
+        ////    workspaceStr += workspaceNames[i] + "\n";
+        ////    if (workspaceNames[i] == workspaceName) {
+        ////        possible = false;
+        ////        break;
+        ////    }
+        ////}
+        ////if (possible) {
+        ////    workspaceNames.push(workspaceName);
+        ////    workspaceStr += workspaceName + "\n";
+        ////} else {
+        ////    console.warn("Save refresh");
+        ////}
 
-        var url = SquidStorage.SaveLocations;
-        window.localStorage.setItem(url, workspaceStr);
-        console.log(workspaceStr);
+        ////var url = SquidStorage.SaveLocations;
+        ////window.localStorage.setItem(url, workspaceStr);
+        ////console.log(workspaceStr);
 
-        SquidStorage.SaveWorkspace(workspace, workspaceName);
-        var elem = document.getElementById("workspaceName");
-        elem.innerHTML = workspaceName;
+        ////SquidStorage.SaveWorkspace(workspace, workspaceName);
+        ////var elem = document.getElementById("workspaceName");
+        ////elem.innerHTML = workspaceName;
 
+        ////Refresh();
+        SquidStorage.SaveFunction(workspace);
+        ////SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
         Refresh();
     }
 

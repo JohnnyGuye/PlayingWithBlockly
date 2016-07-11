@@ -333,7 +333,22 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * @param {!Array} options List of menu options to add to.
    * @this Blockly.Block
    */
-  customContextMenu: function(options) {
+  customContextMenu: function (options) {
+
+    // Option to test decoding block
+    var decodingOption = {
+        text: "Tester le decodeur",
+        enabled: true,
+        callback: function () {
+            //TODO DecodeBlock.
+
+            //var code = Blockly.CSharp.blockToCode(block);
+            //console.log(code);
+            //document.getElementById("resultat").value = code;
+        }
+    }
+    options.push(decodingOption);
+
     // Add option to create caller.
     var option = {enabled: true};
     var name = this.getFieldValue('NAME');
@@ -695,18 +710,38 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     }
   },
   /**
-   * Add menu option to find the definition block for this call.
+   * Add some options to the menu options.
    * @param {!Array} options List of menu options to add to.
    * @this Blockly.Block
    */
   customContextMenu: function (options) {
+   /**
+   * Add menu option to find the definition block for this call.
+   */
     var option = {enabled: true};
     option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
     var name = this.getProcedureCall();
     var workspace = this.workspace;
     option.callback = function() {
-      var def = Blockly.Procedures.getDefinition(name, workspace);
-      def && def.select();
+        var def = Blockly.Procedures.getDefinition(name, workspace);
+
+        function seakInChildren(actualWorkspace) {
+            if (!def) {
+                var children = actualWorkspace.getLinkedWorkspace();
+                for (var i = 0; i < children.length; i++) {
+                    def = Blockly.Procedures.getDefinition(name, children[i]);
+                    if (def) {
+                        workspace.addTopBlock(def);
+                        console.log(def);
+                        actualWorkspace.removeTopBlock(def);
+                        break;
+                    }
+                    seakInChildren(children[i]);
+                }
+            }
+        }
+        seakInChildren(workspace);
+        def && def.select();
         
     };
     options.push(option);
