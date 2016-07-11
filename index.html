@@ -77,7 +77,7 @@
 
         <div>
             <h1>Inventaire</h1>
-            <button class="item-workspace" onclick="createInventaire()">Ajouter config</button>
+            <button class="item-workspace" onclick="createInventaire()">Ajouter inventaire</button>
             <div id="blocklyDivInventaire" style="display: none;"></div>
             <table id="inventaire-table"></table>
         </div>
@@ -197,6 +197,7 @@
     var valueActivWorkspace = -1;
     var nbWorkspaces = 0;
     var variablesCount = 0;
+    var inventaireCount = 0;
 
     /* Element IDs */
     var princToolboxId = "toolboxGeneric";
@@ -334,21 +335,24 @@
     }
 
     function createInventaire() {
-        var name = "Inventaire_" + variablesCount;
+        var name = "Inventaire_" + inventaireCount;
         var table = document.getElementById("inventaire-table");
 
+        var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
+        Blockly.Variables.renameVariable("élément", name, configWorkspace);
+        console.log(Blockly.Variables.flyoutCategory(workspace));
 
         var label = document.createElement("input");
         label.setAttribute("type", "text");
         label.setAttribute("class", "variable-name");
-        label.setAttribute("id", "inventaire" + variablesCount + "_label");
+        label.setAttribute("id", "variable" + variablesCount + "_label");
         label.setAttribute("name", name + "l");
         label.setAttribute("value", name);
         label.setAttribute("onclick", "modifyVariableName(" + variablesCount + ")");
 
         var input = document.createElement("input");
         input.setAttribute("type", "number");
-        input.setAttribute("id", "inventaire" + variablesCount + "_input");
+        input.setAttribute("id", "variable" + variablesCount + "_input");
         input.setAttribute("name", name);
 
         var button = document.createElement("button");
@@ -373,6 +377,7 @@
 
         table.appendChild(row);
 
+        inventaireCount++;
         variablesCount++;
         RefreshVariables(workspace, princToolboxId);
     }
