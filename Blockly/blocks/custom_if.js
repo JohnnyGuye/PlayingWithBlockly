@@ -179,7 +179,7 @@
         for (var i = 1; i <= this.elseifCount_; i++) {
             //TEST
             this.appendDummyInput('IF' + i)
-                .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF)
+                .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF)
                 .appendField(new Blockly.FieldTextInput("expression"), 'IF' + i);
             /*TEST this.appendValueInput('IF' + i)
                 .setCheck('Boolean')

@@ -20,8 +20,9 @@ Blockly.CSharp.procedures_defreturn = function() {
 
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {
-    args[x] = Blockly.CSharp.variableDB_.getName(this.arguments_[x],
-        Blockly.Variables.NAME_TYPE);
+    //TEST args[x] = Blockly.CSharp.variableDB_.getName(this.arguments_[x],
+      //TEST Blockly.Variables.NAME_TYPE);
+      args[x] = this.getFieldValue('ARG' + x);
   }
 
   var append_to_list = function (res, val) {
@@ -104,7 +105,7 @@ Blockly.CSharp.procedures_callnoreturn = function() {
       this.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {
-    args[x] = Blockly.CSharp.valueToCode(this, 'ARG' + x, Blockly.CSharp.ORDER_COMMA) || 'null';
+      args[x] = this.getFieldValue('ARG' + x);
   }
   var code = '.' + funcName + '(' + args.join(', ') + ').End()\n'; // previously );\n
   return code;
