@@ -699,7 +699,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
    * @param {!Array} options List of menu options to add to.
    * @this Blockly.Block
    */
-  customContextMenu: function(options) {
+  customContextMenu: function (options) {
     var option = {enabled: true};
     option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
     var name = this.getProcedureCall();
@@ -707,6 +707,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     option.callback = function() {
       var def = Blockly.Procedures.getDefinition(name, workspace);
       def && def.select();
+        
     };
     options.push(option);
   }

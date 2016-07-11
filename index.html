@@ -17,7 +17,19 @@
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
     <script src="Blockly/blockly_uncompressed.js"></script>
-    <script src="Blockly/blocks_compressed.js"></script>
+    <!--<script src="Blockly/blocks_compressed.js"></script>-->
+
+    <!--Blocks-->
+    <script src="Blockly/blocks/colour.js"></script>
+    <script src="Blockly/blocks/custom.js"></script>
+    <script src="Blockly/blocks/custom_if.js"></script>
+    <script src="Blockly/blocks/lists.js"></script>
+    <script src="Blockly/blocks/logic.js"></script>
+    <script src="Blockly/blocks/loops.js"></script>
+    <script src="Blockly/blocks/math.js"></script>
+    <script src="Blockly/blocks/procedures.js"></script>
+    <script src="Blockly/blocks/text.js"></script>
+    <script src="Blockly/blocks/variables.js"></script>
 
 
     <!-- To show xml with angular -->
@@ -29,9 +41,8 @@
     <script src="Blockly/core_override/variables.js"></script>
 
     <!-- Custom blocks -->
-    <script src="Blockly/blocks/custom.js"></script>
 
-    <!-- Error messages -->
+    <!-- Messages -->
     <script src="Blockly/msg/js/fr.js"></script>
     <script src="Dev/dev-mode.js"></script>
 
@@ -57,51 +68,57 @@
 
 <body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
 
-<div class="top-layer">
-    <aside class="code-hide">
-        <button id="code-hide" onclick="hideGenerated()"><div class="rotate"> Générer </div></button>
-        
-    </aside>
-    <aside class="generated-code" id="generated-code">
-            <h1> Code généré </h1>
-            <pre id="content1"></pre>            
-    </aside>
-
-    <aside class="side-bar" style="display: inline-block; text-align: center;">
-        <div>
-            <h1>Configuration</h1>
-            <button class="item-workspace" onclick="createVariable()">Ajouter config</button>
-            <div id="blocklyDivVariables" style="display: none;"></div>
-            <table id="config-table"></table>
+<div class="top-layer full-height">
+        <div class="generated-code full-height" id="generated-code">
+            <h1 class="no-margin"> Code généré </h1>
+            <pre id="content1"></pre>
         </div>
 
-        <div>
-            <h1>Inventaire</h1>
-            <button class="item-workspace" onclick="createInventaire()">Ajouter inventaire</button>
-            <div id="blocklyDivInventaire" style="display: none;"></div>
-            <table id="inventaire-table"></table>
-        </div>
+        <aside class="side-bar full-height">
+            <div class="row full-height">
+                <aside class="code-hide full-height col-lg-2">
+                    <button id="code-hide" onclick="hideGenerated()">
+                        <div class="rotate"> Générer </div>
+                    </button>
+                </aside>
+                <div class="col-lg-10">
+                    <div class="configuration">
+                        <h1>Configuration</h1>
+                        <button class="item-workspace" onclick="createVariable()">Ajouter config</button>
+                        <div id="blocklyDivVariables" style="display: none;"></div>
+                        <table id="config-table"></table>
+                    </div>
 
-        <div id="decodingTest">
-            <h1>Tester le décodeur</h1>
-            <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
-            <input id="nom-decodeur" type="text" value="nom du décodeur"/>
-            <input id="resultat" type="text" class="textarea" value="resultat"/>
-        </div>
-    </aside>
+                    <div>
+                        <h1>Inventaire</h1>
+                        <button class="item-workspace" onclick="createInventaire()">Ajouter inventaire</button>
+                        <div id="blocklyDivInventaire" style="display: none;"></div>
+                        <table id="inventaire-table"></table>
+                    </div>
 
-</div>
+                    <div id="decodingTest">
+                        <h1>Tester le décodeur</h1>
+                        <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
+                        <input id="nom-decodeur" type="text" value="nom du décodeur" />
+                        <input id="resultat" type="text" class="textarea" value="resultat" />
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
 
 <div class="row">
-    <div class="col-lg-1"></div>
+    <div class="col-lg-0"></div>
     <div class="col-md-9">
 
         <div id="wrapper">
-            <h3 align="center"> Créateur de décodeur </h3>
-            <p align="justify">
-                Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br />
-                Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
-            </p>
+            <div>
+                <h3 align="center"> Créateur de décodeur </h3>
+                <p align="justify">
+                    Cet espace sert à concevoir un décodeur qui se chargera d'expliciter une trame et de la traduire. <br />
+                    Nouvelle fonction permet de concevoir un plus petit niveau du décodeur pour pouvoir aller plus en détails dans le fonctionnement.
+                </p>
+            </div>
 
             <div class="edition-window decode-window">
                 <div class="toolbar-workspace">
@@ -117,7 +134,8 @@
                         </div>-->
                         <div class="toolbar-group">
                             <span>
-                                <button class="item-workspace" onclick="SquidStorage.SaveFunction(workspace); Refresh();">
+                                <button class="item-workspace" onclick="
+SquidStorage.SaveFunction(workspace); Refresh();">
                                     Sauvegarder les fonctions
                                 </button>
                             </span>
@@ -132,8 +150,8 @@
                         </div>
                         <!-- Adding the search bar for tags -->
                         <div class="toolbar-group">
-                            <input id="search-bar" type="text" value="" />
-                            <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')" />
+                            <input id="search-bar" type="text" value=""/>
+                            <input type="button" class="item-workspace" value="Rechercher" onclick="TagSearch(workspace, 'toolboxGeneric')"/>
                         </div>
                     </div>
                 </div>
@@ -387,9 +405,10 @@
         var gc = document.getElementById("generated-code");
         var b = document.getElementById("code-hide");
         var w = gc.style.width;
-        if (gc.style.width !== '80%') {
+        var fullSize = '75%';
+        if (gc.style.width !== fullSize) {
             generateCode();
-            gc.style.width = '80%';
+            gc.style.width = fullSize;
             gc.style.opacity = 1;
         } else {
             gc.style.width = '0%';
