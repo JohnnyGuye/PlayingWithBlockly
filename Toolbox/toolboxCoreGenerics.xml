@@ -9,7 +9,7 @@
       <block type="switch"></block>
       <block type="case"></block>
       <block type="default"></block>
-      <block type="controls_if"></block>
+      <block type="custom_controls_if"></block>
     </category>
 
 
