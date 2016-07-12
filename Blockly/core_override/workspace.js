@@ -407,6 +407,22 @@ Blockly.Workspace.prototype.getParentWorkspace = function() {
 Blockly.Workspace.prototype.hasParentWorkspace = function() {
     return this.parentWorkspace_ != null;
 }
+
+Blockly.Workspace.prototype.hideBlock = function (block) {
+    
+    var oldWorkspace = block.workspace;   
+    var children = oldWorkspace.getLinkedWorkspace();
+
+    if (children.length == 1) {
+        // Here is the tricky part, don't do this at home 
+        // (parsing in xml in order to lose container information)
+        var xml = Blockly.Xml.blockToDom(block);
+        var newBlock = Blockly.Xml.domToBlock(xml, children[0]);
+        block.dispose();
+    } else {
+        console.warn("Nowhere to hide the blocks !");
+    }
+}
 //------------------------------------------------------------
 
 /**

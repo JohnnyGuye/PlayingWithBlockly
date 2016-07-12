@@ -50,7 +50,6 @@
     <Content Include="Blockly\appengine\storage.py" />
     <Content Include="Blockly\blockly_compressed.js" />
     <Content Include="Blockly\blockly_uncompressed.js" />
-    <Content Include="Blockly\blocks\BlockTemperature.js" />
     <Content Include="Blockly\blocks\colour.js" />
     <Content Include="Blockly\blocks\custom.js" />
     <Content Include="Blockly\blocks\custom_if.js" />

@@ -1112,7 +1112,8 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = 'Highlight function definition';
 /// context menu - This appears on the context menu for function definitions.
 /// Selecting it creates a block to call the function.\n\nParameters:\n* %1 - the name of the function.\n{{Identical|Create}}
 Blockly.Msg.PROCEDURES_CREATE_DO = 'Create "%1"';
-
+///
+Blockly.Msg.HIDE_DEFINITION = 'Hide this definition';
 /// tooltip - If the first value is true, this causes the second value to be returned
 /// immediately from the enclosing function.
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a second value.';

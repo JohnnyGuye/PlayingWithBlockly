@@ -334,6 +334,16 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * @this Blockly.Block
    */
   customContextMenu: function (options) {
+      var blockSave = this;
+      // Option to hide the definition 
+      var hideOption = {
+          text: "Cacher le décodeur",
+          enabled: true,
+          callback: function () {
+              Blockly.Workspace.prototype.hideBlock(blockSave);
+          }
+      }
+      options.push(hideOption);
 
     // Option to test decoding block
     var decodingOption = {
@@ -724,19 +734,20 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     var workspace = this.workspace;
     option.callback = function() {
         var def = Blockly.Procedures.getDefinition(name, workspace);
-
         function seakInChildren(actualWorkspace) {
             if (!def) {
                 var children = actualWorkspace.getLinkedWorkspace();
                 for (var i = 0; i < children.length; i++) {
                     def = Blockly.Procedures.getDefinition(name, children[i]);
-                    if (def) {
+                    if (!def) {
+                        seakInChildren(children[i]);
+                    } else {                       
                         workspace.addTopBlock(def);
                         console.log(def);
+                        console.log(workspace);
                         actualWorkspace.removeTopBlock(def);
                         break;
-                    }
-                    seakInChildren(children[i]);
+                    }                  
                 }
             }
         }
