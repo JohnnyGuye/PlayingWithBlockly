@@ -225,8 +225,8 @@ goog.ui.ac.InputHandler.REQUIRES_ASYNC_BLUR_ =
  * Standard list separators.
  * @type {string}
  * @const
- */
-goog.ui.ac.InputHandler.STANDARD_LIST_SEPARATORS = ',;';
+ */  //TEEEEEEEEEEEEEEEEST
+goog.ui.ac.InputHandler.STANDARD_LIST_SEPARATORS = ',;+*/<>-';
 
 
 /**
@@ -557,11 +557,11 @@ goog.ui.ac.InputHandler.prototype.setTokenText = function(
     // Get the new value, ignoring whitespace associated with the entry.
     var replaceValue = tokenText;
 
-    // Only add punctuation if there isn't already a separator available.
-    if (!this.separatorCheck_.test(replaceValue)) {
+    // Only add punctuation if there isn't already a separator available. //TEEEEEEEEEEEEEEEEST
+    /*if (!this.separatorCheck_.test(replaceValue)) {
       replaceValue =
           goog.string.trimRight(replaceValue) + this.defaultSeparator_;
-    }
+    }*/
 
     // Ensure there's whitespace wrapping the entries, if whitespaceWrapEntries_
     // has been set to true.
@@ -570,10 +570,11 @@ goog.ui.ac.InputHandler.prototype.setTokenText = function(
         replaceValue = ' ' + replaceValue;
       }
       // Add a space only if it's the last token; otherwise, we assume the
-      // next token already has the proper spacing.
-      if (index == entries.length - 1) {
+        // next token already has the proper spacing.
+        //PAS BESOIN modified by Felix
+      /*if (index == entries.length - 1) {
         replaceValue = replaceValue + ' ';
-      }
+      }*/
     }
 
     // If the token needs changing, then update the input box and move the

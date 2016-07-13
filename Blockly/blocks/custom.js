@@ -89,10 +89,10 @@ Blockly.Blocks['decodebytes'] = {
             .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("octet de debut :")
-            .appendField(new Blockly.FieldTextInput("0"), "start");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "start");
         this.appendDummyInput()
             .appendField("octet de fin :     ")
-            .appendField(new Blockly.FieldTextInput("0"), "end");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "end");
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -129,7 +129,7 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("Decoder entier non signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -137,14 +137,14 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("poids faible");
         this.appendDummyInput()
             .appendField("octet    ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBYTE")
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "MSBYTE")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBYTE");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "LSBYTE");
         this.appendDummyInput()
             .appendField("bit        ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBIT")
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "MSBIT")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBIT");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "LSBIT");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -159,7 +159,7 @@ Blockly.Blocks['decodesignedinteger'] = {
             .appendField("Decoder entier signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -167,14 +167,14 @@ Blockly.Blocks['decodesignedinteger'] = {
             .appendField("poids faible");
         this.appendDummyInput()
             .appendField("octet    ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBYTE")
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "MSBYTE")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBYTE");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "LSBYTE");
         this.appendDummyInput()
             .appendField("bit        ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBIT")
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "MSBIT")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBIT");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "LSBIT");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -189,10 +189,10 @@ Blockly.Blocks['compute'] = {
             .appendField("Calculer : ");
         this.appendDummyInput()
             .appendField("Resultat : ")
-            .appendField(new Blockly.FieldTextInput("nom"), "NAME");
+            .appendField(new Blockly.FieldTextInput("nom", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("Expression : ")
-            .appendField(new Blockly.FieldTextInput("expression"), "FUNCTION");
+            .appendField(new Blockly.FieldTextInput("expression", null, autoCompleteFunc), "FUNCTION");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -207,7 +207,7 @@ Blockly.Blocks['execute'] = {
             .appendField("Executer ");
         this.appendDummyInput()
             .appendField("Action :")
-            .appendField(new Blockly.FieldTextInput("expression"), "ACTION");
+            .appendField(new Blockly.FieldTextInput("expression", null, autoCompleteFunc), "ACTION");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -222,7 +222,7 @@ Blockly.Blocks['switch'] = {
             .appendField("Aiguillage");
         this.appendDummyInput()
             .appendField("variable :")
-            .appendField(new Blockly.FieldTextInput("item"), "VARIABLE");
+            .appendField(new Blockly.FieldTextInput("item", null, autoCompleteFunc), "VARIABLE");
         this.appendStatementInput("STATEMENT")
             .setCheck(null);
         this.setPreviousStatement(true, null);
@@ -238,7 +238,7 @@ Blockly.Blocks['case'] = {
         this.appendStatementInput("STATEMENT")
             .setCheck(null)
             .appendField("cas : ")
-            .appendField(new Blockly.FieldTextInput("default"), "value")
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "value")
             .appendField("faire");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -270,15 +270,15 @@ Blockly.Blocks['decodeboolean'] = {
             .appendField("Decoder booleen :");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
             .appendField("octet  ")
-            .appendField(new Blockly.FieldTextInput("0"), "BYTEPOS");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "BYTEPOS");
         this.appendDummyInput()
             .appendField("bit      ")
-            .appendField(new Blockly.FieldTextInput("0"), "BITPOS");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "BITPOS");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(120);
@@ -295,10 +295,10 @@ Blockly.Blocks['decodeframe'] = {
             .appendField("Decoder la trame :");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("trame : ")
-            .appendField(new Blockly.FieldTextInput("0"), "hexaValue");
+            .appendField(new Blockly.FieldTextInput("0", null, autoCompleteFunc), "hexaValue");
         this.appendStatementInput("blocks")
             .setCheck(null)
             .appendField("decodage :");
