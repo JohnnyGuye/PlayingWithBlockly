@@ -86,7 +86,7 @@ function TagSearch(workspace, toolboxId) {
     //get all procedures defined in all existing workspaces
     var procedures = workspace.getAllDescendantBlocks();
  
-    var searchWords = parseTags();
+    var searchWords = parseTags(document.getElementById("search-bar").value);
     var count = 0;
 
     // Get the results container tag and remove all the blocks it contains since the last research
@@ -99,23 +99,26 @@ function TagSearch(workspace, toolboxId) {
     for (var i = 0; i < procedures.length; i++) {
 
         var tags = procedures[i].getField("tags").text_;
+        var procedureTags = parseTags(tags);
 
         //for each searched word 
         for (var j = 0; j < searchWords.length; j++) {
-            if (searchWords[j] === tags) {
-                count++;
-                var newProcedure = document.createElement("block");
-                if (procedures[i].getProcedureDef()[2]) {
-                    newProcedure.setAttribute("type", "procedures_callreturn");
-                } else {
-                    newProcedure.setAttribute("type", "procedures_callnoreturn");
+            for (var k = 0; k < procedureTags.length; k++) {
+                if (searchWords[j] === procedureTags[k]) {
+                    count++;
+                    var newProcedure = document.createElement("block");
+                    if (procedures[i].getProcedureDef()[2]) {
+                        newProcedure.setAttribute("type", "procedures_callreturn");
+                    } else {
+                        newProcedure.setAttribute("type", "procedures_callnoreturn");
+                    }
+
+                    var mutator = document.createElement("mutation");
+                    mutator.setAttribute("name", procedures[i].getProcedureDef()[0]);
+
+                    newProcedure.appendChild(mutator);
+                    tagCategory.appendChild(newProcedure);
                 }
-
-                var mutator = document.createElement("mutation");
-                mutator.setAttribute("name", procedures[i].getProcedureDef()[0]);
-
-                newProcedure.appendChild(mutator);
-                tagCategory.appendChild(newProcedure);
             }
         }
     }
@@ -127,9 +130,9 @@ function TagSearch(workspace, toolboxId) {
 }
 
 
-function parseTags() {
-    var search = document.getElementById("search-bar").value;
-    var tagSplit = search.split(",");
+function parseTags(text) {
+    //var search = document.getElementById("search-bar").value;
+    var tagSplit = text.split(",");
     return tagSplit;
 }
 
