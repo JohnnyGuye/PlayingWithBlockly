@@ -88,7 +88,7 @@ function TagSearch(workspace, toolboxId) {
  
     var searchWords = parseTags(document.getElementById("search-bar").value);
     var count = 0;
-
+     
     // Get the results container tag and remove all the blocks it contains since the last research
     var tagCategory = document.getElementById("SearchCategory");
     while (tagCategory.firstChild) {
