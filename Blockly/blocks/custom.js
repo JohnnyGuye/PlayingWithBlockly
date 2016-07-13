@@ -309,6 +309,5 @@ Blockly.Blocks['decodeframe'] = {
 };
 
 autoCompleteFunc = function() {
-    //return ["toto", "tata", "titi"];
-    return AutoComplete.data;
+    return ["toto", "tata", "titi"];
 }
