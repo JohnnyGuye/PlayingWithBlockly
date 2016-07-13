@@ -1,21 +1,32 @@
 ﻿/**
  * Constructor
- * @param {Array<String>} opt_data the completion data
+ * @param {Array<String>} opt_variables the completion variables
  * @returns {} 
  */
-AutoComplete= function(opt_data) {
-    AutoComplete.data = opt_data;
+AutoComplete= function(opt_variables, opt_categories, opt_tags) {
+    AutoComplete.variables = opt_variables;
 }
 
-AutoComplete.data=[];
+AutoComplete.variables = [];
+AutoComplete.categories = [];
+AutoComplete.tags = [];
+AutoComplete.variablesWorkspace = null;
 
 AutoComplete.AddAutoCompleteVariable = function (variable) {
-    AutoComplete.data.push(variable);
+    AutoComplete.variables.push(variable);
 }
 
 AutoComplete.RemoveAutoCompleteVariable = function (variable) {
-    var index = AutoComplete.data.indexOf(variable);
+    var index = AutoComplete.variables.indexOf(variable);
     if (index > -1) {
-        AutoComplete.data.splice(index, 1);
+        AutoComplete.variables.splice(index, 1);
     }
+}
+
+AutoComplete.UpdateAutoCompleteVariables= function () {
+    AutoComplete.variables = Blockly.Variables.allVariables(AutoComplete.variablesWorkspace);
+}
+
+AutoComplete.SetAutoCompleteCategories = function (categories) {
+    AutoComplete.categories = categories;
 }
