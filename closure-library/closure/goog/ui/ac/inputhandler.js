@@ -803,16 +803,19 @@ goog.ui.ac.InputHandler.prototype.handleKeyEvent = function(e) {
     // If the menu is open and 'down' caused a change then prevent the default
     // action and prevent scrolling.  If the box isn't a multi autocomplete
     // and the menu isn't open, we force it open now.
-    case goog.events.KeyCodes.DOWN:
-      if (this.ac_.isOpen()) {
+      case goog.events.KeyCodes.DOWN:
+         // alert("KeyDown");
+          if (this.ac_.isOpen()) {
+            //  alert("ac is open");
         this.moveDown_();
         e.preventDefault();
         return true;
-
-      } else if (!this.multi_) {
+//TEST
+      /*    } else if (!this.multi_) {
+            //  alert("update");
         this.update(true);
         e.preventDefault();
-        return true;
+        return true;*/                   //end test
       }
       break;
 
@@ -846,7 +849,8 @@ goog.ui.ac.InputHandler.prototype.handleKeyEvent = function(e) {
     case goog.events.KeyCodes.ENTER:
       if (this.ac_.isOpen()) {
         // Ensure the menu is up to date before completing.
-        this.update();
+          this.update();
+        //  alert("enter");
         if (this.ac_.selectHilited()) {
           e.preventDefault();
           e.stopPropagation();
@@ -1227,7 +1231,7 @@ goog.ui.ac.InputHandler.prototype.parseToken = function() {
  * @return {boolean} True if successful.
  * @private
  */
-goog.ui.ac.InputHandler.prototype.moveUp_ = function() {
+goog.ui.ac.InputHandler.prototype.moveUp_ = function () {
   return this.upsideDown_ ? this.ac_.hiliteNext() : this.ac_.hilitePrev();
 };
 
@@ -1237,7 +1241,7 @@ goog.ui.ac.InputHandler.prototype.moveUp_ = function() {
  * @return {boolean} True if successful.
  * @private
  */
-goog.ui.ac.InputHandler.prototype.moveDown_ = function() {
+goog.ui.ac.InputHandler.prototype.moveDown_ = function () {
   return this.upsideDown_ ? this.ac_.hilitePrev() : this.ac_.hiliteNext();
 };
 
