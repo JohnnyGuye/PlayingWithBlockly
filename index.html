@@ -65,9 +65,6 @@
 
     <script src="postCode.js"></script>
 
-    <!--AutoCompletion-->
-    <script src="autocomplete_util.js"></script>
-
 </head>
 
 <body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
@@ -318,10 +315,6 @@ SquidStorage.SaveFunction(workspace); Refresh();">
         table.appendChild(row);
 
         variablesCount++;
-
-        /* AutoCompletion */
-        //AutoComplete.AddAutoCompleteVariable(name);
-
         RefreshVariables(workspace, princToolboxId);
     }
 
@@ -408,10 +401,6 @@ SquidStorage.SaveFunction(workspace); Refresh();">
 
         inventaireCount++; 
         variablesCount++;
-
-        /* AutoCompletion */
-        //AutoComplete.AddAutoCompleteVariable(name);
-
         RefreshVariables(workspace, princToolboxId);
     }
 

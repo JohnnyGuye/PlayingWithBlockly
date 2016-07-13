@@ -24,7 +24,6 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="app.js" />
-    <Content Include="autocomplete_util.js" />
     <Content Include="Blockly\.gitignore" />
     <Content Include="Blockly\accessible\app.component.js" />
     <Content Include="Blockly\accessible\clipboard.service.js" />
