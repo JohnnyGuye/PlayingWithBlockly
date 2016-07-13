@@ -65,6 +65,9 @@
 
     <script src="postCode.js"></script>
 
+    <!--AutoCompletion-->
+    <script src="autocomplete_util.js"></script>
+
 </head>
 
 <body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
@@ -266,6 +269,7 @@ SquidStorage.SaveFunction(workspace); Refresh();">
                     
                     /* AutoCompletion */
                     AutoComplete.variablesWorkspace = configWorkspace;
+                    AutoComplete.categoryWorkspace = workspace;
                 });
         });
 

@@ -130,6 +130,8 @@ function TagSearch(workspace, toolboxId) {
 
 function parseTags() {
     var search = document.getElementById("search-bar").value;
+    //remove whitespaces
+    //search = search.replace(/\s+/g, '');
     var tagSplit = search.split(",");
     return tagSplit;
 }
