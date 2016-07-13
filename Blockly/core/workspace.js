@@ -108,7 +108,7 @@ Blockly.Workspace.SCAN_ANGLE = 3;
 
 /**
  * Add a block to the list of top blocks.
- * @param {!Blockly.Block} block Block to remove.
+ * @param {!Blockly.Block} block Block to add.
  */
 Blockly.Workspace.prototype.addTopBlock = function(block) {
   this.topBlocks_.push(block);

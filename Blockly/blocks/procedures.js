@@ -333,7 +333,28 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * @param {!Array} options List of menu options to add to.
    * @this Blockly.Block
    */
-  customContextMenu: function(options) {
+  customContextMenu: function (options) {
+      var blockSave = this;
+      // Option to hide the definition 
+      var hideOption = {
+          text: Blockly.Msg.HIDE_DEFINITION,
+          enabled: true,
+          callback: function () {
+              Blockly.Workspace.prototype.hideBlock(blockSave);
+          }
+      }
+      options.push(hideOption);
+
+    // Option to test decoding block
+    var decodingOption = {
+        text: Blockly.Msg.TEST_DECODE,
+        enabled: true,
+        callback: function () {
+            DecodeBlock.blockName(blockSave);
+        }
+    }
+    options.push(decodingOption);
+
     // Add option to create caller.
     var option = {enabled: true};
     var name = this.getFieldValue('NAME');
@@ -703,18 +724,21 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     }
   },
   /**
-   * Add menu option to find the definition block for this call.
+   * Add some options to the menu options.
    * @param {!Array} options List of menu options to add to.
    * @this Blockly.Block
    */
   customContextMenu: function (options) {
+   /**
+   * Add menu option to find the definition block for this call.
+   */
     var option = {enabled: true};
     option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
     var name = this.getProcedureCall();
     var workspace = this.workspace;
     option.callback = function() {
-      var def = Blockly.Procedures.getDefinition(name, workspace);
-      def && def.select();
+        var def = workspace.bringBackDefinition(name);
+        def && def.select();
         
     };
     options.push(option);

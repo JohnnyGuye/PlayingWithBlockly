@@ -407,6 +407,77 @@ Blockly.Workspace.prototype.getParentWorkspace = function() {
 Blockly.Workspace.prototype.hasParentWorkspace = function() {
     return this.parentWorkspace_ != null;
 }
+
+Blockly.Workspace.prototype.moveBlock = function(block, newWorkspace) {
+    var oldWorkspace = block.workspace;
+
+    // Here is the tricky part, don't do this at home 
+    // (parsing in xml in order to lose container information)
+    var xml = Blockly.Xml.blockToDom(block);
+    var newBlock = Blockly.Xml.domToBlock(xml, newWorkspace);
+    block.dispose();
+
+    return newBlock;
+}
+
+/**
+ * Hide a block into a workspace child.
+ * @param {Blockly.Block} block The block you want to hide. 
+ */
+Blockly.Workspace.prototype.hideBlock = function (block) {
+    
+    var children = block.workspace.getLinkedWorkspace();
+
+    if (children.length == 1) {
+       Blockly.Workspace.prototype.moveBlock(block, children[0]);
+    } else {
+        throw "Nowhere to hide the blocks !";
+    }
+}
+
+/**
+ * Bring back the definition from a children of this workspace to this one
+ * @returns {} 
+ */
+Blockly.Workspace.prototype.bringBackDefinition = function (name) {
+    var func = null;
+
+    function seakInChildren(workspace) {
+        var children = workspace.getLinkedWorkspace();
+        for (var i = 0; i < children.length; i++) {
+            func = getDef(name, children[i]);
+            if (!func) {
+                seakInChildren(children[i]);
+            }
+            // Not else, in case of a discovery in seaking
+            if (func) break;        
+        }
+    }
+
+    function getDef(name_, workspace_) {        
+        var blocks = workspace_.getTopBlocks(false);
+        for (var j = 0; j < blocks.length; j++) {
+            if (blocks[j].getProcedureDef) {
+                var tuple = blocks[j].getProcedureDef();
+                if (tuple && Blockly.Names.equals(tuple[0], name_)) {
+                    return blocks[j];
+                }
+            }
+        }
+        return null;
+    }
+
+    func = getDef(name, this);
+    if (!func) {
+        seakInChildren(this);
+        if (func) {
+            return Blockly.Workspace.prototype.moveBlock(func, this);
+        }
+    }
+    
+    return func;
+
+}
 //------------------------------------------------------------
 
 /**

@@ -1112,7 +1112,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = 'Highlight function definition';
 /// context menu - This appears on the context menu for function definitions.
 /// Selecting it creates a block to call the function.\n\nParameters:\n* %1 - the name of the function.\n{{Identical|Create}}
 Blockly.Msg.PROCEDURES_CREATE_DO = 'Create "%1"';
-
+/// context menu - This appears on the context menu to hide a definition without deleteing for (var i=0;i<ARRAY.length;i++){
+/// Selecting it hide the definition into the first child workspace if it exists. No effect if not.
+Blockly.Msg.HIDE_DEFINITION = 'Hide this definition';
 /// tooltip - If the first value is true, this causes the second value to be returned
 /// immediately from the enclosing function.
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a second value.';
@@ -1120,3 +1122,5 @@ Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a sec
 Blockly.Msg.PROCEDURES_IFRETURN_HELPURL = 'http://c2.com/cgi/wiki?GuardClause';
 /// warning - This appears if the user tries to use this block outside of a function definition.
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';
+
+Blockly.Msg.TEST_DECODE = "Tester le decodeur";

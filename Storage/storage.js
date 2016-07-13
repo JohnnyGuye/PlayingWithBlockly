@@ -39,7 +39,10 @@ SquidStorage.SaveFunction = function(workspace) {
     for (var i = 0; i < children.length; i++) {
         blocks = children[i].getTopBlocks();
         for (var j = 0; j < blocks.length; j++) {
-            workspaceSec.addTopBlock(blocks[j]);
+            if (blocks[j].getProcedureDef) {
+                console.log(blocks[j].getProcedureDef());
+                workspaceSec.addTopBlock(blocks[j]);
+            }
         }
     }
     blocks = workspace.getTopBlocks();

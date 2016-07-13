@@ -5,15 +5,15 @@
     <meta charset="utf-8"/>
     <title>Decodeur - 1.0</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+    
+    <script src="bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.6/dist/js/npm.js"></script>
+
     <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="bootstrap-3.3.6/dist/js/npm.js"></script>
-    <script src="bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="app.css" type="text/css"/>
-    <link rel="stylesheet" href="closure-library/closure/goog/css/autocomplete.css" type="text/css" />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <script src="app.js"></script>
     <script src="Blockly/appengine/storage.js"></script>
@@ -135,8 +135,7 @@
                         </div>-->
                         <div class="toolbar-group">
                             <span>
-                                <button class="item-workspace" onclick="
-SquidStorage.SaveFunction(workspace); Refresh();">
+                                <button class="item-workspace" onclick="Save()">
                                     Sauvegarder les fonctions
                                 </button>
                             </span>
@@ -260,9 +259,12 @@ SquidStorage.SaveFunction(workspace); Refresh();">
                     });
                     configWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Variables");
                     configWorkspace.attachChildWorkspace(workspace);
+                    configWorkspace.newBlock("variables_get", "var");
+                    Blockly.Variables.renameVariable("élément", "undefined", configWorkspace);
                     workspace.attachChildWorkspace(hiddenWorkspace);
                     SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
                     Refresh();
+                    SquidDev.HideDevmode();
                 });
         });
 
@@ -272,9 +274,8 @@ SquidStorage.SaveFunction(workspace); Refresh();">
         var name = "Variable_" + variablesCount;
         var table = document.getElementById("config-table");
 
-        var variable = configWorkspace.newBlock("variables_get", "var" + variablesCount);
+        configWorkspace.newBlock("variables_get", "var");
         Blockly.Variables.renameVariable("élément", name, configWorkspace);
-        console.log(Blockly.Variables.flyoutCategory(workspace));
 
         var label = document.createElement("input");
         label.setAttribute("type", "text");
@@ -288,6 +289,7 @@ SquidStorage.SaveFunction(workspace); Refresh();">
         input.setAttribute("type", "number");
         input.setAttribute("id", "variable" + variablesCount + "_input");
         input.setAttribute("name", name);
+        input.setAttribute("class", "dev-block");
 
         var button = document.createElement("button");
         button.setAttribute("class", "delete-button");
@@ -343,13 +345,9 @@ SquidStorage.SaveFunction(workspace); Refresh();">
 
     function deleteVariable(variableId) {
         var elem = document.getElementById("variable" + variableId + "_label");
-        var name = elem.getAttribute("name");
-        var variables = Blockly.Variables.allVariables(configWorkspace);
-        for (var i = 0; i < variables.length; i++) {
-            if (variables[i]) {
-                console.log(variables[i]);
-            }
-        }
+        var name = elem.getAttribute("value");
+        Blockly.Variables.renameVariable(name, "undefined", configWorkspace);
+
         $('#variable' + variableId + "_row").remove();
     }
 
@@ -476,30 +474,33 @@ SquidStorage.SaveFunction(workspace); Refresh();">
     }
 
     function Save() {
-        var possible = true;
-        var workspaceStr = "";
-        for (var i = 0; i < workspaceNames.length; i++) {
-            workspaceStr += workspaceNames[i] + "\n";
-            if (workspaceNames[i] == workspaceName) {
-                possible = false;
-                break;
-            }
-        }
-        if (possible) {
-            workspaceNames.push(workspaceName);
-            workspaceStr += workspaceName + "\n";
-        } else {
-            console.warn("Save refresh");
-        }
+        ////var possible = true;
+        ////var workspaceStr = "";
+        ////for (var i = 0; i < workspaceNames.length; i++) {
+        ////    workspaceStr += workspaceNames[i] + "\n";
+        ////    if (workspaceNames[i] == workspaceName) {
+        ////        possible = false;
+        ////        break;
+        ////    }
+        ////}
+        ////if (possible) {
+        ////    workspaceNames.push(workspaceName);
+        ////    workspaceStr += workspaceName + "\n";
+        ////} else {
+        ////    console.warn("Save refresh");
+        ////}
 
-        var url = SquidStorage.SaveLocations;
-        window.localStorage.setItem(url, workspaceStr);
-        console.log(workspaceStr);
+        ////var url = SquidStorage.SaveLocations;
+        ////window.localStorage.setItem(url, workspaceStr);
+        ////console.log(workspaceStr);
 
-        SquidStorage.SaveWorkspace(workspace, workspaceName);
-        var elem = document.getElementById("workspaceName");
-        elem.innerHTML = workspaceName;
+        ////SquidStorage.SaveWorkspace(workspace, workspaceName);
+        ////var elem = document.getElementById("workspaceName");
+        ////elem.innerHTML = workspaceName;
 
+        ////Refresh();
+        SquidStorage.SaveFunction(workspace);
+        ////SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
         Refresh();
     }
 
@@ -533,7 +534,6 @@ SquidStorage.SaveFunction(workspace); Refresh();">
             Refresh();
         }
     }
-
     
 </script>
 

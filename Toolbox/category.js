@@ -1,9 +1,8 @@
 ﻿/** Refresh the list of variables in the toolbox using the definition of defined categories
  * @param {Blockly.workspace} The workspace in which you want to list the categories
  */
-function RefreshVariables(workspace, toolboxId) {
-    var variables = Blockly.Variables.allVariables(workspace);
-    console.log(variables.length + " ");
+function RefreshVariables(workspace) {
+    Blockly.Variables.allVariables(workspace);
 }
 /**
  * Refresh the list of categories in the toolbox using the definition of defined functions.

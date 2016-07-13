@@ -88,6 +88,16 @@ Blockly.Variables.renameVariable = function(oldName, newName, workspace) {
   Blockly.Events.setGroup(false);
 };
 
+Blockly.Variables.deleteVariable = function(name, workspace, uniqueInstance) {
+    Blockly.Events.setGroup(true);
+    var blocks = workspace.getAllBlocks();
+    // Iterate through every block.
+    for (var i = 0; i < blocks.length; i++) {
+        blocks[i].renameVar(oldName, newName);
+    }
+    Blockly.Events.setGroup(false);
+}
+
 /**
  * Construct the blocks required by the flyout for the variable category.
  * @param {!Blockly.Workspace} workspace The workspace contianing variables.

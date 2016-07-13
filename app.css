@@ -14,9 +14,9 @@ span {
 }
 
 .dev-block {
-    display: block;
-
+    display: none;
 }
+
 #filesDiv {
     position: relative;
     z-index: 999;
@@ -189,7 +189,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     font-weight: bold;
     font-family: 'Segoe UI', sans-serif;
     color: #604040;
-    border: 0;
+    border: 1px #200000 solid;
     border-radius: 1px;
     box-shadow: 0 0;      
 }
