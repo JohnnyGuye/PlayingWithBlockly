@@ -485,6 +485,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     this.arguments_ = [];
     this.quarkConnections_ = {};
     this.quarkIds_ = null;
+    this.setInputsInline(true);
   },
   /**
    * Returns the name of the procedure this block calls.
@@ -607,7 +608,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
    * @private
    * @this Blockly.Block
    */
-  updateShape_: function() {
+  updateShape_: function () {
     for (var i = 0; i < this.arguments_.length; i++) {
       var field = this.getField('ARGNAME' + i);
       if (field) {
@@ -619,11 +620,18 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         Blockly.Events.enable();
       } else {
         // Add new input.
-        field = new Blockly.FieldLabel(this.arguments_[i]);
-        var input = this.appendValueInput('ARG' + i)
+        // TEST field = new Blockly.FieldLabel(this.arguments_[i]);
+        /*TEST var input = this.appendValueInput('ARG' + i)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(field, 'ARGNAME' + i);
+            .appendField(field, 'ARGNAME' + i);*/
+          //TEST
+        var input = this.appendDummyInput('ARG' + i)
+          .appendField(this.arguments_[i]+' =')
+          .appendField(new Blockly.FieldTextInput("valeur"), 'ARG' + i);
+        //END TEST
         input.init();
+        //this.setInputsInline(true); TO DO
+
       }
     }
     // Remove deleted inputs.

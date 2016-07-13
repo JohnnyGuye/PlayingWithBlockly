@@ -86,7 +86,7 @@ Blockly.Blocks['decodebytes'] = {
             .appendField("Decoder octets");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, autoCompleteFunc), "NAME");
         this.appendDummyInput()
             .appendField("octet de debut :")
             .appendField(new Blockly.FieldTextInput("0"), "start");
@@ -307,3 +307,7 @@ Blockly.Blocks['decodeframe'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };
+
+autoCompleteFunc = function() {
+    return ["toto", "tata", "titi"];
+}
