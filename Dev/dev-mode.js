@@ -2,57 +2,59 @@
     File for debugging
 */
 
-SquidDev = {};
+Squid = {};
+
+Squid.Dev = {};
 
 /* The current state of the devmode
 */
-SquidDev.DEVMODE = true;
+Squid.Dev.DEVMODE = true;
 
 /**
  * The string for activating devmode
  */
-SquidDev.DevmodeCode = "DEVMODE";
+Squid.Dev.DevmodeCode = "DEVMODE";
 
 /* The input stacks (resets when error is committed)
 */
-SquidDev.LastInputs = [];
+Squid.Dev.LastInputs = [];
 
 /* Activate or deactivate the dev mode if the correct string is entered
 * @param {} event A key event containing the keycode of the touch pressed. 
 */
-SquidDev.ToggleDevmode = function (event) {
+Squid.Dev.ToggleDevmode = function (event) {
     var code = event.keyCode;
     var char = String.fromCharCode(code);
-    if (char == SquidDev.DevmodeCode[SquidDev.LastInputs.length]) {
-        SquidDev.LastInputs.push(code);
+    if (char == Squid.Dev.DevmodeCode[Squid.Dev.LastInputs.length]) {
+        Squid.Dev.LastInputs.push(code);
     } else {
-        SquidDev.LastInputs.length = 0;
-        if (char == SquidDev.DevmodeCode[0]) {
-            SquidDev.LastInputs.push(code);
+        Squid.Dev.LastInputs.length = 0;
+        if (char == Squid.Dev.DevmodeCode[0]) {
+            Squid.Dev.LastInputs.push(code);
         }
     }
     //Switch Devmode
-    if (SquidDev.LastInputs.length === SquidDev.DevmodeCode.length) {
-        if (!SquidDev.DEVMODE) {
-            SquidDev.ShowDevmode();
+    if (Squid.Dev.LastInputs.length === Squid.Dev.DevmodeCode.length) {
+        if (!Squid.Dev.DEVMODE) {
+            Squid.Dev.ShowDevmode();
         } else {
-            SquidDev.HideDevmode();
+            Squid.Dev.HideDevmode();
         }
-        SquidDev.LastInputs.length = 0;
-        console.log("Devmode: " + SquidDev.DEVMODE);
+        Squid.Dev.LastInputs.length = 0;
+        console.log("Devmode: " + Squid.Dev.DEVMODE);
     }
 }
 
-SquidDev.HideDevmode = function () {
-    SquidDev.DEVMODE = false;
+Squid.Dev.HideDevmode = function () {
+    Squid.Dev.DEVMODE = false;
     var devElementBlock = document.getElementsByClassName("dev-block");
     for (let i = 0; i < devElementBlock.length; i++) {
         devElementBlock[i].style.display = "none";
     }
 }
 
-SquidDev.ShowDevmode = function () {
-    SquidDev.DEVMODE = true;
+Squid.Dev.ShowDevmode = function () {
+    Squid.Dev.DEVMODE = true;
     var devElementBlock = document.getElementsByClassName("dev-block");
     for (let i = 0; i < devElementBlock.length; i++) {
         devElementBlock[i].style.display = "block";

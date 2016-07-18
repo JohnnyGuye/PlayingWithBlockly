@@ -3102,9 +3102,9 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="landingPagetheme2.html" />
-    <Content Include="obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\BlocklyTest.dll" />
-    <Content Include="obj\Debug\BlocklyTest.pdb" />
+    <Content Include="closure-library\obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
+    <Content Include="closure-library\obj\Debug\BlocklyTest.dll" />
+    <Content Include="closure-library\obj\Debug\BlocklyTest.pdb" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.min.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\stylish-portfolio.css" />
@@ -3129,6 +3129,7 @@
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
     <Content Include="Toolbox\category.js" />
+    <Content Include="Variables\ConfigAndInventoryViewModel.js" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />
@@ -3278,7 +3279,7 @@
     <Content Include="closure-library\scripts\ci\run_all_tests.sh" />
     <Content Include="closure-library\scripts\ci\sauce_connect.sh" />
     <Content Include="closure-library\scripts\http\simple_http_server.py" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="closure-library\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="bootstrap-3.3.6\.editorconfig" />
     <Content Include="bootstrap-3.3.6\.hound.yml" />
     <Content Include="bootstrap-3.3.6\.travis.yml" />
@@ -3469,12 +3470,12 @@
     <Compile Include="Handler1.ashx.cs">
       <DependentUpon>Handler1.ashx</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="closure-library\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="closure-library\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="closure-library\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="closure-library\obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

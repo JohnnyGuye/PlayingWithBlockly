@@ -11,10 +11,11 @@ span {
 .blocklyDiv {
     height: 800px;
     width: 100%; /*1000*/
+    z-index: 800;
 }
 
 .dev-block {
-    display: none;
+    display: block;
 }
 
 #filesDiv {
