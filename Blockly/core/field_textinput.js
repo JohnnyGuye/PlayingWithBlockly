@@ -143,7 +143,7 @@ Blockly.FieldTextInput.prototype.lazyAutocompleteInit_ = function (target) {
 
     if (this.autocompleteData_ && target && !this.autocompleteUI_) {
         var values = this.autocompleteData_();
-        var ui = goog.ui.ac.createSimpleAutoComplete(values, target, false, true);
+        var ui = goog.ui.ac.createSimpleAutoComplete(values, target, true, true);
         ui.setAutoHilite(false);
         this.autocompleteUI_ = ui;
         goog.events.listenOnce(this.autocompleteUI_, goog.ui.ac.AutoComplete.EventType.UPDATE, goog.partial(this.CompUpdate, this));

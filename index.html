@@ -65,6 +65,9 @@
 
     <script src="postCode.js"></script>
 
+    <!--AutoCompletion-->
+    <script src="autocomplete_util.js"></script>
+
 </head>
 
 <body id="body" onkeydown="SquidDev.ToggleDevmode(event)">
@@ -265,10 +268,16 @@
                     SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
                     Refresh();
                     SquidDev.HideDevmode();
+
+                    /* AutoCompletion */
+                    AutoComplete.variablesWorkspace = configWorkspace;
+                    AutoComplete.categoryWorkspace = workspace;
+
+
                 });
         });
 
-    
+
     // ------------------------------------------------------------- Configuration
     function createVariable() {
         var name = "Variable_" + variablesCount;
@@ -306,7 +315,7 @@
         cell = document.createElement("td");
         cell.appendChild(input);
         row.appendChild(cell);
-        
+
         cell = document.createElement("td");
         cell.appendChild(button);
         row.appendChild(document.createElement("td").appendChild(button));
@@ -326,10 +335,10 @@
         var previousName = oldName;
         var newName;
         function valid() {
-            
+
             newName = document.getElementById("variable" + variableId + "_label").getAttribute("value");
             console.log(previousName + "|" + newName);
-            
+
             if (newName != previousName) {
                 setTimeout(valid, 500);
                 console.log("retry");
@@ -394,7 +403,7 @@
 
         table.appendChild(row);
 
-        inventaireCount++; 
+        inventaireCount++;
         variablesCount++;
         RefreshVariables(workspace, princToolboxId);
     }
@@ -415,7 +424,7 @@
         }
     }
     //------------------------------------------------------------------ Tools
-    /** 
+    /**
      * Create a new workspace for editing a function.
      * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
      */
@@ -424,7 +433,7 @@
         if (funcWindow.style.display === "none") {
             funcWindow.style.display = "block";
         }
-        
+
         // Hide the previous workspace
         if (nbWorkspaces > 0) {
             document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
@@ -515,7 +524,7 @@
         }
     }
 
-    function Reload() {   
+    function Reload() {
         reload_(workspaceName);
     }
 
@@ -534,7 +543,7 @@
             Refresh();
         }
     }
-    
+
 </script>
 
 <!-- Storage and parsing -->

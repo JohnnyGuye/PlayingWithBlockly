@@ -24,6 +24,7 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="app.js" />
+    <Content Include="autocomplete_util.js" />
     <Content Include="Blockly\.gitignore" />
     <Content Include="Blockly\accessible\app.component.js" />
     <Content Include="Blockly\accessible\clipboard.service.js" />
@@ -3135,7 +3136,9 @@
     <Content Include="xml2json\samples.html" />
     <Content Include="xml2json\xml2json.js" />
     <Content Include="xml2json\xml2json.min.js" />
-    <Content Include="Toolbox\toolboxCoreGenerics.xml" />
+    <Content Include="Toolbox\toolboxCoreGenerics.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />

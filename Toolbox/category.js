@@ -132,7 +132,9 @@ function TagSearch(workspace, toolboxId) {
 
 function parseTags(text) {
     //var search = document.getElementById("search-bar").value;
-    var tagSplit = text.split(",");
+    //remove whitespaces
+    var tags = text.replace(/\s+/g, '');
+    var tagSplit = tags.split(",");
     return tagSplit;
 }
 

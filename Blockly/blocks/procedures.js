@@ -56,7 +56,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
 
     this.appendDummyInput()
           .appendField("Categorie")
-          .appendField(new Blockly.FieldTextInput("category"), "category");
+          .appendField(new Blockly.FieldTextInput("category", null, AutoComplete.GetCategories), "category");
       /*deprecated
       function dynamicOptions() {
         var options = [];
@@ -69,7 +69,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     }*/   
       this.appendDummyInput()
       .appendField("Tags")
-      .appendField(new Blockly.FieldTextInput("tags"), "tags");
+      .appendField(new Blockly.FieldTextInput("tags", null, AutoComplete.GetTags), "tags");
       //code ajouté : fin 
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     if (Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT) {
