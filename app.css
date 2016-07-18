@@ -83,6 +83,8 @@ span {
     color: #604040;
     box-shadow: 0 0 3px 1px #200000 inset;
     z-index: 999;
+    overflow: auto;
+    
 }
 .generated-code h1 {
     padding: 20px;    
