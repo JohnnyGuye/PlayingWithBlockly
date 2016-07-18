@@ -35,7 +35,7 @@ AutoComplete.UpdateCategories = function () {
 }
 
 //get after update
-AutoComplete.GetVariables = function() {
+AutoComplete.GetVariables = function () {
     AutoComplete.UpdateVariables();
     return AutoComplete.variables;
 }
@@ -46,17 +46,17 @@ AutoComplete.GetCategories = function () {
 }
 
 AutoComplete.GetTags = function () {
-    var procedures = AutoComplete.categoryWorkspace.getAllDescendantBlocks();
+    var blocks = AutoComplete.variablesWorkspace.getAllDescendantBlocks();
+    var procedures = blocks.filter(function (item) {
+        return item.getProcedureDef;
+    });
     var allTags = [];
     for (var i = 0; i < procedures.length; i++) {
         var tags = procedures[i].getField("tags").text_;
-        //alert("tags ="+tags);
-        //tags = removeDuplicates(tags);
-        //tags = tags.replace(/\s+/g, '');
+        tags = tags.replace(/\s+/g, '');
         var tagsSplit = tags.split(",");
         for (var y=0; y<tagsSplit.length; y++) {
             allTags.push(tagsSplit[y]);
-            //alert(tagsSplit[i]);
         }      
     }
     allTags = removeDuplicates(allTags);

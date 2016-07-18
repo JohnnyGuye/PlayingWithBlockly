@@ -84,7 +84,10 @@ function RefreshCategories(workspace, toolboxId) {
  */
 function TagSearch(workspace, toolboxId) {
     //get all procedures defined in all existing workspaces
-    var procedures = workspace.getAllDescendantBlocks();
+    var blocks = workspace.getAllDescendantBlocks();
+    var procedures = blocks.filter(function (item) {
+        return item.getProcedureDef;
+    });
  
     var searchWords = parseTags(document.getElementById("search-bar").value);
     var count = 0;
@@ -104,6 +107,7 @@ function TagSearch(workspace, toolboxId) {
         //for each searched word 
         for (var j = 0; j < searchWords.length; j++) {
             for (var k = 0; k < procedureTags.length; k++) {
+                alert(procedureTags[k]);
                 if (searchWords[j] === procedureTags[k]) {
                     count++;
                     var newProcedure = document.createElement("block");
@@ -118,6 +122,7 @@ function TagSearch(workspace, toolboxId) {
 
                     newProcedure.appendChild(mutator);
                     tagCategory.appendChild(newProcedure);
+                    alert("found !");
                 }
             }
         }
@@ -133,7 +138,9 @@ function TagSearch(workspace, toolboxId) {
 function parseTags(text) {
     //var search = document.getElementById("search-bar").value;
     //remove whitespaces
+    //alert("avec espace" + text);
     var tags = text.replace(/\s+/g, '');
+    //alert("sans espace"+tags);
     var tagSplit = tags.split(",");
     return tagSplit;
 }
