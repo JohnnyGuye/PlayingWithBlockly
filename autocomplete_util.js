@@ -50,16 +50,16 @@ AutoComplete.GetTags = function () {
     var allTags = [];
     for (var i = 0; i < procedures.length; i++) {
         var tags = procedures[i].getField("tags").text_;
-        alert("tags ="+tags);
+        //alert("tags ="+tags);
         //tags = removeDuplicates(tags);
         //tags = tags.replace(/\s+/g, '');
         var tagsSplit = tags.split(",");
         for (var y=0; y<tagsSplit.length; y++) {
             allTags.push(tagsSplit[y]);
             //alert(tagsSplit[i]);
-        }
-        removeDuplicates(allTags);
+        }      
     }
+    allTags = removeDuplicates(allTags);
     AutoComplete.tags = allTags;
     return AutoComplete.tags;
 }
