@@ -19,7 +19,7 @@
     </category>
 
     <sep gap="8"></sep>
-    
+
     <category name="Algorihtmie" colour="20">
       <category name="Logic" id="catLogic" colour="210">
         <block type="controls_if"></block>
@@ -349,7 +349,7 @@
     <category name="Variables" custom="VARIABLE" colour="100"></category>
 
     <sep gap="8"></sep>
-    
+
     <category name="Mes fonctions" id="NewCategory" colour="180">
       <!-- It's gonna be filled the same maneer as function and variables -->
     </category>
@@ -361,9 +361,6 @@
   </div>
 
   <div id="toolboxFunction" style="display: none">
-
-    
-
     <category name="Blocks numériques" colour="60">
       <block type="math_number"></block>
     </category>

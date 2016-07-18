@@ -88,7 +88,7 @@ Blockly.Variables.renameVariable = function(oldName, newName, workspace) {
   Blockly.Events.setGroup(false);
 };
 
-Blockly.Variables.deleteVariable = function(name, workspace, uniqueInstance) {
+Blockly.Variables.deleteVariable = function(name, workspace) {
     Blockly.Events.setGroup(true);
     var blocks = workspace.getAllBlocks();
     // Iterate through every block.
