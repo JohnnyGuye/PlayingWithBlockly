@@ -65,7 +65,7 @@
 
     <!--AutoCompletion-->
     <script src="autocomplete_util.js"></script>
-    <!--<link rel="stylesheet" href="closure-library/closure/goog/css/autocomplete.css" type="text/css"/>-->
+    <link rel="stylesheet" href="closure-library/closure/goog/css/autocomplete.css" type="text/css"/>
 
 </head>
 
@@ -267,7 +267,7 @@
                     SquidStorage.ReloadWorkspace(null, hiddenWorkspace);
                     Refresh();
 
-                    SquidDev.HideDevmode();
+                    Squid.Dev.HideDevmode();
 
                     /* AutoCompletion */
                     AutoComplete.variablesWorkspace = configWorkspace;
