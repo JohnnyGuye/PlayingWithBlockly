@@ -46,7 +46,7 @@ AutoComplete.GetCategories = function () {
 }
 
 AutoComplete.GetTags = function () {
-    var blocks = AutoComplete.variablesWorkspace.getAllDescendantBlocks();
+    var blocks = AutoComplete.categoryWorkspace.getAllDescendantBlocks();
     var procedures = blocks.filter(function (item) {
         return item.getProcedureDef;
     });

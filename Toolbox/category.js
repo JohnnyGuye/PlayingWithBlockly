@@ -107,7 +107,6 @@ function TagSearch(workspace, toolboxId) {
         //for each searched word 
         for (var j = 0; j < searchWords.length; j++) {
             for (var k = 0; k < procedureTags.length; k++) {
-                alert(procedureTags[k]);
                 if (searchWords[j] === procedureTags[k]) {
                     count++;
                     var newProcedure = document.createElement("block");
@@ -122,7 +121,6 @@ function TagSearch(workspace, toolboxId) {
 
                     newProcedure.appendChild(mutator);
                     tagCategory.appendChild(newProcedure);
-                    alert("found !");
                 }
             }
         }
