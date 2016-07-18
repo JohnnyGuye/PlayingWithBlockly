@@ -121,7 +121,6 @@ Squid.Variables.create = function (type) {
     button.setAttribute("onclick", "Squid.Variables.delete('" + type + "', " + count + ")");
     button.innerHTML = " x ";
 
-
     var row = document.createElement("tr");
     row.setAttribute("id", name + "_row");
     var cell = document.createElement("td");
