@@ -67,7 +67,8 @@
 
     <!--AutoCompletion-->
     <script src="autocomplete_util.js"></script>
-    <link rel="stylesheet" href="closure-library/closure/goog/css/autocomplete.css" type="text/css" />
+    <link rel="stylesheet" href="closure-library/closure/goog/css/autocomplete.css" type="text/css"/>
+    <script>goog.require('goog.ui.ac');</script>
 
 </head>
 
@@ -221,10 +222,13 @@
     var variablesCount = 0;
     var inventaireCount = 0;
 
+    /*AutoCompletion*/
+    var acTags;
+
     /* Element IDs */
     var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
-
+    
     // Create a the main workspace
     var app = angular.module('httpApp', []);
     app.controller('httpController',
@@ -273,10 +277,15 @@
                     /* AutoCompletion */
                     AutoComplete.variablesWorkspace = configWorkspace;
                     AutoComplete.categoryWorkspace = workspace;
-
+                   
+                    var autoCompleteTags = AutoComplete.GetTags();
+                    acTags = goog.ui.ac.createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
+                    acTags.setAutoHilite(false);
 
                 });
         });
+
+    
 
 
     // ------------------------------------------------------------- Configuration
@@ -481,6 +490,11 @@
 
     function Refresh() {
         RefreshCategories(workspace, princToolboxId);
+        //for autocompletion
+        if (acTags) {
+            acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
+        }
+       
     }
 
     function Save() {
