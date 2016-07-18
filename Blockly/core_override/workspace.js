@@ -408,14 +408,13 @@ Blockly.Workspace.prototype.hasParentWorkspace = function() {
     return this.parentWorkspace_ != null;
 }
 
-Blockly.Workspace.prototype.moveBlock = function(block, newWorkspace) {
-    var oldWorkspace = block.workspace;
-
+Blockly.Workspace.prototype.moveBlock = function (block, newWorkspace) {
+    if (!newWorkspace) throw "Nowhere to place the block";
     // Here is the tricky part, don't do this at home 
     // (parsing in xml in order to lose container information)
     var xml = Blockly.Xml.blockToDom(block);
     var newBlock = Blockly.Xml.domToBlock(xml, newWorkspace);
-    block.dispose();
+    block.dispose(true);
 
     return newBlock;
 }
@@ -428,11 +427,7 @@ Blockly.Workspace.prototype.hideBlock = function (block) {
     
     var children = block.workspace.getLinkedWorkspace();
 
-    if (children.length == 1) {
-       Blockly.Workspace.prototype.moveBlock(block, children[0]);
-    } else {
-        throw "Nowhere to hide the blocks !";
-    }
+    Blockly.Workspace.prototype.moveBlock(block, children[0]);
 }
 
 /**

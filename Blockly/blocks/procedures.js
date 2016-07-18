@@ -274,9 +274,10 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * Dispose of any callers.
    * @this Blockly.Block
    */
-  dispose: function() {
+  dispose: function(keepCallers) {
     var name = this.getFieldValue('NAME');
-    Blockly.Procedures.disposeCallers(name, this.workspace);
+    if (keepCallers !== true)
+        Blockly.Procedures.disposeCallers(name, this.workspace);
     // Call parent's destructor.
     this.constructor.prototype.dispose.apply(this, arguments);
   },
