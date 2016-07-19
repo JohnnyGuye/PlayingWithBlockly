@@ -546,6 +546,8 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     // Special category for procedures.
     xmlList =
         Blockly.Procedures.flyoutCategory(this.workspace_.targetWorkspace);
+  } else if (xmlList == Blockly.Procedures.NAME_TYPE_ALTERNATIV) {
+      Refresh();
   }
 
   this.svgGroup_.style.display = 'block';
@@ -568,7 +570,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   }
 
   this.layoutBlocks_(blocks, gaps);
-
   // IE 11 is an incompetent browser that fails to fire mouseout events.
   // When the mouse is over the background, deselect all blocks.
   var deselectAll = function() {
@@ -596,6 +597,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
   this.reflowWrapper_ = this.reflow.bind(this);
   this.workspace_.addChangeListener(this.reflowWrapper_);
+  
 };
 
 /**

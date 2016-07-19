@@ -498,11 +498,14 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
   var oldNode = this.getSelectedItem();
   goog.ui.tree.TreeControl.prototype.setSelectedItem.call(this, node);
   if (node && node.blocks && node.blocks.length) {
-    toolbox.flyout_.show(node.blocks);
-    // Scroll the flyout to the top if the category has changed.
-    if (toolbox.lastCategory_ != node) {
-      toolbox.flyout_.scrollToStart();
-    }
+      //Refresh();
+      toolbox.flyout_.show(node.blocks);
+      
+      // Scroll the flyout to the top if the category has changed.
+        if (toolbox.lastCategory_ != node) {
+            toolbox.flyout_.scrollToStart();
+        }
+       
   } else {
     // Hide the flyout.
     toolbox.flyout_.hide();

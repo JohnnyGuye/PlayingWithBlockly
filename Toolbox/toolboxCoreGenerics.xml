@@ -357,7 +357,9 @@
     <category name="Recherche" id="SearchCategory" colour="200">
       <!-- It's gonna be filled by the functions in the good tag -->
     </category>
-
+    
+    <category name="Refresh" custom="PROCEDURE_ALT" colour="80"></category>
+  
   </div>
 
   <div id="toolboxFunction" style="display: none">

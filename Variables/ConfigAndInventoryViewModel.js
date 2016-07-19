@@ -27,10 +27,10 @@ Squid.Variables.InitWorkspaces = function (config, inventory) {
 Squid.Variables.getPrefix = function(type) {
     switch (type) {
         case Squid.Variables.Types.INVENTORY:
-            return "inv_";
+            return "I_";
             break;
         case Squid.Variables.Types.CONFIG:
-            return "config_";
+            return "C_";
             break;
         default:
             return "";
@@ -102,19 +102,20 @@ Squid.Variables.create = function (type) {
     var count = Squid.Variables.getCount(type);
     if (workspace == null) throw "Not a valid type";
 
-    var name = prefix + count;
+    var name = "Variable" + count;
+    var fullName = prefix + name;
     var table = $(Squid.Variables.getAnchor(type));
 
     workspace.newBlock("variables_get", "var");
-    Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, name, workspace);
+    Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, fullName, workspace);
 
     var label = $("<input>");
     label.attr("type", "text");
     label.attr("class", "variable-name");
-    label.attr("id", name + "_label");
-    label.attr("name", name);
+    label.attr("id", fullName + "_label");
+    label.attr("name", fullName);
     label.attr("value", name);
-    label.attr("oldValue", name);
+    label.attr("oldValue", fullName);
     label.on("input",
         function () {
             Squid.Variables.rename(this, type);
@@ -122,8 +123,8 @@ Squid.Variables.create = function (type) {
 
     var input = $("<input>");
     input.attr("type", "number");
-    input.attr("id", name + "_input");
-    input.attr("name", name);
+    input.attr("id", fullName + "_input");
+    input.attr("name", fullName);
     input.attr("class", "dev-block");
 
     var button = $("<button>");
@@ -132,7 +133,7 @@ Squid.Variables.create = function (type) {
     button.html(" x ");
 
     var row = $("<tr>");
-    row.attr("id", name + "_row");
+    row.attr("id", fullName + "_row");
     var cell = $("<td>");
     cell.append(label);
     row.append(cell);
@@ -156,10 +157,13 @@ Squid.Variables.create = function (type) {
  * @param {Number} variableId 
  */
 Squid.Variables.rename = function (input, type) {
+    var prefix = Squid.Variables.getPrefix(type);
     var oldValue = $(input).attr("oldValue");
     var value = $(input).val();
-    Blockly.Variables.renameVariable(oldValue, value, Squid.Variables.getWorkspace(type));
-    $(input).attr("oldValue", value);
+    Blockly.Variables.renameVariable(oldValue, 
+        prefix + value, 
+        Squid.Variables.getWorkspace(type));
+    $(input).attr("oldValue", prefix + value);
 }
 
 /**

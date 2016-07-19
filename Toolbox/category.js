@@ -20,57 +20,59 @@ function RefreshCategories(workspace, toolboxId) {
 
     // Categories container
     var CATEGORY_NAME = "Mes fonctions";
-    var myFunctions = document.createElement("category");
-    myFunctions.setAttribute("name", CATEGORY_NAME);
-    myFunctions.setAttribute("colour", 0);
+    var myFunctions = $("<category>");
+    myFunctions.attr("name", CATEGORY_NAME);
+    myFunctions.attr("colour", 0);
 
     // Rebase the categories to an empty tree
-    var divFunc = document.getElementById("NewCategory");
-    while (divFunc.hasChildNodes() === true) {
-        var child = divFunc.childNodes[0];
-        divFunc.removeChild(child);
-    }
+    var divFunc = $("#NewCategory");
+    divFunc.html("");
 
     if (Blockly.Blocks['procedures_defnoreturn']) {
         // <block type="procedures_defnoreturn" gap="16"></block>
         var block = goog.dom.createDom('block');
         block.setAttribute('type', 'procedures_defnoreturn');
         block.setAttribute('gap', 16);
-        divFunc.appendChild(block);
+        divFunc.append(block);
     }
 
+    var previousColour = Math.random() * 360;
     // For each category
     for (var i = 0; i < categories[0].length; i++) {
 
-        var newCategory = document.createElement("category");       
-        newCategory.setAttribute("name", categoriesNames[i]);
-        newCategory.setAttribute("colour", Math.floor(Math.random() * 360));
-        
+        var cat = $("<category>");
+        cat.attr("name", categoriesNames[i]);
+
+        var colour = Math.random() * 360;
+        colour = Math.floor(colour +
+            (Math.floor(previousColour / 10) === Math.floor(colour / 10) ? 20 : 0))
+            % 360;
+        cat.attr("colour", colour);
+        previousColour = colour;
+
         // For each procedure in this category
         for (var j = 0; j < categoriesProcedures[i].length; j++) {
-            block = categoriesProcedures[i][j];            
+            var block = categoriesProcedures[i][j];
             var def = block.getProcedureDef();
             var name = def[0];
             var args = def[1];
             var type = def[2];
 
-            var newProcedure = document.createElement("block");
-            newProcedure.setAttribute("type", (type ? "procedures_callreturn": "procedures_callnoreturn"));
-            newProcedure.setAttribute("gap", 16);
-            var mutation = document.createElement("mutation");
-            mutation.setAttribute("name", name);
+            var procedure = $("<block>");
+            procedure.attr("type", (type ? "procedures_callreturn" : "procedures_callnoreturn"));
+            procedure.attr("gap", 16);
+            var mutation = $("<mutation>");
+            mutation.attr("name", name);
             for (var k = 0; k < args.length; k++) {
-                var arg = document.createElement("arg");
-                arg.setAttribute("name", args[k]);
-                mutation.appendChild(arg);
+                var arg = $("<arg>");
+                arg.attr("name", args[k]);
+                mutation.append(arg);
             }
 
-            newProcedure.appendChild(mutation);
-            newCategory.appendChild(newProcedure);
+            procedure.append(mutation);
+            cat.append(procedure);
         }
-
-        // Fill the tree
-        divFunc.appendChild(newCategory);
+        divFunc.append(cat);
     }
 
     workspace.updateToolbox(document.getElementById(toolboxId));
