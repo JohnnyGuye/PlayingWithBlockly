@@ -45,6 +45,10 @@ Blockly.CSharp.addVariablePrefix = function(varName) {
     return prefixedName;
 }
 
+Blockly.CSharp.makeExpressionLegal = function(expression) {
+    return expression.replace(/[a-z]\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) }).replace(/=+/, "==");
+}
+
 
 Blockly.CSharp['decodebytes'] = function (block) {
     var varName = block.getFieldValue('NAME');
@@ -85,7 +89,7 @@ Blockly.CSharp['decodesignedinteger'] = function (block) {
 Blockly.CSharp['compute'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var expression = block.getFieldValue('FUNCTION');
-    var legalExpression = expression.replace(/\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) });
+    var legalExpression = Blockly.CSharp.makeExpressionLegal(expression);
     var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + legalExpression + ')\n.End()\n';
     return code;
 };
@@ -107,7 +111,7 @@ Blockly.CSharp['decodeboolean'] = function (block) {
 
 Blockly.CSharp['switch'] = function (block) {
     var varName = block.getFieldValue('VARIABLE');
-    var legalVarName = varName.replace(/\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) });
+    var legalVarName = Blockly.CSharp.makeExpressionLegal(varName);
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
     var code = '.Switch(decodingContextData => ' + legalVarName + ')\n' + statement + '.EndSwitch()\n';
     return code;
@@ -165,13 +169,15 @@ Blockly.CSharp['decodeframe'] = function (block) {
 Blockly.CSharp["custom_controls_if"] = function (block) {
     // If/elseif/else condition.
     var n = 0;
-    var argument = block.getFieldValue('IF' +n) || 'false';
+    var argument = block.getFieldValue('IF' + n) || 'false';
+    var legalExpression = Blockly.CSharp.makeExpressionLegal(argument);
     var branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
-    var code = '.If( decodingContextData => decodingContextData.' + argument + ') \n' + branch;//previously if
+    var code = '.If( decodingContextData => ' + legalExpression + ') \n' + branch;//previously if
     for (n = 1; n <= this.elseifCount_; n++) {
         argument = block.getFieldValue('IF' + n) || 'false';
+        legalExpression = Blockly.CSharp.makeExpressionLegal(argument);
         branch = Blockly.CSharp.statementToCode(this, 'DO' + n);
-        code += '.ElseIf(decodingContextData => decodingContextData.' + argument + ') \n' + branch;
+        code += '.ElseIf(decodingContextData => ' + legalExpression + ') \n' + branch;
     }
     if (this.elseCount_) {
         branch = Blockly.CSharp.statementToCode(this, 'ELSE');

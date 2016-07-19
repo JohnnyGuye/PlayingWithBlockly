@@ -290,10 +290,11 @@ Blockly.Blocks['decodeboolean'] = {
 Blockly.Blocks['check_frame_length'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Verifier longeur de la trame :");
+            .appendField("Verifier longeur de la trame ");
         this.appendDummyInput()
-            .appendField("taille attendue ")
-            .appendField(new Blockly.FieldTextInput("12"), "SIZE");
+            .appendField("taille attendue :")
+            .appendField(new Blockly.FieldTextInput("12"), "SIZE")
+            .appendField("octets");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(120);
