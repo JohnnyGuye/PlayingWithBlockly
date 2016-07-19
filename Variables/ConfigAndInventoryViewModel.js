@@ -10,8 +10,14 @@ Squid.Variables.Types = {};
 Squid.Variables.Types.CONFIG = "configuration";
 Squid.Variables.Types.INVENTORY = "inventory";
 
+/**
+ * Initialize the workspaces for configuration and inventory. 
+ * If only one workspace specified, it works for both.
+ * @param {Blockly.Workspace} config 
+ * @param {Blockly.Workspace} inventory 
+ */
 Squid.Variables.InitWorkspaces = function (config, inventory) {
-    if (config === null) throw "Argument should not be null";
+    if (config === null) throw "First argument should not be null";
     Squid.Variables.ConfigurationWorkspace = config;
     Squid.Variables.InventoryWorkspace = (inventory ? inventory : config);
     Squid.Variables.configCount = 0;
@@ -91,70 +97,69 @@ Squid.Variables.incVariable = function (type, value) {
  */
 Squid.Variables.create = function (type) {
     type = type.toLowerCase();
-    var workspace   = Squid.Variables.getWorkspace(type);
-    var prefix      = Squid.Variables.getPrefix(type);
-    var count       = Squid.Variables.getCount(type);
+    var workspace = Squid.Variables.getWorkspace(type);
+    var prefix = Squid.Variables.getPrefix(type);
+    var count = Squid.Variables.getCount(type);
     if (workspace == null) throw "Not a valid type";
- 
+
     var name = prefix + count;
-    var table = $(Squid.Variables.getAnchor(type)).get()[0];
-    
+    var table = $(Squid.Variables.getAnchor(type));
+
     workspace.newBlock("variables_get", "var");
     Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, name, workspace);
 
-    var label = document.createElement("input");
-    label.setAttribute("type", "text");
-    label.setAttribute("class", "variable-name");
-    label.setAttribute("id", name + "_label");
-    label.setAttribute("name", name + "l");
-    label.setAttribute("value", name);
-    label.setAttribute("onclick", "Squid.Variables.rename(" + type + "," + count + ")");
+    var label = $("<input>");
+    label.attr("type", "text");
+    label.attr("class", "variable-name");
+    label.attr("id", name + "_label");
+    label.attr("name", name);
+    label.attr("value", name);
+    label.attr("oldValue", name);
+    label.on("input",
+        function () {
+            Squid.Variables.rename(this, type);
+        });
 
-    var input = document.createElement("input");
-    input.setAttribute("type", "number");
-    input.setAttribute("id", name + "_input");
-    input.setAttribute("name", name);
-    input.setAttribute("class", "dev-block");
+    var input = $("<input>");
+    input.attr("type", "number");
+    input.attr("id", name + "_input");
+    input.attr("name", name);
+    input.attr("class", "dev-block");
 
-    var button = document.createElement("button");
-    button.setAttribute("class", "delete-button");
-    button.setAttribute("onclick", "Squid.Variables.delete('" + type + "', " + count + ")");
-    button.innerHTML = " x ";
+    var button = $("<button>");
+    button.attr("class", "delete-button");
+    button.attr("onclick", "Squid.Variables.delete('" + type + "', " + count + ")");
+    button.html(" x ");
 
-    var row = document.createElement("tr");
-    row.setAttribute("id", name + "_row");
-    var cell = document.createElement("td");
-    cell.appendChild(label);
-    row.appendChild(cell);
+    var row = $("<tr>");
+    row.attr("id", name + "_row");
+    var cell = $("<td>");
+    cell.append(label);
+    row.append(cell);
 
-    cell = document.createElement("td");
-    cell.appendChild(input);
-    row.appendChild(cell);
+    cell = $("<td>");
+    cell.append(input);
+    row.append(cell);
 
-    cell = document.createElement("td");
-    cell.appendChild(button);
-    row.appendChild(document.createElement("td").appendChild(button));
+    cell = $("<td>");
+    cell.append(button);
+    row.append(cell);
 
-    table.appendChild(row);
+    table.append(row);
 
     Squid.Variables.incVariable(type);
 }
 
-//TODO
 /**
  * Rename a variable using id and type
  * @param {Squid.Variables.Type} type 
  * @param {Number} variableId 
  */
-Squid.Variables.rename = function (type, variableId) {
-    var prefix = Squid.Variables.getPrefix(type);
-    var fullId = prefix + variableId;
-
-    var label = $("#" + fullId + "_label");
-    var oldName = label.attr("value");
-
-    var newName = document.getElementById(fullId + "_label").getAttribute("value");
-    Blockly.Variables.renameVariable(oldName, newName, workspace);
+Squid.Variables.rename = function (input, type) {
+    var oldValue = $(input).attr("oldValue");
+    var value = $(input).val();
+    Blockly.Variables.renameVariable(oldValue, value, Squid.Variables.getWorkspace(type));
+    $(input).attr("oldValue", value);
 }
 
 /**
@@ -164,12 +169,10 @@ Squid.Variables.rename = function (type, variableId) {
  */
 Squid.Variables.delete = function (type, variableId) {
     var workspace = Squid.Variables.getWorkspace(type);
-    var prefix = Squid.Variables.getPrefix(type);
-    if (prefix === "") throw "Not a valid type";
+    var fullId = Squid.Variables.getPrefix(type) + variableId;
 
-    var elem = document.getElementById(prefix + variableId + "_label");
-    var name = elem.getAttribute("value");
-    Blockly.Variables.renameVariable(name, "undefined", workspace);
+    var elem = $("#" + fullId + "_label");
+    Blockly.Variables.renameVariable(elem.val(), "undefined", workspace);
 
-    $("#" + prefix + variableId + "_row").remove();
+    $("#" + fullId + "_row").remove();
 }
