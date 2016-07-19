@@ -180,6 +180,14 @@ Blockly.CSharp["custom_controls_if"] = function (block) {
     return code + '.EndIf()\n';//previously code + '\n'
 };
 
+Blockly.CSharp['check_frame_length'] = function (block) {
+    var size = block.getFieldValue('SIZE');
+    var code = '.If(decodingContextData => decodingContextData.DecodedValues.FrameLength != ' + size + ')' +
+        '\n\t.RaiseErrorIncorrectFrameLength()' +
+        '\n.EndIf()\n';
+    return code;
+};
+
 
 
 

@@ -287,8 +287,22 @@ Blockly.Blocks['decodeboolean'] = {
     }
 };
 
-//block general : 
+Blockly.Blocks['check_frame_length'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Verifier longeur de la trame :");
+        this.appendDummyInput()
+            .appendField("taille attendue ")
+            .appendField(new Blockly.FieldTextInput("12"), "SIZE");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip('');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5739c7');
+    }
+};
 
+//DEPRECATED
 Blockly.Blocks['decodeframe'] = {
     init: function () {
         this.appendDummyInput()
