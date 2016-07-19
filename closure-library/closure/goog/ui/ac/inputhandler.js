@@ -226,7 +226,7 @@ goog.ui.ac.InputHandler.REQUIRES_ASYNC_BLUR_ =
  * @type {string}
  * @const
  */  //TEEEEEEEEEEEEEEEEST
-goog.ui.ac.InputHandler.STANDARD_LIST_SEPARATORS = ',;+*/<>-';
+goog.ui.ac.InputHandler.STANDARD_LIST_SEPARATORS = ',;+*/=<>-';
 
 
 /**

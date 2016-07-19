@@ -10,6 +10,7 @@
       <block type="case"></block>
       <block type="default"></block>
       <block type="custom_controls_if"></block>
+      <block type="check_frame_length"></block>
     </category>
 
 

@@ -31,6 +31,21 @@ Blockly.CSharp.prepareBytesAndBits = function(args) {
     }
 }
 
+Blockly.CSharp.addVariablePrefix = function(varName) {
+    var prefixedName;
+
+    if (varName.indexOf("config_") === 0) {
+        prefixedName = "decodingContextData.configurationData." + varName.substring(7);
+    }
+    else if (varName.indexOf("inv_") === 0) {
+        prefixedName = "decodingContextData.inventoryData." + varName.substring(4);
+    } else {
+        prefixedName = "decodingContextData.decodedValues." + varName;
+    }
+    return prefixedName;
+}
+
+
 Blockly.CSharp['decodebytes'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var startPos = block.getFieldValue('start');
@@ -70,7 +85,8 @@ Blockly.CSharp['decodesignedinteger'] = function (block) {
 Blockly.CSharp['compute'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var expression = block.getFieldValue('FUNCTION');
-    var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + expression + ')\n';
+    var legalExpression = expression.replace(/\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) });
+    var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + legalExpression + ')\n.End()\n';
     return code;
 };
 
@@ -91,24 +107,27 @@ Blockly.CSharp['decodeboolean'] = function (block) {
 
 Blockly.CSharp['switch'] = function (block) {
     var varName = block.getFieldValue('VARIABLE');
+    var legalVarName = varName.replace(/\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) });
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
-    var code = '.Switch(decodingContextData => decodingContextData.' + varName + ')\n' + statement + '.EndSwitch()\n';
+    var code = '.Switch(decodingContextData => ' + legalVarName + ')\n' + statement + '.EndSwitch()\n';
     return code;
 };
 
 Blockly.CSharp['case'] = function (block) {
     var value = block.getFieldValue('value');
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
-    var code = '.Case('+value+')\n'+statement;
+    var code = '.Case(' + value + ')\n' + statement;
     return code;
 };
 
 Blockly.CSharp['default'] = function (block) {
     var statement = Blockly.CSharp.statementToCode(block, 'STATEMENT');
-    var code = '.Default()\n'+statement;
+    var code = '.Default()\n' + statement;
     return code;
 };
 
+
+//DEPRECATED BLOCK
 Blockly.CSharp['decodeframe'] = function (block) {
     var frameName = block.getFieldValue('NAME');
     var statement = Blockly.CSharp.statementToCode(block, 'blocks');
@@ -159,6 +178,14 @@ Blockly.CSharp["custom_controls_if"] = function (block) {
         code += '.Else() \n' + branch;
     }
     return code + '.EndIf()\n';//previously code + '\n'
+};
+
+Blockly.CSharp['check_frame_length'] = function (block) {
+    var size = block.getFieldValue('SIZE');
+    var code = '.If(decodingContextData => decodingContextData.DecodedValues.FrameLength != ' + size + ')' +
+        '\n\t.RaiseErrorIncorrectFrameLength()' +
+        '\n.EndIf()\n';
+    return code;
 };
 
 
