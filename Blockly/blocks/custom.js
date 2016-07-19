@@ -239,7 +239,7 @@ Blockly.Blocks['case'] = {
             .setCheck(null)
             .appendField("cas : ")
             .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables), "value")
-            .appendField("faire");
+            .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(9);
