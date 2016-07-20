@@ -8,10 +8,18 @@ Squid.Storage.BaseUrl = function () {
     return window.location.href.split('#')[0] + "#";
 }
 
-Squid.Storage.PrincipalStorage = "princWS";
-Squid.Storage.SecondaryStorage = "secWS";
-Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
+Squid.Storage.PrincipalStorage  = "princWS";
+Squid.Storage.SecondaryStorage  = "secWS";
+Squid.Storage.SaveLocations     = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
+
+Squid.Storage.init = function () {
+    this.Storage.ConfigList = new Array();
+    this.Storage.ConfigList.push("FirstList");
+
+    console.log(this.Storage.ConfigList[0]);
+};
+
 
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
@@ -23,9 +31,7 @@ Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
 Squid.Storage.SaveWorkspace = function (workspace, location) {
     // Gets the current URL, not including the hash.
     var baseUrl = Squid.Storage.BaseUrl();
-
     Squid.Storage.SaveFunction(workspace);
-
     backupBlocks(workspace, baseUrl + location);
 };
 
@@ -40,7 +46,6 @@ Squid.Storage.SaveFunction = function(workspace) {
         blocks = children[i].getTopBlocks();
         for (var j = 0; j < blocks.length; j++) {
             if (blocks[j].getProcedureDef) {
-                console.log(blocks[j].getProcedureDef());
                 workspaceSec.addTopBlock(blocks[j]);
             }
         }
@@ -52,6 +57,11 @@ Squid.Storage.SaveFunction = function(workspace) {
 
     backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
 }
+
+Squid.Storage.SaveConfig = function(workspace, name) {
+    Squid.Storage.backupBlocks(workspace, Squid.Storage.Configs + "_" + name);
+
+} 
 
 function backupBlocks (workspace, url) {
   if ('localStorage' in window) {
@@ -72,7 +82,7 @@ function backupBlocks (workspace, url) {
 
 // Reload datas to a workspace
 Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
-    var baseUrl = window.location.href.split('#')[0] + "#";
+    var baseUrl = Squid.Storage.BaseUrl();
     if (workspace != null && location != null) {
         workspace.clear();
         restoreBlocks(workspace, baseUrl + location);

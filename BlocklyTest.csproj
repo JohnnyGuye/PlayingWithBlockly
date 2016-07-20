@@ -3134,7 +3134,6 @@
     <Content Include="postCode.js" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
-    <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
     <Content Include="Toolbox\category.js" />
     <Content Include="Variables\ConfigAndInventoryViewModel.js" />
     <Content Include="web.config" />
