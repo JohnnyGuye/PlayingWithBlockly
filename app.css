@@ -9,7 +9,7 @@ span {
 
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 800px;
+    height: 1000px;
     width: 100%; /*1000*/
     z-index: 800;
 }
@@ -270,7 +270,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     padding: 10px;
     color: white;
     background-color: #200000;
-    height: auto;
+    height: 100%;
     border-radius: 5px 5px 5px 5px;
 }
 
