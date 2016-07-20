@@ -663,6 +663,13 @@
     <Content Include="bootstrap-3.3.6\package.js" />
     <Content Include="bootstrap-3.3.6\test-infra\requirements.txt" />
     <Content Include="bootstrap-3.3.6\test-infra\s3_cache.py" />
+    <Content Include="Contents\icons\arrow-right-white.png" />
+    <Content Include="Contents\icons\arrow-right.png" />
+    <Content Include="Contents\icons\ico-arrow-right-white.png" />
+    <Content Include="Contents\icons\ico-clear.png" />
+    <Content Include="Contents\icons\ico-refresh.png" />
+    <Content Include="Contents\icons\ico-research.png" />
+    <Content Include="Contents\icons\ico-save.png" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-mocks.js" />
