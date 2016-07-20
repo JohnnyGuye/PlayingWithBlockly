@@ -2,6 +2,8 @@
 
 Blockly.CSharp.custom = {};
 
+// UTIL
+
 Blockly.CSharp.addMIfNeeded = function (param) {
     if (!isNaN(param)) {
             param = param + 'M';
@@ -45,19 +47,33 @@ Blockly.CSharp.addVariablePrefix = function(varName) {
     return prefixedName;
 }
 
+/**
+ * 
+ * @param {String} expression to make legal 
+ * @returns {String} the expression with the good prefixes and if needed '==' instead of '=' 
+ */
 Blockly.CSharp.makeExpressionLegal = function(expression) {
     return expression.replace(/[a-z]\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) }).replace(/=+/, "==");
 }
 
+Blockly.CSharp.addQuotesIfNeeded = function(varName) {
+    if (varName.indexOf('$') === 0) {
+        return varName.substring(1);
+    } else {
+        return '"' + varName + '"';
+    }
+}
+
+// BLOCKS
 
 Blockly.CSharp['decodebytes'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var startPos = block.getFieldValue('start');
     var endPos = block.getFieldValue('end');
+    varName = Blockly.CSharp.addQuotesIfNeeded(varName);
     startPos = Blockly.CSharp.addMIfNeeded(startPos);
     endPos = Blockly.CSharp.addMIfNeeded(endPos);
-    //var code = '.DecodeBytes("' + varName + '", ' + startPos + 'M, ' + endPos + 'M).End()\n';
-    var code = '.DecodeBytes("' + varName + '", ' + startPos + ', ' + endPos + ').End()\n';
+    var code = '.DecodeBytes(' + varName + ', ' + startPos + ', ' + endPos + ').End()\n';
     return code;
 };
 
@@ -68,9 +84,10 @@ Blockly.CSharp['decodeunsignedinteger'] = function (block) {
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
     var lsbit = block.getFieldValue('LSBIT');
+    varName = Blockly.CSharp.addQuotesIfNeeded(varName);
     var ms = Blockly.CSharp.prepareBytesAndBits([ msbyte, msbit ]);
     var ls = Blockly.CSharp.prepareBytesAndBits([ lsbyte, lsbit ]);
-    var code = '.DecodeUnsignedInteger("' + varName + '", ' + ls + ', ' + ms + ').End()\n';
+    var code = '.DecodeUnsignedInteger(' + varName + ', ' + ls + ', ' + ms + ').End()\n';
     return code;
 };
 
@@ -80,17 +97,19 @@ Blockly.CSharp['decodesignedinteger'] = function (block) {
     var lsbyte = block.getFieldValue('LSBYTE');
     var msbit = block.getFieldValue('MSBIT');
     var lsbit = block.getFieldValue('LSBIT');
+    varName = Blockly.CSharp.addQuotesIfNeeded(varName);
     var ms = Blockly.CSharp.prepareBytesAndBits([msbyte, msbit]);
     var ls = Blockly.CSharp.prepareBytesAndBits([lsbyte, lsbit]);
-    var code = '.DecodeSignedInteger("' + varName + '", ' + ls + ', ' + ms + ').End()\n';
+    var code = '.DecodeSignedInteger(' + varName + ', ' + ls + ', ' + ms + ').End()\n';
     return code;
 };
 
 Blockly.CSharp['compute'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var expression = block.getFieldValue('FUNCTION');
+    varName = Blockly.CSharp.addQuotesIfNeeded(varName);
     var legalExpression = Blockly.CSharp.makeExpressionLegal(expression);
-    var code = '.Compute(\n\t"' + varName + '",\n\tdecodingContextData => ' + legalExpression + ')\n.End()\n';
+    var code = '.Compute(\n\t' + varName + ',\n\tdecodingContextData => ' + legalExpression + ')\n.End()\n';
     return code;
 };
 
@@ -104,8 +123,9 @@ Blockly.CSharp['decodeboolean'] = function (block) {
     var varName = block.getFieldValue('NAME');
     var bytepos = block.getFieldValue('BYTEPOS');
     var bitpos = block.getFieldValue('BITPOS');
+    varName = Blockly.CSharp.addQuotesIfNeeded(varName);
     var pos = Blockly.CSharp.prepareBytesAndBits([bytepos, bitpos]);
-    var code = '.DecodeBoolean("' + varName + '", ' + pos + ').End()\n';
+    var code = '.DecodeBoolean(' + varName + ', ' + pos + ').End()\n';
     return code;
 };
 
