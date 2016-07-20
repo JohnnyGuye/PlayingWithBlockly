@@ -11,7 +11,7 @@ Squid.Storage.BaseUrl = function () {
 Squid.Storage.PrincipalStorage = "princWS";
 Squid.Storage.SecondaryStorage = "secWS";
 Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
-
+Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
 
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 

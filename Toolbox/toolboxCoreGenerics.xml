@@ -1,9 +1,5 @@
 ﻿<xml>
   <div id="toolboxGeneric" style="display: none">
-
-    <category name="Refresh" custom="PROCEDURE_ALT" colour="80"></category>
-
-    <sep gap="8"></sep>
     
     <category name="Briques de base" colour="250">
       <block type="decodebytes"></block>
