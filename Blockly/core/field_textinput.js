@@ -44,16 +44,19 @@ goog.require('goog.ui.ac');
  *     text as an argument and returns either the accepted text, a replacement
  *     text, or null to abort the change.
  * @param {Function=} opt_autoCompleteData An optional function used to get the values( in an array) of the autocompletion
+ * @param {boolean} opt_createVar if this text input create a variable with the content of the input
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldTextInput = function (text, opt_validator, opt_autocompleteData) {
+Blockly.FieldTextInput = function (text, opt_validator, opt_autocompleteData, opt_createVar) {
     Blockly.FieldTextInput.superClass_.constructor.call(this, text, opt_validator);
     if (opt_autocompleteData) {
         this.setAutocompleteData(opt_autocompleteData);
         this.hasAutoComplete = true;
     }
+    if (opt_createVar) this.isVar = opt_createVar;
     
+
 };
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
@@ -88,6 +91,8 @@ Blockly.FieldTextInput.prototype.autocompleteData_ = null;
   * @private
   */
 Blockly.FieldTextInput.prototype.autocompleteUI_ = null;
+
+Blockly.FieldTextInput.prototype.isVar = false;
 
 //END TEST 1
 
@@ -289,6 +294,10 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
   // Update source block.
   var text = htmlInput.value;
   if (text !== htmlInput.oldValue_) {
+      if (this.isVar) {//TEST
+          Squid.removeSimpleVariable(htmlInput.oldValue_);
+          Squid.addSimpleVariable(text);
+      }//END TEST
     htmlInput.oldValue_ = text;
     this.setValue(text);
     this.validate_();
@@ -300,6 +309,7 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
     // Chrome only (version 26, OS X).
     this.sourceBlock_.render();
   }
+
   this.resizeEditor_();
   Blockly.svgResize(this.sourceBlock_.workspace);
 };
