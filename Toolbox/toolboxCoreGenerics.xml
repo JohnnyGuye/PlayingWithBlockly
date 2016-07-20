@@ -1,27 +1,27 @@
 ﻿<xml>
   <div id="toolboxGeneric" style="display: none">
+    
     <category name="Briques de base" colour="250">
-      <block type="decodebytes"></block>
-      <block type="decodeunsignedinteger"></block>
-      <block type="decodesignedinteger"></block>
       <block type="compute"></block>
       <block type="execute"></block>
       <block type="switch"></block>
       <block type="case"></block>
       <block type="default"></block>
-      <block type="custom_controls_if"></block>
       <block type="check_frame_length"></block>
+      <block type="custom_controls_if"></block>
     </category>
 
 
-    <category name="Blocks génériques" colour="270">
+    <category name="Blocks de décodage" colour="270">
+      <block type="decodebytes"></block>
       <block type="decodeboolean"></block>
-      <block type="decodeframe"></block>
+      <block type="decodesignedinteger"></block>
+      <block type="decodeunsignedinteger"></block>      
     </category>
 
     <sep gap="8"></sep>
 
-    <category name="Algorihtmie" colour="20">
+    <!--<category name="Algorihtmie" colour="20">
       <category name="Logic" id="catLogic" colour="210">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>
@@ -345,11 +345,11 @@
     <sep gap="8"></sep>
 
     <category name="Configuration" id="ConfigCategory" colour="0">
-      <!-- It's gonna be filled by the configuration variables -->
+      --><!-- It's gonna be filled by the configuration variables --><!--
     </category>
     <category name="Variables" custom="VARIABLE" colour="100"></category>
 
-    <sep gap="8"></sep>
+    <sep gap="8"></sep>-->
 
     <category name="Mes fonctions" id="NewCategory" colour="180">
       <!-- It's gonna be filled the same maneer as function and variables -->
@@ -358,8 +358,6 @@
     <category name="Recherche" id="SearchCategory" colour="200">
       <!-- It's gonna be filled by the functions in the good tag -->
     </category>
-    
-    <category name="Refresh" custom="PROCEDURE_ALT" colour="80"></category>
   
   </div>
 
@@ -388,10 +386,6 @@
       <block type="case"></block>
       <block type="default"></block>
       <block type="controls_if"></block>
-    </category>
-
-    <category name="Blocks génériques" colour="250">
-      <block type="decodeboolean"></block>
     </category>
 
 

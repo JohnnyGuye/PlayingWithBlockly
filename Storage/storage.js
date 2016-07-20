@@ -2,16 +2,16 @@
  * @fileoverview A file in which are all the utility fonction for saving.
  * @author johnnyq@hotmail.fr (Johnny Guye)
  */
-var SquidStorage = {};
+Squid.Storage = {};
 
-SquidStorage.BaseUrl = function () {
+Squid.Storage.BaseUrl = function () {
     return window.location.href.split('#')[0] + "#";
 }
 
-SquidStorage.PrincipalStorage = "princWS";
-SquidStorage.SecondaryStorage = "secWS";
-SquidStorage.SaveLocations = SquidStorage.BaseUrl() + "saveDictionary";
-
+Squid.Storage.PrincipalStorage = "princWS";
+Squid.Storage.SecondaryStorage = "secWS";
+Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
+Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
 
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
@@ -20,17 +20,17 @@ SquidStorage.SaveLocations = SquidStorage.BaseUrl() + "saveDictionary";
  * @param {Blockly.Workspace} The workspace you want to save.t
  * @param {string} location The location of the save.
  */
-SquidStorage.SaveWorkspace = function (workspace, location) {
+Squid.Storage.SaveWorkspace = function (workspace, location) {
     // Gets the current URL, not including the hash.
-    var baseUrl = SquidStorage.BaseUrl();
+    var baseUrl = Squid.Storage.BaseUrl();
 
-    SquidStorage.SaveFunction(workspace);
+    Squid.Storage.SaveFunction(workspace);
 
     backupBlocks(workspace, baseUrl + location);
 };
 
-SquidStorage.SaveFunction = function(workspace) {
-    var baseUrl = SquidStorage.BaseUrl();
+Squid.Storage.SaveFunction = function(workspace) {
+    var baseUrl = Squid.Storage.BaseUrl();
     var workspaceSec = new Blockly.Workspace();
     var blocks;
     // We create a new workspace in which we place all the blocks from the hidden workspace
@@ -50,7 +50,7 @@ SquidStorage.SaveFunction = function(workspace) {
         workspaceSec.addTopBlock(blocks[j]);
     }
 
-    backupBlocks(workspaceSec, baseUrl + SquidStorage.SecondaryStorage);
+    backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
 }
 
 function backupBlocks (workspace, url) {
@@ -71,7 +71,7 @@ function backupBlocks (workspace, url) {
 };
 
 // Reload datas to a workspace
-SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
+Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
     var baseUrl = window.location.href.split('#')[0] + "#";
     if (workspace != null && location != null) {
         workspace.clear();
@@ -80,7 +80,7 @@ SquidStorage.ReloadWorkspace = function (workspace, secondaryWorkspace, location
 
     if (secondaryWorkspace != null) {
         secondaryWorkspace.clear();
-		restoreBlocks(secondaryWorkspace, baseUrl + SquidStorage.SecondaryStorage);
+		restoreBlocks(secondaryWorkspace, baseUrl + Squid.Storage.SecondaryStorage);
 	}
 };
 

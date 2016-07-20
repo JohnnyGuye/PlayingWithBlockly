@@ -102,6 +102,7 @@ Squid.Variables.create = function (type) {
     var count = Squid.Variables.getCount(type);
     if (workspace == null) throw "Not a valid type";
 
+    var baseId = prefix + count;
     var name = "Variable" + count;
     var fullName = prefix + name;
     var table = $(Squid.Variables.getAnchor(type));
@@ -112,8 +113,8 @@ Squid.Variables.create = function (type) {
     var label = $("<input>");
     label.attr("type", "text");
     label.attr("class", "variable-name");
-    label.attr("id", fullName + "_label");
-    label.attr("name", fullName);
+    label.attr("id", baseId + "_label");
+    label.attr("name", baseId);
     label.attr("value", name);
     label.attr("oldValue", fullName);
     label.on("input",
@@ -123,8 +124,8 @@ Squid.Variables.create = function (type) {
 
     var input = $("<input>");
     input.attr("type", "number");
-    input.attr("id", fullName + "_input");
-    input.attr("name", fullName);
+    input.attr("id", baseId + "_input");
+    input.attr("name", baseId);
     input.attr("class", "dev-block");
 
     var button = $("<button>");
@@ -133,7 +134,7 @@ Squid.Variables.create = function (type) {
     button.html(" x ");
 
     var row = $("<tr>");
-    row.attr("id", fullName + "_row");
+    row.attr("id", baseId + "_row");
     var cell = $("<td>");
     cell.append(label);
     row.append(cell);
@@ -173,10 +174,12 @@ Squid.Variables.rename = function (input, type) {
  */
 Squid.Variables.delete = function (type, variableId) {
     var workspace = Squid.Variables.getWorkspace(type);
-    var fullId = Squid.Variables.getPrefix(type) + variableId;
+    var prefix = Squid.Variables.getPrefix(type);
+    var baseId = prefix + variableId;
 
-    var elem = $("#" + fullId + "_label");
-    Blockly.Variables.renameVariable(elem.val(), "undefined", workspace);
+    var elem = $("#" + baseId + "_label");
+    console.log(elem);
+    Blockly.Variables.renameVariable(prefix + elem.val(), "undefined", workspace);
 
-    $("#" + fullId + "_row").remove();
+    $("#" + baseId + "_row").remove();
 }
