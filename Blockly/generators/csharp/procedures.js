@@ -20,9 +20,9 @@ Blockly.CSharp.procedures_defreturn = function() {
 
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {
-    //TEST args[x] = Blockly.CSharp.variableDB_.getName(this.arguments_[x],
-      //TEST Blockly.Variables.NAME_TYPE);
-      args[x] = this.getFieldValue('ARG' + x);
+    args[x] = Blockly.CSharp.variableDB_.getName(this.arguments_[x],
+    Blockly.Variables.NAME_TYPE);
+      //args[x] = this.getFieldValue('ARG' + x);
   }
 
   var append_to_list = function (res, val) {
@@ -45,13 +45,15 @@ Blockly.CSharp.procedures_defreturn = function() {
     for (var x = 0; x < args.length; x++) {
         argsWithType[x] = 'dynamic ' + args[x];//éventuellement à remplacer par object
     }
+    var argsString = argsWithType.join(', ');
+
 
   var delegateType = (returnValue.length == 0) ? 'Action' : ('Func<' + argTypes + '>');
 
   var code = 'var ' + funcName + ' = new ' + delegateType + '((' + args.join(', ') + ') => {\n' + branch + returnValue + '});';
     if (!returnValue) {
         //code = 'public static void ' + funcName + ' (' + argsWithType.join(', ') + ') \n{\n' + branch + '\n}';
-        code = 'public static TDecodableBlock ' + funcName + '<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep)' +
+        code = 'public static TDecodableBlock ' + funcName + '<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep, ' + argsString + ')' +
             '\n\twhere TDecodableBlock : IDecodableStep<TDecodableBlock>' +
             '\n{' +
             '\n\tContract.Requires<ArgumentNullException>(previousDecodableStep != null);' +
