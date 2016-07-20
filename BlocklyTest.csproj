@@ -664,6 +664,7 @@
     <Content Include="bootstrap-3.3.6\test-infra\requirements.txt" />
     <Content Include="bootstrap-3.3.6\test-infra\s3_cache.py" />
     <Content Include="Dev\dev-mode.js" />
+    <Content Include="index.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -3101,8 +3102,7 @@
     <Content Include="closure-library\third_party\closure\goog\svgpan\svgpan.js" />
     <Content Include="ServerStorage\GeneratedCode.txt" />
     <Content Include="Global.asax" />
-    <Content Include="index.html" />
-    <Content Include="landingPagetheme2.html" />
+    <Content Include="decoder.html" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.dll" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.pdb" />
@@ -3124,7 +3124,6 @@
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.min.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\jquery.js" />
-    <Content Include="landingPage.html" />
     <Content Include="postCode.js" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />

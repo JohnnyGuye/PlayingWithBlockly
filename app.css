@@ -66,6 +66,27 @@ span {
     color: white !important;
 }
 
+.blocklyTreeIconClosedLtr {
+    background-image: url('Contents/icons/ico-arrow-right-white.png') !important;
+    background-repeat: no-repeat;
+    background-position: left top !important;
+    background-size: 100% 100%;
+    transition: .1s;
+    transform: rotate(0deg);
+}
+
+.blocklyTreeIconOpen {
+    transition: .1s;
+    background-image: url('Contents/icons/ico-arrow-right-white.png') !important;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left top !important;
+    transform: rotate(45deg);
+}
+
+.blocklyTreeLabel {
+    font-style: normal !important;
+}
 
 /* ---------------- Generated code ------------------- */
 .top-layer {
@@ -253,10 +274,6 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     border-radius: 5px 5px 5px 5px;
 }
 
-.searchbar {
-    color: black;
-}
-
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
     z-index: 0;
@@ -280,51 +297,76 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 .toolbar-group {
     padding: 0px;
     margin: 0px;
-    margin-bottom: 0px;
+    padding-top: 2px;
     display: inline-block;
-    height: 100%;
-    border-radius: 2px;
-    background-color: #ececec;   
+    height: 30px;
+    border-radius: 0px;
+    border-top: 1px solid antiquewhite;  
 }
 
-#search-bar {
-    margin: 0;
+.toolbar-group input {
+    position: relative;
+    top: -10px !important;
     padding: 0 2px;
-    height : 28px;
-    border: 0px;
-    border-bottom: solid grey 3px;
-    color: black;
+    color: #200000;
+}
+
+.save {
+    background-image: url("Contents/icons/ico-save.png");
+}
+
+.clear {
+    background-image: url("Contents/icons/ico-clear.png");    
+}
+
+.refresh {
+    background-image: url("Contents/icons/ico-refresh.png");
+}
+
+.research {
+    background-image: url("Contents/icons/ico-research.png");
+}
+
+.toolbar-group button {
+    margin: 0px;
+    padding: 0px;
+    background-color: antiquewhite; 
+    width: 30px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    -ms-background-size: 80% 80%;
+    background-size: 80% 80%;  
 }
 
 .item-workspace {
-    color: black;
-    transition: 1s;
+    position: relative;
+    box-shadow: 0 0 1px 0px #200000 inset;
+    border-radius: 1px;
+    color: #200000;
+    transition: 0.1s;
     display: inline-block;
     font-family: 'Segoe UI', sans-serif;
     font-style: normal;
     font-weight: bold;
-    background-color: #ececec;
-    border-radius: 2px;
+    background-color: antiquewhite;
     height: 30px;
     margin-top: 0px;
-    position: relative;
     border: 0;
-    border-bottom: solid grey 3px;
 }
 
-.item-workspace:hover {
-    transition: 0.1s;
-    background-color: #d0d0d0;
-    border-bottom: solid red 3px;
+.toolbar-group button:hover {
+    background-color: #f6d781;
 }
 
-.item-workspace:active {
+.toolbar-group button:active {
     background-color: antiquewhite;
 }
 
-.item-workspace:selection {
+.toolbar-group button:selection {
     border-bottom-color: #454545;
 }
+
+
 
 .toolbar-onglet {
     margin-top: 2px;

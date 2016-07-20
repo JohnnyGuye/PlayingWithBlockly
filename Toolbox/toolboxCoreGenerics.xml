@@ -1,5 +1,10 @@
 ﻿<xml>
   <div id="toolboxGeneric" style="display: none">
+
+    <category name="Refresh" custom="PROCEDURE_ALT" colour="80"></category>
+
+    <sep gap="8"></sep>
+    
     <category name="Briques de base" colour="250">
       <block type="decodebytes"></block>
       <block type="decodeunsignedinteger"></block>
@@ -21,7 +26,7 @@
 
     <sep gap="8"></sep>
 
-    <category name="Algorihtmie" colour="20">
+    <!--<category name="Algorihtmie" colour="20">
       <category name="Logic" id="catLogic" colour="210">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>
@@ -345,11 +350,11 @@
     <sep gap="8"></sep>
 
     <category name="Configuration" id="ConfigCategory" colour="0">
-      <!-- It's gonna be filled by the configuration variables -->
+      --><!-- It's gonna be filled by the configuration variables --><!--
     </category>
     <category name="Variables" custom="VARIABLE" colour="100"></category>
 
-    <sep gap="8"></sep>
+    <sep gap="8"></sep>-->
 
     <category name="Mes fonctions" id="NewCategory" colour="180">
       <!-- It's gonna be filled the same maneer as function and variables -->
@@ -358,8 +363,6 @@
     <category name="Recherche" id="SearchCategory" colour="200">
       <!-- It's gonna be filled by the functions in the good tag -->
     </category>
-    
-    <category name="Refresh" custom="PROCEDURE_ALT" colour="80"></category>
   
   </div>
 
