@@ -90,12 +90,15 @@ Squid.Variables.incVariable = function (type, value) {
     }
 }
 
+Squid.Variables.reset = function(type) {
+   Squid.Variables.incVariable(type, - Squid.Variables.getCount(type));
+}
 // ------------------------------------------------------------- Configuration
 /**
  * Create a new variable, 
  * @param {Squid.Variables.Type} type needs to be a valid type but can be a simple string
  */
-Squid.Variables.create = function (type) {
+Squid.Variables.create = function (type, name) {
     type = type.toLowerCase();
     var workspace = Squid.Variables.getWorkspace(type);
     var prefix = Squid.Variables.getPrefix(type);
@@ -103,7 +106,8 @@ Squid.Variables.create = function (type) {
     if (workspace == null) throw "Not a valid type";
 
     var baseId = prefix + count;
-    var name = "Variable" + count;
+    if(name == null) 
+        name = "Variable" + count;
     var fullName = prefix + name;
     var table = $(Squid.Variables.getAnchor(type));
 
@@ -182,4 +186,13 @@ Squid.Variables.delete = function (type, variableId) {
     Blockly.Variables.renameVariable(prefix + elem.val(), "undefined", workspace);
 
     $("#" + baseId + "_row").remove();
+}
+
+Squid.Variables.deleteAll = function(type) {
+    var workspace = Squid.Variables.getWorkspace(type);
+    workspace.clear();
+
+    Squid.Variables.reset(type);
+
+    $("#config-table").html("");
 }

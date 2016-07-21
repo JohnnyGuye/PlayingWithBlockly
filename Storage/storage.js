@@ -13,6 +13,7 @@ Squid.Storage.SecondaryStorage = "secWS";
 Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
 
+Squid.Storage.ConfigLocations = [];
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
  * but they are all saved at the same place, which, you will restore only two workspaces,
@@ -40,17 +41,60 @@ Squid.Storage.SaveFunction = function(workspace) {
         blocks = children[i].getTopBlocks();
         for (var j = 0; j < blocks.length; j++) {
             if (blocks[j].getProcedureDef) {
-                console.log(blocks[j].getProcedureDef());
                 workspaceSec.addTopBlock(blocks[j]);
             }
         }
     }
+
     blocks = workspace.getTopBlocks();
     for (var j = 0; j < blocks.length; j++) {
-        workspaceSec.addTopBlock(blocks[j]);
+        if (blocks[j].getProcedureDef) {
+            workspaceSec.addTopBlock(blocks[j]);
+        }
     }
 
     backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
+}
+
+/**
+ * Save the configs from a workspace to a specified location 
+ * @param {} workspace 
+ * @param {} name 
+ * @returns {} 
+ */
+Squid.Storage.SaveConfigs = function(workspace, name) {
+    var configUrl = Squid.Storage.Configs;
+
+    backupBlocks(workspace, configUrl + "_" + name);
+
+    for (var i = 0; i < Squid.Storage.ConfigLocations.length; i++) {
+        if (Squid.Storage.ConfigLocations[i] == name) {
+            console.warn("Old value deleted");
+            return;
+        }
+    }
+    Squid.Storage.ConfigLocations.push(name);
+
+    
+}
+
+/**
+ * Restore a config from a location to a workspace
+ * @param {} opt_workspace 
+ * @param {} name 
+ * @returns {} 
+ */
+Squid.Storage.RestoreConfigs = function(opt_workspace, name) {
+    var configUrl = Squid.Storage.Configs;
+
+    for (var i = 0; i < Squid.Storage.ConfigLocations.length; i++) {
+        if (Squid.Storage.ConfigLocations[i] == name) {
+            restoreBlocks(opt_workspace, configUrl + "_" + name);
+            return;
+        }
+    }
+
+    console.warn("No config set at that name.");
 }
 
 function backupBlocks (workspace, url) {
