@@ -116,10 +116,10 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("poids fort    ")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBYTE")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBYTE");
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBIT");
         this.appendDummyInput()
             .appendField("poids faible ")
-            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBIT")
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBYTE")
             .appendField("           ")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBIT");
         this.setPreviousStatement(true, null);
@@ -146,10 +146,10 @@ Blockly.Blocks['decodesignedinteger'] = {
             .appendField("poids fort    ")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBYTE")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBYTE");
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBIT");
         this.appendDummyInput()
             .appendField("poids faible ")
-            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBIT")
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBYTE")
             .appendField("           ")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBIT");
         this.setPreviousStatement(true, null);
