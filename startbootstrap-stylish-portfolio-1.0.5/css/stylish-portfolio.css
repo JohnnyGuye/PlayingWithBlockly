@@ -24,48 +24,31 @@ body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-.text-vertical-center {
+.start-button {
     display: table-cell;
     text-align: center;
-    vertical-align: middle;
-    color: #fff; /*this is for landingPage2*/
-}
-
-.text-vertical-center h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 4.5em;
-    font-weight: 700;
+    position : relative;
+    top : 8%;
+    color: black;
 }
 
 /* Custom Button Styles */
 
 .btn-dark {
-    border-radius: 0;
-    color: rgba(0,0,0,0.4); /* inverser pour revenir a theme1*/
-    background-color: #fff ;
+    color: #fff ;
+    background-color: rgba(0,0,0,0.4) ;
+    -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border: 4px solid #009900;
+  padding: 15px;
 }
 
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
     color: #fff;
-    background-color: rgba(0,0,0,0.7);
+    background-color: #ff6a00;
 }
-
-.btn-light {
-    border-radius: 0;
-    color: #333;
-    background-color: rgb(255,255,255);
-}
-
-.btn-light:hover,
-.btn-light:focus,
-.btn-light:active {
-    color: #333;
-    background-color: rgba(255,255,255,0.8);
-}
-
 
 /* Header */
 

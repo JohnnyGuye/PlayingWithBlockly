@@ -373,11 +373,9 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
             Squid.removeSimpleVariable(thisField.oldText);
         } else {
             thisField.firstWriting = false;
-            console.log("first writing");
         }
         Squid.addSimpleVariable(text);
 
-        console.log(Squid.SimpleVariables);
     }//END TEST
 
     if (thisField.sourceBlock_ && thisField.validator_) {

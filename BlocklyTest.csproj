@@ -3120,14 +3120,8 @@
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\font-awesome\css\font-awesome.min.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme1-im0.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme1-im2.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme1-im3.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme2-im1.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme2-im10.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme2-im3.jpeg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme2-im8.jpg" />
-    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\theme2-im9.jpg" />
+    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\m2o_2.jpg" />
+    <Content Include="startbootstrap-stylish-portfolio-1.0.5\img\m2o_paint.png" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.min.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\jquery.js" />
