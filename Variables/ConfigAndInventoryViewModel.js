@@ -16,12 +16,25 @@ Squid.Variables.Types.INVENTORY = "inventory";
  * @param {Blockly.Workspace} config 
  * @param {Blockly.Workspace} inventory 
  */
-Squid.Variables.InitWorkspaces = function (config, inventory) {
-    if (config === null) throw "First argument should not be null";
-    Squid.Variables.ConfigurationWorkspace = config;
-    Squid.Variables.InventoryWorkspace = (inventory ? inventory : config);
+Squid.Variables.InitWorkspaces = function (configLocation, inventoryLocation) {
+    if (configLocation === null || inventoryLocation === null) throw "Argument should not be null";
+
+    var cw = Blockly.inject(configLocation);
+    cw.attachChildWorkspace(workspace);
+    cw.newBlock("variables_get", "var");
+    Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, "undefined", cw);
+
+    var iw = Blockly.inject(inventoryLocation);
+    iw.attachChildWorkspace(workspace);
+    iw.newBlock("variables_get", "var");
+    Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, "undefined", iw);
+
+    Squid.Variables.ConfigurationWorkspace = cw;
+    Squid.Variables.InventoryWorkspace = iw;
     Squid.Variables.configCount = 0;
     Squid.Variables.inventoryCount = 0;
+
+    
 }
 
 Squid.Variables.getPrefix = function(type) {

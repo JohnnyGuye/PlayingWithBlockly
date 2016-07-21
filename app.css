@@ -11,9 +11,13 @@ span {
     display: inline-block;
     position: relative;
 }
+
+.not-shown {
+    display: none;   
+}
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 1000px;
+    height: 800px;
     width: 100%; /*1000*/
     z-index: 800;
 }

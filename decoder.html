@@ -85,7 +85,8 @@
                 </button>
             </aside>
             <div class="col-lg-10">
-                <div id="blocklyDivConfiguration" class="" style="display:none"></div>
+                <!-- Configuration -->
+                <div id="blocklyDivConfiguration" class="not-shown"></div>
                 <div class="configuration">
                     <h1>Configuration</h1>
                     <div class="toolbar-workspace">
@@ -95,9 +96,9 @@
                                 <div class="inline-block">
                                     <button class="item-workspace restore"
                                             title="Restore un set de variables"
-                                            onclick="launchDropdownRestoreConfig(this)">                                      
+                                            onclick="launchDropdownRestoreConfig(this)">
                                     </button>
-                                </div>                                      
+                                </div>
                                 <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteConfig()"></button>
                                 <button class="item-workspace add" title="Ajouter une variable" onclick="createConfig()"></button>
                             </div>
@@ -106,20 +107,22 @@
                             </div>
                         </div>
                         <table id="config-table"></table>
-                    </div>       
+                    </div>
                 </div>
 
-                <div>
+                <!--Inventaire -->
+                <div id="blocklyDivInventory" class="not-shown"></div>
+                <div class="inventaire">
                     <h1>Inventaire</h1>
                     <div class="toolbar-workspace">
                         <div class="toolbar-group">
-                            <button class="item-workspace save" title="Sauvegarde les variables" onclick="saveConfig()"></button>
+                            <button class="item-workspace save" title="Sauvegarde les variables" onclick="saveInventory()"></button>
                             <div class="inline-block">
                                 <button class="item-workspace restore"
                                         title="Restore un set de variables"
-                                        onclick="launchDropdownRestoreConfig(this)"></button>
+                                        onclick="launchDropdownRestoreInventory(this)"></button>
                             </div>
-                            <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteConfig()"></button>
+                            <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteInventory()"></button>
                             <button class="item-workspace add" title="Ajouter une variable" onclick="createInventory()"></button>
                         </div>
                         <table id="inventory-table"></table>
@@ -139,7 +142,7 @@
                     <input id="resultat" type="text" class="textarea" value="resultat"/>
                 </div>
 
-                
+
 
             </div>
         </div>
@@ -188,7 +191,6 @@
 
     /* Workspaces */
     var workspace;
-    var configWorkspace;
     var hiddenWorkspace;
     var activWorkspace;
 
@@ -239,12 +241,9 @@
                             minScale: 0.1,
                             scaleSpeed: 1.3
                         }
-                    });
-                    configWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Configuration");
-                    configWorkspace.attachChildWorkspace(workspace);
-                    configWorkspace.newBlock("variables_get", "var");
-                    Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, "undefined", configWorkspace);
-                    Squid.Variables.InitWorkspaces(configWorkspace);
+                    });                 
+
+                    Squid.Variables.InitWorkspaces(BASE_BLOCKLY_DIV + "Configuration", BASE_BLOCKLY_DIV + "Inventory");
 
                     workspace.attachChildWorkspace(hiddenWorkspace);
                     Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
@@ -253,7 +252,7 @@
                     Squid.Dev.HideDevmode();
 
                     /* AutoCompletion */
-                    AutoComplete.variablesWorkspace = configWorkspace;
+                    AutoComplete.variablesWorkspace = Squid.Variables.getWorkspace(Squid.Variables.Types.CONFIG);
                     AutoComplete.categoryWorkspace = workspace;
                    
                     var autoCompleteTags = AutoComplete.GetTags();
@@ -296,9 +295,23 @@
             );
     }
 
-    function launchDropdownRestoreConfig(button) {
+    function saveInventory() {
+        Squid.Storage.SaveConfigs(
+            Squid.Variables.getWorkspace(Squid.Variables.Types.INVENTORY),
+            $("#inventory-title").text()
+            );
+    }
+
+    function launchDropdownRestoreConfig(button, type) {
         button = $(button);
-        var locations = Squid.Storage.ConfigLocations;
+        var locations;
+        if (type == Squid.Variables.Types.CONFIG) {
+            locations = Squid.Storage.ConfigLocations;
+        } else if (type == Squid.Variables.Types.INVENTORY) {
+            locations = Squid.Storage.InventoryLocations;
+        } else {
+            locations = [];
+        }
 
         var ul = $("<ul>");
         ul.attr("class", "dropdown");
@@ -306,32 +319,31 @@
         for (var i = 0; i < locations.length; i++) {
             var li = $("<li>");
             li.html(locations[i]);
-            li.on(restoreConfig(locations[i]));
+            li.on(restoreConfig(locations[i], type));
             ul.append(li);
         }
         button.append(ul);
         setTimeout(function() { button.html(""); }, 2000);
     }
 
-    function restoreConfig(location) {
-
+    function restoreConfig(location, type) {
         if (location) {
-            var tConfig = Squid.Variables.Types.CONFIG;
-            var workspace = Squid.Variables.getWorkspace(tConfig);
+            var workspace = Squid.Variables.getWorkspace(type);
 
             var names = Blockly.Variables.allVariables(workspace);
 
-            Squid.Variables.deleteAll(tConfig);
-            Squid.Storage.RestoreConfigs(
+            Squid.Variables.deleteAll(type);
+            Squid.Storage.RestoreVariables(
                 workspace,
-                location
+                location,
+                type
             );
 
-            var prefix = Squid.Variables.getPrefix(tConfig);
+            var prefix = Squid.Variables.getPrefix(type);
             for (var i = 1; i < names.length; i++) {
                 var l = prefix.length;
                 var name = names[i].substr(l, names[i].length - l);
-                Squid.Variables.create(tConfig, name);
+                Squid.Variables.create(type, name);
             }
             $("#config-title").text(location);
         } else {

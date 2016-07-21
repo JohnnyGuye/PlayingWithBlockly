@@ -12,8 +12,10 @@ Squid.Storage.PrincipalStorage = "princWS";
 Squid.Storage.SecondaryStorage = "secWS";
 Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
+Squid.Storage.Inventorys = Squid.Storage.BaseUrl() + "inventory";
 
 Squid.Storage.ConfigLocations = [];
+Squid.Storage.InventoryLocations = [];
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
  * but they are all saved at the same place, which, you will restore only two workspaces,
@@ -84,12 +86,22 @@ Squid.Storage.SaveConfigs = function(workspace, name) {
  * @param {} name 
  * @returns {} 
  */
-Squid.Storage.RestoreConfigs = function(opt_workspace, name) {
-    var configUrl = Squid.Storage.Configs;
+Squid.Storage.RestoreVariables = function (opt_workspace, name, type) {
+    var url = "";
+    var locations = [];
+    if (type == Squid.Variables.Types.CONFIG) {
+        url = Squid.Storage.Configs;
+        locations = Squid.Storage.ConfigLocations;
+    } else if (type == Squid.Variables.Types.INVENTORY) {
+        url = Squid.Storage.Inventorys;
+        locations = Squid.Storage.InventoryLocations;
+    } else {
+        url = Squid.Storage.BaseUrl();
+    }
 
-    for (var i = 0; i < Squid.Storage.ConfigLocations.length; i++) {
-        if (Squid.Storage.ConfigLocations[i] == name) {
-            restoreBlocks(opt_workspace, configUrl + "_" + name);
+    for (var i = 0; i < locations.length; i++) {
+        if (locations[i] == name) {
+            restoreBlocks(opt_workspace, url + "_" + name);
             return;
         }
     }
