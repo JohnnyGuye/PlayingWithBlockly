@@ -84,7 +84,7 @@ Blockly.Blocks['decodebytes'] = {
             .appendField("Decoder octets");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables, true), "NAME");
         this.appendDummyInput()
             .appendField("octet de debut :")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "start");
@@ -103,10 +103,10 @@ Blockly.Blocks['decodebytes'] = {
 Blockly.Blocks['decodeunsignedinteger'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField("Decoder Unsigned Integer");
+            .appendField("Decoder entier non signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldVariable("default"), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables, true), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -114,28 +114,29 @@ Blockly.Blocks['decodeunsignedinteger'] = {
             .appendField("        bit");
         this.appendDummyInput()
             .appendField("poids fort    ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBYTE")
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBYTE")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBYTE");
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBYTE");
         this.appendDummyInput()
             .appendField("poids faible ")
-            .appendField(new Blockly.FieldTextInput("0"), "MSBIT")
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "MSBIT")
             .appendField("           ")
-            .appendField(new Blockly.FieldTextInput("0"), "LSBIT");
+            .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "LSBIT");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(250);
         this.setTooltip('');
-        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#iy7kjc');
+        this.setHelpUrl('https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#9nq9w3');
     }
 };
+
 Blockly.Blocks['decodesignedinteger'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Decoder entier signe");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables, true), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
@@ -165,7 +166,7 @@ Blockly.Blocks['compute'] = {
             .appendField("Calculer : ");
         this.appendDummyInput()
             .appendField("Resultat : ")
-            .appendField(new Blockly.FieldTextInput("nom", null, AutoComplete.GetVariables), "NAME");
+            .appendField(new Blockly.FieldTextInput("nom", null, AutoComplete.GetVariables, true), "NAME");
         this.appendDummyInput()
             .appendField("Expression : ")
             .appendField(new Blockly.FieldTextInput("expression", null, AutoComplete.GetVariables), "FUNCTION");
@@ -246,7 +247,7 @@ Blockly.Blocks['decodeboolean'] = {
             .appendField("Decoder booleen :");
         this.appendDummyInput()
             .appendField("nom :")
-            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables), "NAME");
+            .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables, true), "NAME");
         this.appendDummyInput()
             .appendField("position :");
         this.appendDummyInput()
