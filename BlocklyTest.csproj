@@ -3131,6 +3131,7 @@
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />
     <Content Include="Toolbox\category.js" />
     <Content Include="Variables\ConfigAndInventoryViewModel.js" />
+    <Content Include="Variables\values.js" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />

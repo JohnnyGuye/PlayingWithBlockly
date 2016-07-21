@@ -60,6 +60,7 @@
     <script src="Blockly/generators/csharp/custom.js"></script>
 
     <script src="postCode.js"></script>
+    <script src="Variables/values.js"></script>
 
     <!--AutoCompletion-->
     <script src="autocomplete_util.js"></script>
@@ -97,12 +98,21 @@
                     <table id="inventory-table"></table>
                 </div>
 
+                <div id="Values">
+                    <h1>Valeurs</h1>
+
+                </div>
+                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>
+
                 <div id="decodingTest">
                     <h1>Tester le décodeur</h1>
                     <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
                     <input id="nom-decodeur" type="text" value="nom du décodeur"/>
                     <input id="resultat" type="text" class="textarea" value="resultat"/>
                 </div>
+
+                
+
             </div>
         </div>
     </aside>
