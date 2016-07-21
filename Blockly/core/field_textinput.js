@@ -31,6 +31,7 @@ goog.require('Blockly.Msg');
 goog.require('goog.asserts');
 goog.require('goog.dom');
 goog.require('goog.userAgent');
+//goog.require('Squid.SimpleVariable');
 
 //TEST
 goog.require('goog.ui.ac');
@@ -92,7 +93,16 @@ Blockly.FieldTextInput.prototype.autocompleteData_ = null;
   */
 Blockly.FieldTextInput.prototype.autocompleteUI_ = null;
 
+/**
+ * if this field represent a variable
+ */
 Blockly.FieldTextInput.prototype.isVar = false;
+
+Blockly.FieldTextInput.prototype.oldText = "";
+
+Blockly.FieldTextInput.prototype.firstWriting = true;
+
+
 
 //END TEST 1
 
@@ -113,27 +123,7 @@ Blockly.Field.prototype.setAutocompleteData = function (handler) {
     this.autocompleteData_ = handler;
 };
 
-/**
- * Callback called when autocomplete item is selected and input is
- * updated, used to notify input that a value was set so it resizes
- * if needed
- * @private
- */
-var i1=0;
-Blockly.Field.prototype.onAutoCompleteUpdate_ = function () {
 
-    alert(i1++);
-    //var target = this.autocompleteUI_.getTarget(),
-    //      text = target.value;
-    // this.setText(text);
-
-    // after one autocompletion the ui doesn't display anymore, that's
-    // why I remove it here so it's recreated
-    // this.autocompleteUI_.dismissOnDelay();
-    // this.autocompleteUI_ = null;
-    //this.resizeEditor_();
-    //Blockly.svgResize(this.sourceBlock_.workspace);
-};
 
 /**
  * Inits autocomplete attached to target only if not already inited,
@@ -207,8 +197,10 @@ Blockly.FieldTextInput.prototype.setSpellcheck = function(check) {
  *     focus.  Defaults to false.
  * @private
  */
-Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
-  this.workspace_ = this.sourceBlock_.workspace;
+Blockly.FieldTextInput.prototype.showEditor_ = function (opt_quietInput) {
+    this.oldText = this.text_;
+    this.workspace_ = this.sourceBlock_.workspace;
+
   var quietInput = opt_quietInput || false;
   if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
                       goog.userAgent.IPAD)) {
@@ -239,6 +231,7 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
 
   htmlInput.value = htmlInput.defaultValue = this.text_;
   htmlInput.oldValue_ = null;
+
   this.validate_();
   this.resizeEditor_();
   if (!quietInput) {
@@ -294,10 +287,7 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
   // Update source block.
   var text = htmlInput.value;
   if (text !== htmlInput.oldValue_) {
-      if (this.isVar) {//TEST
-          Squid.removeSimpleVariable(htmlInput.oldValue_);
-          Squid.addSimpleVariable(text);
-      }//END TEST
+      
     htmlInput.oldValue_ = text;
     this.setValue(text);
     this.validate_();
@@ -377,6 +367,19 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     var htmlInput = Blockly.FieldTextInput.htmlInput_;
     // Save the edit (if it validates).
     var text = htmlInput.value;
+
+    if (thisField.isVar && thisField.oldText !== text) {//TEST
+        if (!(thisField.firstWriting)) {
+            Squid.removeSimpleVariable(thisField.oldText);
+        } else {
+            thisField.firstWriting = false;
+            console.log("first writing");
+        }
+        Squid.addSimpleVariable(text);
+
+        console.log(Squid.SimpleVariables);
+    }//END TEST
+
     if (thisField.sourceBlock_ && thisField.validator_) {
       var text1 = thisField.validator_(text);
       if (text1 === null) {

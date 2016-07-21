@@ -235,7 +235,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
 .textarea {
     width: 100%;
-    height: 150px;
+    height: 90px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -273,6 +273,34 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     height: 100%;
     border-radius: 5px 5px 5px 5px;
 }
+
+#Values .list-group {
+    color: #604040;
+    height: auto;
+    max-height: 10em;
+    overflow-y: auto;
+    margin: 10px;
+    font-weight: bold;
+    padding-right: 7px;
+}
+
+#Values .list-group-item {
+   display: block;
+  padding: 3px 3px;
+}
+
+.side-bar table {
+  display: block;
+  max-height: 10em;
+  overflow-y: auto;
+  padding-right: 7px;
+}
+
+
+.col-lg-10 {
+    overflow: auto;
+}
+
 
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {

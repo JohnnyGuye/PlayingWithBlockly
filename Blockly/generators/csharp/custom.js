@@ -37,10 +37,10 @@ Blockly.CSharp.addVariablePrefix = function(varName) {
     var prefixedName;
 
     if (varName.indexOf(Squid.Variables.getPrefix(Squid.Variables.Types.CONFIG)) === 0) {
-        prefixedName = "decodingContextData.configurationData." + varName.substring(7);
+        prefixedName = "decodingContextData.configurationData." + varName.substring(2);
     }
     else if (varName.indexOf(Squid.Variables.getPrefix(Squid.Variables.Types.INVENTORY)) === 0) {
-        prefixedName = "decodingContextData.inventoryData." + varName.substring(4);
+        prefixedName = "decodingContextData.inventoryData." + varName.substring(2);
     } else {
         prefixedName = "decodingContextData.decodedValues." + varName;
     }
@@ -53,7 +53,7 @@ Blockly.CSharp.addVariablePrefix = function(varName) {
  * @returns {String} the expression with the good prefixes and if needed '==' instead of '=' 
  */
 Blockly.CSharp.makeExpressionLegal = function(expression) {
-    return expression.replace(/[a-z]\w+/g, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) }).replace(/=+/, "==");
+    return expression.replace(/[a-z]\w*/gi, function regexreplace(match) { return Blockly.CSharp.addVariablePrefix(match) }).replace(/=+/, "==");
 }
 
 Blockly.CSharp.addQuotesIfNeeded = function(varName) {
