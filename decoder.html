@@ -260,6 +260,9 @@
                     acTags = goog.ui.ac.createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
                     acTags.setAutoHilite(false);
 
+                    /* Simple Variables (not config nor inv) */
+                    reloadVariables();
+
                 });
         });
 
