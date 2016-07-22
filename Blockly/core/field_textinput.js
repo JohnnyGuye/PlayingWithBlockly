@@ -108,12 +108,14 @@ Blockly.FieldTextInput.prototype.firstWriting = true;
 
 /**
  * Close the input widget if this input is being deleted.
+ * If there is a variable with the same name as the input, it is removed
  */
 Blockly.FieldTextInput.prototype.dispose = function () {
     //TEST
     Squid.removeSimpleVariable(this.text_);
+    Squid.displaySimpleVariables();
     Blockly.WidgetDiv.hideIfOwner(this);
-  Blockly.FieldTextInput.superClass_.dispose.call(this);
+   Blockly.FieldTextInput.superClass_.dispose.call(this);
 };
 
 //TEST 2
@@ -125,14 +127,6 @@ Blockly.Field.prototype.setAutocompleteData = function (handler) {
     this.autocompleteData_ = handler;
 };
 
-
-
-/**
- * Inits autocomplete attached to target only if not already inited,
- * and this.autocompleteData_ is set
- * @private
- */
-//var self;
 
 
 Blockly.FieldTextInput.prototype.lazyAutocompleteInit_ = function (target) {
@@ -377,6 +371,7 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
             thisField.firstWriting = false;
         }
         Squid.addSimpleVariable(text);
+        Squid.displaySimpleVariables();
 
     }//END TEST
 

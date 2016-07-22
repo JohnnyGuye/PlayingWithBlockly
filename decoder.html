@@ -130,7 +130,7 @@
                     <h1>Valeurs</h1>
 
                 </div>
-                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>
+                <!--<button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>-->
 
                 <div id="decodingTest">
                     <h1>Tester le décodeur</h1>
@@ -413,6 +413,7 @@
 
     function Save() {
         Squid.Storage.SaveFunction(workspace);
+        saveVariables(Squid.SimpleVariables);
         Refresh();
     }
 
