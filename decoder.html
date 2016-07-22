@@ -89,22 +89,29 @@
                 <div id="blocklyDivConfiguration" class="not-shown"></div>
                 <div class="configuration">
                     <h1>Configuration</h1>
-                    <div class="toolbar-workspace">
+                    <div class="toolbar-workspace">                        
+                        <div class="toolbar-group">
+                            <input id="config-title"
+                                   class="set-title"
+                                   value="Set défaut" 
+                                   onkeyup="Squid.Variables.setNameSet('configuration', $(this).val());">
+                        </div>
                         <div class="toolbar-items">
                             <div class="toolbar-group">
-                                <button class="item-workspace save" title="Sauvegarde les variables" onclick="saveConfig()"></button>
+                                <button class="item-workspace save"
+                                        title="Sauvegarde les variables" 
+                                        onclick="saveVariables('configuration')"></button>
                                 <div class="inline-block">
-                                    <button class="item-workspace restore"
+                                    <button class="item-workspace restore dropdown-toggle"
                                             title="Restore un set de variables"
-                                            onclick="launchDropdownRestoreConfig(this)">
+                                            onclick="launchDropdownRestoreSet(this, 'configuration')"
+                                            data-toggle="dropdown">
                                     </button>
                                 </div>
                                 <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteConfig()"></button>
                                 <button class="item-workspace add" title="Ajouter une variable" onclick="createConfig()"></button>
                             </div>
-                            <div class="toolbar-group">
-                                <span id="config-title">Set défaut</span>
-                            </div>
+
                         </div>
                         <table id="config-table"></table>
                     </div>
@@ -114,17 +121,28 @@
                 <div id="blocklyDivInventory" class="not-shown"></div>
                 <div class="inventaire">
                     <h1>Inventaire</h1>
-                    <div class="toolbar-workspace">
+                    <div class="toolbar-workspace">                        
                         <div class="toolbar-group">
-                            <button class="item-workspace save" title="Sauvegarde les variables" onclick="saveInventory()"></button>
-                            <div class="inline-block">
-                                <button class="item-workspace restore"
-                                        title="Restore un set de variables"
-                                        onclick="launchDropdownRestoreInventory(this)"></button>
-                            </div>
-                            <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteInventory()"></button>
-                            <button class="item-workspace add" title="Ajouter une variable" onclick="createInventory()"></button>
+                            <input id="inventory-title"
+                                   class="set-title" 
+                                   value="Set défaut" 
+                                   onkeyup="Squid.Variables.setNameSet('inventory', $(this).val());">
                         </div>
+                        <div class="toolbar-items">
+                            <div class="toolbar-group">
+                                <button class="item-workspace save"
+                                        title="Sauvegarde les variables" 
+                                        onclick="saveVariables('inventory')"></button>
+                                <div class="inline-block">
+                                    <button class="item-workspace restore"
+                                            title="Restore un set de variables"
+                                            onclick="launchDropdownRestoreSet(this, 'inventory')"></button>
+                                </div>
+                                <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteInventory()"></button>
+                                <button class="item-workspace add" title="Ajouter une variable" onclick="createInventory()"></button>
+                            </div>
+                        </div>
+
                         <table id="inventory-table"></table>
                     </div>
                 </div>
@@ -186,9 +204,6 @@
 
 <script src="Variables/ConfigAndInventoryViewModel.js"></script>
 <script>
-    var workspaceNames = new Array();
-    var workspaceName = "FirstWorkspace";
-
     /* Workspaces */
     var workspace;
     var hiddenWorkspace;
@@ -278,32 +293,31 @@
     }
 
     //------------------------------------------------------------------ Variables
+
+    // Add
     function createConfig() {
         Squid.Variables.create(Squid.Variables.Types.CONFIG);
-        Refresh();
     }
 
     function createInventory() {
         Squid.Variables.create(Squid.Variables.Types.INVENTORY);
-        Refresh();
     }
 
-    function saveConfig() {
-        Squid.Storage.SaveConfigs(
-            Squid.Variables.getWorkspace(Squid.Variables.Types.CONFIG),
-            $("#config-title").text()
-            );
+    function saveVariables(type) {       
+        Squid.Storage.SaveVariables(type);
     }
 
-    function saveInventory() {
-        Squid.Storage.SaveConfigs(
-            Squid.Variables.getWorkspace(Squid.Variables.Types.INVENTORY),
-            $("#inventory-title").text()
-            );
+    /*
+    function createDropdown(div, func) {
+        div = $(div);
     }
-
-    function launchDropdownRestoreConfig(button, type) {
+    */
+    // Restore
+    function launchDropdownRestoreSet(button, type) {
+        
         button = $(button);
+        button.html("");
+
         var locations;
         if (type == Squid.Variables.Types.CONFIG) {
             locations = Squid.Storage.ConfigLocations;
@@ -315,18 +329,24 @@
 
         var ul = $("<ul>");
         ul.attr("class", "dropdown");
+        ul.attr("role", "menu");
+        ul.hover(null, function() { ul.remove(); });
 
         for (var i = 0; i < locations.length; i++) {
             var li = $("<li>");
-            li.html(locations[i]);
-            li.on(restoreConfig(locations[i], type));
+            li.attr("role", "presentation");
+            
+            var but = $("<button>");
+            but.attr("onclick", "restoreSet('" + locations[i] + "', '" + type + "');");
+            but.html(locations[i]);
+
+            li.append(but);
             ul.append(li);
         }
         button.append(ul);
-        setTimeout(function() { button.html(""); }, 2000);
     }
 
-    function restoreConfig(location, type) {
+    function restoreSet(location, type) {
         if (location) {
             var workspace = Squid.Variables.getWorkspace(type);
 
@@ -334,9 +354,8 @@
 
             Squid.Variables.deleteAll(type);
             Squid.Storage.RestoreVariables(
-                workspace,
-                location,
-                type
+                type,
+                location
             );
 
             var prefix = Squid.Variables.getPrefix(type);
@@ -345,12 +364,13 @@
                 var name = names[i].substr(l, names[i].length - l);
                 Squid.Variables.create(type, name);
             }
-            $("#config-title").text(location);
+            $(Squid.Variables.getAnchor(type) + "-title").text(location);
         } else {
             console.warn("Specify a location");
         }
     }
 
+    // Delete
     function deleteConfig() {
         Squid.Variables.deleteAll(Squid.Variables.Types.CONFIG);
     }
@@ -425,6 +445,7 @@
         Refresh();
     }
 
+    /*
     function reload_(name) {
         if (window
             .confirm("Êtes vous sûr de vouloir recharger une trame ?\nTout changement non sauvegardé sera perdu.")) {
@@ -439,6 +460,7 @@
     function Reload() {
         reload_(workspaceName);
     }
+    */
 
     function clearFunc(workspace) {
         var children = workspace.getLinkedWorkspace();

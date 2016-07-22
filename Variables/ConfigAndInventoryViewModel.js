@@ -10,6 +10,9 @@ Squid.Variables.Types = {};
 Squid.Variables.Types.CONFIG = "configuration";
 Squid.Variables.Types.INVENTORY = "inventory";
 
+Squid.Variables.configName = "Set défaut";
+Squid.Variables.inventoryName = "Set défaut";
+
 /**
  * Initialize the workspaces for configuration and inventory. 
  * If only one workspace specified, it works for both.
@@ -35,6 +38,33 @@ Squid.Variables.InitWorkspaces = function (configLocation, inventoryLocation) {
     Squid.Variables.inventoryCount = 0;
 
     
+}
+
+Squid.Variables.getNameSet = function (type) {
+    switch (type) {
+        case Squid.Variables.Types.INVENTORY:
+            return Squid.Variables.inventoryName;
+            break;
+        case Squid.Variables.Types.CONFIG:
+            return Squid.Variables.configName;
+            break;
+        default:
+            return "";
+            break;
+    }
+}
+
+Squid.Variables.setNameSet = function (type, name) {
+    switch (type) {
+        case Squid.Variables.Types.INVENTORY:
+            Squid.Variables.inventoryName = name;
+            break;
+        case Squid.Variables.Types.CONFIG:
+            Squid.Variables.configName = name;
+            break;
+        default:
+            break;
+    }
 }
 
 Squid.Variables.getPrefix = function(type) {
@@ -80,10 +110,10 @@ Squid.Variables.getCount = function (type) {
 Squid.Variables.getAnchor = function(type) {
     switch (type) {
         case Squid.Variables.Types.CONFIG:
-            return "#config-table";
+            return "#config";
             break;
         case Squid.Variables.Types.INVENTORY:
-            return "#inventory-table";
+            return "#inventory";
             break;
         default:
             return null;
@@ -122,7 +152,7 @@ Squid.Variables.create = function (type, name) {
     if(name == null) 
         name = "Variable" + count;
     var fullName = prefix + name;
-    var table = $(Squid.Variables.getAnchor(type));
+    var table = $(Squid.Variables.getAnchor(type) + "-table");
 
     workspace.newBlock("variables_get", "var");
     Blockly.Variables.renameVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME, fullName, workspace);
@@ -195,7 +225,6 @@ Squid.Variables.delete = function (type, variableId) {
     var baseId = prefix + variableId;
 
     var elem = $("#" + baseId + "_label");
-    console.log(elem);
     Blockly.Variables.renameVariable(prefix + elem.val(), "undefined", workspace);
 
     $("#" + baseId + "_row").remove();
@@ -207,5 +236,5 @@ Squid.Variables.deleteAll = function(type) {
 
     Squid.Variables.reset(type);
 
-    $("#config-table").html("");
+    $(Squid.Variables.getAnchor(type) + "-table").html("");
 }
