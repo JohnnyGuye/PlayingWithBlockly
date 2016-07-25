@@ -75,7 +75,6 @@
         <h1 class="no-margin"> Code généré </h1>
         <pre id="content1"></pre>
     </div>
-
     <aside class="side-bar full-height">
         <div class="row full-height">
             <aside class="code-hide full-height col-lg-2">
@@ -87,32 +86,25 @@
                 <variables-set></variables-set>
                 <div id="Values">
                     <h1>Valeurs</h1>
-
                 </div>
                 <button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>
-
                 <div id="decodingTest">
                     <h1>Tester le décodeur</h1>
                     <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
                     <input id="nom-decodeur" type="text" value="nom du décodeur"/>
                     <input id="resultat" type="text" class="textarea" value="resultat"/>
                 </div>
-
-
             </div>
         </div>
     </aside>
 </div>
-
 <div class="row">
     <div class="col-md-9">
         <div id="wrapper">
             <div class="edition-window decode-window">
                 <div class="toolbar-workspace">
                     <div class="title-toolbar-workspace"> Editeur de décodeur </div>
-
                     <div class="toolbar-items">
-
                         <div class="toolbar-group">
                             <button class="item-workspace save" title="Sauvegarde les fonctions" onclick="Save()"></button>
                             <button class="item-workspace clear" onclick="ClearFunction();" title="Efface les fonctions enregistrées"></button>
@@ -136,9 +128,7 @@
         </div>
     </div>
 </div>
-
 <toolbox></toolbox>
-
 <script src="Variables/VariablesSet.js"></script>
 <script src="Variables/VariablesSetViewModel.js"></script>
 
@@ -363,7 +353,7 @@
 
     function generateCode() {
         var code = Blockly.CSharp.workspaceToCode(workspace);
-        var div = document.getElementById('content1');
+        var div = $('#content1')[0];
         div.innerHTML = code;
     }
 

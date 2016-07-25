@@ -123,5 +123,3 @@ Squid.VariablesSet.GetValue = function (name) {
 Squid.VariablesSet.clear = function () {
     this.variables_.length = 0;
 };
-
-
