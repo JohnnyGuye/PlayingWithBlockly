@@ -107,7 +107,7 @@ function backupBlocks (workspace, url) {
       //var div = document.getElementById('xml1');
       //div.innerHTML = prettyTxt;
       var code = Blockly.CSharp.workspaceToCode(workspace);
-      postCode(code, prettyTxt);
+      Squid.Requests.SaveBlocks(code, prettyTxt);
       //END FOR TESTS
      
      // window.localStorage.setItem(url, xmlTxt);
@@ -137,7 +137,7 @@ function restoreBlocks (opt_workspace, url) {
 
 	    //callback function
         // this code is executed asynchonously, when the ajax request has responded
-	    reloadXml(function(xmlText) {
+		Squid.Requests.ReloadXml(function (xmlText) {
 	        //alert(xmlText);
 	        var xml = Blockly.Xml.textToDom(xmlText);
 	        Blockly.Xml.domToWorkspace(xml, workspace);

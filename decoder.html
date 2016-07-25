@@ -59,7 +59,7 @@
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
     <script src="Blockly/generators/csharp/custom.js"></script>
 
-    <script src="postCode.js"></script>
+    <script src="server_requests.js"></script>
     <script src="Variables/values.js"></script>
 
     <!--AutoCompletion-->
@@ -261,7 +261,7 @@
                     acTags.setAutoHilite(false);
 
                     /* Simple Variables (not config nor inv) */
-                    reloadVariables();
+                    Squid.Requests.ReloadVariables();
 
                 });
         });
@@ -413,7 +413,7 @@
 
     function Save() {
         Squid.Storage.SaveFunction(workspace);
-        saveVariables(Squid.SimpleVariables);
+        Squid.Requests.SaveVariables(Squid.SimpleVariables);
         Refresh();
     }
 

@@ -1,34 +1,13 @@
-﻿ function postCode (code, xml) {
-     var strCode = JSON.stringify(code);
-     var strXml= JSON.stringify(xml);
-    /*$.ajax({
-        url: '/api/Blocks/savecode',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        datatype:'json',
-        data:  strCode,
-        success: function (res) {
-            alert("Success " +res);
-        },
-        error: function (error) {
-            alert("Wwoops something went wrong !"+error);
-        }
-    });
-    
-    $.ajax({
-        url: '/api/Blocks/savexml',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        datatype: 'json',
-        data:  strXml,
-        success: function (res) {
-            alert("Success " + res);
-        },
-        error: function (error) {
-            alert("Wwoops something went wrong !" + error);
-        }
-    });*/
+﻿Squid.Requests = {};
 
+/**
+ * Send a request to save in the server 
+ * the blocks in xml and associated generated code
+ * @param {string} code the generated C# code
+ * @param {string} xml the blocks in xml
+ */
+Squid.Requests.SaveBlocks = function(code, xml) {
+    
      $.ajax({
          url: '/api/Blocks/savexml',
          type: 'POST',
@@ -45,12 +24,12 @@
 
  }
 
-saveAllOnServer = function(xml, code) {
-    var strCode = JSON.stringify(code);
-    var strXml = JSON.stringify(xml);
-}
-
- saveVariables = function (map) {
+/**
+ * Send a request to save the simples variables (not config, nor inventory)
+ * in the server
+ * @param {} map the map object containing the simple variables
+ */
+Squid.Requests.SaveVariables = function (map) {
      console.log(map);
      var variables = mapToJson(map);
      var StrVariables = JSON.stringify(variables);
@@ -72,7 +51,11 @@ saveAllOnServer = function(xml, code) {
     });
  }
 
-reloadVariables = function() {
+/**
+ * Retrieve the simples variables from the server
+ * and update the client accordingly
+ */
+Squid.Requests.ReloadVariables = function () {
     $.ajax({
         url: '/api/variables/reload',
         type: 'POST',
@@ -91,19 +74,17 @@ reloadVariables = function() {
     });
 }
 
-reloadXml = function (callback) {
+/**
+ * Retrieve blocks definitions in xml format from the server
+ * @param {} callback 
+ * @returns {} the blocks in xml via a callback function to get them asynchonously
+ */
+Squid.Requests.ReloadXml = function (callback) {
     $.ajax({
         url: '/api/blocks/reload',
         type: 'POST',
         //contentType: 'application/json; charset=utf-8',
         datatype: 'json',
-        //traditional: true,
-        /*success: function (xmlText) {
-            //alert(xmlText);
-            alert(workspace);
-            var xml = Blockly.Xml.textToDom(xmlText);
-            Blockly.Xml.domToWorkspace(xml, workspace);
-        },*/
         success: callback,
         error: function (error) {
             alert("Wwoops something went wrong !" + error);
@@ -111,7 +92,7 @@ reloadXml = function (callback) {
     });  
 }
 
-
+//UTILS
 
  function mapToJson(map) {
      return JSON.stringify([...map]);

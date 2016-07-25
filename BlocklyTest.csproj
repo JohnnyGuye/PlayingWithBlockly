@@ -3126,7 +3126,7 @@
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.min.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\jquery.js" />
-    <Content Include="postCode.js" />
+    <Content Include="server_requests.js" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\toolboxCreateNewFunction.xml" />

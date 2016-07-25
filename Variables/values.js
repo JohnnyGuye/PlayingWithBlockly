@@ -4,8 +4,7 @@ Squid.SimpleVariables = new Map();
 //Squid.SimpleVariablesNames = [];
 
 Squid.addSimpleVariable = function (name) {
-    Squid.SimpleVariables.set(name, 0);
-    
+    Squid.SimpleVariables.set(name, 0);  
 }
 
 Squid.removeSimpleVariable = function (name) {
@@ -47,6 +46,5 @@ Squid.displaySimpleVariables = function () {
     } else {
         var values = document.getElementById('Values').appendChild(makeUL(Squid.SimpleVariables));
     }
-    //postCode("haha", "lol");
     //saveVariables(Squid.SimpleVariables);
 }
