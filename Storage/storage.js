@@ -101,16 +101,16 @@ function backupBlocks (workspace, url) {
   if ('localStorage' in window) {
       var xml = Blockly.Xml.workspaceToDom(workspace);
       //FOR TESTS add by felix
-      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
+      var prettyTxt = Blockly.Xml.domToPrettyText(xml);
       var xmlTxt = Blockly.Xml.domToText(xml);
       //alert(txt);
       //var div = document.getElementById('xml1');
       //div.innerHTML = prettyTxt;
-      //var code = Blockly.CSharp.workspaceToCode(workspace);
-      //postCode(code, xmlTxt);
+      var code = Blockly.CSharp.workspaceToCode(workspace);
+      postCode(code, prettyTxt);
       //END FOR TESTS
      
-      window.localStorage.setItem(url, xmlTxt);
+     // window.localStorage.setItem(url, xmlTxt);
   }
 };
 
@@ -132,8 +132,16 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 function restoreBlocks (opt_workspace, url) {
 	if('localStorage' in window && window.localStorage[url]) {
 		var workspace = opt_workspace;
+		//var xml = Blockly.Xml.textToDom(window.localStorage[url]);
+	    //Blockly.Xml.domToWorkspace(xml, workspace);
 
-		var xml = Blockly.Xml.textToDom(window.localStorage[url]);
-		Blockly.Xml.domToWorkspace(xml, workspace);
+	    //callback function
+        // this code is executed asynchonously, when the ajax request has responded
+	    reloadXml(function(xmlText) {
+	        //alert(xmlText);
+	        var xml = Blockly.Xml.textToDom(xmlText);
+	        Blockly.Xml.domToWorkspace(xml, workspace);
+	        Refresh();
+	    });
 	}
 };
