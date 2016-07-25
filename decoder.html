@@ -1,16 +1,16 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en">
+<html ng-app="httpApp" lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Decodeur - 1.0</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-    
+
     <script src="bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
     <script src="bootstrap-3.3.6/dist/js/npm.js"></script>
 
-    <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">   
+    <link href="bootstrap-3.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="app.css" type="text/css"/>
 
@@ -69,8 +69,7 @@
 
 </head>
 
-<body id="body" onkeydown="Squid.Dev.ToggleDevmode(event)">
-
+<body onkeydown="Squid.Dev.ToggleDevmode(event)">
 <div class="top-layer full-height">
     <div class="generated-code full-height" id="generated-code">
         <h1 class="no-margin"> Code généré </h1>
@@ -85,73 +84,13 @@
                 </button>
             </aside>
             <div class="col-lg-10">
-                <!-- Configuration -->
-                <div id="blocklyDivConfiguration" class="not-shown"></div>
-                <div class="configuration">
-                    <h1>Configuration</h1>
-                    <div class="toolbar-workspace">                        
-                        <div class="toolbar-group">
-                            <input id="config-title"
-                                   class="set-title"
-                                   value="Set défaut" 
-                                   onkeyup="Squid.Variables.setNameSet('configuration', $(this).val());">
-                        </div>
-                        <div class="toolbar-items">
-                            <div class="toolbar-group">
-                                <button class="item-workspace save"
-                                        title="Sauvegarde les variables" 
-                                        onclick="saveVariables('configuration')"></button>
-                                <div class="inline-block">
-                                    <button class="item-workspace restore dropdown-toggle"
-                                            title="Restore un set de variables"
-                                            onclick="launchDropdownRestoreSet(this, 'configuration')"
-                                            data-toggle="dropdown">
-                                    </button>
-                                </div>
-                                <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteConfig()"></button>
-                                <button class="item-workspace add" title="Ajouter une variable" onclick="createConfig()"></button>
-                            </div>
-
-                        </div>
-                        <table id="config-table"></table>
-                    </div>
-                </div>
-
-                <!--Inventaire -->
-                <div id="blocklyDivInventory" class="not-shown"></div>
-                <div class="inventaire">
-                    <h1>Inventaire</h1>
-                    <div class="toolbar-workspace">                        
-                        <div class="toolbar-group">
-                            <input id="inventory-title"
-                                   class="set-title" 
-                                   value="Set défaut" 
-                                   onkeyup="Squid.Variables.setNameSet('inventory', $(this).val());">
-                        </div>
-                        <div class="toolbar-items">
-                            <div class="toolbar-group">
-                                <button class="item-workspace save"
-                                        title="Sauvegarde les variables" 
-                                        onclick="saveVariables('inventory')"></button>
-                                <div class="inline-block">
-                                    <button class="item-workspace restore"
-                                            title="Restore un set de variables"
-                                            onclick="launchDropdownRestoreSet(this, 'inventory')"></button>
-                                </div>
-                                <button class="item-workspace clear" title="Efface les fonctions enregistrées" onclick="deleteInventory()"></button>
-                                <button class="item-workspace add" title="Ajouter une variable" onclick="createInventory()"></button>
-                            </div>
-                        </div>
-
-                        <table id="inventory-table"></table>
-                    </div>
-                </div>
-
+                <div ng-controller="VariablesSetController" id="try"></div>
                 <div id="Values">
                     <h1>Valeurs</h1>
 
                 </div>
-                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>
+                <button class="item-workspace" onclick="Squid
+    .displaySimpleVariables()">Rafraîchir valeurs</button>
 
                 <div id="decodingTest">
                     <h1>Tester le décodeur</h1>
@@ -159,7 +98,6 @@
                     <input id="nom-decodeur" type="text" value="nom du décodeur"/>
                     <input id="resultat" type="text" class="textarea" value="resultat"/>
                 </div>
-
 
 
             </div>
@@ -182,11 +120,11 @@
                         </div>
                         <!-- Adding the search bar for tags -->
                         <div class="toolbar-group">
-                            <input class="item-workspace" id="search-bar" type="text" placeholder="tag1, tag2, ..." value="" />
+                            <input class="item-workspace" id="search-bar" type="text" placeholder="tag1, tag2, ..." value=""/>
                             <button class="item-workspace research" onclick="TagSearch(workspace, 'toolboxGeneric')" title="Rechercher les tags"></button>
                         </div>
                         <div class="toolbar-group">
-                              <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
+                            <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
                         </div>
                     </div>
                 </div>
@@ -200,19 +138,15 @@
     </div>
 </div>
 
-<div ng-app="httpApp" ng-controller="httpController"></div>
+<div ng-controller="httpController"></div>
 
-<script src="Variables/ConfigAndInventoryViewModel.js"></script>
+<script src="Variables/VariablesSet.js"></script>
+<script src="Variables/VariablesSetViewModel.js"></script>
+
 <script>
     /* Workspaces */
     var workspace;
     var hiddenWorkspace;
-    var activWorkspace;
-
-    var valueActivWorkspace = -1;
-    var nbWorkspaces = 0;
-    var variablesCount = 0;
-    var inventaireCount = 0;
 
     /*AutoCompletion*/
     var acTags;
@@ -220,15 +154,23 @@
     /* Element IDs */
     var princToolboxId = "toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
-    
-    // Create a the main workspace
+
     var app = angular.module('httpApp', []);
+    //app.component('variable-set');
+    app.controller('VariablesSetController',
+        function($scope, $http) {
+            $http.get("Variables/VariablesSetView.html", {})
+                .success(function(response) {
+                    $("#try").html(response);
+                });
+        });
+    // Create a the main workspace
+    
     app.controller('httpController',
         function($scope, $http) {
             $http.get("Toolbox/toolboxCoreGenerics.xml", {})
                 .success(function(response) {
-                    document.getElementById("body").innerHTML += response;
-
+                    $("body").append(response);
                     workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                     {
                         toolbox: document.getElementById(princToolboxId),
@@ -243,7 +185,6 @@
                         },
                         trashcan: true
                     });
-                    activWorkspace = workspace;
                     hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden",
                     {
                         trashcan: true,
@@ -256,7 +197,7 @@
                             minScale: 0.1,
                             scaleSpeed: 1.3
                         }
-                    });                 
+                    });
 
                     Squid.Variables.InitWorkspaces(BASE_BLOCKLY_DIV + "Configuration", BASE_BLOCKLY_DIV + "Inventory");
 
@@ -269,9 +210,10 @@
                     /* AutoCompletion */
                     AutoComplete.variablesWorkspace = Squid.Variables.getWorkspace(Squid.Variables.Types.CONFIG);
                     AutoComplete.categoryWorkspace = workspace;
-                   
+
                     var autoCompleteTags = AutoComplete.GetTags();
-                    acTags = goog.ui.ac.createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
+                    acTags = goog.ui.ac
+                        .createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
                     acTags.setAutoHilite(false);
 
                 });
@@ -303,7 +245,7 @@
         Squid.Variables.create(Squid.Variables.Types.INVENTORY);
     }
 
-    function saveVariables(type) {       
+    function saveVariables(type) {
         Squid.Storage.SaveVariables(type);
     }
 
@@ -314,7 +256,7 @@
     */
     // Restore
     function launchDropdownRestoreSet(button, type) {
-        
+
         button = $(button);
         button.html("");
 
@@ -335,7 +277,7 @@
         for (var i = 0; i < locations.length; i++) {
             var li = $("<li>");
             li.attr("role", "presentation");
-            
+
             var but = $("<button>");
             but.attr("onclick", "restoreSet('" + locations[i] + "', '" + type + "');");
             but.html(locations[i]);
@@ -375,7 +317,7 @@
         Squid.Variables.deleteAll(Squid.Variables.Types.CONFIG);
     }
 
-    
+
     //------------------------------------------------------------------ Tools
     /////**
     //// * Create a new workspace for editing a function.
@@ -426,7 +368,7 @@
     ////}
 
     function generateCode() {
-        var code = Blockly.CSharp.workspaceToCode(activWorkspace);
+        var code = Blockly.CSharp.workspaceToCode(workspace);
         var div = document.getElementById('content1');
         div.innerHTML = code;
     }
@@ -437,7 +379,7 @@
         if (acTags) {
             acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
         }
-       
+
     }
 
     function Save() {

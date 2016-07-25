@@ -3137,7 +3137,9 @@
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
-    <Content Include="Variables\ConfigAndInventoryViewModel.js" />
+    <Content Include="Variables\VariablesSetViewModel.js" />
+    <Content Include="Variables\VariablesSet.js" />
+    <Content Include="Variables\VariablesSetView.html" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />

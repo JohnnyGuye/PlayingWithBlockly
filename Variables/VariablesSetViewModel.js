@@ -238,3 +238,11 @@ Squid.Variables.deleteAll = function(type) {
 
     $(Squid.Variables.getAnchor(type) + "-table").html("");
 }
+
+/*============================================== ViewModel */
+
+
+
+Squid.VariablesSet.ViewModel = function (name, type) {
+    this.variablesSet_ = new Squid.VariablesSet(name, type);
+};
