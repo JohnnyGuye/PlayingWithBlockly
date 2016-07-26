@@ -48,5 +48,7 @@ app.component("workspace",
             acTags = goog.ui.ac
                 .createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
             acTags.setAutoHilite(false);
+
+            reloadVariables();
         }
     });

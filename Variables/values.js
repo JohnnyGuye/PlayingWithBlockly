@@ -1,18 +1,25 @@
 ﻿//goog.provide("Squid.SimpleVariable");
 
 Squid.SimpleVariables = new Map();
-Squid.SimpleVariablesNames = [];
+//Squid.SimpleVariablesNames = [];
 
 Squid.addSimpleVariable = function (name) {
     Squid.SimpleVariables.set(name, 0);
-    Squid.SimpleVariablesNames = Array.from(Squid.SimpleVariables.keys());
+    
 }
 
 Squid.removeSimpleVariable = function (name) {
     Squid.SimpleVariables.delete(name);
+    //Squid.SimpleVariablesNames = Array.from(Squid.SimpleVariables.keys());
 }
 
-  function makeUL(array) {
+Squid.restoreSimpleVariables = function(map) {
+    Squid.SimpleVariables = map;
+   // Squid.SimpleVariablesNames = Array.from(Squid.SimpleVariables.keys());
+}
+
+function makeUL(map) {
+    var array = Array.from(map.keys());
     // Create the list element:
     var list = document.createElement('ul');
 
@@ -36,8 +43,10 @@ Squid.removeSimpleVariable = function (name) {
 Squid.displaySimpleVariables = function () {
     var oldValues = document.getElementById('values_list');
     if (oldValues) {
-        var values = document.getElementById('Values').replaceChild(makeUL(Squid.SimpleVariablesNames), oldValues);
+        var values = document.getElementById('Values').replaceChild(makeUL(Squid.SimpleVariables), oldValues);
     } else {
-        var values = document.getElementById('Values').appendChild(makeUL(Squid.SimpleVariablesNames));
-    }  
+        var values = document.getElementById('Values').appendChild(makeUL(Squid.SimpleVariables));
+    }
+    //postCode("haha", "lol");
+    //saveVariables(Squid.SimpleVariables);
 }

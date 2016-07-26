@@ -109,8 +109,10 @@ Blockly.FieldTextInput.prototype.firstWriting = true;
 /**
  * Close the input widget if this input is being deleted.
  */
-Blockly.FieldTextInput.prototype.dispose = function() {
-  Blockly.WidgetDiv.hideIfOwner(this);
+Blockly.FieldTextInput.prototype.dispose = function () {
+    //TEST
+    Squid.removeSimpleVariable(this.text_);
+    Blockly.WidgetDiv.hideIfOwner(this);
   Blockly.FieldTextInput.superClass_.dispose.call(this);
 };
 

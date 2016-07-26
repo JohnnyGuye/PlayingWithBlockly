@@ -672,6 +672,7 @@
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
+    <Content Include="Controllers\variables_save.txt" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="index.html" />
     <Content Include="Workspace\workspace.viewmodel.js" />
@@ -3478,6 +3479,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlocksController.cs" />
+    <Compile Include="Controllers\VariablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
