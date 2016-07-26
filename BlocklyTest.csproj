@@ -3116,6 +3116,8 @@
     <Content Include="closure-library\obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.dll" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.pdb" />
+    <Content Include="ServerStorage\BlocksInXml.txt" />
+    <Content Include="ServerStorage\GeneratedCode.txt" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.min.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\stylish-portfolio.css" />
@@ -3481,7 +3483,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="closure-library\obj\Debug\TempPE\" />
-    <Folder Include="ServerStorage\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
