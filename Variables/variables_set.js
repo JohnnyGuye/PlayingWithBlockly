@@ -20,8 +20,6 @@ Squid.VariablesSet = function(name, type) {
      * @type {Squid.VariablesSet.Type}
      */
     this.type_ = type;
-
-
 };
 
 Squid.VariablesSet.Types = {};
@@ -34,11 +32,11 @@ Squid.VariablesSet.Types.INVENTORY = "inventory";
  * @param {} type 
  * @returns {string} 
  */
-Squid.VariablesSet.setPrefix_ = function(type) {
+Squid.VariablesSet.prototype.setPrefix_ = function(type) {
     switch (type) {
-        case Squid.Variables.Types.INVENTORY:
+        case Squid.VariablesSet.Types.INVENTORY:
             return this.prefix_ = "I_";
-        case Squid.Variables.Types.CONFIG:
+        case Squid.VariablesSet.Types.CONFIG:
             return this.prefix_ = "C_";
         default:
             return this.prefix_ = "_";
@@ -49,11 +47,11 @@ Squid.VariablesSet.setPrefix_ = function(type) {
  * Get the prefix of the variables
  * @returns {string} 
  */
-Squid.VariablesSet.Prefix = function() {
+Squid.VariablesSet.prototype.Prefix = function() {
     return this.prefix_;
 };
 
-Squid.VariablesSet.Type = function() {
+Squid.VariablesSet.prototype.Type = function() {
     return this.type_;
 };
 
@@ -62,7 +60,7 @@ Squid.VariablesSet.Type = function() {
  * @param {number} count 
  * @returns {number} the actual count of variables 
  */
-Squid.VariablesSet.Count = function () {
+Squid.VariablesSet.prototype.Count = function () {
     return this.variables_.length;
 };
 
@@ -71,19 +69,18 @@ Squid.VariablesSet.Count = function () {
  * @param {string} name 
  * @returns {string} the actual name  
  */
-Squid.VariablesSet.Name = function(name) {
+Squid.VariablesSet.prototype.Name = function(name) {
     return this.name_ = name || this.name_;
 };
 
-Squid.VariablesSet.Create = function (name) {
-    var halvedName = name + this.Count;
-    var fullName = this.prefix_ + halvedName;
+Squid.VariablesSet.prototype.Create = function (name, value) {
+    var fullName = this.prefix_ + name;
 
-    this.variables_.push([fullName, null]);
+    this.variables_.push([fullName, value]);
 
 };
 
-Squid.VariablesSet.Rename = function (oldname, newname) {
+Squid.VariablesSet.prototype.Rename = function (oldname, newname) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == oldname) {
             this.variables_[i][0] = newname;
@@ -93,7 +90,7 @@ Squid.VariablesSet.Rename = function (oldname, newname) {
     throw "No variable " + oldname + " to rename.";
 };
 
-Squid.VariablesSet.Delete = function (name) {
+Squid.VariablesSet.prototype.Delete = function (name) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
             variables.splice(i, 1);
@@ -102,7 +99,7 @@ Squid.VariablesSet.Delete = function (name) {
     }
 };
 
-Squid.VariablesSet.SetValue = function(name, value) {
+Squid.VariablesSet.prototype.SetValue = function (name, value) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
             variables[i][1] = value;
@@ -111,7 +108,7 @@ Squid.VariablesSet.SetValue = function(name, value) {
     }
 };
 
-Squid.VariablesSet.GetValue = function (name) {
+Squid.VariablesSet.prototype.GetValue = function (name) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
             return variables[i][1];
@@ -120,6 +117,10 @@ Squid.VariablesSet.GetValue = function (name) {
     return null;
 };
 
-Squid.VariablesSet.clear = function () {
+Squid.VariablesSet.prototype.Clear = function () {
     this.variables_.length = 0;
+};
+
+Squid.VariablesSet.prototype.List = function() {
+    return this.variables_;
 };

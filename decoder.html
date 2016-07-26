@@ -70,67 +70,47 @@
 </head>
 
 <body onkeydown="Squid.Dev.ToggleDevmode(event)">
-<div class="top-layer full-height">
-    <div class="generated-code full-height" id="generated-code">
-        <h1 class="no-margin"> Code généré </h1>
-        <pre id="content1"></pre>
-    </div>
-    <aside class="side-bar full-height">
-        <div class="row full-height">
-            <aside class="code-hide full-height col-lg-2">
-                <button id="code-hide" onclick="hideGenerated()">
-                    <div class="rotate"> Générer </div>
-                </button>
-            </aside>
-            <div class="col-lg-10">
-                <variables-set></variables-set>
-                <div id="Values">
-                    <h1>Valeurs</h1>
-                </div>
-                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">Rafraîchir valeurs</button>
-                <div id="decodingTest">
-                    <h1>Tester le décodeur</h1>
-                    <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
-                    <input id="nom-decodeur" type="text" value="nom du décodeur"/>
-                    <input id="resultat" type="text" class="textarea" value="resultat"/>
-                </div>
-            </div>
+    <div class="top-layer full-height">
+        <div class="generated-code full-height" id="generated-code">
+            <h1 class="no-margin"> Code généré </h1>
+            <pre id="content1"></pre>
         </div>
-    </aside>
-</div>
-<div class="row">
-    <div class="col-md-9">
-        <div id="wrapper">
-            <div class="edition-window decode-window">
-                <div class="toolbar-workspace">
-                    <div class="title-toolbar-workspace"> Editeur de décodeur </div>
-                    <div class="toolbar-items">
-                        <div class="toolbar-group">
-                            <button class="item-workspace save" title="Sauvegarde les fonctions" onclick="Save()"></button>
-                            <button class="item-workspace clear" onclick="ClearFunction();" title="Efface les fonctions enregistrées"></button>
-                        </div>
-                        <!-- Adding the search bar for tags -->
-                        <div class="toolbar-group">
-                            <input class="item-workspace" id="search-bar" type="text" placeholder="tag1, tag2, ..." value=""/>
-                            <button class="item-workspace research" onclick="TagSearch(workspace, 'toolboxGeneric')" title="Rechercher les tags"></button>
-                        </div>
-                        <div class="toolbar-group">
-                            <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
-                        </div>
+        <aside class="side-bar full-height">
+            <div class="row full-height">
+                <aside class="code-hide full-height col-lg-2">
+                    <button id="code-hide" onclick="hideGenerated()">
+                        <div class="rotate"> Générer </div>
+                    </button>
+                </aside>
+                <div class="col-lg-10">
+                    <variables-set></variables-set>
+                    <div id="Values">
+                        <h1>Valeurs</h1>
+                    </div>
+                    <button class="item-workspace" onclick="Squid
+    .displaySimpleVariables()">
+                        Rafraîchir valeurs
+                    </button>
+                    <div id="decodingTest">
+                        <h1>Tester le décodeur</h1>
+                        <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
+                        <input id="nom-decodeur" type="text" value="nom du décodeur" />
+                        <input id="resultat" type="text" class="textarea" value="resultat" />
                     </div>
                 </div>
-                <div id="blocklyDiv" class="blocklyDiv"></div>
             </div>
-            <!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
-            <div class="edition-window decode-window row dev-block">
-                <div id="blocklyDivHidden" class="blocklyDiv dev-block"></div>
+        </aside>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div id="wrapper">
+                <toolbox></toolbox>
+                <workspace></workspace>
             </div>
         </div>
     </div>
-</div>
-<toolbox></toolbox>
-<script src="Variables/VariablesSet.js"></script>
-<script src="Variables/VariablesSetViewModel.js"></script>
+
+<!-- SCRIPTS -->
 
 <script>
     /* Workspaces */
@@ -144,100 +124,30 @@
     var princToolboxId = "#toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
-    var app = angular.module('httpApp', []);
-    // Create a the main workspace
-    app.component('toolbox',
-    {
-        templateUrl: "Toolbox/toolboxCoreGenerics.xml",
-        controller: function() {
-            workspace = Blockly.inject(BASE_BLOCKLY_DIV,
-                    {
-                        toolbox: $(princToolboxId)[0],
-                        zoom:
-                        {
-                            controls: true,
-                            wheel: true,
-                            startScale: 1.0,
-                            maxScale: 3,
-                            minScale: 0.2,
-                            scaleSpeed: 1.2
-                        },
-                        trashcan: true
-                    });
-            hiddenWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + "Hidden",
-            {
-                trashcan: true,
-                zoom:
-                {
-                    controls: true,
-                    wheel: true,
-                    startScale: 1.0,
-                    maxScale: 5.0,
-                    minScale: 0.1,
-                    scaleSpeed: 1.3
-                }
-            });
+    var app = angular.module("httpApp", []);
 
-            workspace.attachChildWorkspace(hiddenWorkspace);
-            Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
-            Refresh();
+</script>
 
-            Squid.Dev.HideDevmode();
+<script src="Workspace/workspace.viewmodel.js"></script>
+<script src="Variables/variables_set.js"></script>
+<script src="Variables/variables_set.wiewmodel.js"></script>
 
-            /* AutoCompletion */
-            AutoComplete.categoryWorkspace = workspace;
 
-            var autoCompleteTags = AutoComplete.GetTags();
-            acTags = goog.ui.ac
-                .createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
-            acTags.setAutoHilite(false);
-        }
-    });
-   
-    app.component('variablesSet',
-    {
-        templateUrl: "Variables/VariablesSetView.html",
-        controller: function () {
-            Squid.Variables.InitWorkspaces(BASE_BLOCKLY_DIV + "Configuration", BASE_BLOCKLY_DIV + "Inventory");
-            AutoComplete.variablesWorkspace = Squid.Variables.getWorkspace(Squid.Variables.Types.CONFIG);
-        }
-    });
-
+<script>
     function hideGenerated() {
-        var gc = document.getElementById("generated-code");
-        var b = document.getElementById("code-hide");
-        var w = gc.style.width;
+        var gc = $("#generated-code");
         var fullSize = '75%';
-        if (gc.style.width !== fullSize) {
+        if (gc.css("width") === '0px') {
             generateCode();
-            gc.style.width = fullSize;
-            gc.style.opacity = 1;
+            gc.css("width", fullSize);
+            gc.css("opacity", 1);
         } else {
-            gc.style.width = '0%';
-            gc.style.opacity = 0;
+            gc.css("width", '0%');
+            gc.css("opacity", 0);
         }
     }
 
     //------------------------------------------------------------------ Variables
-
-    // Add
-    function createConfig() {
-        Squid.Variables.create(Squid.Variables.Types.CONFIG);
-    }
-
-    function createInventory() {
-        Squid.Variables.create(Squid.Variables.Types.INVENTORY);
-    }
-
-    function saveVariables(type) {
-        Squid.Storage.SaveVariables(type);
-    }
-
-    /*
-    function createDropdown(div, func) {
-        div = $(div);
-    }
-    */
     // Restore
     function launchDropdownRestoreSet(button, type) {
 
@@ -295,12 +205,6 @@
             console.warn("Specify a location");
         }
     }
-
-    // Delete
-    function deleteConfig() {
-        Squid.Variables.deleteAll(Squid.Variables.Types.CONFIG);
-    }
-
 
     //------------------------------------------------------------------ Tools
     /////**
@@ -370,23 +274,6 @@
         Squid.Storage.SaveFunction(workspace);
         Refresh();
     }
-
-    /*
-    function reload_(name) {
-        if (window
-            .confirm("Êtes vous sûr de vouloir recharger une trame ?\nTout changement non sauvegardé sera perdu.")) {
-            workspaceName = name;
-            Squid.Storage.ReloadWorkspace(workspace, null, workspaceName);
-            var elem = document.getElementById("workspaceName");
-            elem.innerHTML = workspaceName;
-            Refresh();
-        }
-    }
-
-    function Reload() {
-        reload_(workspaceName);
-    }
-    */
 
     function clearFunc(workspace) {
         var children = workspace.getLinkedWorkspace();

@@ -674,6 +674,8 @@
     <Content Include="Contents\icons\ico-save.png" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="index.html" />
+    <Content Include="Workspace\workspace.viewmodel.js" />
+    <Content Include="Workspace\workspace.view.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -3137,9 +3139,9 @@
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
-    <Content Include="Variables\VariablesSetViewModel.js" />
-    <Content Include="Variables\VariablesSet.js" />
-    <Content Include="Variables\VariablesSetView.html" />
+    <Content Include="Variables\variables-set.wiewmodel.js" />
+    <Content Include="Variables\variables_set.js" />
+    <Content Include="Variables\variables-set.view.html" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />
