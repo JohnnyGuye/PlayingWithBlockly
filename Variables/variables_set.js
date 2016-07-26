@@ -74,10 +74,19 @@ Squid.VariablesSet.prototype.Name = function(name) {
 };
 
 Squid.VariablesSet.prototype.Create = function (name, value) {
+    if (!name) {
+        name = "variable";
+    }
     var fullName = this.prefix_ + name;
-
-    this.variables_.push([fullName, value]);
-
+    var num = 1;
+    var nameTest = fullName;
+    for (var i = 0; i < this.variables_.length; i++) {
+        if (this.variables_[i][0] == nameTest) {
+            nameTest = fullName + num++;
+            i = -1;
+        }
+    }
+    this.variables_.push([nameTest, value]);
 };
 
 Squid.VariablesSet.prototype.Rename = function (oldname, newname) {
@@ -93,7 +102,7 @@ Squid.VariablesSet.prototype.Rename = function (oldname, newname) {
 Squid.VariablesSet.prototype.Delete = function (name) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
-            variables.splice(i, 1);
+            this.variables_.splice(i, 1);
             return;
         }
     }
@@ -102,7 +111,7 @@ Squid.VariablesSet.prototype.Delete = function (name) {
 Squid.VariablesSet.prototype.SetValue = function (name, value) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
-            variables[i][1] = value;
+            this.variables_[i][1] = value;
             return;
         }
     }
@@ -111,7 +120,7 @@ Squid.VariablesSet.prototype.SetValue = function (name, value) {
 Squid.VariablesSet.prototype.GetValue = function (name) {
     for (var i = 0; i < this.variables_.length; i++) {
         if (this.variables_[i][0] == name) {
-            return variables[i][1];
+            return this.variables_[i][1];
         }
     }
     return null;
@@ -121,6 +130,26 @@ Squid.VariablesSet.prototype.Clear = function () {
     this.variables_.length = 0;
 };
 
+/**
+ * 
+ * @returns {} 
+ */
 Squid.VariablesSet.prototype.List = function() {
-    return this.variables_;
+    var list = [];
+    for (var i = 0; i < this.variables_.length; i++) {
+        list.push(this.variables_[i]);
+    }
+    return list;
+};
+
+/**
+ * Get a list of names in the variable set.
+ * @returns {} 
+ */
+Squid.VariablesSet.prototype.Names = function() {
+    var names = [];
+    for (var i = 0; i < this.variables_.length; i++) {
+        names.push(this.variables_[i][0]);
+    }
+    return names;
 };

@@ -668,6 +668,7 @@
     <Content Include="Contents\icons\arrow-right.png" />
     <Content Include="Contents\icons\ico-arrow-right-white.png" />
     <Content Include="Contents\icons\ico-clear.png" />
+    <Content Include="Contents\icons\ico-delete.png" />
     <Content Include="Contents\icons\ico-refresh.png" />
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
@@ -3478,6 +3479,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlocksController.cs" />
+    <Compile Include="Controllers\VariablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
