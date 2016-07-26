@@ -151,23 +151,48 @@ function backupBlocks (workspace, url) {
   if ("localStorage" in window) {
       var xml = Blockly.Xml.workspaceToDom(workspace);
       //FOR TESTS add by felix
-      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
+      var prettyTxt = Blockly.Xml.domToPrettyText(xml);
       var xmlTxt = Blockly.Xml.domToText(xml);
       //alert(txt);
       //var div = document.getElementById('xml1');
       //div.innerHTML = prettyTxt;
-      //var code = Blockly.CSharp.workspaceToCode(workspace);
-      //postCode(code, xmlTxt);
+      var code = Blockly.CSharp.workspaceToCode(workspace);
+      Squid.Requests.SaveBlocks(code, prettyTxt);
       //END FOR TESTS
      
-      window.localStorage.setItem(url, xmlTxt);
+     // window.localStorage.setItem(url, xmlTxt);
   }
 };
 
+// Reload datas to a workspace
+Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
+    var baseUrl = window.location.href.split('#')[0] + "#";
+    if (workspace != null && location != null) {
+        workspace.clear();
+        restoreBlocks(workspace, baseUrl + location);
+    }
+
+    if (secondaryWorkspace != null) {
+        secondaryWorkspace.clear();
+		restoreBlocks(secondaryWorkspace, baseUrl + Squid.Storage.SecondaryStorage);
+	}
+};
+
+
 function restoreBlocks (opt_workspace, url) {
-	if("localStorage" in window && window.localStorage[url]) {
-		var xml = Blockly.Xml.textToDom(window.localStorage[url]);
-		Blockly.Xml.domToWorkspace(xml, opt_workspace);
+	if('localStorage' in window && window.localStorage[url]) {
+		var workspace = opt_workspace;
+		//var xml = Blockly.Xml.textToDom(window.localStorage[url]);
+	    //Blockly.Xml.domToWorkspace(xml, workspace);
+
+	    //callback function
+        // this code is executed asynchonously, when the ajax request has responded
+		Squid.Requests.ReloadXml(function (xmlText) {
+	        //alert(xmlText);
+	        var xml = Blockly.Xml.textToDom(xmlText);
+	        Blockly.Xml.domToWorkspace(xml, workspace);
+	        Refresh();
+	    });
 	}
 };
 

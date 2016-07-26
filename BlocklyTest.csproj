@@ -264,6 +264,10 @@
     <Content Include="Blockly\generators\dart\procedures.js" />
     <Content Include="Blockly\generators\dart\text.js" />
     <Content Include="Blockly\generators\dart\variables.js" />
+    <Content Include="Blockly\generators\french.js" />
+    <Content Include="Blockly\generators\french\base_blocks.js" />
+    <Content Include="Blockly\generators\french\decoding_blocks.js" />
+    <Content Include="Blockly\generators\french\procedures.js" />
     <Content Include="Blockly\generators\javascript.js" />
     <Content Include="Blockly\generators\javascript\colour.js" />
     <Content Include="Blockly\generators\javascript\custom.js" />
@@ -681,7 +685,6 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
-    <Content Include="ServerStorage\BlocksInXml.txt" />
     <Content Include="closure-library\.gitignore" />
     <Content Include="closure-library\alltests.js" />
     <Content Include="closure-library\all_tests.html" />
@@ -3112,12 +3115,13 @@
     <Content Include="closure-library\third_party\closure\goog\mochikit\async\deferred_test.html" />
     <Content Include="closure-library\third_party\closure\goog\osapi\osapi.js" />
     <Content Include="closure-library\third_party\closure\goog\svgpan\svgpan.js" />
-    <Content Include="ServerStorage\GeneratedCode.txt" />
     <Content Include="Global.asax" />
     <Content Include="decoder.html" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.csproj.FileListAbsolute.txt" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.dll" />
     <Content Include="closure-library\obj\Debug\BlocklyTest.pdb" />
+    <Content Include="ServerStorage\BlocksInXml.txt" />
+    <Content Include="ServerStorage\GeneratedCode.txt" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\bootstrap.min.css" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\css\stylish-portfolio.css" />
@@ -3136,7 +3140,7 @@
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\bootstrap.min.js" />
     <Content Include="startbootstrap-stylish-portfolio-1.0.5\js\jquery.js" />
-    <Content Include="postCode.js" />
+    <Content Include="server_requests.js" />
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />

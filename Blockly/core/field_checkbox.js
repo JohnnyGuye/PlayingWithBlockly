@@ -93,6 +93,7 @@ Blockly.FieldCheckbox.prototype.setValue = function(strBool) {
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       Blockly.Events.fire(new Blockly.Events.Change(
           this.sourceBlock_, 'field', this.name, this.state_, newState));
+        //alert("change !!");//TEEEEEEEEEEEEEEEEST
     }
     this.state_ = newState;
     if (this.checkElement_) {

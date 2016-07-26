@@ -1,1 +1,45 @@
-haha
+/**
+ * Décrire cette fonction…
+ */
+public static TDecodableBlock faire_quelque_chose<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep, )
+	where TDecodableBlock : IDecodableStep<TDecodableBlock>
+{
+	Contract.Requires<ArgumentNullException>(previousDecodableStep != null);
+
+	return
+		previousDecodableStep
+		.DecodeBoolean("default", 0.0M).End()
+		.DecodeBytes("default", 0M, 0M);
+}
+
+/**
+ * Décrire cette fonction…
+ */
+public static TDecodableBlock faire_quelque_chose2<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep, )
+	where TDecodableBlock : IDecodableStep<TDecodableBlock>
+{
+	Contract.Requires<ArgumentNullException>(previousDecodableStep != null);
+
+	return
+		previousDecodableStep
+		.DecodeBytes("default", 4M, 5M).End()
+		.DecodeBoolean("default", 0.0M);
+}
+
+/**
+ * Décrire cette fonction…
+ */
+public static TDecodableBlock qdqdq<TDecodableBlock>(this IDecodableStep<TDecodableBlock> previousDecodableStep, )
+	where TDecodableBlock : IDecodableStep<TDecodableBlock>
+{
+	Contract.Requires<ArgumentNullException>(previousDecodableStep != null);
+
+	return
+		previousDecodableStep
+		.DecodeSignedInteger("l", 0.0M, 0.0M).End()
+		.DecodeBoolean("default", 0.0M).End()
+		.If( decodingContextData => decodingContextData.decodedValues.expression)
+		.ElseIf(decodingContextData => decodingContextData.decodedValues.expression)
+		.Else()
+		.EndIf();
+}
