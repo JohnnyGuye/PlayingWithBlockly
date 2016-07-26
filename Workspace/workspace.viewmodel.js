@@ -38,7 +38,8 @@ app.component("workspace",
             workspace.attachChildWorkspace(hiddenWorkspace);
             Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
             //not optimal
-            setTimeout(Refresh, 200);
+            //$(document).ready(Refresh);
+            setTimeout(Refresh, 250);
             
 
             Squid.Dev.HideDevmode();
