@@ -12,8 +12,16 @@ Squid.Storage.PrincipalStorage = "princWS";
 Squid.Storage.SecondaryStorage = "secWS";
 Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
+Squid.Storage.Inventorys = Squid.Storage.BaseUrl() + "inventory";
 
-Squid.Storage.ConfigLocations = [];
+Squid.Storage.ConfigLocations = new Array();
+Squid.Storage.InventoryLocations = new Array();
+
+Squid.Storage.Init = function() {
+    restoreList(Squid.Storage.ConfigLocations, Squid.Storage.Configs);
+    restoreList(Squid.Storage.InventoryLocations, Squid.Storage.Inventorys);
+}
+
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
  * but they are all saved at the same place, which, you will restore only two workspaces,
@@ -30,7 +38,20 @@ Squid.Storage.SaveWorkspace = function (workspace, location) {
     backupBlocks(workspace, baseUrl + location);
 };
 
-Squid.Storage.SaveFunction = function(workspace) {
+
+Squid.Storage.SaveFinishedFunction = function (workspace) {
+    var finishedFunction = workspace.getTopBlocks();
+    if (finishedFunction.length !== 1 || !finishedFunction[0].getProcedureDef)
+    {
+        alert("La sauvegarde serveur a echoué. Le workspace contient plus d'un block ou votre décodeur n'est pas du type fonction.");
+    }
+    //console.log(finishedFunction[0].id);
+    var blockId = finishedFunction[0].id;
+    backupBlocks(workspace, baseUrl + blockId);
+}
+
+Squid.Storage.SaveFunction = function (workspace) {
+
     var baseUrl = Squid.Storage.BaseUrl();
     var workspaceSec = new Blockly.Workspace();
     var blocks;
@@ -62,20 +83,34 @@ Squid.Storage.SaveFunction = function(workspace) {
  * @param {} name 
  * @returns {} 
  */
-Squid.Storage.SaveConfigs = function(workspace, name) {
-    var configUrl = Squid.Storage.Configs;
+Squid.Storage.SaveVariables = function(type) {
+    var workspace = Squid.Variables.getWorkspace(type);;
+    var name = Squid.Variables.getNameSet(type);
 
-    backupBlocks(workspace, configUrl + "_" + name);
+    var url = "";
+    var locations;
+    if (type == Squid.Variables.Types.CONFIG) {
+        url = Squid.Storage.Configs;
+        locations = Squid.Storage.ConfigLocations;
+    } else if (type == Squid.Variables.Types.INVENTORY) {
+        url = Squid.Storage.Inventorys;
+        locations = Squid.Storage.InventoryLocations;
+    } else {
+        return;
+    }
 
-    for (var i = 0; i < Squid.Storage.ConfigLocations.length; i++) {
-        if (Squid.Storage.ConfigLocations[i] == name) {
+    backupBlocks(workspace, url + "_" + name);
+
+    for (var i = 0; i < locations.length; i++) {
+        if (locations[i] == name) {
             console.warn("Old value deleted");
             return;
         }
     }
-    Squid.Storage.ConfigLocations.push(name);
+    locations.push(name);
+    locations.sort();
 
-    
+    backupList(locations, url);
 }
 
 /**
@@ -84,12 +119,25 @@ Squid.Storage.SaveConfigs = function(workspace, name) {
  * @param {} name 
  * @returns {} 
  */
-Squid.Storage.RestoreConfigs = function(opt_workspace, name) {
-    var configUrl = Squid.Storage.Configs;
+Squid.Storage.RestoreVariables = function (type, name ) {
+    var url;
+    var locations;
+    var ws = Squid.Variables.getWorkspace(type);
+    if (type == Squid.Variables.Types.CONFIG) {
+        url = Squid.Storage.Configs;
+        locations = Squid.Storage.ConfigLocations;
+    } else if (type == Squid.Variables.Types.INVENTORY) {
+        url = Squid.Storage.Inventorys;
+        locations = Squid.Storage.InventoryLocations;
+    } else {
+        return;
+    }
 
-    for (var i = 0; i < Squid.Storage.ConfigLocations.length; i++) {
-        if (Squid.Storage.ConfigLocations[i] == name) {
-            restoreBlocks(opt_workspace, configUrl + "_" + name);
+    console.log("nieh");
+
+    for (var i = 0; i < locations.length; i++) {
+        if (locations[i] == name) {
+            restoreBlocks(ws, url + "_" + name);
             return;
         }
     }
@@ -97,22 +145,6 @@ Squid.Storage.RestoreConfigs = function(opt_workspace, name) {
     console.warn("No config set at that name.");
 }
 
-function backupBlocks (workspace, url) {
-  if ('localStorage' in window) {
-      var xml = Blockly.Xml.workspaceToDom(workspace);
-      //FOR TESTS add by felix
-      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
-      var xmlTxt = Blockly.Xml.domToText(xml);
-      //alert(txt);
-      //var div = document.getElementById('xml1');
-      //div.innerHTML = prettyTxt;
-      //var code = Blockly.CSharp.workspaceToCode(workspace);
-      //postCode(code, xmlTxt);
-      //END FOR TESTS
-     
-      window.localStorage.setItem(url, xmlTxt);
-  }
-};
 
 // Reload datas to a workspace
 Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
@@ -128,12 +160,42 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 	}
 };
 
+function backupBlocks (workspace, url) {
+  if ("localStorage" in window) {
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      //FOR TESTS add by felix
+      //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
+      var xmlTxt = Blockly.Xml.domToText(xml);
+      //alert(txt);
+      //var div = document.getElementById('xml1');
+      //div.innerHTML = prettyTxt;
+      //var code = Blockly.CSharp.workspaceToCode(workspace);
+      //postCode(code, xmlTxt);
+      //END FOR TESTS
+     
+      window.localStorage.setItem(url, xmlTxt);
+  }
+};
 
 function restoreBlocks (opt_workspace, url) {
-	if('localStorage' in window && window.localStorage[url]) {
-		var workspace = opt_workspace;
-
+	if("localStorage" in window && window.localStorage[url]) {
 		var xml = Blockly.Xml.textToDom(window.localStorage[url]);
-		Blockly.Xml.domToWorkspace(xml, workspace);
+		Blockly.Xml.domToWorkspace(xml, opt_workspace);
 	}
 };
+
+function backupList(list, url) {
+    if ("localStorage" in window && window.localStorage[url]) {
+        var text = "";
+        for (var i = 0; i < list.length; i++) {
+            text += list[i] + "\n";
+        }
+        window.localStorage.setItem(url, txt);
+    }
+}
+
+function restoreList(opt_list, url) {
+    if ("localStorage" in window && window.localStorage[url]) {
+        opt_list = window.localStorage[url].split("\n");
+    }
+}

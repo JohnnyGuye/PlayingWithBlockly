@@ -75,7 +75,7 @@ function RefreshCategories(workspace, toolboxId) {
         divFunc.append(cat);
     }
 
-    workspace.updateToolbox(document.getElementById(toolboxId));
+    workspace.updateToolbox($(toolboxId)[0]);
 }
 
 /**
