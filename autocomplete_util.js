@@ -28,6 +28,8 @@ AutoComplete.RemoveAutoCompleteVariable = function (variable) {
 
 AutoComplete.UpdateVariables= function () {
     AutoComplete.variables = Blockly.Variables.allVariables(AutoComplete.variablesWorkspace);
+    //adding simple variables (not config nor inventory)
+    AutoComplete.variables.push.apply(AutoComplete.variables, Squid.SimpleVariablesNames);
 }
 
 AutoComplete.UpdateCategories = function () {

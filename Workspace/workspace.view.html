@@ -1,0 +1,24 @@
+﻿<div class="edition-window decode-window">
+    <div class="toolbar-workspace">
+        <div class="title-toolbar-workspace"> Editeur de décodeur </div>
+        <div class="toolbar-items">
+            <div class="toolbar-group">
+                <button class="item-workspace save" title="Sauvegarde les fonctions" onclick="Save()"></button>
+                <button class="item-workspace clear" onclick="ClearFunction();" title="Efface les fonctions enregistrées"></button>
+            </div>
+            <!-- Adding the search bar for tags -->
+            <div class="toolbar-group">
+                <input class="item-workspace" id="search-bar" type="text" placeholder="tag1, tag2, ..." value="" />
+                <button class="item-workspace research" onclick="TagSearch(workspace, 'toolboxGeneric')" title="Rechercher les tags"></button>
+            </div>
+            <div class="toolbar-group">
+                <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
+            </div>
+        </div>
+    </div>
+    <div id="blocklyDiv" class="blocklyDiv"></div>
+</div>
+<!-- There is the hidden workspace which is supposed to contain all the function usable BUT not shown -->
+<div class="edition-window decode-window row dev-block">
+    <div id="blocklyDivHidden" class="blocklyDiv dev-block"></div>
+</div>

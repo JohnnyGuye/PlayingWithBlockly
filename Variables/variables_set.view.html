@@ -1,0 +1,51 @@
+﻿<div class="variables-set">
+    <div id="blocklyDivInventory" class="not-shown"></div>
+    <div id="blocklyDivConfiguration" class="not-shown"></div>
+    <h1>{{$ctrl.variablesSet.Name()}}</h1>
+    <div class="toolbar-workspace">
+        <div class="toolbar-group">
+            <input id="config-title"
+                   class="set-title"
+                   value="Set défaut"/>
+                </div>
+        <div class="toolbar-items">
+            <div class="toolbar-group">
+                <button class="item-workspace save"
+                        title="Sauvegarde les variables"></button>
+                <div class="inline-block">
+                    <button class="item-workspace restore dropdown-toggle"
+                            title="Restore un set de variables"
+                            data-toggle="dropdown"></button>
+                </div>
+                <button class="item-workspace clear" 
+                        title="Efface les fonctions enregistrées"></button>
+                <button class="item-workspace add"
+                        title="Ajouter une variable">
+                </button>
+            </div>
+        </div>
+        <table id="config-table">
+            <tr ng-repeat="variable in $ctrl.variablesSet.List()">
+                <td>
+                    <input type="text"
+                           class="variable-name"
+                           id="C_0_label"
+                           name="C_0"
+                           value={{variable[0]}}
+                           oldvalue="C_Variable0">
+                </td>
+                <td>
+                    <input type="number"
+                           id="C_0_input"
+                           name="C_0"
+                           value="{{variable[1]}}">
+                </td>
+                <td>
+                    <button class="delete-button">
+                         x
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

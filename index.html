@@ -20,10 +20,7 @@
 <div id="landingPageId" class="landingPage">
     <!-- Header -->
     <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Décodeur de trames</h1>
-            <h3>m2ocity</h3>
-            <br>
+        <div class="start-button">
             <a class="btn btn-dark btn-lg" href="decoder.html"> Commencer </a>
         </div>
     </header>
@@ -66,29 +63,18 @@
 <!-- Customizing page -->
 <script>  
 
-    //automatic slidshow of background images :
-    var images = new Array(
-        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im9.jpg',
-        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im3.jpeg',
-        'startbootstrap-stylish-portfolio-1.0.5/img/theme2-im10.jpg');
-    var nextimage = 0;
+    var image = 'startbootstrap-stylish-portfolio-1.0.5/img/m2o_paint.png';
+    LoadBackgroudImage();
 
-    doSlideshow();
-
-    function doSlideshow() {
-        if (nextimage >= images.length) {
-            nextimage = 0;
-        }
+    function LoadBackgroudImage() {
         $('.header')
-            .css('background', 'url("' + images[nextimage++] + '")' + ' no-repeat center center scroll')
+            .css('background', 'url("' + image + '")')
             .css('-webkit-background-size', 'cover')
             .css('-moz-background-size', 'cover')
-            .css('background-size', 'cover')
-            .css('-o-background-size', 'cover')
-            .fadeIn(500,
-                function() {
-                    setTimeout(doSlideshow, 1300);
-                });
+            .css('background-size', '100% 100%')
+            .css('background-repeat', 'no repeat')
+            .css('background-position', 'center')
+            .css('-o-background-size', 'cover');
     }
 
 

@@ -7,9 +7,17 @@ span {
     font-style: italic;
 }
 
+.inline-block {
+    display: inline-block;
+    position: relative;
+}
+
+.not-shown {
+    display: none;   
+}
 /* ----------------- Blockly Div --------------------- */
 .blocklyDiv {
-    height: 1000px;
+    height: 800px;
     width: 100%; /*1000*/
     z-index: 800;
 }
@@ -235,7 +243,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
 .textarea {
     width: 100%;
-    height: 150px;
+    height: 90px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -274,15 +282,41 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     border-radius: 5px 5px 5px 5px;
 }
 
+#Values .list-group {
+    color: #604040;
+    height: auto;
+    max-height: 10em;
+    overflow-y: auto;
+    margin: 10px;
+    font-weight: bold;
+    padding-right: 7px;
+}
+
+#Values .list-group-item {
+   display: block;
+  padding: 3px 3px;
+}
+
+.side-bar table {
+  display: block;
+  max-height: 10em;
+  overflow-y: auto;
+  padding-right: 7px;
+}
+
+
+.col-lg-10 {
+    overflow: auto;
+}
+
+
 /*-------------------- Toolbar ----------------------- */
 .toolbar-workspace {
     z-index: 0;
     margin: 0px;
     padding: 10px;
-    padding-right: 0px;
     color: white;
     background-color: #200000;
-    width: 90%; /*1000*/
     height: auto;
     border-radius: 5px 5px 5px 5px;
 }
@@ -311,6 +345,12 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     color: #200000;
 }
 
+.toolbar-group span {
+    color: antiquewhite;
+    font-size: 1.9em;
+    margin: 0;
+    height: 100%;
+}
 .save {
     background-image: url("Contents/icons/ico-save.png");
 }
@@ -325,6 +365,13 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
 .research {
     background-image: url("Contents/icons/ico-research.png");
+}
+.restore {
+    background-image: url("Contents/icons/ico-restore.png");    
+}
+
+.add {
+    background-image: url("Contents/icons/ico-add.png");
 }
 
 .toolbar-group button {
@@ -366,6 +413,20 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     border-bottom-color: #454545;
 }
 
+.set-title {
+    background-color: #000000;
+    background-color: rgba(0,0,0,0);
+    color: antiquewhite !important;
+    border: 0 !important;
+    width: auto !important;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    padding-right: 0px !important;
+    text-align: center;
+    height: 30px;
+    font-size: 1.3em;
+}
 
 
 .toolbar-onglet {
@@ -398,3 +459,49 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 
+/* ---------------------- Dropwdown -----------------*/
+
+.dropdown {
+    font-family: 'Segoe UI', sans-serif;
+    position: absolute;
+    background-color: antiquewhite;
+    top: 100%;
+    left: 0;
+    z-index: 2000;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    min-height: 30px;
+    max-height: 300px;
+    box-shadow: 0 0 1px 0px #200000 inset,
+        0 0 2px 0px black;
+    width: 200px;
+}
+
+.dropdown li{
+    position: relative;
+    text-align: left;
+    background-color: antiquewhite;
+    color: #200000;
+    margin: 0;
+    padding: 3px 5px;
+    transition: 0.05s;
+    height: 30px;
+}
+
+.dropdown li button {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: none;
+}
+
+.dropdown li:hover{
+    background-color: #f6d781;
+    color: #200000;
+}

@@ -12,6 +12,15 @@ Squid.Storage.PrincipalStorage  = "princWS";
 Squid.Storage.SecondaryStorage  = "secWS";
 Squid.Storage.SaveLocations     = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
+Squid.Storage.Inventorys = Squid.Storage.BaseUrl() + "inventory";
+
+Squid.Storage.ConfigLocations = new Array();
+Squid.Storage.InventoryLocations = new Array();
+
+Squid.Storage.Init = function() {
+    restoreList(Squid.Storage.ConfigLocations, Squid.Storage.Configs);
+    restoreList(Squid.Storage.InventoryLocations, Squid.Storage.Inventorys);
+}
 
 Squid.Storage.init = function () {
     this.Storage.ConfigList = new Array();
@@ -50,21 +59,34 @@ Squid.Storage.SaveFunction = function(workspace) {
             }
         }
     }
+
     blocks = workspace.getTopBlocks();
     for (var j = 0; j < blocks.length; j++) {
-        workspaceSec.addTopBlock(blocks[j]);
+        if (blocks[j].getProcedureDef) {
+            workspaceSec.addTopBlock(blocks[j]);
+        }
     }
 
     backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
 }
 
-Squid.Storage.SaveConfig = function(workspace, name) {
-    Squid.Storage.backupBlocks(workspace, Squid.Storage.Configs + "_" + name);
 
-} 
+// Reload datas to a workspace
+Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
+    var baseUrl = window.location.href.split('#')[0] + "#";
+    if (workspace != null && location != null) {
+        workspace.clear();
+        restoreBlocks(workspace, baseUrl + location);
+    }
+
+    if (secondaryWorkspace != null) {
+        secondaryWorkspace.clear();
+		restoreBlocks(secondaryWorkspace, baseUrl + Squid.Storage.SecondaryStorage);
+	}
+};
 
 function backupBlocks (workspace, url) {
-  if ('localStorage' in window) {
+  if ("localStorage" in window) {
       var xml = Blockly.Xml.workspaceToDom(workspace);
       //FOR TESTS add by felix
       //var prettyTxt = Blockly.Xml.domToPrettyText(xml);
@@ -80,26 +102,25 @@ function backupBlocks (workspace, url) {
   }
 };
 
-// Reload datas to a workspace
-Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, location) {
-    var baseUrl = Squid.Storage.BaseUrl();
-    if (workspace != null && location != null) {
-        workspace.clear();
-        restoreBlocks(workspace, baseUrl + location);
-    }
-
-    if (secondaryWorkspace != null) {
-        secondaryWorkspace.clear();
-		restoreBlocks(secondaryWorkspace, baseUrl + Squid.Storage.SecondaryStorage);
-	}
-};
-
-
 function restoreBlocks (opt_workspace, url) {
-	if('localStorage' in window && window.localStorage[url]) {
-		var workspace = opt_workspace;
-
+	if("localStorage" in window && window.localStorage[url]) {
 		var xml = Blockly.Xml.textToDom(window.localStorage[url]);
-		Blockly.Xml.domToWorkspace(xml, workspace);
+		Blockly.Xml.domToWorkspace(xml, opt_workspace);
 	}
 };
+
+function backupList(list, url) {
+    if ("localStorage" in window && window.localStorage[url]) {
+        var text = "";
+        for (var i = 0; i < list.length; i++) {
+            text += list[i] + "\n";
+        }
+        window.localStorage.setItem(url, txt);
+    }
+}
+
+function restoreList(opt_list, url) {
+    if ("localStorage" in window && window.localStorage[url]) {
+        opt_list = window.localStorage[url].split("\n");
+    }
+}
