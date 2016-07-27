@@ -2,11 +2,11 @@
 
 goog.provide("Squid.Variables");
 
-Squid.VariablesSet = function(name, type) {
+Squid.VariablesSet = function(type, name) {
     /**
      * @type {string}
      */
-    this.name_ = name;
+    this.Name = name || "New set";
     /**
      * @type {!Array<Array<string, number>>}
      */
@@ -66,15 +66,6 @@ Squid.VariablesSet.prototype.Type = function() {
  */
 Squid.VariablesSet.prototype.Count = function () {
     return this.variables_.length;
-};
-
-/**
- * Get or set the name
- * @param {string} name 
- * @returns {string} the actual name  
- */
-Squid.VariablesSet.prototype.Name = function(name) {
-    return this.name_ = name || this.name_;
 };
 
 /**
@@ -158,12 +149,16 @@ Squid.VariablesSet.prototype.Clear = function () {
  * Get a copy of the dictionary, name/value
  * @returns {} 
  */
-Squid.VariablesSet.prototype.List = function() {
-    var list = [];
-    for (var i = 0; i < this.variables_.length; i++) {
-        list.push(this.variables_[i]);
+Squid.VariablesSet.prototype.List = function (copy) {
+    if (copy != false) {
+        var list = [];
+        for (var i = 0; i < this.variables_.length; i++) {
+            list.push([this.variables_[i][0], this.variables_[i][1]]);
+        }
+        return list;
+    } else {
+        return this.variables_;
     }
-    return list;
 };
 
 /**

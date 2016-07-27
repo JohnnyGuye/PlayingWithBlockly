@@ -20,14 +20,15 @@
     <!--<script src="Blockly/blocks_compressed.js"></script>-->
 
     <!--Blocks-->
-    <script src="Blockly/blocks/colour.js"></script>
+    <script src="Blockly/blocks/procedures.js"></script>
     <script src="Blockly/blocks/custom.js"></script>
     <script src="Blockly/blocks/custom_if.js"></script>
+
+    <script src="Blockly/blocks/colour.js"></script>
     <script src="Blockly/blocks/lists.js"></script>
     <script src="Blockly/blocks/logic.js"></script>
     <script src="Blockly/blocks/loops.js"></script>
     <script src="Blockly/blocks/math.js"></script>
-    <script src="Blockly/blocks/procedures.js"></script>
     <script src="Blockly/blocks/text.js"></script>
     <script src="Blockly/blocks/variables.js"></script>
 
@@ -37,7 +38,7 @@
 
     <!-- Overriden version of the core -->
     <script src="Blockly/core_override/procedures.js"></script>
-    <script src="Blockly/core_override/variables.js"></script>
+    <!--<script src="Blockly/core_override/variables.js"></script>-->
 
     <!-- Messages -->
     <script src="Blockly/msg/js/fr.js"></script>
@@ -45,19 +46,21 @@
 
     <!--Csharp generator-->
     <script src="Blockly/generators/csharp.js"></script>
+    <script src="Blockly/generators/csharp/procedures.js"></script>
+    <script src="Blockly/generators/csharp/custom.js"></script>
+
     <script src="Blockly/generators/csharp/variables.js"></script>
     <script src="Blockly/generators/csharp/lists.js"></script>
     <script src="Blockly/generators/csharp/colour.js"></script>
     <script src="Blockly/generators/csharp/logic.js"></script>
     <script src="Blockly/generators/csharp/math.js"></script>
     <script src="Blockly/generators/csharp/loops.js"></script>
-    <script src="Blockly/generators/csharp/procedures.js"></script>
     <script src="Blockly/generators/csharp/text.js"></script>
     <script src="Blockly/generators/csharp/inferboilerplate.js"></script>
     <script src="Blockly/generators/csharp/inferbool_variables.js"></script>
     <script src="Blockly/generators/csharp/inferdistributions.js"></script>
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
-    <script src="Blockly/generators/csharp/custom.js"></script>
+
 
     <!-- French generator -->
     <script src="Blockly/generators/french.js"></script>
@@ -78,31 +81,47 @@
 </head>
 
 <body onkeydown="Squid.Dev.ToggleDevmode(event)">
+<script>
+    /* Workspaces */
+    var workspace;
+    var hiddenWorkspace;
+
+    /*AutoCompletion*/
+    var acTags;
+
+    /* Element IDs */
+    var princToolboxId = "#toolboxGeneric";
+    var BASE_BLOCKLY_DIV = "blocklyDiv";
+
+    var app = angular.module('httpApp', []);
+
+</script>
+
+<script src="Workspace/workspace.viewmodel.js"></script>
+<script src="Variables/variables_set.js"></script>
+<script src="Variables/variables_set.wiewmodel.js"></script>
+<script src="Generation/generation.viewmodel.js"></script>
+
     <div class="top-layer full-height">
-        <div class="generated-code full-height" id="generated-code">
-            <h1 class="no-margin"> Code généré </h1>
-            <pre id="content1"></pre>
-        </div>
+        <generator></generator>
         <aside class="side-bar full-height">
             <div class="row full-height">
-                <aside class="code-hide full-height col-lg-2">
-                    <button id="code-hide" onclick="hideGenerated()">
-                        <div class="rotate"> Générer </div>
-                    </button>
-                </aside>
+                <div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <variables-set></variables-set>
+                    <config-set></config-set>
+                    <inventory-set></inventory-set>
                     <div id="Values">
                         <h1>Valeurs</h1>
                     </div>
-                    <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
+                    <button class="item-workspace" onclick="Squid
+    .displaySimpleVariables()">
                         Rafraîchir valeurs
                     </button>
                     <div id="decodingTest">
                         <h1>Tester le décodeur</h1>
-                        <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
-                        <input id="nom-decodeur" type="text" value="nom du décodeur" />
-                        <input id="resultat" type="text" class="textarea" value="resultat" />
+                        <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
+                        <input id="nom-decodeur" type="text" value="nom du décodeur"/>
+                        <input id="resultat" type="text" class="textarea" value="resultat"/>
                     </div>
                 </div>
             </div>
@@ -117,196 +136,116 @@
         </div>
     </div>
 
-<!-- SCRIPTS -->
+    <!-- SCRIPTS -->
 
-<script>
-    /* Workspaces */
-    var workspace;
-    var hiddenWorkspace;
-
-    /*AutoCompletion*/
-    var acTags;
-
-    /* Element IDs */
-    var princToolboxId = "#toolboxGeneric";
-    var BASE_BLOCKLY_DIV = "blocklyDiv";
-
-    var app = angular.module('httpApp', []);
-   
-</script>
-
-<script src="Workspace/workspace.viewmodel.js"></script>
-<script src="Variables/variables_set.js"></script>
-<script src="Variables/variables_set.wiewmodel.js"></script>
-
-
-<script>
-    function hideGenerated() {
-        var gc = $("#generated-code");
-        var fullSize = '75%';
-        if (gc.css("width") === '0px') {
-            generateCode();
-            gc.css("width", fullSize);
-            gc.css("opacity", 1);
-        } else {
-            gc.css("width", '0%');
-            gc.css("opacity", 0);
-        }
-    }
-
-    //------------------------------------------------------------------ Variables
-    // Restore
-    function launchDropdownRestoreSet(button, type) {
-
-        button = $(button);
-        button.html("");
-
-        var locations;
-        if (type == Squid.Variables.Types.CONFIG) {
-            locations = Squid.Storage.ConfigLocations;
-        } else if (type == Squid.Variables.Types.INVENTORY) {
-            locations = Squid.Storage.InventoryLocations;
-        } else {
-            locations = [];
-        }
-
-        var ul = $("<ul>");
-        ul.attr("class", "dropdown");
-        ul.attr("role", "menu");
-        ul.hover(null, function() { ul.remove(); });
-
-        for (var i = 0; i < locations.length; i++) {
-            var li = $("<li>");
-            li.attr("role", "presentation");
-
-            var but = $("<button>");
-            but.attr("onclick", "restoreSet('" + locations[i] + "', '" + type + "');");
-            but.html(locations[i]);
-
-            li.append(but);
-            ul.append(li);
-        }
-        button.append(ul);
-    }
-
-    function restoreSet(location, type) {
-        if (location) {
-            var workspace = Squid.Variables.getWorkspace(type);
-
-            var names = Blockly.Variables.allVariables(workspace);
-
-            Squid.Variables.deleteAll(type);
-            Squid.Storage.RestoreVariables(
-                type,
-                location
-            );
-
-            var prefix = Squid.Variables.getPrefix(type);
-            for (var i = 1; i < names.length; i++) {
-                var l = prefix.length;
-                var name = names[i].substr(l, names[i].length - l);
-                Squid.Variables.create(type, name);
+    <script>
+        function hideGenerated() {
+            var gc = $("#generated-code");
+            var fullSize = '75%';
+            if (gc.css("width") === '0px') {
+                generateCode();
+                gc.css("width", fullSize);
+                gc.css("opacity", 1);
+            } else {
+                gc.css("width", 0);
+                gc.css("opacity", 0);
             }
-            $(Squid.Variables.getAnchor(type) + "-title").text(location);
-        } else {
-            console.warn("Specify a location");
-        }
-    }
-
-    //------------------------------------------------------------------ Tools
-    /////**
-    //// * Create a new workspace for editing a function.
-    //// * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
-    //// */
-    ////function createFunction(workspace) {
-    ////    var funcWindow = document.getElementById("functionWrapper");
-    ////    if (funcWindow.style.display === "none") {
-    ////        funcWindow.style.display = "block";
-    ////    }
-
-    ////    // Hide the previous workspace
-    ////    if (nbWorkspaces > 0) {
-    ////        document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
-    ////    }
-
-    ////    // Create anchor
-    ////    var newDiv = document.createElement('div');
-    ////    newDiv.setAttribute("id", BASE_BLOCKLY_DIV + nbWorkspaces);
-    ////    newDiv.setAttribute("class", BASE_BLOCKLY_DIV);
-    ////    funcWindow.appendChild(newDiv);
-
-    ////    // Create the workspace
-    ////    var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
-    ////    { toolbox: document.getElementById('toolboxFunction') });
-    ////    workspace.attachChildWorkspace(newWorkspace);
-    ////    activWorkspace = newWorkspace;
-    ////    valueActivWorkspace = nbWorkspaces;
-
-    ////    // Create the onglet
-    ////    var newOnglet = document.createElement('button');
-    ////    newOnglet.setAttribute("class", "onglet");
-    ////    newOnglet.setAttribute("name", "Nouveau");
-    ////    newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
-    ////    newOnglet.setAttribute("value", nbWorkspaces);
-    ////    newOnglet.setAttribute("checked", true);
-    ////    newOnglet.setAttribute("onclick", "changeActiveWorkspace(" + nbWorkspaces + ")");
-    ////    newOnglet.textContent = "Nouveau !";
-    ////    document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
-
-    ////    nbWorkspaces++;
-    ////}
-
-    ////function changeActiveWorkspace(newValueActivWorkspace) {
-    ////    document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
-    ////    document.getElementById(BASE_BLOCKLY_DIV + newValueActivWorkspace).style.display = "block";
-    ////    valueActivWorkspace = newValueActivWorkspace;
-    ////}
-
-    function generateCode() {
-        var code = Blockly.CSharp.workspaceToCode(workspace);
-        var div = $('#content1')[0];
-        //var code = Blockly.French.workspaceToCode(workspace);
-        var div = document.getElementById('content1');
-        div.innerHTML = code;
-    }
-
-    function Refresh() {
-        RefreshCategories(workspace, princToolboxId);
-        //for autocompletion
-        if (acTags) {
-            acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
         }
 
-    }
+        //------------------------------------------------------------------ Tools
+        /////**
+        //// * Create a new workspace for editing a function.
+        //// * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
+        //// */
+        ////function createFunction(workspace) {
+        ////    var funcWindow = document.getElementById("functionWrapper");
+        ////    if (funcWindow.style.display === "none") {
+        ////        funcWindow.style.display = "block";
+        ////    }
 
-    function Save() {
-        Squid.Storage.SaveFunction(workspace);
-        Squid.Requests.SaveVariables(Squid.SimpleVariables);
-        Refresh();
-    }
+        ////    // Hide the previous workspace
+        ////    if (nbWorkspaces > 0) {
+        ////        document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
+        ////    }
 
-    function clearFunc(workspace) {
-        var children = workspace.getLinkedWorkspace();
-        for (var i = 0; i < children.length; i++) {
-            children[i].clear();
-            clearFunc(children[i]);
+        ////    // Create anchor
+        ////    var newDiv = document.createElement('div');
+        ////    newDiv.setAttribute("id", BASE_BLOCKLY_DIV + nbWorkspaces);
+        ////    newDiv.setAttribute("class", BASE_BLOCKLY_DIV);
+        ////    funcWindow.appendChild(newDiv);
+
+        ////    // Create the workspace
+        ////    var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
+        ////    { toolbox: document.getElementById('toolboxFunction') });
+        ////    workspace.attachChildWorkspace(newWorkspace);
+        ////    activWorkspace = newWorkspace;
+        ////    valueActivWorkspace = nbWorkspaces;
+
+        ////    // Create the onglet
+        ////    var newOnglet = document.createElement('button');
+        ////    newOnglet.setAttribute("class", "onglet");
+        ////    newOnglet.setAttribute("name", "Nouveau");
+        ////    newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
+        ////    newOnglet.setAttribute("value", nbWorkspaces);
+        ////    newOnglet.setAttribute("checked", true);
+        ////    newOnglet.setAttribute("onclick", "changeActiveWorkspace(" + nbWorkspaces + ")");
+        ////    newOnglet.textContent = "Nouveau !";
+        ////    document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
+
+        ////    nbWorkspaces++;
+        ////}
+
+        ////function changeActiveWorkspace(newValueActivWorkspace) {
+        ////    document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
+        ////    document.getElementById(BASE_BLOCKLY_DIV + newValueActivWorkspace).style.display = "block";
+        ////    valueActivWorkspace = newValueActivWorkspace;
+        ////}
+
+        function generateCode() {
+            var code = Blockly.CSharp.workspaceToCode(workspace);
+            var div = $('#content1')[0];
+            //var code = Blockly.French.workspaceToCode(workspace);
+            var div = document.getElementById('content1');
+            div.innerHTML = code;
         }
-    }
 
-    function ClearFunction() {
-        if (window
-            .confirm("Êtes-vous sur de vouloir effacer toutes les fonctions ? A la prochaine sauvegarde, elle seront perdues.")) {
-            clearFunc(workspace);
+        function Refresh() {
+            RefreshCategories(workspace, princToolboxId);
+            //for autocompletion
+            if (acTags) {
+                acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
+            }
+
+        }
+
+        function Save() {
+            Squid.Storage.SaveFunction(workspace);
+            Squid.Requests.SaveVariables(Squid.SimpleVariables);
             Refresh();
         }
-    }
 
-</script>
+        function clearFunc(workspace) {
+            var children = workspace.getLinkedWorkspace();
+            for (var i = 0; i < children.length; i++) {
+                children[i].clear();
+                clearFunc(children[i]);
+            }
+        }
 
-<!-- Storage and parsing -->
-<script src="Storage/storage.js"></script>
-<script src="Storage/parsingXML.js"></script>
-<script src="Toolbox/category.js"></script>
+        function ClearFunction() {
+            if (window
+                .confirm("Êtes-vous sur de vouloir effacer toutes les fonctions ? A la prochaine sauvegarde, elle seront perdues.")) {
+                clearFunc(workspace);
+                Refresh();
+            }
+        }
+
+    </script>
+
+    <!-- Storage and parsing -->
+    <script src="Storage/storage.js"></script>
+    <script src="Storage/parsingXML.js"></script>
+    <script src="Toolbox/category.js"></script>
 
 </body>
 </html>

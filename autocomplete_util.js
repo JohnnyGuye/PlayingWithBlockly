@@ -12,8 +12,10 @@ AutoComplete= function(opt_variables, opt_categories, opt_tags) {
 AutoComplete.variables = [];
 AutoComplete.categories = [];
 AutoComplete.tags = [];
-AutoComplete.variablesWorkspace = null;
 AutoComplete.categoryWorkspace = null;
+
+AutoComplete.inventorySet = null;
+AutoComplete.configSet = null;
 
 AutoComplete.AddAutoCompleteVariable = function (variable) {
     AutoComplete.variables.push(variable);
@@ -26,10 +28,16 @@ AutoComplete.RemoveAutoCompleteVariable = function (variable) {
     }
 }
 
-AutoComplete.UpdateVariables= function () {
-    AutoComplete.variables = Blockly.Variables.allVariables(AutoComplete.variablesWorkspace);
-    //adding simple variables (not config nor inventory)
-    AutoComplete.variables.push.apply(AutoComplete.variables, Squid.SimpleVariablesNames);
+AutoComplete.UpdateVariables = function () {
+    AutoComplete.variables = [];
+    // Config variables
+    if (AutoComplete.configSet)
+        AutoComplete.variables.push.apply(AutoComplete.variables, AutoComplete.configSet.Names());
+    // Inventory variables
+    if (AutoComplete.inventorySet)
+        AutoComplete.variables.push.apply(AutoComplete.variables, AutoComplete.inventorySet.Names());
+    // Other variables
+    AutoComplete.variables.push.apply(AutoComplete.variables, Array.from(Squid.SimpleVariables.keys()));
 }
 
 AutoComplete.UpdateCategories = function () {

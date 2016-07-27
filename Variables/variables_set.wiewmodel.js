@@ -1,11 +1,30 @@
-﻿app.component("variablesSet",
-    {
-        templateUrl: "Variables/variables_set.view.html",
-        controller: function () {
-
-            this.variablesSet = new Squid.VariablesSet("Configuration", Squid.VariablesSet.Types.CONFIG);
-            ////    Squid.Variables.InitWorkspaces(BASE_BLOCKLY_DIV + "Configuration", BASE_BLOCKLY_DIV + "Inventory");
-            ////    AutoComplete.variablesWorkspace = Squid.Variables.getWorkspace(Squid.Variables.Types.CONFIG);
+﻿app.component("configSet",
+{
+    templateUrl: "Variables/variables_set.view.html",
+    controller: function() {
+        this.name = "Configuration";
+        this.sets = [];
+        this.NewSet = function() {
+            this.set = new Squid.VariablesSet(Squid.VariablesSet.Types.CONFIG);
+            this.sets.push(this.set);
         }
-    });
+        this.NewSet();
 
+        AutoComplete.configSet = this.set;
+    }
+});
+
+app.component("inventorySet",
+{
+    templateUrl: "Variables/variables_set.view.html",
+    controller: function() {
+        this.name = "Inventaire";
+        this.sets = [];
+        this.NewSet = function () {
+            this.set = new Squid.VariablesSet(Squid.VariablesSet.Types.INVENTORY);
+            this.sets.push(this.set);
+        }
+        this.NewSet();
+        AutoComplete.inventorySet = this.set;
+    }
+});

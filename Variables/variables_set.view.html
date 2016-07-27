@@ -1,46 +1,55 @@
 ﻿<div class="variables-set">
-    <div id="blocklyDivInventory" class="not-shown"></div>
-    <div id="blocklyDivConfiguration" class="not-shown"></div>
-    <h1>{{$ctrl.variablesSet.Name()}}</h1>
+    <h1>{{$ctrl.name}}</h1>
     <div class="toolbar-workspace">
         <div class="toolbar-group">
             <input id="config-title"
                    class="set-title"
-                   value="Set défaut"/>
-                </div>
+                   ng-model="$ctrl.set.Name"/>
+        </div>
         <div class="toolbar-items">
             <div class="toolbar-group">
                 <button class="item-workspace save"
                         title="Sauvegarde les variables"></button>
-                <div class="inline-block">
-                    <button class="item-workspace restore dropdown-toggle"
-                            title="Restore un set de variables"
-                            data-toggle="dropdown"></button>
+                <div class="dropdown inline-block">
+                    <button class="restore
+                                item-workspace 
+                                dropdown-toggle"
+                            type="button"
+                            data-toggle="dropdown">
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="set in $ctrl.sets" ng-click="$ctrl.set = set">
+                            {{set.Name}}
+                        </li>
+                        <li ng-click="$ctrl.NewSet()">
+                            Nouveau set
+                        </li>
+                    </ul>
                 </div>
                 <button class="item-workspace clear"
                         title="Efface les fonctions enregistrées"
-                        ng-click="$ctrl.variablesSet.Clear()"></button>
+                        ng-click="$ctrl.set.Clear()"></button>
                 <button class="item-workspace add"
                         title="Ajouter une variable"
-                        ng-click="$ctrl.variablesSet.Create()">
+                        ng-click="$ctrl.set.Create()">
                 </button>
             </div>
         </div>
         <table id="config-table">
-            <tr ng-repeat="variable in $ctrl.variablesSet.List()">
+            <tr ng-repeat="variable in $ctrl.set.List(false)">
                 <td>
                     <input type="text"
                            class="variable-name"
-                           value={{variable[0]}}>
+                           ng-model="variable[0]">
                 </td>
                 <td>
                     <input type="text"
                            class="variable-value"
-                           value="{{variable[1]}}">
+                           ng-model="variable[1]">
                 </td>
                 <td>
                     <button class="delete-button delete"
-                            ng-click="$ctrl.variablesSet.Delete(variable[0])">
+                            ng-click="$ctrl.set.Delete(variable[0])">
                     </button>
                 </td>
             </tr>

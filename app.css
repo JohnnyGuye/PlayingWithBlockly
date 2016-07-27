@@ -459,7 +459,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
 
 /* ---------------------- Dropwdown -----------------*/
-
+/*
 .dropdown {
     font-family: 'Segoe UI', sans-serif;
     position: absolute;
@@ -476,7 +476,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
         0 0 2px 0px black;
     width: 200px;
 }
-
+*/
 .dropdown li{
     position: relative;
     text-align: left;
@@ -500,7 +500,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background: none;
 }
 
-.dropdown li:hover{
-    background-color: #f6d781;
-    color: #200000;
-}
+    .dropdown li:hover {
+        background-color: #f6d781;
+        color: #200000;
+    }

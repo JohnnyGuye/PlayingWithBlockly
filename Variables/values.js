@@ -14,7 +14,7 @@ Squid.removeSimpleVariable = function (name) {
 
 Squid.restoreSimpleVariables = function(map) {
     Squid.SimpleVariables = map;
-   // Squid.SimpleVariablesNames = Array.from(Squid.SimpleVariables.keys());
+    //Squid.SimpleVariablesNames = Array.from(Squid.SimpleVariables.keys());
 }
 
 function makeUL(map) {
