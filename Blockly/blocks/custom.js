@@ -85,6 +85,11 @@ Blockly.Blocks['decodebytes'] = {
         this.appendDummyInput()
             .appendField("nom :")
             .appendField(new Blockly.FieldTextInput("default", null, AutoComplete.GetVariables, true), "NAME");
+
+        /*this.appendDummyInput()
+            .appendField("temporaire")
+            .appendField(new Blockly.FieldCheckbox("TRUE"), "BOX");*/
+
         this.appendDummyInput()
             .appendField("octet de debut :")
             .appendField(new Blockly.FieldTextInput("0", null, AutoComplete.GetVariables), "start");

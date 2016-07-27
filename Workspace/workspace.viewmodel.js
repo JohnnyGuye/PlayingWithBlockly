@@ -37,7 +37,9 @@ app.component("workspace",
 
             workspace.attachChildWorkspace(hiddenWorkspace);
             Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
-            Refresh();
+            //not optimal
+            setTimeout(Refresh, 200);
+            
 
             Squid.Dev.HideDevmode();
 
@@ -49,6 +51,6 @@ app.component("workspace",
                 .createSimpleAutoComplete(autoCompleteTags, document.getElementById('search-bar'), true, true);
             acTags.setAutoHilite(false);
 
-            reloadVariables();
+            Squid.Requests.ReloadVariables();
         }
     });

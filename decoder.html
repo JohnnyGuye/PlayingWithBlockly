@@ -59,7 +59,15 @@
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
     <script src="Blockly/generators/csharp/custom.js"></script>
 
-    <script src="postCode.js"></script>
+    <!-- French generator -->
+    <script src="Blockly/generators/french.js"></script>
+    <script src="Blockly/generators/french/decoding_blocks.js"></script>
+    <script src="Blockly/generators/french/base_blocks.js"></script>
+    <script src="Blockly/generators/french/procedures.js"></script>
+
+
+
+    <script src="server_requests.js"></script>
     <script src="Variables/values.js"></script>
 
     <!--AutoCompletion-->
@@ -257,6 +265,8 @@
     function generateCode() {
         var code = Blockly.CSharp.workspaceToCode(workspace);
         var div = $('#content1')[0];
+        //var code = Blockly.French.workspaceToCode(workspace);
+        var div = document.getElementById('content1');
         div.innerHTML = code;
     }
 
@@ -271,6 +281,7 @@
 
     function Save() {
         Squid.Storage.SaveFunction(workspace);
+        Squid.Requests.SaveVariables(Squid.SimpleVariables);
         Refresh();
     }
 
