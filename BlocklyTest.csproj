@@ -678,6 +678,8 @@
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
     <Content Include="Dev\dev-mode.js" />
+    <Content Include="Generation\generation.view.html" />
+    <Content Include="Generation\generation.viewmodel.js" />
     <Content Include="index.html" />
     <Content Include="Variables\values.js" />
     <Content Include="Variables\variables_set.view.html" />
@@ -3147,9 +3149,7 @@
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
-    <Content Include="Variables\variables_set.wiewmodel.js" />
     <Content Include="Variables\variables_set.js" />
-    <Content Include="Variables\variables_set.view.html" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />

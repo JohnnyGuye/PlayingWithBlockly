@@ -101,47 +101,46 @@
 <script src="Variables/variables_set.js"></script>
 <script src="Variables/variables_set.wiewmodel.js"></script>
 <script src="Generation/generation.viewmodel.js"></script>
-
-    <div class="top-layer full-height">
+<div class="row">
+    <div class="col-md-9">
         <generator></generator>
-        <aside class="side-bar full-height">
-            <div class="row full-height">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
-                    <config-set></config-set>
-                    <inventory-set></inventory-set>
-                    <div id="Values">
-                        <h1>Valeurs</h1>
-                    </div>
-                    <button class="item-workspace" onclick="Squid
-    .displaySimpleVariables()">
-                        Rafraîchir valeurs
-                    </button>
-                    <div id="decodingTest">
-                        <h1>Tester le décodeur</h1>
-                        <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
-                        <input id="nom-decodeur" type="text" value="nom du décodeur"/>
-                        <input id="resultat" type="text" class="textarea" value="resultat"/>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div id="wrapper">
-                <toolbox></toolbox>
-                <workspace></workspace>
-            </div>
+    <div class="col-md-9">
+        <div id="wrapper">
+            <toolbox></toolbox>
+            <workspace></workspace>
         </div>
     </div>
+    <aside class="side-bar full-height col-md-3">
+        <div class="row full-height" style="margin-left: -15px">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <config-set></config-set>
+                <inventory-set></inventory-set>
+                <div id="Values">
+                    <h1>Valeurs</h1>
+                </div>
+                <button class="item-workspace" onclick="Squid
+    .displaySimpleVariables()">
+                    Rafraîchir valeurs
+                </button>
+                <div id="decodingTest">
+                    <h1>Tester le décodeur</h1>
+                    <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
+                    <input id="nom-decodeur" type="text" value="nom du décodeur" />
+                    <input id="resultat" type="text" class="textarea" value="resultat" />
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
 
     <!-- SCRIPTS -->
 
     <script>
         function hideGenerated() {
             var gc = $("#generated-code");
-            var fullSize = '75%';
+            var fullSize = '100%';
             if (gc.css("width") === '0px') {
                 generateCode();
                 gc.css("width", fullSize);

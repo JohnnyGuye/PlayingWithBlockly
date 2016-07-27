@@ -95,25 +95,51 @@ span {
 .blocklyTreeLabel {
     font-style: normal !important;
 }
+/* ------------------- Util -------------------------- */
+.full-height {
+    height: 100%;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
 
 /* ---------------- Generated code ------------------- */
-.top-layer {
-    position: fixed;
-    z-index: 999;
+.code-generator {
+    height: auto;
+}
+
+.code-hide {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background: none;
+    border: 0;
+}
+
+.code-hide button {
+    width: 100%;
+    height: 70px;
+    color: antiquewhite;
+    background-color: #200000;
+    border: 0;
+    box-shadow: 0 0 2px 2px brown inset;
 }
 
 .generated-code {
     text-align: center;
-    transition: width 0.4s, opacity 0.4s;
-    position: fixed;
-    width: 0%;
-    opacity: 0;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: 100%;
     background-color: antiquewhite;
     color: #604040;
     box-shadow: 0 0 3px 1px #200000 inset;
     z-index: 999;
-    overflow: auto;
-    
 }
 .generated-code h1 {
     padding: 20px;    
@@ -128,24 +154,14 @@ span {
         
 }
 
-.full-height {
-    height: 100%;
-}
-
-.no-margin {
-    margin: 0;
-}
-
-.no-padding {
-    padding: 0;
-}
-
+/*
 .code-hide {
     position: relative;
     margin: 0;
     padding: 0;
     z-index: 999;
-    width: 10%;
+    width: 100%;
+    height: 70px;
 }
 
 .code-hide button {
@@ -153,6 +169,7 @@ span {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     border: 0px;
     width: 100%;
     font-size: 2em;
@@ -164,7 +181,7 @@ span {
 .code-hide button:hover {
     background-color: #300000;
 }
-
+*/
 .rotate {
 
 /* Safari */
