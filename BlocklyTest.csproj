@@ -672,11 +672,11 @@
     <Content Include="Contents\icons\arrow-right.png" />
     <Content Include="Contents\icons\ico-arrow-right-white.png" />
     <Content Include="Contents\icons\ico-clear.png" />
+    <Content Include="Contents\icons\ico-delete.png" />
     <Content Include="Contents\icons\ico-refresh.png" />
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
-    <Content Include="Controllers\variables_save.txt" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="index.html" />
     <Content Include="Variables\values.js" />
@@ -3147,7 +3147,9 @@
     <Content Include="Storage\parsingXML.js" />
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
+    <Content Include="Variables\variables_set.wiewmodel.js" />
     <Content Include="Variables\variables_set.js" />
+    <Content Include="Variables\variables_set.view.html" />
     <Content Include="web.config" />
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />

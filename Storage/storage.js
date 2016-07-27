@@ -8,9 +8,9 @@ Squid.Storage.BaseUrl = function () {
     return window.location.href.split('#')[0] + "#";
 }
 
-Squid.Storage.PrincipalStorage = "princWS";
-Squid.Storage.SecondaryStorage = "secWS";
-Squid.Storage.SaveLocations = Squid.Storage.BaseUrl() + "saveDictionary";
+Squid.Storage.PrincipalStorage  = "princWS";
+Squid.Storage.SecondaryStorage  = "secWS";
+Squid.Storage.SaveLocations     = Squid.Storage.BaseUrl() + "saveDictionary";
 Squid.Storage.Configs = Squid.Storage.BaseUrl() + "config";
 Squid.Storage.Inventorys = Squid.Storage.BaseUrl() + "inventory";
 
@@ -22,6 +22,14 @@ Squid.Storage.Init = function() {
     restoreList(Squid.Storage.InventoryLocations, Squid.Storage.Inventorys);
 }
 
+Squid.Storage.init = function () {
+    this.Storage.ConfigList = new Array();
+    this.Storage.ConfigList.push("FirstList");
+
+    console.log(this.Storage.ConfigList[0]);
+};
+
+
 /**
  * Saves a workspace in local storage. The secondary workspace are fully saved too, 
  * but they are all saved at the same place, which, you will restore only two workspaces,
@@ -32,9 +40,7 @@ Squid.Storage.Init = function() {
 Squid.Storage.SaveWorkspace = function (workspace, location) {
     // Gets the current URL, not including the hash.
     var baseUrl = Squid.Storage.BaseUrl();
-
     Squid.Storage.SaveFunction(workspace);
-
     backupBlocks(workspace, baseUrl + location);
 };
 
@@ -62,74 +68,6 @@ Squid.Storage.SaveFunction = function(workspace) {
     }
 
     backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
-}
-
-/**
- * Save the configs from a workspace to a specified location 
- * @param {} workspace 
- * @param {} name 
- * @returns {} 
- */
-Squid.Storage.SaveVariables = function(type) {
-    var workspace = Squid.Variables.getWorkspace(type);;
-    var name = Squid.Variables.getNameSet(type);
-
-    var url = "";
-    var locations;
-    if (type == Squid.Variables.Types.CONFIG) {
-        url = Squid.Storage.Configs;
-        locations = Squid.Storage.ConfigLocations;
-    } else if (type == Squid.Variables.Types.INVENTORY) {
-        url = Squid.Storage.Inventorys;
-        locations = Squid.Storage.InventoryLocations;
-    } else {
-        return;
-    }
-
-    backupBlocks(workspace, url + "_" + name);
-
-    for (var i = 0; i < locations.length; i++) {
-        if (locations[i] == name) {
-            console.warn("Old value deleted");
-            return;
-        }
-    }
-    locations.push(name);
-    locations.sort();
-
-    backupList(locations, url);
-}
-
-/**
- * Restore a config from a location to a workspace
- * @param {} opt_workspace 
- * @param {} name 
- * @returns {} 
- */
-Squid.Storage.RestoreVariables = function (type, name ) {
-    var url;
-    var locations;
-    var ws = Squid.Variables.getWorkspace(type);
-    if (type == Squid.Variables.Types.CONFIG) {
-        url = Squid.Storage.Configs;
-        locations = Squid.Storage.ConfigLocations;
-    } else if (type == Squid.Variables.Types.INVENTORY) {
-        url = Squid.Storage.Inventorys;
-        locations = Squid.Storage.InventoryLocations;
-    } else {
-        return;
-    }
-
-    console.log("nieh");
-
-    for (var i = 0; i < locations.length; i++) {
-        if (locations[i] == name) {
-            restoreBlocks(ws, url + "_" + name);
-            return;
-        }
-    }
-
-    console.warn("No config set at that name.");
 }
 
 

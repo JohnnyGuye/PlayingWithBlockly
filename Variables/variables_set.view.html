@@ -17,10 +17,12 @@
                             title="Restore un set de variables"
                             data-toggle="dropdown"></button>
                 </div>
-                <button class="item-workspace clear" 
-                        title="Efface les fonctions enregistrées"></button>
+                <button class="item-workspace clear"
+                        title="Efface les fonctions enregistrées"
+                        ng-click="$ctrl.variablesSet.Clear()"></button>
                 <button class="item-workspace add"
-                        title="Ajouter une variable">
+                        title="Ajouter une variable"
+                        ng-click="$ctrl.variablesSet.Create()">
                 </button>
             </div>
         </div>
@@ -29,20 +31,16 @@
                 <td>
                     <input type="text"
                            class="variable-name"
-                           id="C_0_label"
-                           name="C_0"
-                           value={{variable[0]}}
-                           oldvalue="C_Variable0">
+                           value={{variable[0]}}>
                 </td>
                 <td>
-                    <input type="number"
-                           id="C_0_input"
-                           name="C_0"
+                    <input type="text"
+                           class="variable-value"
                            value="{{variable[1]}}">
                 </td>
                 <td>
-                    <button class="delete-button">
-                         x
+                    <button class="delete-button delete"
+                            ng-click="$ctrl.variablesSet.Delete(variable[0])">
                     </button>
                 </td>
             </tr>
