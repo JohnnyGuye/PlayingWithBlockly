@@ -12,7 +12,8 @@
         };
 
         this.style = styleClosed;
-        this.Code = "Rien à générer";
+        this.CodeCSharp = "";
+        this.CodeFrench = "";
 
         this.Toggle = function (show) {
             if (show == null) {
@@ -30,13 +31,12 @@
         };
 
         this.Generate = function (spec) {
-            if (spec) {
-                this.Code = Blockly.French.workspaceToCode(workspace);
-            } else {
-                this.Code = Blockly.CSharp.workspaceToCode(workspace);
-            }
-            if (this.Code === "") {
-                this.Code = "Rien à générer";
+            this.CodeFrench = Blockly.French.workspaceToCode(workspace);
+            this.CodeCSharp = Blockly.CSharp.workspaceToCode(workspace);
+
+            if (this.CodeCSharp === "") {
+                this.CodeFrench = "Rien à générer";
+                this.CodeCSharp = "Rien à générer";
             }
         };
 

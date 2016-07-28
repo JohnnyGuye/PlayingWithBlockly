@@ -118,7 +118,7 @@ span {
     width: 75%;
     left: 0;
     padding-right: 0px;
-    z-index: 2000;
+    z-index: 900;
     transition: 0.4s;
     overflow: hidden;
 }
@@ -130,7 +130,7 @@ span {
     height: 70px;
     background: none;
     border: 0;
-    z-index: 2500;
+    z-index: 920;
 }
 
 .code-hide button {
@@ -139,7 +139,7 @@ span {
     color: antiquewhite;
     background-color: #200000;
     border: 0;
-    box-shadow: 0 0 2px 2px brown inset;
+    box-shadow: 0 0 30px 4px #604040 inset;
     transition: 0.4s;
     font-size: 36px;
 
@@ -158,8 +158,15 @@ span {
     background-color: antiquewhite;
     color: #604040;
     box-shadow: 0 0 3px 1px #200000 inset;
-    z-index: 999;
+    z-index: 910;
     transition: 0.4s;
+}
+
+.content-code {
+    position: relative;
+    height: 100%;
+    padding: 20px;
+    overflow: hidden;
 }
 .generated-code h1 {
     padding: 20px;    
@@ -168,10 +175,9 @@ span {
 .generated-code pre {
     text-align: left;
     position: relative;
-    margin: 20px;
     border: 0;
-    box-shadow: 0 0 1px 1px brown;
-        
+    box-shadow: 0 0 1px 1px #604040;
+    overflow: scroll;
 }
 
 /*
@@ -230,7 +236,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     height: 100%;
     width: 25%;
     z-index: 999;
-    min-width: 300px;
+    min-width: 200px;
     background: #604040;
     color: antiquewhite;
     text-align: center;
