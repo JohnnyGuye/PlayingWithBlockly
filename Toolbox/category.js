@@ -4,16 +4,36 @@
 function RefreshVariables(workspace) {
     Blockly.Variables.allVariables(workspace);
 }
+
+function getAllOpenWindows(winData) {
+
+    var tabs = [];
+    for (var i in winData) {
+        if (winData[i].focused === true) {
+            var winTabs = winData[i].tabs;
+            var totTabs = winTabs.length;
+            for (var j = 0; j < totTabs; j++) {
+                tabs.push(winTabs[j].url);
+            }
+        }
+    }
+    console.log(tabs);
+}
+
 /**
  * Refresh the list of categories in the toolbox using the definition of defined functions.
  * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
  */
-function RefreshCategories(workspace, toolboxId) {
+function RefreshCategories(workspace, toolboxId, browser) {
     /* Categories tree :
      * [0][i] -> Category name
      * [1][i] -> list of procedure in this category
      * [1][i][j] -> procedure definition
      */
+
+    //chrome.windows.getAll({ populate: true }, getAllOpenWindows);
+    //chrome.window.getAll({ populate: true  }, getAllOpenWindows);
+    //console.log(window);
     var categories = Blockly.Procedures.allCategories(workspace);
     var categoriesNames = categories[0];
     var categoriesProcedures = categories[1];

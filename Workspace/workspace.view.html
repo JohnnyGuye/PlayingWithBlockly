@@ -4,7 +4,7 @@
         <div class="toolbar-items">
             <div class="toolbar-group">
                 <button class="item-workspace save" title="Sauvegarde les fonctions" onclick="Save()"></button>
-                <button class="item-workspace save" title="Sauvegarde serveur" onclick="SaveFinished()"></button>
+                <button class="item-workspace saveServer" title="Sauvegarde serveur" onclick="SaveFinished()"></button>
                 <button class="item-workspace clear" onclick="ClearFunction();" title="Efface les fonctions enregistrées"></button>
             </div>
             <!-- Adding the search bar for tags -->
@@ -16,9 +16,7 @@
                 <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
             </div>
             <div class="toolbar-group">
-                <form action="decoder.html" target="_blank">
-                    <button class="item-workspace add" title="Créer une nouvelle fonction"></button>
-                </form>
+                    <button class="item-workspace add" title="Créer une nouvelle fonction" onclick="open_Tab()"></button>
             </div>
         </div>
     </div>

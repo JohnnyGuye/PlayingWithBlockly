@@ -672,6 +672,11 @@
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
+    <Content Include="Contents\icons\server.png" />
+    <Content Include="Contents\icons\server1.png" />
+    <Content Include="Contents\icons\server2.png" />
+    <Content Include="Contents\icons\server3.png" />
+    <Content Include="Contents\icons\server4.png" />
     <Content Include="Controllers\variables_save.txt" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="index.html" />
@@ -3143,7 +3148,9 @@
     <Content Include="Variables\variables-set.wiewmodel.js" />
     <Content Include="Variables\variables_set.js" />
     <Content Include="Variables\variables-set.view.html" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />
     <Content Include="xml2json\samples.html" />
@@ -3466,6 +3473,7 @@
     <Content Include="Handler1.ashx" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="manifest.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
