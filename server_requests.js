@@ -8,7 +8,7 @@
  */
 Squid.Requests.SaveBlocks = function(code, xml) {
     
-     $.ajax({
+     /*$.ajax({
          url: '/api/Blocks/savexml',
          type: 'POST',
          contentType: 'application/json; charset=utf-8',
@@ -20,7 +20,21 @@ Squid.Requests.SaveBlocks = function(code, xml) {
          error: function (error) {
              alert("Erreur lors de la sauvegarde" + error);
          }
-     });
+     });*/
+
+    $.ajax({
+        url: '/api/Decoders',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        datatype: 'json',
+        data: JSON.stringify({Xml:xml,Code:code, CategoryID:'hehe' }),
+        success: function (res) {
+            alert(res);
+        },
+        error: function (error) {
+            alert("Erreur lors de la sauvegarde" + error);
+        }
+    });
 
  }
 

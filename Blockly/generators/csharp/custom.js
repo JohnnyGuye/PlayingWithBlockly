@@ -188,10 +188,10 @@ Blockly.CSharp.prepareBytesAndBits = function (args) {
 Blockly.CSharp.addVariablePrefix = function (varName) {
     var prefixedName;
 
-    if (varName.indexOf(Squid.Variables.getPrefix(Squid.Variables.Types.CONFIG)) === 0) {
+    if (varName.indexOf(Squid.VariablesSet.getPrefix(Squid.VariablesSet.Types.CONFIG)) === 0) {
         prefixedName = "decodingContextData.configurationData." + varName.substring(2);
     }
-    else if (varName.indexOf(Squid.Variables.getPrefix(Squid.Variables.Types.INVENTORY)) === 0) {
+    else if (varName.indexOf(Squid.VariablesSet.getPrefix(Squid.VariablesSet.Types.INVENTORY)) === 0) {
         prefixedName = "decodingContextData.inventoryData." + varName.substring(2);
     } else {
         prefixedName = "decodingContextData.decodedValues." + varName;

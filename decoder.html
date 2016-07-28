@@ -263,10 +263,10 @@
     ////}
 
     function generateCode() {
-        var code = Blockly.CSharp.workspaceToCode(workspace);
+        //var code = Blockly.CSharp.workspaceToCode(workspace);
         var div = $('#content1')[0];
-        //var code = Blockly.French.workspaceToCode(workspace);
-        var div = document.getElementById('content1');
+        var code = Blockly.French.workspaceToCode(workspace);
+        //var div = document.getElementById('content1');
         div.innerHTML = code;
     }
 
