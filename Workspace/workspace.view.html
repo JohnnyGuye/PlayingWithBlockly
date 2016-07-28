@@ -3,16 +3,31 @@
         <div class="title-toolbar-workspace"> Editeur de décodeur </div>
         <div class="toolbar-items">
             <div class="toolbar-group">
-                <button class="item-workspace save" title="Sauvegarde les fonctions" onclick="Save()"></button>
-                <button class="item-workspace clear" onclick="ClearFunction();" title="Efface les fonctions enregistrées"></button>
+                <button class="item-workspace save"
+                        title="Sauvegarde les fonctions" 
+                        ng-click="$ctrl.Save()"></button>
+                <button class="item-workspace clear"
+                        title="Efface le contenu de l'espace de travail"
+                        ng-click="$ctrl.Clear()">
+                </button>
             </div>
             <!-- Adding the search bar for tags -->
             <div class="toolbar-group">
-                <input class="item-workspace" id="search-bar" type="text" placeholder="tag1, tag2, ..." value="" />
-                <button class="item-workspace research" onclick="TagSearch(workspace, 'toolboxGeneric')" title="Rechercher les tags"></button>
+                <input class="item-workspace"
+                       id="search-bar"
+                       type="text"
+                       placeholder="tag1, tag2, ..." 
+                       ng-model="$ctrl.Tags" />
+                <button class="item-workspace research"
+                        title="Rechercher les tags"
+                        ng-click="$ctrl.SearchTag()">
+                </button>
             </div>
             <div class="toolbar-group">
-                <button class="item-workspace refresh" onclick="Refresh();" title="Rafraichit les fonctions"></button>
+                <button class="item-workspace refresh"
+                        ng-click="$ctrl.Refresh()"
+                        title="Rafraichit les fonctions">
+                </button>
             </div>
         </div>
     </div>

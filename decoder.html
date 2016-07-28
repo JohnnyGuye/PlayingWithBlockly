@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html ng-app="httpApp" lang="en">
+<html ng-app="decoderApp" lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Decodeur - 1.0</title>
@@ -61,14 +61,11 @@
     <script src="Blockly/generators/csharp/inferdistributions.js"></script>
     <script src="Blockly/generators/csharp/inferdouble_variables.js"></script>
 
-
     <!-- French generator -->
     <script src="Blockly/generators/french.js"></script>
     <script src="Blockly/generators/french/decoding_blocks.js"></script>
     <script src="Blockly/generators/french/base_blocks.js"></script>
     <script src="Blockly/generators/french/procedures.js"></script>
-
-
 
     <script src="server_requests.js"></script>
     <script src="Variables/values.js"></script>
@@ -93,8 +90,7 @@
     var princToolboxId = "#toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
-    var app = angular.module('httpApp', []);
-
+    var app = angular.module('decoderApp', []);
 </script>
 
 <script src="Workspace/workspace.viewmodel.js"></script>
@@ -102,124 +98,38 @@
 <script src="Variables/variables_set.wiewmodel.js"></script>
 <script src="Generation/generation.viewmodel.js"></script>
 
-<generator></generator>
+    <generator></generator>
 
-<div class="row">
+    <div class="row">
 
-    <div class="col-md-9 margin-top-standard">
-        <div id="wrapper">
-            <toolbox></toolbox>
-            <workspace></workspace>
-        </div>
-    </div>
-    <aside class="side-bar full-height col-md-3">
-        <div class="row full-height">
-            <div class="col-lg-1 un-12"></div>
-            <div class="col-lg-10">
-                <config-set></config-set>
-                <inventory-set></inventory-set>
-                <div id="Values">
-                    <h1>Valeurs</h1>
-                </div>
-                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
-                    Rafraîchir valeurs
-                </button>
-                <div id="decodingTest">
-                    <h1>Tester le décodeur</h1>
-                    <input id="valeur-a-decoder" type="text" value="valeur à décoder" />
-                    <input id="nom-decodeur" type="text" value="nom du décodeur" />
-                    <input id="resultat" type="text" class="textarea" value="resultat" />
-                </div>
+        <div class="col-md-9 margin-top-standard">
+            <div id="wrapper">
+                <toolbox></toolbox>
+                <workspace></workspace>
             </div>
         </div>
-    </aside>
-</div>
-
-    <!-- SCRIPTS -->
-
-    <script>
-
-        //------------------------------------------------------------------ Tools
-        /////**
-        //// * Create a new workspace for editing a function.
-        //// * @param {!Blockly.Workspace} workspace The workspace on which you want to add a function.
-        //// */
-        ////function createFunction(workspace) {
-        ////    var funcWindow = document.getElementById("functionWrapper");
-        ////    if (funcWindow.style.display === "none") {
-        ////        funcWindow.style.display = "block";
-        ////    }
-
-        ////    // Hide the previous workspace
-        ////    if (nbWorkspaces > 0) {
-        ////        document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
-        ////    }
-
-        ////    // Create anchor
-        ////    var newDiv = document.createElement('div');
-        ////    newDiv.setAttribute("id", BASE_BLOCKLY_DIV + nbWorkspaces);
-        ////    newDiv.setAttribute("class", BASE_BLOCKLY_DIV);
-        ////    funcWindow.appendChild(newDiv);
-
-        ////    // Create the workspace
-        ////    var newWorkspace = Blockly.inject(BASE_BLOCKLY_DIV + nbWorkspaces,
-        ////    { toolbox: document.getElementById('toolboxFunction') });
-        ////    workspace.attachChildWorkspace(newWorkspace);
-        ////    activWorkspace = newWorkspace;
-        ////    valueActivWorkspace = nbWorkspaces;
-
-        ////    // Create the onglet
-        ////    var newOnglet = document.createElement('button');
-        ////    newOnglet.setAttribute("class", "onglet");
-        ////    newOnglet.setAttribute("name", "Nouveau");
-        ////    newOnglet.setAttribute("id", "onglet" + nbWorkspaces);
-        ////    newOnglet.setAttribute("value", nbWorkspaces);
-        ////    newOnglet.setAttribute("checked", true);
-        ////    newOnglet.setAttribute("onclick", "changeActiveWorkspace(" + nbWorkspaces + ")");
-        ////    newOnglet.textContent = "Nouveau !";
-        ////    document.getElementById("toolbar-onglet-func").appendChild(newOnglet);
-
-        ////    nbWorkspaces++;
-        ////}
-
-        ////function changeActiveWorkspace(newValueActivWorkspace) {
-        ////    document.getElementById(BASE_BLOCKLY_DIV + valueActivWorkspace).style.display = "none";
-        ////    document.getElementById(BASE_BLOCKLY_DIV + newValueActivWorkspace).style.display = "block";
-        ////    valueActivWorkspace = newValueActivWorkspace;
-        ////}
-
-        function Refresh() {
-            RefreshCategories(workspace, princToolboxId);
-            //for autocompletion
-            if (acTags) {
-                acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
-            }
-
-        }
-
-        function Save() {
-            Squid.Storage.SaveFunction(workspace);
-            Squid.Requests.SaveVariables(Squid.SimpleVariables);
-            Refresh();
-        }
-
-        function clearFunc(workspace) {
-            var children = workspace.getLinkedWorkspace();
-            for (var i = 0; i < children.length; i++) {
-                children[i].clear();
-                clearFunc(children[i]);
-            }
-        }
-
-        function ClearFunction() {
-            if (window
-                .confirm("Êtes-vous sur de vouloir effacer toutes les fonctions ? A la prochaine sauvegarde, elle seront perdues.")) {
-                clearFunc(workspace);
-                Refresh();
-            }
-        }
-
-    </script>
+        <aside class="side-bar full-height col-md-3">
+            <div class="row full-height">
+                <div class="col-lg-1 un-12"></div>
+                <div class="col-lg-10">
+                    <config-set></config-set>
+                    <inventory-set></inventory-set>
+                    <div id="Values">
+                        <h1>Valeurs</h1>
+                    </div>
+                    <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
+                        Rafraîchir valeurs
+                    </button>
+                    <div id="decodingTest">
+                        <h1>Tester le décodeur</h1>
+                        <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
+                        <input id="nom-decodeur" type="text" value="nom du décodeur"/>
+                        <input id="resultat" type="text" class="textarea" value="resultat"/>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
 
     <!-- Storage and parsing -->
     <script src="Storage/storage.js"></script>
