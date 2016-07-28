@@ -101,27 +101,27 @@
 <script src="Variables/variables_set.js"></script>
 <script src="Variables/variables_set.wiewmodel.js"></script>
 <script src="Generation/generation.viewmodel.js"></script>
+
+<generator></generator>
+
 <div class="row">
-    <div class="col-md-9">
-        <generator></generator>
-    </div>
-    <div class="col-md-9">
+
+    <div class="col-md-9 margin-top-standard">
         <div id="wrapper">
             <toolbox></toolbox>
             <workspace></workspace>
         </div>
     </div>
     <aside class="side-bar full-height col-md-3">
-        <div class="row full-height" style="margin-left: -15px">
-            <div class="col-lg-1"></div>
+        <div class="row full-height">
+            <div class="col-lg-1 un-12"></div>
             <div class="col-lg-10">
                 <config-set></config-set>
                 <inventory-set></inventory-set>
                 <div id="Values">
                     <h1>Valeurs</h1>
                 </div>
-                <button class="item-workspace" onclick="Squid
-    .displaySimpleVariables()">
+                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
                     Rafraîchir valeurs
                 </button>
                 <div id="decodingTest">
@@ -138,18 +138,6 @@
     <!-- SCRIPTS -->
 
     <script>
-        function hideGenerated() {
-            var gc = $("#generated-code");
-            var fullSize = '100%';
-            if (gc.css("width") === '0px') {
-                generateCode();
-                gc.css("width", fullSize);
-                gc.css("opacity", 1);
-            } else {
-                gc.css("width", 0);
-                gc.css("opacity", 0);
-            }
-        }
 
         //------------------------------------------------------------------ Tools
         /////**
@@ -199,14 +187,6 @@
         ////    document.getElementById(BASE_BLOCKLY_DIV + newValueActivWorkspace).style.display = "block";
         ////    valueActivWorkspace = newValueActivWorkspace;
         ////}
-
-        function generateCode() {
-            var code = Blockly.CSharp.workspaceToCode(workspace);
-            var div = $('#content1')[0];
-            //var code = Blockly.French.workspaceToCode(workspace);
-            var div = document.getElementById('content1');
-            div.innerHTML = code;
-        }
 
         function Refresh() {
             RefreshCategories(workspace, princToolboxId);

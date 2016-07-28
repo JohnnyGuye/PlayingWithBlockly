@@ -1,14 +1,14 @@
-﻿<aside class="code-generator" ng-style="$ctrl.full">
-    <div class="row">
-        <div class="code-hide col-lg-12" >
+﻿<aside class="code-generator" ng-style="$ctrl.style">
+    <div class="generated-code" ng-style="$ctrl.style">
+        <div class="code-hide">
             <button ng-click="$ctrl.Toggle()">
                 Générer
             </button>
         </div>
-        <div class="generated-code col-lg-12" ng-style="$ctrl.style">
-            <h1> Code généré </h1>
-            <pre id="content1"></pre>
-        </div>      
-    </div>
+        <div>
+            <h2> Code généré </h2>
+            <pre>{{$ctrl.Code}}</pre>
+        </div>
+    </div>      
 </aside>
 

@@ -4,39 +4,42 @@
     controller: function () {
         
         var styleOpen = {
-            height: "100%",
-            transition: "0.4s",
-            overflow: "scroll"
-        };
-        var styleClosed = {
-            height: "0px",
-            transition: "0.4s",
-            overflow: "auto"
-        };
-
-        var full = {
             height: "100%"
         };
-        var halved = {
+
+        var styleClosed = {
             height: "70px"
         };
 
-        this.open = false;
         this.style = styleClosed;
-        this.full = halved;
+        this.Code = "Rien à générer";
 
-        this.Toggle = function() {
-            this.open = !this.open;
-            var gc = $("#generated-code");
-            var fullSize = '100%';
+        this.Toggle = function (show) {
+            if (show == null) {
+                this.open = !this.open;
+            } else {
+                this.open = show;
+            }
+
             if (this.open) {
-                generateCode();
+                this.Generate();
                 this.style = styleOpen;
-                this.full = full;
             } else {
                 this.style = styleClosed;
-                this.full = halved;
             }
         };
+
+        this.Generate = function (spec) {
+            if (spec) {
+                this.Code = Blockly.French.workspaceToCode(workspace);
+            } else {
+                this.Code = Blockly.CSharp.workspaceToCode(workspace);
+            }
+            if (this.Code === "") {
+                this.Code = "Rien à générer";
+            }
+        };
+
+        this.Toggle(false);
     }
 });
