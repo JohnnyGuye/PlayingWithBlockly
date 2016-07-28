@@ -242,9 +242,10 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     text-align: center;
 
 }
-.side-bar .variable-name {
+
+/*.side-bar .variable-name {
     
-}
+}*/
 
 .side-bar input {
     width: 100%;
@@ -406,14 +407,16 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background-image: url("Contents/icons/ico-research.png");
 }
 
-
-
 .add {
     background-image: url("Contents/icons/ico-add.png");
 }
 
 .delete {
     background-image: url("Contents/icons/ico-delete.png");
+}
+
+.saveServer {
+    background-image: url("Contents/icons/cloud0.png");
 }
 
 .toolbar-group button {
@@ -492,7 +495,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
 .onglet:hover {
-    box-shadow: 0px 0px 5px #A08080;
+    box-shadow: 0 0 5px #A08080;
 }
 
 .onglet:checked {
@@ -543,7 +546,7 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background: none;
 }
 
-    .dropdown li:hover {
-        background-color: #f6d781;
-        color: #200000;
-    }
+.dropdown li:hover {
+    background-color: #f6d781;
+    color: #200000;
+}

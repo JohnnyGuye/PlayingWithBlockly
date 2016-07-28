@@ -10,6 +10,10 @@
                         title="Efface le contenu de l'espace de travail"
                         ng-click="$ctrl.Clear()">
                 </button>
+                <button class="item-workspace saveServer"
+                        title="Sauvegarde serveur"
+                        onclick="SaveFinished()">
+                </button>
             </div>
             <!-- Adding the search bar for tags -->
             <div class="toolbar-group">
@@ -27,6 +31,12 @@
                 <button class="item-workspace refresh"
                         ng-click="$ctrl.Refresh()"
                         title="Rafraichit les fonctions">
+                </button>
+            </div>
+            <div class="toolbar-group">
+                <button class="item-workspace add"
+                        title="Créer une nouvelle fonction"
+                        onclick="open_Tab()">
                 </button>
             </div>
         </div>

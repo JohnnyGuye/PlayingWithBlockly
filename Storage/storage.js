@@ -44,7 +44,20 @@ Squid.Storage.SaveWorkspace = function (workspace, location) {
     backupBlocks(workspace, baseUrl + location);
 };
 
-Squid.Storage.SaveFunction = function(workspace) {
+
+Squid.Storage.SaveFinishedFunction = function (workspace) {
+    var finishedFunction = workspace.getTopBlocks();
+    if (finishedFunction.length !== 1 || !finishedFunction[0].getProcedureDef)
+    {
+        alert("La sauvegarde serveur a echoué. Le workspace contient plus d'un block ou votre décodeur n'est pas du type fonction.");
+    }
+    //console.log(finishedFunction[0].id);
+    var blockId = finishedFunction[0].id;
+    backupBlocks(workspace, baseUrl + blockId);
+}
+
+Squid.Storage.SaveFunction = function (workspace) {
+
     var baseUrl = Squid.Storage.BaseUrl();
     var workspaceSec = new Blockly.Workspace();
     var blocks;

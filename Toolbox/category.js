@@ -1,12 +1,28 @@
 ﻿/** Refresh the list of variables in the toolbox using the definition of defined categories
- * @param {Blockly.workspace} The workspace in which you want to list the categories
+ * @param {Blockly.workspace} workspace The workspace in which you want to list the categories
  */
 function RefreshVariables(workspace) {
     Blockly.Variables.allVariables(workspace);
 }
-/**
- * Refresh the list of categories in the toolbox using the definition of defined functions.
- * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
+
+function getAllOpenWindows(winData) {
+
+    var tabs = [];
+    for (var i in winData) {
+        if (winData[i].focused === true) {
+            var winTabs = winData[i].tabs;
+            var totTabs = winTabs.length;
+            for (var j = 0; j < totTabs; j++) {
+                tabs.push(winTabs[j].url);
+            }
+        }
+    }
+    console.log(tabs);
+}
+
+/** Refresh the list of categories in the toolbox using the definition of defined functions.
+ * @param {Blockly.workspace} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
+ * @param {Object} toolboxTree The DOM toolbox
  */
 function RefreshCategories(workspace, toolboxTree) {
     /* Categories tree :
@@ -14,6 +30,10 @@ function RefreshCategories(workspace, toolboxTree) {
      * [1][i] -> list of procedure in this category
      * [1][i][j] -> procedure definition
      */
+
+    ////chrome.windows.getAll({ populate: true }, getAllOpenWindows);
+    ////chrome.window.getAll({ populate: true  }, getAllOpenWindows);
+    ////console.log(window);
     var categories = Blockly.Procedures.allCategories(workspace);
     var categoriesNames = categories[0];
     var categoriesProcedures = categories[1];
@@ -28,9 +48,10 @@ function RefreshCategories(workspace, toolboxTree) {
     var divFunc = $("#NewCategory");
     divFunc.html("");
 
+    var block;
     if (Blockly.Blocks['procedures_defnoreturn']) {
         // <block type="procedures_defnoreturn" gap="16"></block>
-        var block = goog.dom.createDom('block');
+        block = goog.dom.createDom('block');
         block.setAttribute('type', 'procedures_defnoreturn');
         block.setAttribute('gap', 16);
         divFunc.append(block);
@@ -52,7 +73,7 @@ function RefreshCategories(workspace, toolboxTree) {
 
         // For each procedure in this category
         for (var j = 0; j < categoriesProcedures[i].length; j++) {
-            var block = categoriesProcedures[i][j];
+            block = categoriesProcedures[i][j];
             var def = block.getProcedureDef();
             var name = def[0];
             var args = def[1];

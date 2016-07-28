@@ -42,9 +42,9 @@ function makeUL(map) {
 Squid.displaySimpleVariables = function () {
     var oldValues = document.getElementById('values_list');
     if (oldValues) {
-        var values = document.getElementById('Values').replaceChild(makeUL(Squid.SimpleVariables), oldValues);
+        document.getElementById('Values').replaceChild(makeUL(Squid.SimpleVariables), oldValues);
     } else {
-        var values = document.getElementById('Values').appendChild(makeUL(Squid.SimpleVariables));
+        document.getElementById('Values').appendChild(makeUL(Squid.SimpleVariables));
     }
     //saveVariables(Squid.SimpleVariables);
 }

@@ -667,9 +667,14 @@
     <Content Include="bootstrap-3.3.6\package.js" />
     <Content Include="bootstrap-3.3.6\test-infra\requirements.txt" />
     <Content Include="bootstrap-3.3.6\test-infra\s3_cache.py" />
+    <Content Include="Contents\icons\cloud.png" />
+    <Content Include="Contents\icons\cloud0.png" />
+    <Content Include="Contents\icons\cloud2.png" />
     <Content Include="Contents\icons\ico-add.png" />
     <Content Include="Contents\icons\arrow-right-white.png" />
     <Content Include="Contents\icons\arrow-right.png" />
+    <Content Include="Contents\icons\ico-add1.png" />
+    <Content Include="Contents\icons\ico-add2.png" />
     <Content Include="Contents\icons\ico-arrow-right-white.png" />
     <Content Include="Contents\icons\ico-clear.png" />
     <Content Include="Contents\icons\ico-delete.png" />
@@ -677,10 +682,18 @@
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
+    <Content Include="Contents\icons\server.png" />
+    <Content Include="Contents\icons\server1.png" />
+    <Content Include="Contents\icons\server2.png" />
+    <Content Include="Contents\icons\server3.png" />
+    <Content Include="Contents\icons\server4.png" />
+    <Content Include="Controllers\variables_save.txt" />
     <Content Include="Dev\dev-mode.js" />
     <Content Include="Generation\generation.view.html" />
     <Content Include="Generation\generation.viewmodel.js" />
     <Content Include="index.html" />
+    <Content Include="NotUsedCode.js" />
+    <Content Include="Toolbox\toolbox.xml" />
     <Content Include="Variables\values.js" />
     <Content Include="Variables\variables_set.view.html" />
     <Content Include="Variables\variables_set.wiewmodel.js" />
@@ -3150,15 +3163,14 @@
     <Content Include="Storage\storage.js" />
     <Content Include="Toolbox\category.js" />
     <Content Include="Variables\variables_set.js" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xml2json\check_issues.html" />
     <Content Include="xml2json\demo.html" />
     <Content Include="xml2json\samples.html" />
     <Content Include="xml2json\xml2json.js" />
     <Content Include="xml2json\xml2json.min.js" />
-    <Content Include="Toolbox\toolboxCoreGenerics.xml">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
@@ -3473,6 +3485,8 @@
     <Content Include="Handler1.ashx" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="manifest.json" />
+    <Content Include="README.md" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

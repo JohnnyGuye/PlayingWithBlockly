@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html ng-app="decoderApp" lang="en">
+<html ng-app="decoderApp" lang="en" manifest="manifest.json">
 <head>
     <meta charset="utf-8"/>
     <title>Decodeur - 1.0</title>
@@ -90,6 +90,9 @@
     var app = angular.module('decoderApp',
     ["workspace", "generator", "variablesSet"]);
 
+    /* handling tab number */
+    var child_tabs = "0";
+
 </script>
 
 <script src="Workspace/workspace.viewmodel.js"></script>   
@@ -100,7 +103,6 @@
 <generator></generator>
 
 <div class="row">
-
     <div class="col-md-9 margin-top-standard">
         <div id="wrapper">
             <toolbox></toolbox>
