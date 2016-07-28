@@ -1,4 +1,4 @@
-﻿app.component("configSet",
+﻿angular.module("variablesSet", []).component("configSet",
 {
     templateUrl: "Variables/variables_set.view.html",
     controller: function() {
@@ -14,7 +14,7 @@
     }
 });
 
-app.component("inventorySet",
+angular.module("variablesSet").component("inventorySet",
 {
     templateUrl: "Variables/variables_set.view.html",
     controller: function() {

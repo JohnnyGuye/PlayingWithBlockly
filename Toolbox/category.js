@@ -8,7 +8,7 @@ function RefreshVariables(workspace) {
  * Refresh the list of categories in the toolbox using the definition of defined functions.
  * @param {} workspace The workspace parent in which you will have the definitions. (or maybe in its children)
  */
-function RefreshCategories(workspace, toolboxId) {
+function RefreshCategories(workspace, toolboxTree) {
     /* Categories tree :
      * [0][i] -> Category name
      * [1][i] -> list of procedure in this category
@@ -75,6 +75,6 @@ function RefreshCategories(workspace, toolboxId) {
         divFunc.append(cat);
     }
 
-    workspace.updateToolbox($(toolboxId)[0]);
+    workspace.updateToolbox(toolboxTree);
 }
 

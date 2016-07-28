@@ -78,6 +78,7 @@
 </head>
 
 <body onkeydown="Squid.Dev.ToggleDevmode(event)">
+    
 <script>
     /* Workspaces */
     var workspace;
@@ -86,55 +87,53 @@
     /*AutoCompletion*/
     var acTags;
 
-    /* Element IDs */
-    var princToolboxId = "#toolboxGeneric";
-    var BASE_BLOCKLY_DIV = "blocklyDiv";
+    var app = angular.module('decoderApp',
+    ["workspace", "generator", "variablesSet"]);
 
-    var app = angular.module('decoderApp', []);
 </script>
 
-<script src="Workspace/workspace.viewmodel.js"></script>
+<script src="Workspace/workspace.viewmodel.js"></script>   
 <script src="Variables/variables_set.js"></script>
 <script src="Variables/variables_set.wiewmodel.js"></script>
 <script src="Generation/generation.viewmodel.js"></script>
 
-    <generator></generator>
+<generator></generator>
 
-    <div class="row">
+<div class="row">
 
-        <div class="col-md-9 margin-top-standard">
-            <div id="wrapper">
-                <toolbox></toolbox>
-                <workspace></workspace>
-            </div>
+    <div class="col-md-9 margin-top-standard">
+        <div id="wrapper">
+            <toolbox></toolbox>
+            <workspace></workspace>
         </div>
-        <aside class="side-bar full-height col-md-3">
-            <div class="row full-height">
-                <div class="col-lg-1 un-12"></div>
-                <div class="col-lg-10">
-                    <config-set></config-set>
-                    <inventory-set></inventory-set>
-                    <div id="Values">
-                        <h1>Valeurs</h1>
-                    </div>
-                    <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
-                        Rafraîchir valeurs
-                    </button>
-                    <div id="decodingTest">
-                        <h1>Tester le décodeur</h1>
-                        <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
-                        <input id="nom-decodeur" type="text" value="nom du décodeur"/>
-                        <input id="resultat" type="text" class="textarea" value="resultat"/>
-                    </div>
+    </div>
+    <aside class="side-bar full-height col-md-3">
+        <div class="row full-height">
+            <div class="col-lg-1 un-12"></div>
+            <div class="col-lg-10">
+                <config-set></config-set>
+                <inventory-set></inventory-set>
+                <div id="Values">
+                    <h1>Valeurs</h1>
+                </div>
+                <button class="item-workspace" onclick="Squid.displaySimpleVariables()">
+                    Rafraîchir valeurs
+                </button>
+                <div id="decodingTest">
+                    <h1>Tester le décodeur</h1>
+                    <input id="valeur-a-decoder" type="text" value="valeur à décoder"/>
+                    <input id="nom-decodeur" type="text" value="nom du décodeur"/>
+                    <input id="resultat" type="text" class="textarea" value="resultat"/>
                 </div>
             </div>
-        </aside>
-    </div>
+        </div>
+    </aside>
+</div>
 
-    <!-- Storage and parsing -->
-    <script src="Storage/storage.js"></script>
-    <script src="Storage/parsingXML.js"></script>
-    <script src="Toolbox/category.js"></script>
+<!-- Storage and parsing -->
+<script src="Storage/storage.js"></script>
+<script src="Storage/parsingXML.js"></script>
+<script src="Toolbox/category.js"></script>
 
 </body>
 </html>

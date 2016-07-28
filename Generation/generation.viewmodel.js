@@ -1,4 +1,4 @@
-﻿app.component("generator",
+﻿angular.module("generator", []).component("generator",
 {
     templateUrl: "Generation/generation.view.html",
     controller: function () {
@@ -30,7 +30,7 @@
             }
         };
 
-        this.Generate = function (spec) {
+        this.Generate = function () {
             this.CodeFrench = Blockly.French.workspaceToCode(workspace);
             this.CodeCSharp = Blockly.CSharp.workspaceToCode(workspace);
 
