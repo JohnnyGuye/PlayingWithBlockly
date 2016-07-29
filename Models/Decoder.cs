@@ -12,6 +12,7 @@ namespace BlocklyTest.Models
 
     public class Decoder
     {
+        public Decoder() { }
 
         public Decoder(string xml, string code)
         {

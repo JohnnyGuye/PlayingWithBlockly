@@ -16,13 +16,12 @@ namespace BlocklyTest.Models
     }
     public class VariablesSet
     {
+        public int Id { get; set; }
 
-        public int Id;
+        public string Name { get; set; }
 
-        public string Name;
+        public Types Type { get; set; }
 
-        public Types Type;
-
-        public string Variables;
+        public string Variables { get; set; }
     }
 }

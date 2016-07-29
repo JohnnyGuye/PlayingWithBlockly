@@ -19,7 +19,16 @@ namespace BlocklyTest.DAL
             };
             decoders.ForEach(s => context.Decoders.Add(s));
             context.SaveChanges();
-           
+
+            var variables = new List<VariablesSet>
+            {
+                //new Decoder{Xml="Carson",Code="Decode bidule"},
+                //new Decoder{Xml="some Xml",Code="Decode bidule2"},
+
+            };
+            variables.ForEach(s => context.AllVariables.Add(s));
+            context.SaveChanges();
+
         }
     }
 }
