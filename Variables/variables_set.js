@@ -39,7 +39,18 @@ Squid.VariablesSet.prototype.setPrefix_ = function(type) {
         case Squid.VariablesSet.Types.CONFIG:
             return this.prefix_ = "C_";
         default:
-            return this.prefix_ = "_";
+            return this.prefix_ = "";
+    }
+};
+
+Squid.VariablesSet.getPrefix = function(type) {
+    switch (type) {
+        case Squid.VariablesSet.Types.INVENTORY:
+            return "I_";
+        case Squid.VariablesSet.Types.CONFIG:
+            return "C_";
+        default:
+            return "";
     }
 };
 
