@@ -148,6 +148,10 @@ angular.module("workspace", ["toolbox"]).component("workspace",
             workspace.updateToolbox(this.Toolbox);
         };
 
+        this.OpenTab = function () {
+            Squid.Tabs.Open();
+        }
+
         Squid.Dev.HideDevmode();
 
         /* AutoCompletion */
