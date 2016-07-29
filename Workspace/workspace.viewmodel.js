@@ -7,7 +7,7 @@ angular.module("workspace", ["toolbox"]).component("workspace",
     templateUrl: "Workspace/workspace.view.html",
     controller: function ($timeout) {
         this.Toolbox = document.getElementById("toolboxGeneric");
-        console.log(this.Toolbox === null);
+        //console.log(this.Toolbox);
         workspace = Blockly.inject("blocklyDiv",
         {
             toolbox: this.Toolbox,
@@ -39,17 +39,8 @@ angular.module("workspace", ["toolbox"]).component("workspace",
         workspace.attachChildWorkspace(hiddenWorkspace);
         Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
 
-        /**
-         * Refresh the functions and category list
-         * @returns {} 
-         */
         this.Refresh = function() {
-            RefreshCategories(workspace, this.Toolbox);
-            console.log(this.Toolbox === null);
-            //for autocompletion
-            if (acTags) {
-                acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
-            }
+            Refresh();
         };
 
         /**
@@ -79,7 +70,7 @@ angular.module("workspace", ["toolbox"]).component("workspace",
             if (window
                 .confirm("Êtes vous sûr de vouloir vider tout l'espace de travail ?")) {
                 clearFunc(workspace);
-                Refresh();
+                this.Refresh();
             }
         };
 
@@ -164,6 +155,20 @@ angular.module("workspace", ["toolbox"]).component("workspace",
 
         Squid.Requests.ReloadVariables();
         //this.Refresh();
-        $timeout(Refresh, 0);
+        //var self = this;
+        //$timeout(this.Refresh(self), 0);
     }
 });
+
+/**
+* Refresh the functions and category list
+* @returns {} 
+*/
+Refresh = function () {
+    var toolbox = document.getElementById("toolboxGeneric");
+    RefreshCategories(workspace, toolbox);
+    //for autocompletion
+    if (acTags) {
+        acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
+    }
+};
