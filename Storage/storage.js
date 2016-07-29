@@ -53,12 +53,12 @@ Squid.Storage.SaveToServer = function (workspace) {
 
         var blockId = blocks[0].id;
         backupBlocks(workspace, "blabla");
-        //window.location
+        
     } else {
         alert("La sauvegarde serveur a echoué. Le workspace contient plus d'un block ou votre décodeur n'est pas du type fonction.");
     }
 
-    
+    //alert(document.location + "#" + TabId);
 }
 
 Squid.Storage.SaveFunction = function (workspace) {
@@ -110,6 +110,7 @@ function backupBlocks (workspace, url) {
       var xmlTxt = Blockly.Xml.domToText(xml);
       var code = Blockly.CSharp.workspaceToCode(workspace);
       Squid.Requests.SaveBlocks(code, prettyTxt);
+
      // window.localStorage.setItem(url, xmlTxt);
   }
 };

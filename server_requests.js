@@ -34,6 +34,7 @@ Squid.Requests.SaveBlocks = function(code, xml) {
                 TabId = id;
             }
             alert(id);
+            document.location += "#" + id;
         },
         error: function (error) {
             alert("Erreur lors de la sauvegarde" + error);
