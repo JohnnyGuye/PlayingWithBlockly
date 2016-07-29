@@ -84,7 +84,7 @@ Squid.Storage.SaveFunction = function (workspace) {
         }
     }
 
-    backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
+    //backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
 }
 
 
@@ -140,6 +140,7 @@ function restoreBlocks (opt_workspace, url) {
 	        //alert(xmlText);
 	        var xml = Blockly.Xml.textToDom(xmlText);
 	        Blockly.Xml.domToWorkspace(xml, workspace);
+		    Refresh();
 		    //TEST
 		    //Refresh();
 		});
