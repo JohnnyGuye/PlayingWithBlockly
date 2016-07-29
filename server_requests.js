@@ -34,6 +34,7 @@ Squid.Requests.SaveBlocks = function(code, xml) {
             if (res.id) {
                 if (!TabId) {
                     TabId = res.id;
+                    document.location += "#" + res.id;
                 }
                 alert(res.id);
             } else {

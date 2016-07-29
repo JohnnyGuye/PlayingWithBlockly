@@ -45,15 +45,20 @@ Squid.Storage.SaveWorkspace = function (workspace, location) {
 };
 
 
-Squid.Storage.SaveFinishedFunction = function (workspace) {
-    var finishedFunction = workspace.getTopBlocks();
-    if (finishedFunction.length !== 1 || !finishedFunction[0].getProcedureDef)
-    {
+Squid.Storage.SaveToServer = function (workspace) {
+    var blocks = workspace.getTopBlocks();
+
+    if (blocks.length === 1
+        && blocks[0].getProcedureDef) {
+
+        var blockId = blocks[0].id;
+        backupBlocks(workspace, "blabla");
+        
+    } else {
         alert("La sauvegarde serveur a echoué. Le workspace contient plus d'un block ou votre décodeur n'est pas du type fonction.");
     }
-    //console.log(finishedFunction[0].id);
-    var blockId = finishedFunction[0].id;
-    backupBlocks(workspace, baseUrl + blockId);
+
+    //alert(document.location + "#" + TabId);
 }
 
 Squid.Storage.SaveFunction = function (workspace) {
@@ -101,16 +106,11 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 function backupBlocks (workspace, url) {
   if ("localStorage" in window) {
       var xml = Blockly.Xml.workspaceToDom(workspace);
-      //FOR TESTS add by felix
       var prettyTxt = Blockly.Xml.domToPrettyText(xml);
       var xmlTxt = Blockly.Xml.domToText(xml);
-      //alert(txt);
-      //var div = document.getElementById('xml1');
-      //div.innerHTML = prettyTxt;
       var code = Blockly.CSharp.workspaceToCode(workspace);
       Squid.Requests.SaveBlocks(code, prettyTxt);
-      //END FOR TESTS
-     
+
      // window.localStorage.setItem(url, xmlTxt);
   }
 };
@@ -130,8 +130,8 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 };
 
 
-function restoreBlocks (opt_workspace, url) {
-		var workspace = opt_workspace;
+function restoreBlocks(opt_workspace, url) {
+	    var workspace = opt_workspace;
 		//var xml = Blockly.Xml.textToDom(window.localStorage[url]);
 	    //Blockly.Xml.domToWorkspace(xml, workspace);
 
@@ -145,6 +145,7 @@ function restoreBlocks (opt_workspace, url) {
 		    //TEST
 		    //Refresh();
 		});
+
 };
 
 function backupList(list, url) {

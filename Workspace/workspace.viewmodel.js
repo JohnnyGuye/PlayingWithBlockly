@@ -47,12 +47,16 @@ angular.module("workspace", ["toolbox"]).component("workspace",
          * Saves the workspace
          * @returns {} 
          */
-        this.Save = function() {
-            Squid.Storage.SaveFunction(workspace);
-            Squid.Requests.SaveVariables(Squid.SimpleVariables);
-            this.Refresh();
-        };
+        ////this.Save = function() {
+        ////    Squid.Storage.SaveFunction(workspace);
+        ////    Squid.Requests.SaveVariables(Squid.SimpleVariables);
+        ////    this.Refresh();
+        ////};
 
+        this.Save = function()
+        {
+            Squid.Storage.SaveToServer(workspace);
+        }
         /**
          * Clear the workspace
          * @returns {} 
