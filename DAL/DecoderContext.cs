@@ -18,6 +18,7 @@ namespace BlocklyTest.DAL
             
         }
         public DbSet<Decoder> Decoders { get; set; }
+        public DbSet<VariablesSet> AllVariables { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

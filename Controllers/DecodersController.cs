@@ -75,37 +75,38 @@ namespace BlocklyTest.Controllers
 
         // POST: api/Decoders
         [ResponseType(typeof(Decoder))]
-        public string PostDecoder(Decoder decoder)
+        public IHttpActionResult PostDecoder(Decoder decoder)
         {
+
             try
             {
                 if (!ModelState.IsValid)
                 {
                     //return BadRequest(ModelState);
-                    return "not valid model";
+                    return Json(new { error= "not valid model" });
                 }
                 if (decoder == null)
                 {
-                    return "erreur lors du transfert de données vers le serveur";
+                    return Json(new { error = "erreur lors du transfert de données vers le serveur" });
                 }
 
                 var services = new DecoderServices();
                 if (decoder.Id == null)
                 {
-                    services.AddDecoder(decoder);
-                    return decoder.Id.ToString();
+                    var decoderId = services.AddDecoder(decoder);
+                    return Json(new { id= decoderId.ToString() });
                 }
                 else
                 {
                    services.UpdateDecoder(decoder.Id, decoder.Xml, decoder.Code);
-                    return "id="+ decoder.Id;
+                    return Json(new { id = decoder.Id.ToString() });
                 }
 
                 
             }
             catch (Exception e )
             {
-                return e.ToString();
+                return Json(new { error = e.ToString() });
             }
         }
 

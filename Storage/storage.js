@@ -131,7 +131,6 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 
 
 function restoreBlocks (opt_workspace, url) {
-	if('localStorage' in window && window.localStorage[url]) {
 		var workspace = opt_workspace;
 		//var xml = Blockly.Xml.textToDom(window.localStorage[url]);
 	    //Blockly.Xml.domToWorkspace(xml, workspace);
@@ -146,7 +145,6 @@ function restoreBlocks (opt_workspace, url) {
 		    //TEST
 		    //Refresh();
 		});
-	}
 };
 
 function backupList(list, url) {

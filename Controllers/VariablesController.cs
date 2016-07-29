@@ -10,6 +10,8 @@ namespace BlocklyTest.Controllers
     using System.IO;
     using System.Web.Hosting;
 
+    using BlocklyTest.Models;
+
     public class VariablesController : ApiController
     {
         private static string hostPath = HostingEnvironment.ApplicationPhysicalPath;
@@ -49,6 +51,19 @@ namespace BlocklyTest.Controllers
             string path = hostPath + @"Controllers\variables_save.txt";
             string text = File.ReadAllText(path);
             return text;
+        }
+
+
+        [Route("api/variables/createset")]
+        [HttpPost]
+        public string CreateSet(VariablesSet set)
+        {
+            if (!ModelState.IsValid)
+            {
+                //return BadRequest(ModelState);
+                return "not valid model";
+            }
+            return "work in progress";
         }
 
     }

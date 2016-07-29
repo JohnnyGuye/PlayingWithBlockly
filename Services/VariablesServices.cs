@@ -8,20 +8,17 @@ namespace BlocklyTest.Services
     using BlocklyTest.DAL;
     using BlocklyTest.Models;
 
-    public class DecoderServices
+    public class VariablesServices
     {
-        //private DecoderContext db = new DecoderContext();
-
-        public Guid? AddDecoder(Decoder decoder)
+        public int AddVariablesSet(VariablesSet set)
         {
-            DecoderContext db=null;
+            DecoderContext db = null;
             try
             {
                 db = new DecoderContext();
-                decoder.SetCategoryAndTags();
-                db.Decoders.Add(decoder);
+                db.AllVariables.Add(set);
                 db.SaveChanges();
-                return decoder.Id;
+                return set.Id;
             }
             catch (Exception e)
             {
@@ -35,23 +32,22 @@ namespace BlocklyTest.Services
                 }
                 catch (Exception e)
                 {
-                    throw ;
-                }               
+                    throw;
+                }
             }
         }
 
-        public Guid? UpdateDecoder(Guid? id, string xml, string code)
+        public int UpdateVariablesSet(int id, string name, string variables)
         {
             DecoderContext db = null;
             try
             {
                 db = new DecoderContext();
-                var decoder = db.Decoders.Find(id);
-                if (decoder != null)
+                var set = db.AllVariables.Find(id);
+                if (set != null)
                 {
-                    decoder.Xml = xml;
-                    decoder.Code = code;
-                    decoder.SetCategoryAndTags();
+                    set.Name = name;
+                    set.Variables = variables;
                     db.SaveChanges();
                     return id;
                 }
@@ -74,19 +70,21 @@ namespace BlocklyTest.Services
                 {
                     throw;
                 }
-            }          
+            }
         }
 
-        public Decoder GetDecoder(Guid? id)
+        public VariablesSet[] GetTypedSets(Types type)
         {
             DecoderContext db = null;
             try
             {
                 db = new DecoderContext();
-                var decoder = db.Decoders.Find(id);
-                return decoder;
+                var query = from set in db.AllVariables
+                               where set.Type == type
+                               select set;
+                return query.ToArray();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
             }

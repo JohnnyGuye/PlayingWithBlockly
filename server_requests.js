@@ -29,11 +29,17 @@ Squid.Requests.SaveBlocks = function(code, xml) {
         contentType: 'application/json; charset=utf-8',
         datatype: 'json',
         data: JSON.stringify({Id:TabId, Xml:xml, Code:code}),
-        success: function (id) {
-            if (!TabId) {
-                TabId = id;
+        success: function (res) {
+
+            if (res.id) {
+                if (!TabId) {
+                    TabId = res.id;
+                }
+                alert(res.id);
+            } else {
+                alert(res.error);
             }
-            alert(id);
+           
         },
         error: function (error) {
             alert("Erreur lors de la sauvegarde" + error);
