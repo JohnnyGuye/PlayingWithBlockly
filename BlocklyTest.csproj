@@ -3517,6 +3517,7 @@
     </Compile>
     <Compile Include="DAL\DecoderContext.cs" />
     <Compile Include="Models\Decoder.cs" />
+    <Compile Include="Services\DecoderServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

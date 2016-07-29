@@ -22,14 +22,18 @@ Squid.Requests.SaveBlocks = function(code, xml) {
          }
      });*/
 
+
     $.ajax({
         url: '/api/Decoders',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         datatype: 'json',
-        data: JSON.stringify({Xml:xml,Code:code, CategoryID:'hehe' }),
-        success: function (res) {
-            alert(res);
+        data: JSON.stringify({Id:TabId, Xml:xml, Code:code}),
+        success: function (id) {
+            if (!TabId) {
+                TabId = id;
+            }
+            alert(id);
         },
         error: function (error) {
             alert("Erreur lors de la sauvegarde" + error);

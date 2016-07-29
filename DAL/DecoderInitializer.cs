@@ -13,8 +13,8 @@ namespace BlocklyTest.DAL
         {
             var decoders = new List<Decoder>
             {
-            new Decoder{Xml="Carson",Code="Decode bidule"},
-            new Decoder{Xml="some Xml",Code="Decode bidule2"},
+            //new Decoder{Xml="Carson",Code="Decode bidule"},
+            //new Decoder{Xml="some Xml",Code="Decode bidule2"},
 
             };
             decoders.ForEach(s => context.Decoders.Add(s));

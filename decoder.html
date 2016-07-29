@@ -128,6 +128,7 @@
     var acTags;
 
     /* Element IDs */
+    var TabId = null;
     var princToolboxId = "#toolboxGeneric";
     var BASE_BLOCKLY_DIV = "blocklyDiv";
 
@@ -280,6 +281,7 @@
     }
 
     function Save() {
+        Squid.Storage.SaveWorkspace(workspace, "testdb");
         Squid.Storage.SaveFunction(workspace);
         Squid.Requests.SaveVariables(Squid.SimpleVariables);
         Refresh();

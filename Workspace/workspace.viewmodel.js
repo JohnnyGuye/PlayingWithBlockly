@@ -6,7 +6,7 @@
 app.component("workspace",
     {
         templateUrl: "Workspace/workspace.view.html",
-        controller: function () {
+        controller: function ($timeout) {
             workspace = Blockly.inject(BASE_BLOCKLY_DIV,
                     {
                         toolbox: $(princToolboxId)[0],
@@ -39,7 +39,8 @@ app.component("workspace",
             Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
             //not optimal
             //$(document).ready(Refresh);
-            setTimeout(Refresh, 250);
+            //setTimeout(Refresh, 250);
+            $timeout(Refresh, 0);
             
 
             Squid.Dev.HideDevmode();

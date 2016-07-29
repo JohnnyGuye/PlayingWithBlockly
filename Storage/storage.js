@@ -67,7 +67,7 @@ Squid.Storage.SaveFunction = function(workspace) {
         }
     }
 
-    backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
+    //backupBlocks(workspaceSec, baseUrl + Squid.Storage.SecondaryStorage);
 }
 
 

@@ -13,13 +13,14 @@ using BlocklyTest.Models;
 namespace BlocklyTest.Controllers
 {
     using BlocklyTest.DAL;
+    using BlocklyTest.Services;
 
     public class DecodersController : ApiController
     {
-        private DecoderContext db = new DecoderContext();
+        // DecoderContext db = new DecoderContext();
 
         // GET: api/Decoders
-        public IQueryable<Decoder> GetDecoders()
+       /* public IQueryable<Decoder> GetDecoders()
         {
             return db.Decoders;
         }
@@ -70,7 +71,7 @@ namespace BlocklyTest.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/Decoders
         [ResponseType(typeof(Decoder))]
@@ -83,23 +84,34 @@ namespace BlocklyTest.Controllers
                     //return BadRequest(ModelState);
                     return "not valid model";
                 }
+                if (decoder == null)
+                {
+                    return "erreur lors du transfert de données vers le serveur";
+                }
 
-                db.Decoders.Add(decoder);
-                db.SaveChanges();
+                var services = new DecoderServices();
+                if (decoder.Id == null)
+                {
+                    services.AddDecoder(decoder);
+                    return decoder.Id.ToString();
+                }
+                else
+                {
+                   services.UpdateDecoder(decoder.Id, decoder.Xml, decoder.Code);
+                    return "id="+ decoder.Id;
+                }
 
-                //return CreatedAtRoute("DefaultApi", new { id = decoder.Id }, decoder);
-                return "ok";
+                
             }
             catch (Exception e )
             {
-
                 return e.ToString();
             }
         }
 
 
         // DELETE: api/Decoders/5
-        [ResponseType(typeof(Decoder))]
+      /*  [ResponseType(typeof(Decoder))]
         public IHttpActionResult DeleteDecoder(int id)
         {
             Decoder decoder = db.Decoders.Find(id);
@@ -112,20 +124,20 @@ namespace BlocklyTest.Controllers
             db.SaveChanges();
 
             return Ok(decoder);
-        }
+        }*/
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
 
-        private bool DecoderExists(int id)
+        /*private bool DecoderExists(int id)
         {
             return db.Decoders.Count(e => e.Id == id) > 0;
-        }
+        }*/
     }
 }
