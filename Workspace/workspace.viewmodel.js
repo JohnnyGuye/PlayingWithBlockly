@@ -55,7 +55,7 @@ angular.module("workspace", ["toolbox"]).component("workspace",
 
         this.Save = function()
         {
-            Squid.Storage.SaveFinishedFunction(workspace);
+            Squid.Storage.SaveToServer(workspace);
         }
         /**
          * Clear the workspace

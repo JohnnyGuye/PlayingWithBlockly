@@ -52,7 +52,8 @@ Squid.Storage.SaveToServer = function (workspace) {
         && blocks[0].getProcedureDef) {
 
         var blockId = blocks[0].id;
-        backupBlocks(workspace, "JOhn");
+        backupBlocks(workspace, "blabla");
+        //window.location
     } else {
         alert("La sauvegarde serveur a echoué. Le workspace contient plus d'un block ou votre décodeur n'est pas du type fonction.");
     }
@@ -128,23 +129,22 @@ Squid.Storage.ReloadWorkspace = function (workspace, secondaryWorkspace, locatio
 };
 
 
-function restoreBlocks (opt_workspace, url) {
-	if('localStorage' in window && window.localStorage[url]) {
-		var workspace = opt_workspace;
+function restoreBlocks(opt_workspace, url) {
+	    var workspace = opt_workspace;
 		//var xml = Blockly.Xml.textToDom(window.localStorage[url]);
 	    //Blockly.Xml.domToWorkspace(xml, workspace);
 
 	    //callback function
         // this code is executed asynchonously, when the ajax request has responded
 		Squid.Requests.ReloadXml(function (xmlText) {
-	        //alert(xmlText);
+	        alert("dfdd"+xmlText);
 	        var xml = Blockly.Xml.textToDom(xmlText);
 	        Blockly.Xml.domToWorkspace(xml, workspace);
 		    Refresh();
 		    //TEST
 		    //Refresh();
 		});
-	}
+
 };
 
 function backupList(list, url) {
