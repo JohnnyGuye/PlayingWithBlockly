@@ -682,6 +682,8 @@
     <Content Include="Contents\icons\ico-research.png" />
     <Content Include="Contents\icons\ico-restore.png" />
     <Content Include="Contents\icons\ico-save.png" />
+    <Content Include="Contents\icons\ico-serv-restore1.png" />
+    <Content Include="Contents\icons\ico-serv-store1.png" />
     <Content Include="Contents\icons\server.png" />
     <Content Include="Contents\icons\server1.png" />
     <Content Include="Contents\icons\server2.png" />
@@ -693,6 +695,7 @@
     <Content Include="Generation\generation.viewmodel.js" />
     <Content Include="index.html" />
     <Content Include="NotUsedCode.js" />
+    <Content Include="tabs.js" />
     <Content Include="Toolbox\toolbox.xml" />
     <Content Include="Variables\values.js" />
     <Content Include="Variables\variables_set.view.html" />
