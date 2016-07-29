@@ -52,3 +52,9 @@ Blockly.French["custom_controls_if"] = function (block) {
     }
     return code ;//previously code + '\n'
 };
+
+Blockly.French['check_frame_length'] = function (block) {
+    var size = block.getFieldValue('SIZE');
+    var code = '- Si la longueur de trame n\'est pas de '+size+' octets, lève une exception\n' ;
+    return code;
+};

@@ -5,7 +5,7 @@
 angular.module("workspace", ["toolbox"]).component("workspace",
 {
     templateUrl: "Workspace/workspace.view.html",
-    controller: function() {
+    controller: function ($timeout) {
         this.Toolbox = document.getElementById("toolboxGeneric");
         console.log(this.Toolbox === null);
         workspace = Blockly.inject("blocklyDiv",
@@ -163,6 +163,7 @@ angular.module("workspace", ["toolbox"]).component("workspace",
         acTags.setAutoHilite(false);
 
         Squid.Requests.ReloadVariables();
-        this.Refresh();
+        //this.Refresh();
+        $timeout(Refresh, 0);
     }
 });
