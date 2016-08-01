@@ -83,7 +83,7 @@ namespace BlocklyTest.Controllers
                 if (!ModelState.IsValid)
                 {
                     //return BadRequest(ModelState);
-                    return Json(new { error= "not valid model" });
+                    return Json(new { error= "bad model state" });
                 }
                 if (decoder == null)
                 {

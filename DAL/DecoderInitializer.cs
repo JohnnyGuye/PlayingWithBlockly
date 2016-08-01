@@ -22,8 +22,7 @@ namespace BlocklyTest.DAL
 
             var variables = new List<VariablesSet>
             {
-                //new Decoder{Xml="Carson",Code="Decode bidule"},
-                //new Decoder{Xml="some Xml",Code="Decode bidule2"},
+
 
             };
             variables.ForEach(s => context.AllVariables.Add(s));

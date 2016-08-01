@@ -18,7 +18,7 @@ namespace BlocklyTest.Services
             try
             {
                 db = new DecoderContext();
-                decoder.SetCategoryAndTags();
+                decoder.UpdateFieldsFromXml();
                 db.Decoders.Add(decoder);
                 db.SaveChanges();
                 return decoder.Id;
@@ -51,7 +51,7 @@ namespace BlocklyTest.Services
                 {
                     decoder.Xml = xml;
                     decoder.Code = code;
-                    decoder.SetCategoryAndTags();
+                    decoder.UpdateFieldsFromXml();
                     db.SaveChanges();
                     return id;
                 }
@@ -101,6 +101,15 @@ namespace BlocklyTest.Services
                     throw;
                 }
             }
+        }
+
+        struct CallInfos
+        {
+            public string name;
+
+            public string parameters;
+
+            public string tags;
         }
     }
 }
