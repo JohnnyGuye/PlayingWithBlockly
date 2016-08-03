@@ -109,7 +109,7 @@ function backupBlocks (workspace, url) {
       var prettyTxt = Blockly.Xml.domToPrettyText(xml);
       var xmlTxt = Blockly.Xml.domToText(xml);
       var code = Blockly.CSharp.workspaceToCode(workspace);
-      Squid.Requests.SaveBlocks(code, xmlTxt);
+      Squid.Requests.SaveDecoder(code, xmlTxt);
 
      // window.localStorage.setItem(url, xmlTxt);
   }

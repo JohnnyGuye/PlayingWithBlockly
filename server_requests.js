@@ -1,12 +1,11 @@
 ﻿Squid.Requests = {};
 
 /**
- * Send a request to save in the server 
- * the blocks in xml and associated generated code
+ * Send a request to save in the server the decoder
  * @param {string} code the generated C# code
- * @param {string} xml the blocks in xml
+ * @param {string} xml the decoder definition in xml
  */
-Squid.Requests.SaveBlocks = function(code, xml) {
+Squid.Requests.SaveDecoder = function(code, xml) {
     
     $.ajax({
         url: '/api/Decoders',
@@ -20,12 +19,43 @@ Squid.Requests.SaveBlocks = function(code, xml) {
                 if (!TabId) {
                     TabId = res.id;
                     document.location += "#" + res.id;
+                    //FOOOOR THE TESTS !!!!!
+                    //Squid.Requests.GetDecoderDef(res.id);
                 }
                 alert(res.id);
             } else {
                 alert(res.error);
             }
            
+        },
+        error: function (error) {
+            alert("Erreur lors de la sauvegarde" + error);
+        }
+    });
+
+}
+
+/**
+ * 
+ * @param {} id l'id du décodeur à récup
+ * @returns {string} la définition du block en xml
+ */
+Squid.Requests.GetDecoderDef = function (id) {
+
+    $.ajax({
+        url: '/api/Decoders/decoderdef',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        //datatype: 'json',
+        data: JSON.stringify({ Id: id }),
+        success: function (res) {
+            //alert(res);
+            if (res.xml) {
+                return res.xml;
+            } else {
+                alert(res.error);
+            }
+
         },
         error: function (error) {
             alert("Erreur lors de la sauvegarde" + error);

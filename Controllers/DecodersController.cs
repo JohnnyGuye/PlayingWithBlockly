@@ -22,61 +22,63 @@ namespace BlocklyTest.Controllers
         // DecoderContext db = new DecoderContext();
 
         // GET: api/Decoders
-       /* public IQueryable<Decoder> GetDecoders()
-        {
-            return db.Decoders;
-        }
+        /* public IQueryable<Decoder> GetDecoders()
+         {
+             return db.Decoders;
+         }
 
-        // GET: api/Decoders/5
-        [ResponseType(typeof(Decoder))]
-        public IHttpActionResult GetDecoder(int id)
-        {
-            Decoder decoder = db.Decoders.Find(id);
-            if (decoder == null)
-            {
-                return NotFound();
-            }
+         // GET: api/Decoders/5
+         [ResponseType(typeof(Decoder))]
+         public IHttpActionResult GetDecoder(int id)
+         {
+             Decoder decoder = db.Decoders.Find(id);
+             if (decoder == null)
+             {
+                 return NotFound();
+             }
 
-            return Ok(decoder);
-        }
+             return Ok(decoder);
+         }
 
-        // PUT: api/Decoders/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDecoder(int id, Decoder decoder)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+         // PUT: api/Decoders/5
+         [ResponseType(typeof(void))]
+         public IHttpActionResult PutDecoder(int id, Decoder decoder)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
 
-            if (id != decoder.Id)
-            {
-                return BadRequest();
-            }
+             if (id != decoder.Id)
+             {
+                 return BadRequest();
+             }
 
-            db.Entry(decoder).State = EntityState.Modified;
+             db.Entry(decoder).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DecoderExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+             try
+             {
+                 db.SaveChanges();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!DecoderExists(id))
+                 {
+                     return NotFound();
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+             return StatusCode(HttpStatusCode.NoContent);
+         }*/
 
         // POST: api/Decoders
         //[ResponseType(typeof(Decoder))]
+        [Route("api/Decoders")]
+        [HttpPost]
         public IHttpActionResult PostDecoder(Decoder decoder)
         {
 
@@ -113,9 +115,9 @@ namespace BlocklyTest.Controllers
         }
 
 
-        [Route("api/Decoders/getdecoder")]
+        [Route("api/Decoders/decoderdef")]
         [HttpPost]
-        public IHttpActionResult GetDecoder(Guid? id)
+        public IHttpActionResult GetDecoderDef(GetIdRequest r)
         {
             try
             {
@@ -124,9 +126,14 @@ namespace BlocklyTest.Controllers
                     //return BadRequest(ModelState);
                     return Json(new { error = "bad model state" });
                 }
+                var id = new Guid(r.Id);
                 var services = new DecoderServices();
-                var decoderXml = services.GetDecoder(id);
-                return Json(new { xml = decoderXml });
+                var decoderXml = services.GetDecoderDef(id);
+                if (decoderXml != null)
+                {
+                    return Json(new { xml = decoderXml });
+                }
+                return Json(new { error = "Décodeur non éditable" });
 
             }
             catch (Exception e)
@@ -140,7 +147,6 @@ namespace BlocklyTest.Controllers
         [HttpPost]
         public string GetCategories()
         {
-
             try
             {
                 if (!ModelState.IsValid)
@@ -192,4 +198,9 @@ namespace BlocklyTest.Controllers
             return db.Decoders.Count(e => e.Id == id) > 0;
         }*/
     }
+}
+
+public class GetIdRequest
+{
+    public string Id;
 }

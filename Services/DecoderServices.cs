@@ -80,7 +80,7 @@ namespace BlocklyTest.Services
             }          
         }
 
-        public string GetDecoder(Guid? id)
+        public string GetDecoderDef(Guid? id)
         {
             DecoderContext db = null;
             try
@@ -89,7 +89,11 @@ namespace BlocklyTest.Services
                 var decoder = db.Decoders.Find(id);
                 if (decoder != null)
                 {
-                    return decoder.Xml;
+                    if (decoder.Editable)
+                    {
+                        return decoder.Xml;
+                    }
+                    return null;
                 }
                 else
                 {
