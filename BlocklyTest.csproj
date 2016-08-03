@@ -3506,6 +3506,7 @@
       <DependentUpon>Handler1.ashx</DependentUpon>
     </Compile>
     <Compile Include="DAL\DecoderContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Decoder.cs" />
     <Compile Include="Models\VariablesSet.cs" />
     <Compile Include="Services\DecoderServices.cs" />

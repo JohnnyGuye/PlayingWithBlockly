@@ -37,7 +37,7 @@ angular.module("workspace", ["toolbox"]).component("workspace",
         });
 
         workspace.attachChildWorkspace(hiddenWorkspace);
-        Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
+        //Squid.Storage.ReloadWorkspace(null, hiddenWorkspace);
 
         this.Refresh = function() {
             Refresh();
@@ -158,6 +158,8 @@ angular.module("workspace", ["toolbox"]).component("workspace",
         acTags.setAutoHilite(false);
 
         Squid.Requests.ReloadVariables();
+
+        Refresh();
         //this.Refresh();
         //var self = this;
         //$timeout(this.Refresh(self), 0);
@@ -170,7 +172,8 @@ angular.module("workspace", ["toolbox"]).component("workspace",
 */
 Refresh = function () {
     var toolbox = document.getElementById("toolboxGeneric");
-    RefreshCategories(workspace, toolbox);
+    Squid.Requests.GetCategories(workspace, toolbox, RefreshCategories);
+    //RefreshCategories(workspace, toolbox);
     //for autocompletion
     if (acTags) {
         acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);

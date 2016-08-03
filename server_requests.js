@@ -8,21 +8,6 @@
  */
 Squid.Requests.SaveBlocks = function(code, xml) {
     
-     /*$.ajax({
-         url: '/api/Blocks/savexml',
-         type: 'POST',
-         contentType: 'application/json; charset=utf-8',
-         datatype: 'json',
-         data: JSON.stringify({Code:code, Xml:xml}),
-         success: function (res) {
-             alert(res);
-         },
-         error: function (error) {
-             alert("Erreur lors de la sauvegarde" + error);
-         }
-     });*/
-
-
     $.ajax({
         url: '/api/Decoders',
         type: 'POST',
@@ -47,7 +32,25 @@ Squid.Requests.SaveBlocks = function(code, xml) {
         }
     });
 
- }
+}
+
+Squid.Requests.GetCategories = function(workspace, toolbox, callback) {
+    $.ajax({
+        url: '/api/Decoders/categories',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        datatype: 'json',
+        success: function (mapstr) {
+            //alert(map);
+            //var map = jsonToStrMap(mapstr);
+            callback(workspace, toolbox, JSON.parse(mapstr));
+        },
+        error: function (error) {
+            alert("Erreur lors du chargement" + error);
+        }
+    });
+
+}
 
 /**
  * Send a request to save the simples variables (not config, nor inventory)
@@ -124,4 +127,18 @@ Squid.Requests.ReloadXml = function (callback) {
  }
  function jsonToMap(jsonStr) {
      return new Map(JSON.parse(jsonStr));
+ }
+
+ function jsonToStrMap(jsonStr) {
+     return objToStrMap(JSON.parse(jsonStr));
+ }
+
+ function objToStrMap(obj) {
+     var strMap = new Map();
+     for (var category in obj) {
+         if (obj.hasOwnProperty(category)) {
+             strMap.set(category, obj[category]);
+         }       
+     }
+     return strMap;
  }

@@ -15,7 +15,7 @@ namespace BlocklyTest.DAL
         public DecoderContext()
             : base("DecoderContext")
         {
-            
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DecoderContext, Migrations.Configuration>("DecoderContext"));
         }
         public DbSet<Decoder> Decoders { get; set; }
         public DbSet<VariablesSet> AllVariables { get; set; }

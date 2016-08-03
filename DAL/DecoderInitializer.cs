@@ -5,10 +5,13 @@ using System.Web;
 
 namespace BlocklyTest.DAL
 {
+    using System.Data.Entity;
+
     using BlocklyTest.Models; 
 
-    public class DecoderInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<DecoderContext>
+  /*  public class DecoderInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<DecoderContext>
     {
+        
         protected override void Seed(DecoderContext context)
         {
             var decoders = new List<Decoder>
@@ -29,5 +32,5 @@ namespace BlocklyTest.DAL
             context.SaveChanges();
 
         }
-    }
+    }*/
 }

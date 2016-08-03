@@ -137,14 +137,14 @@ function restoreBlocks(opt_workspace, url) {
 
 	    //callback function
         // this code is executed asynchonously, when the ajax request has responded
-		Squid.Requests.ReloadXml(function (xmlText) {
+		/*Squid.Requests.ReloadXml(function (xmlText) {
 	        //alert(xmlText);
 	        var xml = Blockly.Xml.textToDom(xmlText);
 	        Blockly.Xml.domToWorkspace(xml, workspace);
 		    Refresh();
 		    //TEST
 		    //Refresh();
-		});
+		});*/
 
 };
 

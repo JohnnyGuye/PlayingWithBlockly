@@ -12,6 +12,8 @@ using BlocklyTest.Models;
 
 namespace BlocklyTest.Controllers
 {
+    using System.Web.Script.Serialization;
+
     using BlocklyTest.DAL;
     using BlocklyTest.Services;
 
@@ -74,7 +76,7 @@ namespace BlocklyTest.Controllers
         }*/
 
         // POST: api/Decoders
-        [ResponseType(typeof(Decoder))]
+        //[ResponseType(typeof(Decoder))]
         public IHttpActionResult PostDecoder(Decoder decoder)
         {
 
@@ -93,7 +95,7 @@ namespace BlocklyTest.Controllers
                 var services = new DecoderServices();
                 if (decoder.Id == null)
                 {
-                    var decoderId = services.AddDecoder(decoder);
+                    var decoderId = services.AddDecoder(decoder.Xml, decoder.Code);
                     return Json(new { id= decoderId.ToString() });
                 }
                 else
@@ -111,21 +113,70 @@ namespace BlocklyTest.Controllers
         }
 
 
-        // DELETE: api/Decoders/5
-      /*  [ResponseType(typeof(Decoder))]
-        public IHttpActionResult DeleteDecoder(int id)
+        [Route("api/Decoders/getdecoder")]
+        [HttpPost]
+        public IHttpActionResult GetDecoder(Guid? id)
         {
-            Decoder decoder = db.Decoders.Find(id);
-            if (decoder == null)
+            try
             {
-                return NotFound();
+                if (!ModelState.IsValid)
+                {
+                    //return BadRequest(ModelState);
+                    return Json(new { error = "bad model state" });
+                }
+                var services = new DecoderServices();
+                var decoderXml = services.GetDecoder(id);
+                return Json(new { xml = decoderXml });
+
             }
+            catch (Exception e)
+            {
+                return Json(new { error = e.ToString() });
+            }
+        }
 
-            db.Decoders.Remove(decoder);
-            db.SaveChanges();
 
-            return Ok(decoder);
-        }*/
+        [Route("api/Decoders/categories")]
+        [HttpPost]
+        public string GetCategories()
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    //return BadRequest(ModelState);
+                    //return Json(new { error = "bad model state" });
+                    return "modèle non valide";
+                }
+                var services = new DecoderServices();
+                var map =services.GetCategoryInfos();
+                return new JavaScriptSerializer().Serialize(map);
+
+            }
+            catch (Exception e)
+            {
+                //return Json(new { error = e.ToString() });
+                return e.ToString();
+            }
+        }
+
+
+        // DELETE: api/Decoders/5
+        /*  [ResponseType(typeof(Decoder))]
+          public IHttpActionResult DeleteDecoder(int id)
+          {
+              Decoder decoder = db.Decoders.Find(id);
+              if (decoder == null)
+              {
+                  return NotFound();
+              }
+
+              db.Decoders.Remove(decoder);
+              db.SaveChanges();
+
+              return Ok(decoder);
+          }*/
 
         /*protected override void Dispose(bool disposing)
         {

@@ -12,7 +12,10 @@ namespace BlocklyTest.Models
 
     public class Decoder
     {
-        public Decoder() { }
+        public Decoder()
+        {
+            this.Editable = true;
+        }
 
         public Decoder(string xml, string code)
         {
@@ -60,18 +63,20 @@ namespace BlocklyTest.Models
                         args.Add(reader.GetAttribute("name"));
                     }
                     while (reader.ReadToNextSibling("arg"));
-                        this.Parameters = String.Join(",", args.ToArray());
+
+                    this.Parameters = String.Join(",", args.ToArray());
                     reader.ReadToFollowing("field");
-                    this.Name = reader.ReadElementContentAsString();
+                    //this.Name = reader.ReadElementContentAsString();
                 }
-                else
+                /*else
                 {
                     this.Name = reader.ReadElementContentAsString();
-                }
-                //reader.ReadToFollowing("field");
+                }*/
+                this.Name = reader.ReadElementContentAsString();
+                //skip Version field
                 reader.ReadToFollowing("field");
+
                 this.Category = reader.ReadElementContentAsString();
-               // reader.ReadToFollowing("field");
                 this.Tags= reader.ReadElementContentAsString();
             }
         }
