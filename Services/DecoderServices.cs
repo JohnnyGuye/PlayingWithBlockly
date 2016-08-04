@@ -152,9 +152,39 @@ namespace BlocklyTest.Services
             }
         }
 
-        public void DeleteDecoder(Guid id)
+        public List<string> FindProcedureUsages(Guid? id)
         {
-            
+            DecoderContext db = null;
+            try
+            {
+                db = new DecoderContext();
+                var decoder = db.Decoders.Find(id);
+                if (decoder != null)
+                {
+                    var proceduresThatUseIt =
+                                db.Decoders.Where(d => d.Xml.Contains("<mutation name=\"" + decoder.Name + "\">")).Select(d => d.Name).ToList();
+                    return proceduresThatUseIt; 
+                }
+                else
+                {
+                    throw new KeyNotFoundException();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                try
+                {
+                    db?.Dispose();
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
         }
  
     }

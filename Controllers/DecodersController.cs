@@ -87,7 +87,7 @@ namespace BlocklyTest.Controllers
                 if (!ModelState.IsValid)
                 {
                     //return BadRequest(ModelState);
-                    return Json(new { error= "bad model state" });
+                    return Json(new { error= "modèle non valide" });
                 }
                 if (decoder == null)
                 {
@@ -117,14 +117,14 @@ namespace BlocklyTest.Controllers
 
         [Route("api/Decoders/decoderdef")]
         [HttpPost]
-        public IHttpActionResult GetDecoderDef(GetIdRequest r)
+        public IHttpActionResult GetDecoderDef(IdRequest r)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     //return BadRequest(ModelState);
-                    return Json(new { error = "bad model state" });
+                    return Json(new { error = "modèle non valide" });
                 }
                 var id = new Guid(r.Id);
                 var services = new DecoderServices();
@@ -145,7 +145,7 @@ namespace BlocklyTest.Controllers
 
         [Route("api/Decoders/categories")]
         [HttpPost]
-        public string GetCategories()
+        public IHttpActionResult GetCategories()
         {
             try
             {
@@ -153,17 +153,41 @@ namespace BlocklyTest.Controllers
                 {
                     //return BadRequest(ModelState);
                     //return Json(new { error = "bad model state" });
-                    return "modèle non valide";
+                    return Json(new { error = "modèle non valide" });
                 }
                 var services = new DecoderServices();
                 var map =services.GetCategoryInfos();
-                return new JavaScriptSerializer().Serialize(map);
+                return Json(new JavaScriptSerializer().Serialize(map));
 
             }
             catch (Exception e)
             {
                 //return Json(new { error = e.ToString() });
-                return e.ToString();
+                return Json(new { error = e.ToString() });
+            }
+        }
+
+        [Route("api/Decoders/findusages")]
+        [HttpPost]
+        public IHttpActionResult FindUsages(IdRequest r)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    //return BadRequest(ModelState);
+                    //return Json(new { error = "bad model state" });
+                    return Json(new { error = "modèle non valide" });
+                }
+                var services = new DecoderServices();
+                var list = services.FindProcedureUsages(new Guid(r.Id));
+                return Json(list.ToArray());
+
+            }
+            catch (Exception e)
+            {
+                //return Json(new { error = e.ToString() });
+                return Json(new { error = e.ToString() });
             }
         }
 
@@ -200,7 +224,7 @@ namespace BlocklyTest.Controllers
     }
 }
 
-public class GetIdRequest
+public class IdRequest
 {
     public string Id;
 }

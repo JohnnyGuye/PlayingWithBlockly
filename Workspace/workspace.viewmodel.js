@@ -178,4 +178,7 @@ Refresh = function () {
     if (acTags) {
         acTags.matcher_ = new goog.ui.ac.ArrayMatcher(AutoComplete.GetTags(), true);
     }
+
+    //TEEEEEST
+    //Squid.Requests.FindUsages("be9ed80b-8759-e611-8c74-843a4b7089b8");
 };
