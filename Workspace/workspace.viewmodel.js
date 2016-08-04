@@ -7,6 +7,13 @@ angular.module("workspace", ["toolbox"]).component("workspace",
     templateUrl: "Workspace/workspace.view.html",
     controller: function ($timeout) {
         this.Toolbox = document.getElementById("toolboxGeneric");
+        var nbTry = 1;
+        while (!this.Toolbox && nbTry<100) {
+            setTimeout(100);
+            this.Toolbox = document.getElementById("toolboxGeneric");
+            nbTry++;          
+        }
+        console.log("nb try =" + nbTry);
         //console.log(this.Toolbox);
         workspace = Blockly.inject("blocklyDiv",
         {

@@ -422,6 +422,7 @@
     <Content Include="Blockly\tests\jsunit\xml_test.js" />
     <Content Include="Blockly\tests\multi_playground.html" />
     <Content Include="Blockly\tests\playground.html" />
+    <Content Include="bootbox\bootbox.min.js" />
     <Content Include="bootstrap-3.3.6\.gitattributes" />
     <Content Include="bootstrap-3.3.6\.gitignore" />
     <Content Include="bootstrap-3.3.6\dist\css\bootstrap-theme.css" />

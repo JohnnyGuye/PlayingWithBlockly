@@ -96,17 +96,36 @@ Squid.Requests.FindUsages = function (id) {
                 alert(res.error);
             } else {
                 if (res.length > 0) {
-                    alert(res);
-                    var msgBody = res.join('\n- ');
+                    //alert(res);
+                    var msgBody = res.join('<br>- ');
                     var confMsg =
-                        "Les fonctions suivantes utlisent la fonction à supprimer (ou une de même nom) :\n- " +
+                        "Les fonctions suivantes utlisent la fonction à supprimer (ou une de même nom) :<br>- " +
                             msgBody +
-                            "\n Etes-vous sûr de vouloir continuer ?";
-                    var retVal = confirm(confMsg);
-                    if (retVal === true) {
-                        //delete function
-                        alert("fonction supprimée !");
-                    }
+                            "<br> Etes-vous sûr de vouloir continuer ?";
+                    //var retVal = confirm(confMsg);
+                    bootbox.dialog({
+                        message: confMsg,
+                        title: "Custom title",
+                        buttons: {
+                            ok: {
+                                label: "Supprimer",
+                                className: "btn-success",
+                                callback: function () {
+                                    //Example.show("great success");
+                                    bootbox.alert("Décodeur supprimé");
+                                }
+                            },
+                          
+                            cancel: {
+                                label: "Annuler",
+                                className: "btn-primary",
+                                callback: function () {
+                                    //window.show("Suppression annulée");
+                                }
+                            }
+                        }
+                    });
+
                 } else {
                     var retVal = confirm("La fonction à supprimer n'est utilisé nulle part.");
                     if (retVal === true) {
